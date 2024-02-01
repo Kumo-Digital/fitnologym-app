@@ -2,10 +2,34 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import connectDB from "@/lib/db";
+
+type ConnectionStatus = {
+  isConnected: boolean;
+};
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+export const getServerSideProps: GetServerSideProps<
+  ConnectionStatus
+> = async () => {
+  try {
+    await connectDB();
+    return {
+      props: { isConnected: true },
+    };
+  } catch (e) {
+    console.error(e);
+    return {
+      props: { isConnected: false },
+    };
+  }
+};
+
+export default function Home({
+  isConnected,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <>
       <Head>
@@ -15,6 +39,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
+        {isConnected ? (
+            <h2 className="subtitle">You are connected to MongoDB</h2>
+          ) : (
+            <h2 className="subtitle">
+              You are NOT connected to MongoDB. Check the <code>README.md</code>{" "}
+              for instructions.
+            </h2>
+          )}
         <div className={styles.description}>
           <p>
             Get started by editing&nbsp;
