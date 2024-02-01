@@ -6,4 +6,7 @@ export const apiUrls = {
   users: {
     get: '/users',
   },
+  gyms: {
+    get: '/gyms',
+  }
 };
