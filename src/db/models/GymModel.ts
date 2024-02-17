@@ -29,6 +29,9 @@ const gymSchema = new Schema<Gym>({
     type: String,
     required: false
   },
+},
+{
+  timestamps: true,
 });
 
 const GymModel = model<Gym>('Gym', gymSchema);
