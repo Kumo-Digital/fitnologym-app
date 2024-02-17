@@ -1,30 +1,38 @@
 import { Formik, Field, Form, FormikHelpers } from "formik";
+import { useState } from "react";
 
-interface initialValues {
+interface initialCredentials {
   email: string;
   password: string;
 }
 
-async function loginUser(values: initialValues) {
-  try {
-    const res = await fetch('api/v1/auth/login', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    })
-
-    if (res.ok) {
-      console.log('jatsiemasz!');
-    }
-  } catch (err) {
-    console.log(err);
-  }
-  alert(JSON.stringify(values));
-}
-
 export default function LoginForm() {
+  const [error, setError] = useState('');
+
+  async function loginUser(values: initialCredentials) {
+    try {
+      if (!values.email || !values.password) {
+        setError('Por favor llene todos los campos');
+        return;
+      }
+
+      const res = await fetch('api/v1/auth/login', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+  
+      if (res.ok) {
+        console.log('jatsiemasz!');
+        console.log(await res.json());
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <Formik
@@ -33,8 +41,8 @@ export default function LoginForm() {
           password: '',
         }}
         onSubmit={(
-          values: initialValues,
-          { setSubmitting }: FormikHelpers<initialValues>
+          values: initialCredentials,
+          { setSubmitting }: FormikHelpers<initialCredentials>
         ) => loginUser(values)}
       >
         <Form>
@@ -53,6 +61,12 @@ export default function LoginForm() {
           <button type="submit">Ingresar</button>
         </Form>
       </Formik>
+      <hr />
+      {error && (
+        <div>
+          {error}
+        </div>
+      )}
     </div>
   );
 }
