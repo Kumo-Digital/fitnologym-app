@@ -1,20 +1,8 @@
-import { UserType } from '@/types/UserType';
-import { Schema, model, Document } from 'mongoose';
-
-// Define the interface for the User document
-export interface User extends Document {
-  uid: number;
-  fullname: string;
-  dni: string;
-  email: string;
-  password: string;
-  gym_id: number;
-  role: string;
-  user_type: UserType;
-}
+import { IUser } from '@/types/interfaces/IUser';
+import { Schema, model, models } from 'mongoose';
 
 // Define the Mongoose schema for the User model
-const userSchema = new Schema<User>({
+const userSchema = new Schema<IUser>({
   uid: {
     type: Number,
     required: true
@@ -52,6 +40,6 @@ const userSchema = new Schema<User>({
   timestamps: true,
 });
 
-const UserModel = model<User>('User', userSchema);
+const UserModel = models.User || model<IUser>('User', userSchema);
 
 export default UserModel;
