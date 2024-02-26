@@ -1,7 +1,7 @@
 export const apiUrls = {
   auth: {
     login: '/auth/login',
-    logout: '/auth/lognout',
+    logout: '/auth/logout',
     register: '/auth/register',
   },
   users: {
