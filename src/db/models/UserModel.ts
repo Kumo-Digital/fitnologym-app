@@ -1,17 +1,13 @@
-import { IUser } from '@/types/interfaces/IUser';
+import { DatabaseUser } from '@/lib/auth';
 import { Schema, model, models } from 'mongoose';
 
 // Define the Mongoose schema for the User model
-const userSchema = new Schema<IUser>({
-  uid: {
-    type: Number,
-    required: true
-  },
-  fullname: {
+const userSchema = new Schema<DatabaseUser>({
+  _id: {
     type: String,
     required: true
   },
-  dni: {
+  fullname: {
     type: String,
     required: true
   },
@@ -19,27 +15,24 @@ const userSchema = new Schema<IUser>({
     type: String,
     required: true
   },
-  password: {
+  dni: {
     type: String,
     required: true
   },
-  gym_id: {
-    type: Number,
-    required: true
-  },
-  role: {
+  password: {
     type: String,
     required: true
   },
   user_type: {
     type: String,
     required: true
+  },
+  role: {
+    type: String,
+    required: true
   }
-},
-{
-  timestamps: true,
-});
+} as const);
 
-const UserModel = models.User || model<IUser>('User', userSchema);
+const UserModel = models.User || model<DatabaseUser>('User', userSchema);
 
 export default UserModel;

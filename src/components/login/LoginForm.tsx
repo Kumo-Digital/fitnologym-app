@@ -1,4 +1,6 @@
+import { API_URL_V1, apiUrls } from "@/lib/apiUrls";
 import { Formik, Field, Form, FormikHelpers } from "formik";
+import router from "next/router";
 import { useState } from "react";
 
 interface initialCredentials {
@@ -16,7 +18,7 @@ export default function LoginForm() {
         return;
       }
 
-      const res = await fetch('api/v1/auth/login', {
+      const res = await fetch(`${API_URL_V1}${apiUrls.auth.login}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,8 +27,10 @@ export default function LoginForm() {
       })
   
       if (res.ok) {
-        console.log('jatsiemasz!');
-        console.log(await res.json());
+        // router.push("/");
+        console.log('EStamos todo bien');
+      } else {
+        setError((await res.json()).error);
       }
     } catch (err) {
       console.log(err);

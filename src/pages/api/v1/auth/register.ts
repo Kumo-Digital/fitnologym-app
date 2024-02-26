@@ -4,6 +4,11 @@ import bcrypt from 'bcrypt';
 import UserService from '@/services/UserService';
  
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "POST") {
+		res.status(404).end();
+		return;
+	}
+
   if (req.method === 'POST') {
     try {
         await connectDB();
@@ -11,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const res = await userService.createUser(req.body);
 
         if (res.ok) {
-            return res.json();
+            return await res.json();
         }
         console.log('Hubo un error');
 
