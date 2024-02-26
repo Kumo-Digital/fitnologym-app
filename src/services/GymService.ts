@@ -1,13 +1,14 @@
-import GymModel, { Gym } from "@/db/models/GymModel";
+import GymModel from "@/db/models/GymModel";
+import { IGym } from "@/types/interfaces/IGym";
 
 class GymService {
-  async getAllGyms(): Promise<Gym[]> {
+  async getAllGyms(): Promise<IGym[]> {
     const gyms = await GymModel.find();
 
     return gyms;
   }
 
-  async getGymById(id: string): Promise<Gym | null> {
+  async getGymById(id: string): Promise<IGym | null> {
     const gym = await GymModel.findOne({
       id: id,
     });
@@ -15,7 +16,7 @@ class GymService {
     return gym;
   }
 
-  async createGym(gymData: Gym): Promise<Gym> {
+  async createGym(gymData: IGym): Promise<IGym> {
     const newGym = await GymModel.create(gymData);
     return newGym;
   }

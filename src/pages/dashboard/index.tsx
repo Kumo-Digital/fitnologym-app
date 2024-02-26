@@ -8,7 +8,6 @@ import type {
 } from "next";
 import type { User } from "lucia";
 import type { FormEvent } from "react";
-import { API_URL_V1, apiUrls } from "@/lib/apiUrls";
 
 export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
 	GetServerSidePropsResult<{
@@ -23,6 +22,15 @@ export async function getServerSideProps(context: GetServerSidePropsContext): Pr
 			redirect: {
 				permanent: false,
 				destination: "/login"
+			}
+		};
+	}
+	if (user.role !== 'administrator') {
+		console.log('NO PUEDES ESTAR AQUI!!!');
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/"
 			}
 		};
 	}
@@ -47,10 +55,10 @@ export default function Page({ user }: InferGetServerSidePropsType<typeof getSer
 
 	return (
 		<>
-			<h1>Hi, {user.fullname}!</h1>
+			<h1>Esto es una página SOLO para Administración!</h1>
 			<p>Your user ID is {user.id}.</p>
-			<p>You are a {user.user_type} user.</p>
-			<form method="post" action={`./${API_URL_V1}${apiUrls.auth.logout}`} onSubmit={onSubmit}>
+			<p>Si estás aquí es porque eres un usuario de rol ADMINISTRADOR. Eres: {user.role}.</p>
+			<form method="post" action="./api/v1/auth/logout" onSubmit={onSubmit}>
 				<button>Sign out</button>
 			</form>
 		</>

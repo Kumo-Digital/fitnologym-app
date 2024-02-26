@@ -1,14 +1,7 @@
-import { Schema, model, Document } from 'mongoose';
+import { IGym } from '@/types/interfaces/IGym';
+import { Schema, model, models } from 'mongoose';
 
-export interface Gym extends Document {
-  id: string;
-  name: string;
-  address: string;
-  city: string;
-  image_url?: string;
-}
-
-const gymSchema = new Schema<Gym>({
+const gymSchema = new Schema<IGym>({
   id: {
     type: String,
     required: true
@@ -29,8 +22,11 @@ const gymSchema = new Schema<Gym>({
     type: String,
     required: false
   },
+},
+{
+  timestamps: true,
 });
 
-const GymModel = model<Gym>('Gym', gymSchema);
+const GymModel = models.Gym || model<IGym>('Gym', gymSchema);
 
 export default GymModel;

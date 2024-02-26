@@ -1,7 +1,8 @@
 export const apiUrls = {
   auth: {
-    signin: '/auth/callback',
-    signout: '/auth/signout',
+    login: '/auth/login',
+    logout: '/auth/logout',
+    register: '/auth/register',
   },
   users: {
     get: '/users',
@@ -10,3 +11,5 @@ export const apiUrls = {
     get: '/gyms',
   }
 };
+
+export const API_URL_V1 = 'api/v1';
