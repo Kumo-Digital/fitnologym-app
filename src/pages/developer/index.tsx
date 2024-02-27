@@ -1,11 +1,11 @@
-import { UserCard } from "@/components/ui/Cards/UserCard/UserCardUI";
+import { UserCard } from "@/components/ui/Cards/UserCard/UserCard";
 import Head from "next/head";
 
 export default function Login() {
   return (
     <>
       <Head>
-        <title>Fitnologym - Login</title>
+        <title>Fitnologym - Components</title>
         <meta name="description" content="Login" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
