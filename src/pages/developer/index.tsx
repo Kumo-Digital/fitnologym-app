@@ -1,4 +1,4 @@
-import { UserCard } from "@/components/ui/Cards/UserCard/UserCard";
+import { UserCard } from "@/components/ui/cards/user-card/user-card";
 import Head from "next/head";
 
 export default function Login() {
@@ -15,11 +15,6 @@ export default function Login() {
           title="LeanBeefPatty"
           subtitle="ENBOX Fitness"
           description="Se unió el Martes 2, Feb 2024"
-          cardStyle={{
-            width: "25%",
-            backgroundColor: "dark.8",
-            justifyContent: "space-between",
-          }}
         />
       </main>
     </>

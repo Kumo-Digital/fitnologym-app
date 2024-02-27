@@ -1,5 +1,5 @@
 import connectDB from '@/lib/db';
-import GymService from '@/services/GymService';
+import GymService from '@/services/gym';
 import type { NextApiRequest, NextApiResponse } from 'next'
  
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

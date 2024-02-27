@@ -1,5 +1,5 @@
 import GymModel from "@/db/models/GymModel";
-import { IGym } from "@/types/interfaces/IGym";
+import { IGym } from "@/db/interfaces/IGym";
 
 class GymService {
   async getAllGyms(): Promise<IGym[]> {
