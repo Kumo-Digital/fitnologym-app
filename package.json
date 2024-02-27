@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@lucia-auth/adapter-mongodb": "^1.0.2",
-    "@node-rs/argon2": "^1.7.2",
-    "@node-rs/bcrypt": "^1.9.2",
     "@mantine/core": "^7.5.3",
     "@mantine/hooks": "^7.5.3",
+    "@node-rs/argon2": "^1.7.2",
+    "@node-rs/bcrypt": "^1.9.2",
+    "@tabler/icons-react": "^2.47.0",
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.1",
@@ -36,7 +37,6 @@
     "postcss": "^8.4.35",
     "postcss-preset-mantine": "^1.13.0",
     "postcss-simple-vars": "^7.0.1",
-    "@types/mongoose": "^5.11.97",
     "typescript": "^5"
   }
 }
