@@ -1,7 +1,7 @@
 import connectDB from '@/lib/db';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcrypt';
-import UserService from '@/services/UserService';
+import UserService from '@/services/user';
  
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {

@@ -1,4 +1,4 @@
-import { IGym } from '@/types/interfaces/IGym';
+import { IGym } from '@/db/interfaces/IGym';
 import { Schema, model, models } from 'mongoose';
 
 const gymSchema = new Schema<IGym>({

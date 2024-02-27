@@ -1,4 +1,4 @@
-import { ISession } from "@/types/interfaces/ISession";
+import { ISession } from "@/db/interfaces/ISession";
 import { Schema, model, models } from "mongoose";
 
 const sessionSchema = new Schema({

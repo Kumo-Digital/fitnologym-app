@@ -1,6 +1,6 @@
 import UserModel from "@/db/models/UserModel";
 import { DatabaseUser } from "@/lib/auth";
-import { IUser } from "@/types/interfaces/IUser";
+import { IUser } from "@/db/interfaces/IUser";
 // import bcrypt from 'bcrypt';
 import { generateId } from "lucia";
 import mongoose from "mongoose";

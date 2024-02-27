@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 // import bcrypt from 'bcrypt';
-import UserService from '@/services/UserService';
+import UserService from '@/services/user';
 import connectDB from '@/lib/db';
 import { lucia } from '@/lib/auth';
 import { Argon2id } from 'oslo/password';
