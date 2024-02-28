@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Card,
-  Text,
-  Group,
-  Stack,
-  useMantineTheme,
-  Title,
-} from "@mantine/core";
+import { Card, Text, Group, Stack, Title } from "@mantine/core";
 import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
 
 interface MeasureCardProps {
@@ -28,8 +21,6 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
   color,
   percent,
 }) => {
-  percent = 10;
-
   return (
     <Card
       bg="dark.7"
