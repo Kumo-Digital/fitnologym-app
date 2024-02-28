@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import "@mantine/core/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
+import { RootLayout } from "@/components/layouts/root-layout";
 
 const theme = createTheme({
   fontFamily: "Roboto, sans-serif",
@@ -13,7 +14,9 @@ const theme = createTheme({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark">
-      <Component {...pageProps} />
+      <RootLayout>
+        <Component {...pageProps} />
+      </RootLayout>
     </MantineProvider>
   );
 }
