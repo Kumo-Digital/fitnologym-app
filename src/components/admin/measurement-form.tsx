@@ -52,7 +52,10 @@ export default function MeasurementForm({ users }: {
 
               <Stack mb={32}>
                 <Group id="report" grow align="start" gap={24}>
-                  <Stack>
+                  <Stack style={{
+                    position: "sticky",
+                    top: "32px",
+                  }}>
                     <Group wrap="nowrap">
                       <Title order={4}>Reporte</Title>
                       <Divider w="100%" />
@@ -83,7 +86,10 @@ export default function MeasurementForm({ users }: {
 
               <Stack mb={32}>
                 <Group id="general" grow align="start" gap={24}>
-                  <Stack>
+                  <Stack style={{
+                    position: "sticky",
+                    top: "32px",
+                  }}>
                     <Group wrap="nowrap">
                       <Title order={4}>Generales</Title>
                       <Divider w="100%" />
@@ -451,7 +457,10 @@ export default function MeasurementForm({ users }: {
 
               <Stack mb={32}>
                 <Group id="trunk" grow align="start" gap={24}>
-                  <Stack>
+                  <Stack style={{
+                    position: "sticky",
+                    top: "32px",
+                  }}>
                     <Group wrap="nowrap">
                       <Title order={4}>Torso</Title>
                       <Divider w="100%" />
@@ -563,7 +572,10 @@ export default function MeasurementForm({ users }: {
 
               <Stack mb={32}>
                 <Group id="arms" grow align="start" gap={24}>
-                  <Stack>
+                  <Stack style={{
+                    position: "sticky",
+                    top: "32px",
+                  }}>
                     <Group wrap="nowrap">
                       <Title order={4}>Brazos</Title>
                       <Divider w="100%" />
@@ -778,7 +790,10 @@ export default function MeasurementForm({ users }: {
 
               <Stack mb={32}>
                 <Group id="legs" grow align="start" gap={24}>
-                  <Stack>
+                  <Stack style={{
+                    position: "sticky",
+                    top: "32px",
+                  }}>
                     <Group wrap="nowrap">
                       <Title order={4}>Piernas</Title>
                       <Divider w="100%" />
@@ -993,7 +1008,10 @@ export default function MeasurementForm({ users }: {
 
               <Stack mb={32}>
                 <Group id="circumferences" grow align="start" gap={24}>
-                  <Stack>
+                  <Stack style={{
+                    position: "sticky",
+                    top: "32px",
+                  }}>
                     <Group wrap="nowrap">
                       <Title order={4}>Circunferencias</Title>
                       <Divider w="100%" />
