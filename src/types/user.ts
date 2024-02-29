@@ -3,3 +3,8 @@ export enum UserType {
   PLUS = 'plus',
   PREMIUM = 'premium',
 };
+
+export type UserItem = {
+  value: string;
+  label: string;
+}
