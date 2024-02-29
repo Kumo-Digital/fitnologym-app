@@ -19,7 +19,7 @@ export default function Login() {
         />
         <MeasureCard
           percent={10}
-          color="orange"
+          color="orange.6"
           measureTitle="Indice de Masa Corporal"
           measure={23.5}
           measureType="BMI"

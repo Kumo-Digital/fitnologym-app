@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Text, Group, Stack, Title } from "@mantine/core";
+import { Card, Text, Group, Stack, Title, Box } from "@mantine/core";
 import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
 
 interface MeasureCardProps {
@@ -26,77 +26,69 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
       bg="dark.7"
       radius="md"
       withBorder
-      // estilos para ver la card como en figma
-      style={{ margin: "10px", width: "25%" }}
+      w="25%"
+      p={0}
     >
-      <Stack p={12} gap={12} justify="center">
-        <Group gap={8}>
-          <Group gap={20}>
-            <div
-              style={{
-                width: "8px",
-                height: "80px",
-                backgroundColor: color,
-                borderRadius: "6px",
-              }}
-            ></div>
-            <Group gap={10} h={80}>
-              <Stack
-                gap={20}
-                align="flex-start"
-                h="100%"
-                justify="space-between"
-              >
-                <Text size="md" c="gray.0" fw={700} h={36} w={149}>
-                  {measureTitle}
-                </Text>
-                <Group align="baseline" gap={2}>
-                  <Title order={2} c="gray.5" fw={700}>
-                    {measure}
-                  </Title>
-                  <Text size="xs" c="gray.5">
-                    {measureType}
-                  </Text>
-                </Group>
-              </Stack>
-              <Stack
-                gap={32}
-                align="flex-start"
-                w={75}
-                h="100%"
-                justify="space-between"
-              >
-                <Text size="md" c="gray.0" fw={700} h={36} w={75}>
-                  {percentTitle}
-                </Text>
-                <Group align="baseline" gap={8}>
-                  {percent > 0 ? (
-                    <IconTrendingUp
-                      color="green"
-                      aria-label="Options"
-                      size={18}
-                    />
-                  ) : (
-                    <IconTrendingDown
-                      color="red"
-                      aria-label="Options"
-                      size={18}
-                    />
-                  )}
-                  <Group align="baseline" gap={2}>
-                    <Title order={3} c="gray.5" fw={700}>
-                      {percentText}
-                    </Title>
-                    <Text size="sm" c="gray.5">
-                      %
-                    </Text>
-                  </Group>
-                </Group>
-              </Stack>
-            </Group>
+      <Group gap={16} py={24} pl={16} pr={24} align="stretch">
+        <Box miw={8} bg={color} style={{borderRadius: 9999}}></Box>
+        <Stack
+        gap={4}
+        align="flex-start"
+        h="100%"
+        justify="space-between"
+        style={{ flexGrow: 1 }}
+        >
+          <Text size="md" c="gray.0" fw={600} maw={150}>
+            {measureTitle}
+          </Text>
+          <Group align="baseline" gap={4}>
+            <Title order={2} c="gray.0" fw={600}>
+              {measure}
+            </Title>
+            <Text size="xs" c="gray.5">
+              {measureType}
+            </Text>
           </Group>
-        </Group>
-      </Stack>
+        </Stack>
+        <Stack
+          gap={4}
+          align="flex-start"
+          justify="space-between"
+        >
+          <Text size="md" c="gray.0" fw={700} h={36} w={75}>
+            {percentTitle}
+          </Text>
+          <Group align="baseline" gap={8}>
+            {percent > 0 ? (
+              <IconTrendingUp
+                color="green"
+                aria-label="Options"
+                size={14}
+                style={{
+                  position: 'relative',
+                  bottom: '-4px',
+                }}
+              />
+            ) : (
+              <IconTrendingDown
+                color="red"
+                aria-label="Options"
+                size={16}
+                style={{
+                  position: 'relative',
+                  bottom: '-4px',
+                }}
+              />
+            )}
+            <Text size="xl" c="gray.0" fw={600}>
+              {percentText}
+            </Text>
+            <Text size="sm" c="gray.5">
+              %
+            </Text>
+          </Group>
+        </Stack>
+      </Group>
     </Card>
   );
 };
