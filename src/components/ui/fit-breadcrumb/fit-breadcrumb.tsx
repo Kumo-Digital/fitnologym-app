@@ -1,3 +1,4 @@
+import { useGyms, useUsers } from "@/hooks/mock";
 import {
   ActionIcon,
   Anchor,
@@ -7,13 +8,19 @@ import {
   Text,
 } from "@mantine/core";
 import { IconSelector } from "@tabler/icons-react";
+import { FitnologymBreadcrumbSkeleton } from "../navbar/breadcrumb/fitnologym-breadcrum-skeleton";
+import { useState } from "react";
 
 export const FitBreadcrumb = () => {
-  const items = [
+  const { users, isLoading: isLoadingUsers } = useUsers();
+  const { gyms, isLoading: isLoadingGyms } = useGyms();
+  const [items, setItems] = useState([
     { title: "Fitnologym", icon: "💪", href: "#", action: null },
     { title: "ENBOX Fitness", href: "#", action: "menu-gyms" },
     { title: "LeanBeefPatty", href: "#", action: "menu-users" },
-  ].map((item, index) => (
+  ]);
+
+  const breadCrumbLinks = items.map((item, index) => (
     <Group>
       {item.icon && <Avatar>{item.icon}</Avatar>}
       <Anchor href={item.href} key={index}>
@@ -38,9 +45,10 @@ export const FitBreadcrumb = () => {
     </Group>
   ));
 
+  if (isLoadingUsers || isLoadingGyms) return <FitnologymBreadcrumbSkeleton />;
   return (
     <Breadcrumbs separatorMargin="md" mt="xs">
-      {items}
+      {breadCrumbLinks}
     </Breadcrumbs>
   );
 };
