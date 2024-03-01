@@ -1134,8 +1134,8 @@ export default function MeasurementForm({ users }: {
               </Stack>
 
               <Group justify="flex-end">
-                <Button variant="subtle" fw={400} color="gray">Volver</Button>
-                <Button variant="filled" fw={400} c="black" type="submit">Agregar</Button>
+                <Button variant="subtle" color="gray">Volver</Button>
+                <Button variant="filled" c="black" type="submit">Agregar</Button>
               </Group>
             </Stack>
           </Form>
