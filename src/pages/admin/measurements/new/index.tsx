@@ -1,17 +1,18 @@
 import { validateRequest } from "@/lib/auth";
-import { useRouter } from "next/router";
-
 import type {
 	GetServerSidePropsContext,
 	GetServerSidePropsResult,
 	InferGetServerSidePropsType
 } from "next";
 import type { User } from "lucia";
-import type { FormEvent } from "react";
+import MeasurementForm from "@/components/admin/measurement-form";
+import connectDB from "@/lib/db";
+import UserService from "@/services/user";
+import { UserItem } from "@/types/user";
 
 export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
 	GetServerSidePropsResult<{
-		user: User;
+		allUsers: UserItem[];
 	}>
 > {
   console.log(context.req.cookies);
@@ -34,30 +35,29 @@ export async function getServerSideProps(context: GetServerSidePropsContext): Pr
 			}
 		};
 	}
+
+	await connectDB();
+	const userService = new UserService();
+	const users = await userService.getAllUsersButAdmins();
+	const allUsers = users.map((user) => {
+		return {
+			value: user._id,
+			label: user.fullname,
+		}
+	});
+	
 	return {
 		props: {
-			user
+			allUsers,
 		}
 	};
 }
 
-export default function Page({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	const router = useRouter();
-
-	async function onSubmit(e: FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-		const formElement = e.target as HTMLFormElement;
-		await fetch(formElement.action, {
-			method: formElement.method
-		});
-		router.push("/login");
-	}
+export default function Page({ allUsers }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
 	return (
 		<>
-			<p>Your user ID is {user.id}.</p>
-			<p>Si estás aquí es porque eres un usuario de rol ADMINISTRADOR. Eres: {user.role}.</p>
-			ACA VA EL FORMULARIO DE NUEVA MEASURE
+			<MeasurementForm users={allUsers} />
 		</>
 	);
 }

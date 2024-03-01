@@ -65,6 +65,12 @@ class UserService {
       }, {status: 400});
     }
   }
+
+  async getAllUsersButAdmins(): Promise<DatabaseUser[]> {
+    const allUsers = await UserModel.find({role: { $nin: 'administrator'}});
+
+    return allUsers;
+  }
 }
 
 export default UserService;
