@@ -1,5 +1,7 @@
 import { MeasureCard } from "@/components/ui/Cards/measure-card/measure-card";
-import { UserCard } from "@/components/ui/Cards/user-card/user-card";
+import GymModal from "@/components/ui/modal/gym-modal/gym-modal";
+import UserModal from "@/components/ui/modal/user-modal/user-modal";
+import WelcomeModal from "@/components/ui/modal/welcome-modal/welcome-modal";
 import Head from "next/head";
 
 export default function Login() {
@@ -12,11 +14,10 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <UserCard
-          title="LeanBeefPatty"
-          subtitle="ENBOX Fitness"
-          description="Se unió el Martes 2, Feb 2024"
-        />
+        <UserModal />
+        <GymModal />
+        <WelcomeModal />
+
         <MeasureCard
           percent={10}
           color="orange.6"
