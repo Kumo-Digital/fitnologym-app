@@ -1,4 +1,4 @@
-import { FitBreadcrumb } from "@/components/ui/fit-breadcrumb/fit-breadcrumb";
+import { FitBreadcrumb } from "@/components/ui/navbar/breadcrumb/fitnologym-breadcrumb";
 
 export default function MockBreadcrumb() {
   return (
