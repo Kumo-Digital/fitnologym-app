@@ -29,14 +29,9 @@ const WelcomeModal = () => {
           <Group grow>
             <Group>
               <Text>
-                <span
-                  style={{
-                    fontWeight: 600,
-                  }}
-                >
-                  Fitnologym
-                  <sup>®</sup>{" "}
-                </span>
+                <Text fw={600} span={true}>
+                  Fitnologym <sup>®</sup>{" "}
+                </Text>
                 es una plataforma que te permite llevar un control de tus
                 medidas y evolución, además de poder interactuar con tus rutinas
                 de ejercicios y tener un diagnóstico preciso de tu estado de
