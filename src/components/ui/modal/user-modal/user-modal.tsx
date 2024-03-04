@@ -33,26 +33,24 @@ export const SuscriptionValues = [
   },
 ];
 
-const renderSelectOption: SelectProps['renderOption'] = ({ option }) => (
+const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   <Group flex="1" gap="xs">
-    <Box 
+    <Box
       w={8}
       h={8}
-      bg={SuscriptionColors[Number(option.value)-1]}
+      bg={SuscriptionColors[Number(option.value) - 1]}
       style={{
-        borderRadius: "100%"
+        borderRadius: "100%",
       }}
-    >
-    </Box>
-    <Text size="sm">
-      {option.label}
-    </Text>
-  </Group> 
+    ></Box>
+    <Text size="sm">{option.label}</Text>
+  </Group>
 );
 
 interface UserForm {
   fullName: string;
   dni: string;
+  email: string;
   subscription: string;
   gym: string;
   gender: string;
@@ -62,6 +60,7 @@ const UserModal = () => {
 
   const initialValues: UserForm = {
     fullName: "",
+    email: "",
     dni: "",
     subscription: "1",
     gym: "",
@@ -70,6 +69,9 @@ const UserModal = () => {
 
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required("El nombre completo es obligatorio"),
+    email: Yup.string()
+      .email("Correo electrónico inválido")
+      .required("El correo electrónico es obligatorio"),
     dni: Yup.string()
       .required("El DNI es obligatorio")
       .min(6, "El DNI debe tener 6 dígitos")
@@ -97,21 +99,35 @@ const UserModal = () => {
           }}
           validationSchema={validationSchema}
         >
-          {({ values, handleSubmit, setFieldValue, errors, touched }) => (
+          {({
+            values,
+            handleSubmit,
+            setFieldValue,
+            errors,
+            touched,
+            setFieldTouched,
+          }) => (
             <Form onSubmit={handleSubmit}>
-              <Stack gap={8}>
-                <Group grow>
-                  <TextInput
-                    name="fullName"
-                    label="Nombre completo"
-                    placeholder="Nombre completo"
-                    error={touched.fullName && errors.fullName}
-                    onChange={(e) => setFieldValue("fullName", e.target.value)}
-                    value={values.fullName}
-                  />
-                </Group>
-
-                <Group grow justify="space-between">
+              <Stack gap={16}>
+                <TextInput
+                  name="fullName"
+                  label="Nombre completo"
+                  placeholder="Nombre completo"
+                  error={touched.fullName && errors.fullName}
+                  onBlur={() => setFieldTouched("fullName", true)}
+                  onChange={(e) => setFieldValue("fullName", e.target.value)}
+                  value={values.fullName}
+                />
+                <TextInput
+                  name="email"
+                  label="Correo Electrónico"
+                  placeholder="Correo Electrónico"
+                  error={touched.email && errors.email}
+                  onBlur={() => setFieldTouched("email", true)}
+                  onChange={(e) => setFieldValue("email", e.target.value)}
+                  value={values.email}
+                />
+                <Group grow justify="space-between" align="stretch">
                   <NumberInput
                     maw="100%"
                     label="DNI"
@@ -122,6 +138,7 @@ const UserModal = () => {
                     hideControls
                     placeholder="Documento Nacional de Identidad"
                     error={touched.dni && errors.dni}
+                    onBlur={() => setFieldTouched("dni", true)}
                     onChange={(e) => setFieldValue("dni", e)}
                     value={values.dni}
                   />
@@ -133,15 +150,14 @@ const UserModal = () => {
                     withCheckIcon={false}
                     renderOption={renderSelectOption}
                     error={touched.subscription && errors.subscription}
+                    onBlur={() => setFieldTouched("subscription", true)}
                     onChange={(e) => setFieldValue("subscription", e)}
                     value={values.subscription}
                     leftSection={
                       <Box
                         w={8}
                         h={8}
-                        bg={
-                          SuscriptionColors[Number(values.subscription) - 1]
-                        }
+                        bg={SuscriptionColors[Number(values.subscription) - 1]}
                         style={{
                           borderRadius: "100%",
                         }}
@@ -151,32 +167,33 @@ const UserModal = () => {
                   />
                 </Group>
 
-                  <Select
-                    label="Gimnasio"
-                    name="gym"
-                    placeholder="Gimnasio"
-                    error={touched.gym && errors.gym}
-                    onChange={(e) => setFieldValue("gym", e)}
-                    value={values.gym}
-                    data={[
-                      { value: "1", label: "Gym 1" },
-                      { value: "2", label: "Gym 2" },
-                    ]}
-                  />
+                <Select
+                  label="Gimnasio"
+                  name="gym"
+                  placeholder="Gimnasio"
+                  error={touched.gym && errors.gym}
+                  onBlur={() => setFieldTouched("gym", true)}
+                  onChange={(e) => setFieldValue("gym", e)}
+                  value={values.gym}
+                  data={[
+                    { value: "1", label: "Gym 1" },
+                    { value: "2", label: "Gym 2" },
+                  ]}
+                />
 
-                  <RadioGroup
-                    name="gender"
-                    label="Género"
-                    onChange={(e) => {
-                      setFieldValue("gender", e);
-                    }}
-                    value={values.gender}
-                  >
-                    <Group style={{ marginTop: 20 }}>
-                      <Radio value="male" label="Hombre" />
-                      <Radio value="female" label="Mujer" />
-                    </Group>
-                  </RadioGroup>
+                <RadioGroup
+                  name="gender"
+                  label="Género"
+                  onChange={(e) => {
+                    setFieldValue("gender", e);
+                  }}
+                  value={values.gender}
+                >
+                  <Group style={{ marginTop: 20 }}>
+                    <Radio value="male" label="Hombre" />
+                    <Radio value="female" label="Mujer" />
+                  </Group>
+                </RadioGroup>
 
                 <Group justify="flex-end">
                   <Button variant="subtle" color="gray" onClick={close}>

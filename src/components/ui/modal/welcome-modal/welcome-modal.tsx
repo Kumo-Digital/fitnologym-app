@@ -29,8 +29,8 @@ const WelcomeModal = () => {
           <Group grow>
             <Group>
               <Text>
-                <Text fw={600} span={true}>
-                  Fitnologym <sup>®</sup>{" "}
+                <Text fw={600} span={true} size="lg">
+                  Fitnologym<sup>®</sup>{" "}
                 </Text>
                 es una plataforma que te permite llevar un control de tus
                 medidas y evolución, además de poder interactuar con tus rutinas
@@ -58,21 +58,20 @@ const WelcomeModal = () => {
 
             <Image
               radius="md"
-              w="auto"
               h={500}
               component={NextImage}
               src={WelcomeImage}
               alt="Welcome Image"
             />
           </Group>
+          <Group justify="center" m={50} grow>
+            <Button variant="filled" c="black" onClick={close}>
+              <Text fw="600" size="xl">
+                Empieza Ahora
+              </Text>
+            </Button>
+          </Group>
         </Stack>
-        <Group justify="center" m={50} grow>
-          <Button variant="filled" c="black" onClick={close}>
-            <Text fw="600" size="xl">
-              Empieza Ahora
-            </Text>
-          </Button>
-        </Group>
       </Modal>
 
       <Button onClick={open} size="sm" variant="filled" c="black">

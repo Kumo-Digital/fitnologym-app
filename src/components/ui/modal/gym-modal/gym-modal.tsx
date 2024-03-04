@@ -1,7 +1,6 @@
-import { Button, Group, Modal, TextInput } from "@mantine/core";
+import { Button, Group, Modal, Stack, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Field, Form, Formik, FormikHelpers } from "formik";
-import { useState } from "react";
 import * as Yup from "yup";
 
 interface gymForm {
@@ -11,7 +10,6 @@ interface gymForm {
 }
 const UserModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
-  const [value, setValue] = useState("male");
 
   const initialValues: gymForm = {
     gymName: "",
@@ -45,50 +43,48 @@ const UserModal = () => {
           }}
           validationSchema={validationSchema}
         >
-          {({ values, handleSubmit, setFieldValue, errors, touched }) => (
+          {({
+            values,
+            handleSubmit,
+            setFieldValue,
+            errors,
+            touched,
+            setFieldTouched,
+          }) => (
             <Form onSubmit={handleSubmit}>
-              <Field name="gymName">
-                {(field: any) => (
-                  <TextInput
-                    style={{ marginBottom: 20 }}
-                    {...field}
-                    label="Nombre"
-                    placeholder="Nombre del gimnasio"
-                    error={touched.gymName && errors.gymName}
-                    onChange={(e) => setFieldValue("gymName", e.target.value)}
-                    value={values.gymName}
-                  />
-                )}
-              </Field>
+              <Stack gap={16}>
+                <TextInput
+                  label="Nombre"
+                  placeholder="Nombre del gimnasio"
+                  name="gymName"
+                  error={touched.gymName && errors.gymName}
+                  onBlur={() => setFieldTouched("gymName", true)}
+                  onChange={(e) => setFieldValue("gymName", e.target.value)}
+                  value={values.gymName}
+                />
 
-              <Field name="city">
-                {(field: any) => (
-                  <TextInput
-                    style={{ marginBottom: 20 }}
-                    {...field}
-                    label="Ciudad"
-                    placeholder="Ciudad del gimnasio"
-                    error={touched.city && errors.city}
-                    onChange={(e) => setFieldValue("city", e.target.value)}
-                    value={values.city}
-                  />
-                )}
-              </Field>
+                <TextInput
+                  label="Ciudad"
+                  placeholder="Ciudad del gimnasio"
+                  name="city"
+                  error={touched.city && errors.city}
+                  onBlur={() => setFieldTouched("city", true)}
+                  onChange={(e) => setFieldValue("city", e.target.value)}
+                  value={values.city}
+                />
 
-              <Field name="address">
-                {(field: any) => (
-                  <TextInput
-                    style={{ marginBottom: 20 }}
-                    {...field}
-                    label="Dirección"
-                    placeholder="Dirección del gimnasio"
-                    error={touched.address && errors.address}
-                    onChange={(e) => setFieldValue("address", e.target.value)}
-                    value={values.address}
-                  />
-                )}
-              </Field>
-              <Group justify="flex-end">
+                <TextInput
+                  label="Dirección"
+                  placeholder="Dirección del gimnasio"
+                  name="address"
+                  onBlur={() => setFieldTouched("address", true)}
+                  error={touched.address && errors.address}
+                  onChange={(e) => setFieldValue("address", e.target.value)}
+                  value={values.address}
+                />
+              </Stack>
+
+              <Group justify="flex-end" mt={20}>
                 <Button variant="subtle" color="gray" onClick={close}>
                   Cancelar
                 </Button>
