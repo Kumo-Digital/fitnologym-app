@@ -22,21 +22,15 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
   percent,
 }) => {
   return (
-    <Card
-      bg="dark.7"
-      radius="md"
-      withBorder
-      w="25%"
-      p={0}
-    >
+    <Card bg="dark.7" radius="md" withBorder p={0}>
       <Group gap={16} py={24} pl={16} pr={24} align="stretch">
-        <Box miw={8} bg={color} style={{borderRadius: 9999}}></Box>
+        <Box miw={8} bg={color} style={{ borderRadius: 9999 }}></Box>
         <Stack
-        gap={4}
-        align="flex-start"
-        h="100%"
-        justify="space-between"
-        style={{ flexGrow: 1 }}
+          gap={4}
+          align="flex-start"
+          h="100%"
+          justify="space-between"
+          style={{ flexGrow: 1 }}
         >
           <Text size="md" c="gray.0" fw={600} maw={150}>
             {measureTitle}
@@ -50,11 +44,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
             </Text>
           </Group>
         </Stack>
-        <Stack
-          gap={4}
-          align="flex-start"
-          justify="space-between"
-        >
+        <Stack gap={4} align="flex-start" justify="space-between">
           <Text size="md" c="gray.0" fw={700} h={36} w={75}>
             {percentTitle}
           </Text>
@@ -65,8 +55,8 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 aria-label="Options"
                 size={14}
                 style={{
-                  position: 'relative',
-                  bottom: '-4px',
+                  position: "relative",
+                  bottom: "-4px",
                 }}
               />
             ) : (
@@ -75,8 +65,8 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 aria-label="Options"
                 size={16}
                 style={{
-                  position: 'relative',
-                  bottom: '-4px',
+                  position: "relative",
+                  bottom: "-4px",
                 }}
               />
             )}
