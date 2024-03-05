@@ -14,9 +14,9 @@ class UserService {
     return users;
   }
 
-  async getUserByUid(userId: string): Promise<DatabaseUser | null> {
+  async getUserById(userId: string): Promise<DatabaseUser | null> {
     const user = await UserModel.findOne({
-      uid: userId,
+      _id: userId,
     });
 
     return user;
@@ -38,36 +38,41 @@ class UserService {
       const hashedPassword = await new Argon2id().hash(dni);
       // const hashedPassword = await bcrypt.hash(dni, Number(process.env.BCRYPT_SALT_ROUNDS));
       const userId = generateId(15);
-      
+
       const newData = {
         _id: userId,
         fullname,
         dni,
         email,
         password: hashedPassword,
-        user_type: 'basic',
-        role: 'user'
-      }
+        user_type: "basic",
+        role: "user",
+      };
 
       const newUser = await UserModel.create(newData);
       console.log(newUser);
 
-      return NextResponse.json({
-        message: 'Usuario registrado',
-        success: true,
-      }, {status: 200});
-
+      return NextResponse.json(
+        {
+          message: "Usuario registrado",
+          success: true,
+        },
+        { status: 200 }
+      );
     } catch (error) {
       console.log(error);
-      return NextResponse.json({
-        message: error,
-        success: false,
-      }, {status: 400});
+      return NextResponse.json(
+        {
+          message: error,
+          success: false,
+        },
+        { status: 400 }
+      );
     }
   }
 
   async getAllUsersButAdmins(): Promise<DatabaseUser[]> {
-    const allUsers = await UserModel.find({role: { $nin: 'administrator'}});
+    const allUsers = await UserModel.find({ role: { $nin: "administrator" } });
 
     return allUsers;
   }
