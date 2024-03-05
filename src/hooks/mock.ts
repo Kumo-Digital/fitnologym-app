@@ -2,10 +2,8 @@ import { mockFetcher } from "@/utils/apiUtils";
 import useSWR from "swr";
 
 export const useUsers = (id?: number) => {
-  const { data, error, isLoading, mutate } = useSWR(
-    `/users` + id && `/${id}`,
-    mockFetcher
-  );
+  const key = id ? `/users/${id}` : "/users";
+  const { data, error, isLoading, mutate } = useSWR(key, mockFetcher);
 
   return {
     users: data,
@@ -16,10 +14,8 @@ export const useUsers = (id?: number) => {
 };
 
 export const useGyms = (id?: number) => {
-  const { data, error, isLoading, mutate } = useSWR(
-    `/gyms` + id && `/${id}`,
-    mockFetcher
-  );
+  const key = id ? `/gyms/${id}` : "/gyms";
+  const { data, error, isLoading, mutate } = useSWR(key, mockFetcher);
 
   return {
     gyms: data,
