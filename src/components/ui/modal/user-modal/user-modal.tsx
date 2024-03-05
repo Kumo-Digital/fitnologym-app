@@ -102,6 +102,8 @@ const UserModal = () => {
           {({
             values,
             handleSubmit,
+            handleChange,
+            handleBlur,
             setFieldValue,
             errors,
             touched,
@@ -114,8 +116,8 @@ const UserModal = () => {
                   label="Nombre completo"
                   placeholder="Nombre completo"
                   error={touched.fullName && errors.fullName}
-                  onBlur={() => setFieldTouched("fullName", true)}
-                  onChange={(e) => setFieldValue("fullName", e.target.value)}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
                   value={values.fullName}
                 />
                 <TextInput
@@ -123,8 +125,8 @@ const UserModal = () => {
                   label="Correo Electrónico"
                   placeholder="Correo Electrónico"
                   error={touched.email && errors.email}
-                  onBlur={() => setFieldTouched("email", true)}
-                  onChange={(e) => setFieldValue("email", e.target.value)}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
                   value={values.email}
                 />
                 <Group grow justify="space-between" align="stretch">
@@ -171,6 +173,7 @@ const UserModal = () => {
                   label="Gimnasio"
                   name="gym"
                   placeholder="Gimnasio"
+                  withCheckIcon={false}
                   error={touched.gym && errors.gym}
                   onBlur={() => setFieldTouched("gym", true)}
                   onChange={(e) => setFieldValue("gym", e)}

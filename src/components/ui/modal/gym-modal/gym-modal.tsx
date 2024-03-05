@@ -3,22 +3,22 @@ import { useDisclosure } from "@mantine/hooks";
 import { Field, Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
-interface gymForm {
-  gymName: string;
+interface GymForm {
+  name: string;
   city: string;
   address: string;
 }
 const UserModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const initialValues: gymForm = {
-    gymName: "",
+  const initialValues: GymForm = {
+    name: "",
     city: "",
     address: "",
   };
 
   const validationSchema = Yup.object().shape({
-    gymName: Yup.string().required("El nombre del gimnasio es obligatorio"),
+    name: Yup.string().required("El nombre del gimnasio es obligatorio"),
     city: Yup.string().required("La ciudad es obligatoria"),
     address: Yup.string().required("La dirección es obligatoria"),
   });
@@ -56,11 +56,11 @@ const UserModal = () => {
                 <TextInput
                   label="Nombre"
                   placeholder="Nombre del gimnasio"
-                  name="gymName"
-                  error={touched.gymName && errors.gymName}
-                  onBlur={() => setFieldTouched("gymName", true)}
-                  onChange={(e) => setFieldValue("gymName", e.target.value)}
-                  value={values.gymName}
+                  name="name"
+                  error={touched.name && errors.name}
+                  onBlur={() => setFieldTouched("name", true)}
+                  onChange={(e) => setFieldValue("name", e.target.value)}
+                  value={values.name}
                 />
 
                 <TextInput
