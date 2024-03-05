@@ -1,37 +1,49 @@
 import UserModel from "@/db/models/UserModel";
 import { DatabaseUser } from "@/lib/auth";
-import { IUser } from "@/db/interfaces/IUser";
-// import bcrypt from 'bcrypt';
 import { generateId } from "lucia";
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 import { Argon2id } from "oslo/password";
 
 class UserService {
   async getAllUsers(): Promise<DatabaseUser[]> {
-    const users = await UserModel.find();
+    const users = await UserModel.find({}, { password: 0 });
 
     return users;
   }
 
+  async getAllUsersButAdmins(): Promise<DatabaseUser[]> {
+    const allUsers = await UserModel.find(
+      { role: { $nin: "administrator" } },
+      { password: 0 }
+    );
+
+    return allUsers;
+  }
+
   async getUserById(userId: string): Promise<DatabaseUser | null> {
-    const user = await UserModel.findOne({
-      _id: userId,
-    });
+    const user = await UserModel.findOne(
+      {
+        _id: userId,
+      },
+      { password: 0 }
+    );
 
     return user;
   }
 
   async getUserByEmail(email: string): Promise<DatabaseUser | null> {
-    const user = await UserModel.findOne({
-      email: email,
-    });
+    const user = await UserModel.findOne(
+      {
+        email: email,
+      },
+      { password: 0 }
+    );
 
     return user;
   }
 
   async createUser(userData: DatabaseUser): Promise<NextResponse> {
-    const { email, dni, fullname } = userData;
+    const { email, dni, fullname, user_type } = userData;
 
     try {
       // Hash password
@@ -45,12 +57,11 @@ class UserService {
         dni,
         email,
         password: hashedPassword,
-        user_type: "basic",
+        user_type,
         role: "user",
       };
 
       const newUser = await UserModel.create(newData);
-      console.log(newUser);
 
       return NextResponse.json(
         {
@@ -60,7 +71,6 @@ class UserService {
         { status: 200 }
       );
     } catch (error) {
-      console.log(error);
       return NextResponse.json(
         {
           message: error,
@@ -69,12 +79,6 @@ class UserService {
         { status: 400 }
       );
     }
-  }
-
-  async getAllUsersButAdmins(): Promise<DatabaseUser[]> {
-    const allUsers = await UserModel.find({ role: { $nin: "administrator" } });
-
-    return allUsers;
   }
 }
 
