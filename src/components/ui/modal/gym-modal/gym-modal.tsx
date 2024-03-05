@@ -8,7 +8,7 @@ interface GymForm {
   city: string;
   address: string;
 }
-const UserModal = () => {
+const GymModal = () => {
   const [opened, { open, close }] = useDisclosure(false);
 
   const initialValues: GymForm = {
@@ -34,8 +34,8 @@ const UserModal = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={(
-            values: gymForm,
-            { setSubmitting }: FormikHelpers<gymForm>
+            values: GymForm,
+            { setSubmitting }: FormikHelpers<GymForm>
           ) => {
             console.log("YEAH BOY");
             console.log(values);
@@ -104,4 +104,4 @@ const UserModal = () => {
   );
 };
 
-export default UserModal;
+export default GymModal;
