@@ -4,7 +4,7 @@ import Image from "next/image";
 import maleBodyImage from "../../../../public/assets/images/body/male-body.png";
 import femaleBodyImage from "../../../../public/assets/images/body/female-body.png";
 import { MaleBodyOutlines } from "@/components/ui/body-model/male-body-outlines";
-import { FemaleBodyOutlines } from "@/components/ui/body-model/femele-body-outlines";
+import { FemaleBodyOutlines } from "@/components/ui/body-model/female-body-outlines";
 
 interface BodySectionsProps {
   gender: "female" | "male";
