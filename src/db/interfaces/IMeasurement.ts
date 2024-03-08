@@ -6,9 +6,14 @@ interface MeasurementObject {
   measure_status?: number;
 }
 
-export interface IMeasurement extends Document {
-  id: string;
-  user_id: number;
+interface CircumferenceObject {
+  measure_uom?: string;
+  measure_value?: number;
+}
+
+export interface IMeasurement {
+  _id: string;
+  user_id: string;
   date: Date;
   report_url?: string;
   weight: MeasurementObject;
@@ -47,13 +52,13 @@ export interface IMeasurement extends Document {
     body_fat: MeasurementObject;
     muscle_quality: MeasurementObject;
   };
-  circumferenceNeck?: number;
-  circumferenceChest?: number;
-  circumferenceShoulders?: number;
-  circumferenceArms?: number;
-  circumferenceWaist?: number;
-  circumferenceHips?: number;
-  circumferenceGlutes?: number;
-  circumferenceQuads?: number;
-  circumferenceCalf?: number;
+  circumferenceNeck?: CircumferenceObject;
+  circumferenceChest?: CircumferenceObject;
+  circumferenceShoulders?: CircumferenceObject;
+  circumferenceArms?: CircumferenceObject;
+  circumferenceWaist?: CircumferenceObject;
+  circumferenceHips?: CircumferenceObject;
+  circumferenceGlutes?: CircumferenceObject;
+  circumferenceQuads?: CircumferenceObject;
+  circumferenceCalf?: CircumferenceObject;
 }

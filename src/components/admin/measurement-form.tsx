@@ -1,8 +1,10 @@
+import { IMeasurement } from "@/db/interfaces/IMeasurement";
+import { apiClient } from "@/lib/apiClient";
 import { API_URL_V1, apiUrls } from "@/lib/apiUrls";
 import { MeasurementFormValues } from "@/types/admin";
 import { UserItem } from "@/types/user";
 import { StatusColors, StatusValues, measurementFormInitialValues } from "@/utils/admin";
-import { Box, Button, Divider, Group, Input, NumberInput, Select, SelectProps, Stack, Text, Title } from "@mantine/core";
+import { Box, Button, Divider, Group, Input, NumberInput, Select, SelectProps, Stack, Text, TextInput, Title } from "@mantine/core";
 import { Formik, Form, FormikHelpers } from "formik";
 
 const renderSelectOption: SelectProps['renderOption'] = ({ option }) => (
@@ -26,19 +28,35 @@ export default function MeasurementForm({ users }: {
   users: UserItem[],
 }) {
 
+  async function createMeasurement(values: MeasurementFormValues) {
+    try {
+      console.log(values);
+      const res = await apiClient.post(apiUrls.measurements.create, values);
+      console.log('la response es:', res);
+  
+      if (res.status === 201) {
+        console.log('Hemos añadido una nueva medida!');
+      } else {
+        console.log('ERROR!');
+        console.error(res.statusText);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <Formik
       initialValues={measurementFormInitialValues}
-        onSubmit={(
-          values: MeasurementFormValues,
-          { setSubmitting }: FormikHelpers<MeasurementFormValues>
+        onSubmit={async (
+          values: any,
+          { setSubmitting }: FormikHelpers<any>
         ) => {
-          console.log('YEAH BOY');
-          console.log(values);
+          await createMeasurement(values);
         }}>
         
-        {({ values, handleBlur, handleSubmit, setFieldValue, touched, errors }) => (
+        {({ values, handleBlur, handleSubmit, handleChange, setFieldValue, touched, errors }) => (
           <Form onSubmit={handleSubmit}>
             <Stack>
               <Group h={120} align="center" justify="space-between">
@@ -74,12 +92,14 @@ export default function MeasurementForm({ users }: {
                       value={values.user_id}
                       onChange={(e) => setFieldValue("user_id", e)}
                     />
-                    <Input.Wrapper label="Devolución" description="Link al reporte en Google Drive o Google Docs/Excel, etc...">
-                      <Input
-                        value={values.report_link}
-                        onChange={(e) => setFieldValue("report_link", e)}
-                      />
-                    </Input.Wrapper>
+                    <TextInput
+                      name="report_url"
+                      label="Devolución"
+                      description="Link al reporte en Google Drive o Google Docs/Excel, etc..."
+                      placeholder="Enlace al reporte..."
+                      value={values.report_url}
+                      onChange={handleChange}
+                    />
                   </Stack>
                 </Group>
               </Stack>
