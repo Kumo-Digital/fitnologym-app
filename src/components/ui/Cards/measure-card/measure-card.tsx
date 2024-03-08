@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Text, Group, Stack, Title, Box } from "@mantine/core";
+import { Card, Text, Group, Stack, Title, Box, Tooltip } from "@mantine/core";
 import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
 
 interface MeasureCardProps {
@@ -70,12 +70,22 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 }}
               />
             )}
-            <Text size="xl" c="gray.0" fw={600}>
-              {percentText}
-            </Text>
-            <Text size="sm" c="gray.5">
-              %
-            </Text>
+            <Tooltip
+              label={"Crecimiento respecto a la última medida"}
+              position="bottom"
+              multiline
+              withArrow
+              w={160}
+            >
+              <Group align="baseline" gap={8}>
+                <Text size="xl" c="gray.0" fw={600}>
+                  {percentText}
+                </Text>
+                <Text size="sm" c="gray.5">
+                  %
+                </Text>
+              </Group>
+            </Tooltip>
           </Group>
         </Stack>
       </Group>
