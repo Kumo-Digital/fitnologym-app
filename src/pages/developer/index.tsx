@@ -1,7 +1,4 @@
-import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
-import GymModal from "@/components/ui/modal/gym-modal/gym-modal";
-import UserModal from "@/components/ui/modal/user-modal/user-modal";
-import WelcomeModal from "@/components/ui/modal/welcome-modal/welcome-modal";
+import Overview from "@/components/overview/overview";
 import Head from "next/head";
 
 export default function Login() {
@@ -14,19 +11,7 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <UserModal />
-        <GymModal />
-        <WelcomeModal />
-
-        <MeasureCard
-          percent={10}
-          color="orange.6"
-          measureTitle="Indice de Masa Corporal"
-          measure={23.5}
-          measureType="BMI"
-          percentTitle="Evolución"
-          percentText={2.3}
-        />
+        <Overview />
       </main>
     </>
   );
