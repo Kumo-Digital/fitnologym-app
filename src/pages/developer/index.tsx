@@ -1,4 +1,4 @@
-import { MeasureCard } from "@/components/ui/Cards/measure-card/measure-card";
+import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import GymModal from "@/components/ui/modal/gym-modal/gym-modal";
 import UserModal from "@/components/ui/modal/user-modal/user-modal";
 import WelcomeModal from "@/components/ui/modal/welcome-modal/welcome-modal";
