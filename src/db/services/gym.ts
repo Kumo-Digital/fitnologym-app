@@ -1,5 +1,6 @@
 import GymModel from "@/db/models/GymModel";
 import { IGym } from "@/db/interfaces/IGym";
+import { generateId } from "lucia";
 
 class GymService {
   async getAllGyms(): Promise<IGym[]> {
@@ -17,7 +18,9 @@ class GymService {
   }
 
   async createGym(gymData: IGym): Promise<IGym> {
-    const newGym = await GymModel.create(gymData);
+    const gymId = generateId(8);
+
+    const newGym = await GymModel.create({ ...gymData, id: gymId });
     return newGym;
   }
 }

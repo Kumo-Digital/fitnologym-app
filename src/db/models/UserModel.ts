@@ -1,38 +1,38 @@
-import { DatabaseUser } from '@/lib/auth';
-import { Schema, model, models } from 'mongoose';
+import { DatabaseUser } from "@/lib/auth";
+import { Schema, model, models } from "mongoose";
 
 // Define the Mongoose schema for the User model
 const userSchema = new Schema<DatabaseUser>({
   _id: {
     type: String,
-    required: true
+    required: true,
   },
   fullname: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   dni: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   user_type: {
     type: String,
-    required: true
+    required: true,
   },
   role: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 } as const);
 
-const UserModel = models.User || model<DatabaseUser>('User', userSchema);
+const UserModel = models.User || model<DatabaseUser>("User", userSchema);
 
 export default UserModel;

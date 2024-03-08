@@ -7,7 +7,7 @@ import type {
 import type { User } from "lucia";
 import MeasurementForm from "@/components/admin/measurement-form";
 import connectDB from "@/lib/db";
-import UserService from "@/services/user";
+import UserService from "@/db/services/user";
 import { UserItem } from "@/types/user";
 
 export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
