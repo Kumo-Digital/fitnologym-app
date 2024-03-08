@@ -17,4 +17,8 @@ export const apiUrls = {
     getById: (id: string) => `/gyms/${id}`,
     create: "/gyms",
   },
+  measurements: {
+    get: "/measurements",
+    create: "/measurements",
+  }
 };

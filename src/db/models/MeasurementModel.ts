@@ -27,14 +27,13 @@ const CircumferenceObjSchema = {
   },
 }
 
-// Define the Mongoose schema for the User model
 const measurementSchema = new Schema<IMeasurement>({
   _id: {
     type: String,
-    required: true
+    required: true,
   },
   user_id: {
-    type: Number,
+    type: String,
     required: true
   },
   date: {
@@ -57,88 +56,43 @@ const measurementSchema = new Schema<IMeasurement>({
   body_water: MeasurementObjSchema,
   physique_rating: MeasurementObjSchema,
   left_arm: {
-    muscle_mass: {
-      MeasurementObjSchema
-    },
-    body_fat: {
-      MeasurementObjSchema
-    },
-    muscle_quality: {
-      MeasurementObjSchema
-    },
+    muscle_mass: MeasurementObjSchema,
+    body_fat: MeasurementObjSchema,
+    muscle_quality: MeasurementObjSchema,
   },
   right_arm: {
-    muscle_mass: {
-      MeasurementObjSchema
-    },
-    body_fat: {
-      MeasurementObjSchema
-    },
-    muscle_quality: {
-      MeasurementObjSchema
-    },
+    muscle_mass: MeasurementObjSchema,
+    body_fat: MeasurementObjSchema,
+    muscle_quality:MeasurementObjSchema,
   },
   left_leg: {
-    muscle_mass: {
-      MeasurementObjSchema
-    },
-    body_fat: {
-      MeasurementObjSchema
-    },
-    muscle_quality: {
-      MeasurementObjSchema
-    },
+    muscle_mass: MeasurementObjSchema,
+    body_fat: MeasurementObjSchema,
+    muscle_quality: MeasurementObjSchema,
   },
   right_leg: {
-    muscle_mass: {
-      MeasurementObjSchema
-    },
-    body_fat: {
-      MeasurementObjSchema
-    },
-    muscle_quality: {
-      MeasurementObjSchema
-    },
+    muscle_mass: MeasurementObjSchema,
+    body_fat: MeasurementObjSchema,
+    muscle_quality: MeasurementObjSchema,
   },
   trunk: {
-    muscle_mass: {
-      MeasurementObjSchema
-    },
-    body_fat: {
-      MeasurementObjSchema
-    },
-    muscle_quality: {
-      MeasurementObjSchema
-    },
+    muscle_mass: MeasurementObjSchema,
+    body_fat: MeasurementObjSchema,
+    muscle_quality: MeasurementObjSchema,
   },
-  circumferenceNeck: {
-    CircumferenceObjSchema,
-  },
-  circumferenceChest: {
-    CircumferenceObjSchema,
-  },
-  circumferenceShoulders: {
-    CircumferenceObjSchema,
-  },
-  circumferenceArms: {
-    CircumferenceObjSchema,
-  },
-  circumferenceWaist: {
-    CircumferenceObjSchema,
-  },
-  circumferenceHips: {
-    CircumferenceObjSchema,
-  },
-  circumferenceGlutes: {
-    CircumferenceObjSchema,
-  },
-  circumferenceQuads: {
-    CircumferenceObjSchema,
-  },
-  circumferenceCalf: {
-    CircumferenceObjSchema,
-  },
-} as const);
+  circumferenceNeck: CircumferenceObjSchema,
+  circumferenceChest: CircumferenceObjSchema,
+  circumferenceShoulders: CircumferenceObjSchema,
+  circumferenceArms: CircumferenceObjSchema,
+  circumferenceWaist: CircumferenceObjSchema,
+  circumferenceHips: CircumferenceObjSchema,
+  circumferenceGlutes: CircumferenceObjSchema,
+  circumferenceQuads: CircumferenceObjSchema,
+  circumferenceCalf: CircumferenceObjSchema,
+} as const,
+{
+  timestamps: true,
+});
 
 const MeasurementModel = models.Measurement || model<IMeasurement>('Measurement', measurementSchema);
 

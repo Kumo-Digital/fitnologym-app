@@ -1,5 +1,5 @@
 import connectDB from "@/lib/db";
-import UserService from "@/services/user";
+import UserService from "@/db/services/user";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
