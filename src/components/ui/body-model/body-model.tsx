@@ -8,7 +8,7 @@ import { FemaleBodyOutlines } from "@/components/ui/body-model/female-body-outli
 
 interface BodySectionsProps {
   gender: "female" | "male";
-  onSectionSelect: (section: string | null) => void;
+  onSectionSelect: (section: string) => void;
 }
 
 export const BodyModel = ({ gender, onSectionSelect }: BodySectionsProps) => {

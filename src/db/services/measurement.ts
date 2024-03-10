@@ -20,32 +20,35 @@ class MeasurementService {
   async getMeasurementsByUser(userId: string): Promise<IMeasurement[]> {
     const measurements = await MeasurementModel.find({
       user_id: userId,
-    })
+    });
 
     return measurements;
   }
 
   async getLastMeasureByUser(userId: string): Promise<IMeasurement> {
-    const measurement = await MeasurementModel.findOne({
-      user_id: userId,
-    },
-    {},
-    {
-      sort: 
+    const measurement = await MeasurementModel.findOne(
       {
-        date: -1
+        user_id: userId,
+      },
+      {},
+      {
+        sort: {
+          date: -1,
+        },
       }
-    });
+    );
 
     return measurement;
   }
 
-  async createMeasurement(MeasurementData: IMeasurement): Promise<NextResponse> {
+  async createMeasurement(
+    MeasurementData: IMeasurement
+  ): Promise<NextResponse> {
     try {
-      console.log('la data en el servicio se recibe:', MeasurementData);
+      console.log("la data en el servicio se recibe:", MeasurementData);
       const newMeasurement = await MeasurementModel.create(MeasurementData);
-      console.log('Se creó la new measure en mongodb?');
-      console.log('Mi new measure es:', newMeasurement);
+      console.log("Se creó la new measure en mongodb?");
+      console.log("Mi new measure es:", newMeasurement);
 
       return NextResponse.json(
         {
