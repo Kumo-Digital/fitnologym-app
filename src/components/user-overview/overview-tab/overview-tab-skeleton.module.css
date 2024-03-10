@@ -1,0 +1,19 @@
+@keyframes fill {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.body-outline-skeleton {
+  fill: var(--mantine-color-dark-4);
+  fill-opacity: 1;
+
+  &[data-animate="true"] {
+    animation: fill 1.5s linear infinite;
+  }
+}

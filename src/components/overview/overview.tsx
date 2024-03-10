@@ -15,7 +15,7 @@ import {
 import { useState } from "react";
 import NextImage from "next/image";
 import WelcomeImage from "@/assets/ava.jpg";
-import { MeasureCard } from "../ui/Cards/measure-card/measure-card";
+import { MeasureCard } from "../ui/card/measure-card/measure-card";
 import { IconPlus } from "@tabler/icons-react";
 
 export default function Overview() {
