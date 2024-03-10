@@ -9,6 +9,9 @@ export const RootLayout = ({ children }: any) => {
         <Navbar />
         <main
           style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
             // 64px is the height of the navbar, 46px is the height of the footer, 32px is both gaps
             minHeight: "calc(100vh - 64px - 46px - 32px)",
           }}
