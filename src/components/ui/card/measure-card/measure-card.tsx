@@ -1,30 +1,31 @@
 import React from "react";
 import { Card, Text, Group, Stack, Title, Box, Tooltip } from "@mantine/core";
 import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
+import { getMeasureName, getMeasureStatusColor } from "@/utils/measurement";
 
 interface MeasureCardProps {
   measureTitle: string;
-  measure: number;
-  measureType: string;
-  percentTitle: string;
-  percentText: number;
-  color?: string;
-  percent: number;
+  measureValue: number;
+  measureUnit: string;
+  evolutionValue: number;
+  measureStatus: number;
 }
 
 export const MeasureCard: React.FC<MeasureCardProps> = ({
   measureTitle,
-  measure,
-  percentTitle,
-  percentText,
-  measureType,
-  color,
-  percent,
+  measureValue,
+  evolutionValue,
+  measureUnit,
+  measureStatus,
 }) => {
   return (
-    <Card bg="dark.7" radius="md" withBorder p={0}>
+    <Card radius="md" withBorder p={0}>
       <Group gap={16} py={24} pl={16} pr={24} align="stretch">
-        <Box miw={8} bg={color} style={{ borderRadius: 9999 }}></Box>
+        <Box
+          miw={8}
+          bg={getMeasureStatusColor(measureStatus ?? 1)}
+          style={{ borderRadius: 9999 }}
+        ></Box>
         <Stack
           gap={4}
           align="flex-start"
@@ -33,23 +34,23 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
           style={{ flexGrow: 1 }}
         >
           <Text size="md" c="gray.0" fw={600} maw={150}>
-            {measureTitle}
+            {getMeasureName(measureTitle)}
           </Text>
           <Group align="baseline" gap={4}>
             <Title order={2} c="gray.0" fw={600}>
-              {measure}
+              {measureValue}
             </Title>
             <Text size="xs" c="gray.5">
-              {measureType}
+              {measureUnit}
             </Text>
           </Group>
         </Stack>
         <Stack gap={4} align="flex-start" justify="space-between">
           <Text size="md" c="gray.0" fw={700} h={36} w={75}>
-            {percentTitle}
+            Evolución
           </Text>
           <Group align="baseline" gap={8}>
-            {percent > 0 ? (
+            {evolutionValue > 0 ? (
               <IconTrendingUp
                 color="green"
                 aria-label="Options"
@@ -79,7 +80,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
             >
               <Group align="baseline" gap={8}>
                 <Text size="xl" c="gray.0" fw={600}>
-                  {percentText}
+                  {evolutionValue}
                 </Text>
                 <Text size="sm" c="gray.5">
                   %
