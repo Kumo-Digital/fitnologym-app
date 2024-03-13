@@ -264,7 +264,7 @@ export const BodySectionLegs = ({ lastMeasure }: any) => {
         </Stack>
       </Group>
       <Stack>
-        <Title order={4}>Circumferencias</Title>
+        <Title order={4}>Circunferencias</Title>
         {legMeasures.circumferences.map((value: Measure, index: number) => (
           <CircumferenceCard
             key={`${value.metricName}-${index}`}
