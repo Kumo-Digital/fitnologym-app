@@ -31,6 +31,14 @@ class UserService {
     return user;
   }
 
+  async getLoginUserByEmail(email: string): Promise<DatabaseUser | null> {
+    const user = await UserModel.findOne({
+      email: email,
+    });
+
+    return user;
+  }
+
   async getUserByEmail(email: string): Promise<DatabaseUser | null> {
     const user = await UserModel.findOne(
       {

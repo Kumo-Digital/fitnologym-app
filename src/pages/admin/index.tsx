@@ -1,13 +1,16 @@
 import { validateRequest } from "@/lib/auth";
 import { useRouter } from "next/router";
 
+import { Stack, Tabs } from "@mantine/core";
+import type { User } from "lucia";
 import type {
 	GetServerSidePropsContext,
 	GetServerSidePropsResult,
 	InferGetServerSidePropsType
 } from "next";
-import type { User } from "lucia";
 import type { FormEvent } from "react";
+import { withRootLayout } from "@/utils/layouts";
+import { NextPageWithLayout } from "../_app";
 
 export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
 	GetServerSidePropsResult<{
@@ -41,8 +44,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext): Pr
 	};
 }
 
-export default function Page({ user }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-	const router = useRouter();
+const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
+  const router = useRouter();
 
 	async function onSubmit(e: FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -53,14 +56,30 @@ export default function Page({ user }: InferGetServerSidePropsType<typeof getSer
 		router.push("/login");
 	}
 
-	return (
-		<>
-			<h1>Esto es una página SOLO para Administración!</h1>
-			<p>Your user ID is {user.id}.</p>
-			<p>Si estás aquí es porque eres un usuario de rol ADMINISTRADOR. Eres: {user.role}.</p>
-			<form method="post" action="./api/v1/auth/logout" onSubmit={onSubmit}>
-				<button>Sign out</button>
-			</form>
-		</>
-	);
+  return (
+    <>
+      <Stack gap={24} style={{ flexGrow: 1 }}>
+        <Tabs defaultValue="clients">
+          <Tabs.List mb={24}>
+            <Tabs.Tab value="clients">Clientes</Tabs.Tab>
+            <Tabs.Tab value="gyms">Gimnasios</Tabs.Tab>
+            <Tabs.Tab value="measurements">Mediciones</Tabs.Tab>
+          </Tabs.List>
+
+          <Tabs.Panel value="clients">
+            <div>CLIENTES</div>
+          </Tabs.Panel>
+          <Tabs.Panel value="gyms">
+            <div>GIMNASIOS</div>
+          </Tabs.Panel>
+          <Tabs.Panel value="measurements">
+            <div>MEDICIONES</div>
+          </Tabs.Panel>
+        </Tabs>
+      </Stack>
+    </>
+  );
 }
+
+withRootLayout(Page);
+export default Page;

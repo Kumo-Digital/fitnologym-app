@@ -6,6 +6,9 @@ import "@mantine/notifications/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { RootLayout } from "@/components/layouts/root-layout";
+import { NextPage } from "next";
+import { ReactElement, ReactNode } from "react";
+import { User } from "lucia";
 
 const theme = createTheme({
   fontFamily: "Roboto, sans-serif",
@@ -15,13 +18,21 @@ const theme = createTheme({
   },
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = { user: User }, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark">
       <Notifications limit={5} autoClose={7000} />
-      <RootLayout>
-        <Component {...pageProps} />
-      </RootLayout>
+      {getLayout(<Component {...pageProps} />)}
     </MantineProvider>
   );
 }
