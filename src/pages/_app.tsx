@@ -1,5 +1,7 @@
 import type { AppProps } from "next/app";
 import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+import "@mantine/charts/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { RootLayout } from "@/components/layouts/root-layout";
 
