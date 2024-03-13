@@ -1,4 +1,3 @@
-import Overview from "@/components/overview/overview";
 import Head from "next/head";
 
 export default function Login() {
@@ -11,7 +10,7 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Overview />
+
       </main>
     </>
   );
