@@ -1,5 +1,7 @@
+import AnalysisTab from "@/components/user-overview/analysis-tab/analysis-tab";
 import OverviewTab from "@/components/user-overview/overview-tab/overview-tab";
 import { useUniqueUser } from "@/hooks/users";
+import { withRootLayout } from "@/utils/layouts";
 import {
   Badge,
   Group,
@@ -67,9 +69,14 @@ const UserOverview = () => {
         <Tabs.Panel value="overview">
           <OverviewTab user={user} />
         </Tabs.Panel>
+        <Tabs.Panel value="analysis">
+          <AnalysisTab user={user} />
+        </Tabs.Panel>
       </Tabs>
     </Stack>
   );
 };
+
+withRootLayout(UserOverview);
 
 export default UserOverview;

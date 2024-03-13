@@ -4,59 +4,57 @@ import { useRouter } from "next/router";
 import { Stack, Tabs } from "@mantine/core";
 import type { User } from "lucia";
 import type {
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-  InferGetServerSidePropsType,
+	GetServerSidePropsContext,
+	GetServerSidePropsResult,
+	InferGetServerSidePropsType
 } from "next";
 import type { FormEvent } from "react";
+import { withRootLayout } from "@/utils/layouts";
+import { NextPageWithLayout } from "../_app";
 
-export async function getServerSideProps(
-  context: GetServerSidePropsContext
-): Promise<
-  GetServerSidePropsResult<{
-    user: User;
-  }>
+export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
+	GetServerSidePropsResult<{
+		user: User;
+	}>
 > {
   console.log(context.req.cookies);
-  const { user } = await validateRequest(context.req, context.res);
-  console.log(user);
-  if (!user) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/login",
-      },
-    };
-  }
-  if (user.role !== "administrator") {
-    console.log("NO PUEDES ESTAR AQUI!!!");
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/",
-      },
-    };
-  }
-  return {
-    props: {
-      user,
-    },
-  };
+	const { user } = await validateRequest(context.req, context.res);
+	console.log(user);
+	if (!user) {
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/login"
+			}
+		};
+	}
+	if (user.role !== 'administrator') {
+		console.log('NO PUEDES ESTAR AQUI!!!');
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/"
+			}
+		};
+	}
+	return {
+		props: {
+			user
+		}
+	};
 }
 
-export default function Page({
-  user,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
   const router = useRouter();
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formElement = e.target as HTMLFormElement;
-    await fetch(formElement.action, {
-      method: formElement.method,
-    });
-    router.push("/login");
-  }
+	async function onSubmit(e: FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		const formElement = e.target as HTMLFormElement;
+		await fetch(formElement.action, {
+			method: formElement.method
+		});
+		router.push("/login");
+	}
 
   return (
     <>
