@@ -1,5 +1,6 @@
 import AnalysisTab from "@/components/user-overview/analysis-tab/analysis-tab";
 import OverviewTab from "@/components/user-overview/overview-tab/overview-tab";
+import ResourcesTab from "@/components/user-overview/resources-tab/resources-tab";
 import { useUniqueUser } from "@/hooks/users";
 import { withRootLayout } from "@/utils/layouts";
 import {
@@ -44,6 +45,7 @@ const UserOverview = () => {
               </Badge>
             </Group>
           </Tabs.Tab>
+          <Tabs.Tab value="resources">Recursos</Tabs.Tab>{" "}
         </Tabs.List>
 
         {/* USER HEADER */}
@@ -71,6 +73,9 @@ const UserOverview = () => {
         </Tabs.Panel>
         <Tabs.Panel value="analysis">
           <AnalysisTab user={user} />
+        </Tabs.Panel>
+        <Tabs.Panel value="resources">
+          <ResourcesTab />
         </Tabs.Panel>
       </Tabs>
     </Stack>
