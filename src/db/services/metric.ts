@@ -21,7 +21,7 @@ class MetricService {
           uom: `$values.${metric}.measure_uom`,
           filtered_metrics: {
             date: "$createdAt",
-            general: `$values.${metric}.measure_value`
+            overview: `$values.${metric}.measure_value`
           }
         }
       },
