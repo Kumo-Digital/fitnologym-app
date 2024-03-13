@@ -6,6 +6,7 @@ import { createTheme, MantineProvider } from "@mantine/core";
 import { RootLayout } from "@/components/layouts/root-layout";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
+import { User } from "lucia";
 
 const theme = createTheme({
   fontFamily: "Roboto, sans-serif",
@@ -15,7 +16,7 @@ const theme = createTheme({
   },
 });
 
-export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = { user: User }, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
