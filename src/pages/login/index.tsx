@@ -114,7 +114,7 @@ const Login = () => {
                   Ingresar
                 </Button>
               </form>
-              <Text ta="center" mt="md">
+              {/* <Text ta="center" mt="md">
                 No estás registrado?{" "}
                 <Anchor<"a">
                   href="#"
@@ -123,7 +123,7 @@ const Login = () => {
                 >
                   Registrarse
                 </Anchor>
-              </Text>
+              </Text> */}
             </Paper>
           );
         }}
