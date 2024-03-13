@@ -14,7 +14,6 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import NextImage from "next/image";
-import WelcomeImage from "@/assets/ava.jpg";
 import { MeasureCard } from "../ui/card/measure-card/measure-card";
 import { IconPlus } from "@tabler/icons-react";
 
@@ -74,12 +73,7 @@ export default function Overview() {
         <Group grow align="stretch" gap={16}>
           <Box h="auto">
             <Text>Panel3</Text>
-            <Image
-              radius="md"
-              component={NextImage}
-              src={WelcomeImage}
-              alt="Welcome Image"
-            />
+            <Image radius="md" component={NextImage} alt="Welcome Image" />
           </Box>
           <Box h="100vh">
             <Stack align="stretch">
@@ -564,12 +558,7 @@ export default function Overview() {
         <Group grow>
           <Box>
             <Text>Panel2</Text>
-            <Image
-              radius="md"
-              component={NextImage}
-              src={WelcomeImage}
-              alt="Welcome Image"
-            />
+            <Image radius="md" component={NextImage} alt="Welcome Image" />
           </Box>
         </Group>
       </Tabs.Panel>
@@ -578,12 +567,7 @@ export default function Overview() {
         <Group grow>
           <Box>
             <Text>Panel3</Text>
-            <Image
-              radius="md"
-              component={NextImage}
-              src={WelcomeImage}
-              alt="Welcome Image"
-            />
+            <Image radius="md" component={NextImage} alt="Welcome Image" />
           </Box>
           <Box h="100vh">
             <Stack>
@@ -617,12 +601,7 @@ export default function Overview() {
         <Group grow>
           <Box>
             <Text>Panel4</Text>
-            <Image
-              radius="md"
-              component={NextImage}
-              src={WelcomeImage}
-              alt="Welcome Image"
-            />
+            <Image radius="md" component={NextImage} alt="Welcome Image" />
           </Box>
           Settings tab content
         </Group>
@@ -632,12 +611,7 @@ export default function Overview() {
         <Group grow>
           <Box>
             <Text>Panel5</Text>
-            <Image
-              radius="md"
-              component={NextImage}
-              src={WelcomeImage}
-              alt="Welcome Image"
-            />
+            <Image radius="md" component={NextImage} alt="Welcome Image" />
           </Box>
           Settings tab content
         </Group>

@@ -1,5 +1,6 @@
 import { Button, Group, Modal, Stack, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { IconPlus } from "@tabler/icons-react";
 import { Field, Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
@@ -97,7 +98,14 @@ const GymModal = () => {
         </Formik>
       </Modal>
 
-      <Button onClick={open} size="sm" variant="filled" c="black">
+      <Button
+        onClick={open}
+        size="sm"
+        variant="filled"
+        c="black"
+        rightSection={<IconPlus size={15} />}
+        w={150}
+      >
         Agregar
       </Button>
     </>
