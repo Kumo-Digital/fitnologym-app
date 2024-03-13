@@ -12,33 +12,34 @@ export default async function handler(
   if (req.method === "POST") {
     try {
       const { email, password } = req.body;
+
       await connectDB();
       const userService = new UserService();
-      const existingUser = await userService.getUserByEmail(email);
+      const existingUser = await userService.getLoginUserByEmail(email);
 
       if (existingUser) {
         const validPassword = await new Argon2id().verify(
-          existingUser.password,
-          password
+          existingUser.password.toString(),
+          password.toString()
         );
         // const match = await bcrypt.compare(password, existingUser.password);
-
         if (!validPassword) {
           res.status(400).json({
             error: "Incorrect username or password",
           });
-          return;
         }
 
         const session = await lucia.createSession(existingUser._id, {});
         console.log("session created:", session);
+
         res
           .appendHeader(
             "Set-Cookie",
             lucia.createSessionCookie(session.id).serialize()
           )
           .status(200)
-          .end();
+          .json({ message: "Login successful" });
+        // .end();
         // if (match) {
         //   // Login succesful
         //   console.log('La contraseña es correcta');
@@ -57,6 +58,9 @@ export default async function handler(
       return res.json("El e-mail no es correcto");
     } catch (e) {
       console.error(e);
+      res.status(400).json({
+        error: "Something went wrong",
+      });
     }
   }
 }
