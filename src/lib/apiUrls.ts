@@ -23,4 +23,7 @@ export const apiUrls = {
       `/measurements/get-last-measure-by-user/${id}`,
     create: "/measurements",
   },
+  metrics: {
+    get: (filters: string) => `/metrics?${filters}`,
+  },
 };
