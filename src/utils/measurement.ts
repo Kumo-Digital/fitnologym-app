@@ -231,6 +231,8 @@ export const getMeasureName = (measure: string): string => {
       return "Agua Corporal";
     case "physique_rating":
       return "Rating Físico";
+    case "overview":
+      return "General";
     case "left_arm":
       return "Brazo Izquierdo";
     case "right_arm":
@@ -300,3 +302,76 @@ export const legsBodyMetrics = [
   "circumferenceQuads",
   "circumferenceCalf",
 ];
+
+export const metricsSelectOptions = [
+  { value: "weight", label: "Peso", sections: ["overview"] },
+  { value: "bmi", label: "IMC", sections: ["overview"] },
+  {
+    value: "body_fat",
+    label: "Grasa Corporal",
+    sections: [
+      "overview",
+      "torso",
+      "left_leg",
+      "right_leg",
+      "left_arm",
+      "right_arm",
+    ],
+  },
+  {
+    value: "muscle_mass",
+    label: "Masa Muscular",
+    sections: [
+      "overview",
+      "torso",
+      "left_leg",
+      "right_leg",
+      "left_arm",
+      "right_arm",
+    ],
+  },
+  {
+    value: "muscle_quality",
+    label: "Calidad Muscular",
+    sections: [
+      "overview",
+      "torso",
+      "left_leg",
+      "right_leg",
+      "left_arm",
+      "right_arm",
+    ],
+  },
+  { value: "visc_fat", label: "Grasa Visceral", sections: ["overview"] },
+  { value: "bone_mass", label: "Masa Ósea", sections: ["overview"] },
+  { value: "bmr", label: "TMB", sections: ["overview"] },
+  { value: "metab_age", label: "Edad Metabólica", sections: ["overview"] },
+  { value: "body_water", label: "Agua Corporal", sections: ["overview"] },
+  { value: "physique_rating", label: "Rating Físico", sections: ["overview"] },
+  {
+    value: "circumference",
+    label: "Circunferencias",
+    sections: ["circumferences"],
+  },
+];
+
+export const getLabelColoBySection = (section: string): string => {
+  switch (section) {
+    case "overview":
+      return "orange.5";
+    case "torso":
+      return "red.6";
+    case "left_leg":
+      return "grape.5";
+    case "right_leg":
+      return "violet.5";
+    case "left_arm":
+      return "cyan.5";
+    case "right_arm":
+      return "teal.5";
+    case "circumferences":
+      return "gray.5";
+    default:
+      return "gray.5";
+  }
+};
