@@ -58,39 +58,28 @@ const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
 
   return (
     <>
-      <h1>Esto es una página SOLO para Administración!</h1>
-      <p>Your user ID is {user.id}.</p>
-      <p>
-        Si estás aquí es porque eres un usuario de rol ADMINISTRADOR. Eres:{" "}
-        {user.role}.
-      </p>
-      <form method="post" action="./api/v1/auth/logout" onSubmit={onSubmit}>
-        <button>Sign out</button>
-      </form>
-
-      <Stack gap={16} style={{ flexGrow: 1 }} mt={25}>
-        {/* TAB LIST */}
+      <Stack gap={24} style={{ flexGrow: 1 }}>
         <Tabs defaultValue="clients">
-          <Tabs.List>
+          <Tabs.List mb={24}>
             <Tabs.Tab value="clients">Clientes</Tabs.Tab>
             <Tabs.Tab value="gyms">Gimnasios</Tabs.Tab>
             <Tabs.Tab value="measurements">Mediciones</Tabs.Tab>
           </Tabs.List>
 
-          {/* CLIENTES */}
           <Tabs.Panel value="clients">
             <div>CLIENTES</div>
           </Tabs.Panel>
-          {/* GIMNASIOS */}
           <Tabs.Panel value="gyms">
             <div>GIMNASIOS</div>
           </Tabs.Panel>
-          {/* MEDICIONES */}
           <Tabs.Panel value="measurements">
-            <div>MEDICCIONES</div>
+            <div>MEDICIONES</div>
           </Tabs.Panel>
         </Tabs>
       </Stack>
     </>
   );
 }
+
+withRootLayout(Page);
+export default Page;
