@@ -6,6 +6,9 @@ import { UserItem } from "@/types/user";
 import { StatusColors, StatusValues, measurementFormInitialValues } from "@/utils/admin";
 import { Box, Button, Divider, Group, Input, NumberInput, Select, SelectProps, Stack, Text, TextInput, Title } from "@mantine/core";
 import { Formik, Form, FormikHelpers } from "formik";
+import { until } from '@open-draft/until'
+import { useRouter } from "next/router";
+import { appUrls } from "@/lib/appUrls";
 
 const renderSelectOption: SelectProps['renderOption'] = ({ option }) => (
   <Group flex="1" gap="xs">
@@ -27,6 +30,7 @@ const renderSelectOption: SelectProps['renderOption'] = ({ option }) => (
 export default function MeasurementForm({ users }: {
   users: UserItem[],
 }) {
+  const { push } = useRouter();
 
   async function createMeasurement(values: MeasurementFormValues) {
     try {
@@ -53,7 +57,16 @@ export default function MeasurementForm({ users }: {
           values: any,
           { setSubmitting }: FormikHelpers<any>
         ) => {
-          await createMeasurement(values);
+          const { data, error } = await until(() => createMeasurement(values));
+          if (error) {
+            console.log('error');
+            return;
+          }
+
+          push({
+            pathname: appUrls.admin,
+            query: { tab: 'measurements' },
+          });
         }}>
         
         {({ values, handleBlur, handleSubmit, handleChange, setFieldValue, touched, errors }) => (
