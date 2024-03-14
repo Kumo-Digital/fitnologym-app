@@ -1,15 +1,11 @@
 import { validateRequest } from "@/lib/auth";
-import type {
-  GetServerSidePropsContext,
-  GetServerSidePropsResult,
-  InferGetServerSidePropsType,
-} from "next";
-import type { User } from "lucia";
+import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import MeasurementForm from "@/components/admin/measurement-form";
 import connectDB from "@/lib/db";
 import UserService from "@/db/services/user";
 import { UserItem } from "@/types/user";
 import { withRootLayout } from "@/utils/layouts";
+import { NextPageWithLayout } from "@/pages/_app";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -56,16 +52,13 @@ export async function getServerSideProps(
   };
 }
 
-function Page({
-  allUsers,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+const Page: NextPageWithLayout<{ allUsers: UserItem[] }> = ({ allUsers }) => {
   return (
     <>
       <MeasurementForm users={allUsers} />
     </>
   );
-}
+};
 
 withRootLayout(Page);
-
 export default Page;
