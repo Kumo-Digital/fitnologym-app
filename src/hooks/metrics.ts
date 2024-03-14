@@ -7,11 +7,11 @@ export const useMetrics = (filters: URLSearchParams) => {
 
   const { data, error, isLoading, mutate } = useSWR(
     apiUrls.metrics.get(params.toString()),
-    mockFetcher
+    apiFetcher
   );
 
   return {
-    metrics: data,
+    metrics: data ? data[0] : [],
     isLoading,
     isError: error,
     refetch: mutate,

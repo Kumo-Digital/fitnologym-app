@@ -49,12 +49,12 @@ const AnalysisTab = ({ user }: any) => {
         curveType="natural"
         withLegend
         tooltipAnimationDuration={200}
-        series={Object.keys(metrics.filtered_metrics[0])
+        series={(metrics.filtered_metrics) ? Object.keys(metrics.filtered_metrics[0])
           .filter((section) => section !== "date")
           .map((section) => ({
             name: section,
             color: getLabelColoBySection(section),
-          }))}
+          })) : [{name: '', color: ''}]}
       />
     </Stack>
   );
