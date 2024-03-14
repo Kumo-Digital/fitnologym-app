@@ -41,30 +41,13 @@ class MeasurementService {
     return measurement;
   }
 
-  async createMeasurement(
-    MeasurementData: IMeasurement
-  ): Promise<NextResponse> {
+  async createMeasurement(MeasurementData: IMeasurement): Promise<any> {
     try {
-      console.log("la data en el servicio se recibe:", MeasurementData);
       const newMeasurement = await MeasurementModel.create(MeasurementData);
-      console.log("Se creó la new measure en mongodb?");
-      console.log("Mi new measure es:", newMeasurement);
 
-      return NextResponse.json(
-        {
-          message: "Medida añadida",
-          success: true,
-        },
-        { status: 200 }
-      );
+      return newMeasurement;
     } catch (error) {
-      return NextResponse.json(
-        {
-          message: error,
-          success: false,
-        },
-        { status: 400 }
-      );
+      return error;
     }
   }
 }
