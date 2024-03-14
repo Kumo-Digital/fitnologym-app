@@ -1,7 +1,7 @@
 import { validateRequest } from "@/lib/auth";
 import { useRouter } from "next/router";
 
-import GymTab from "@/components/admin/gymtab/gymtab";
+import GymTab from "@/components/admin/gym-tab/gym-tab";
 import { withRootLayout } from "@/utils/layouts";
 import { Stack, Tabs } from "@mantine/core";
 import type { User } from "lucia";

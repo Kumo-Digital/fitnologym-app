@@ -1,4 +1,4 @@
-import GymTab from "@/components/admin/gymtab/gymtab";
+import GymTab from "@/components/admin/gym-tab/gym-tab";
 import { Stack, Tabs } from "@mantine/core";
 import { InferGetServerSidePropsType } from "next";
 import { getServerSideProps } from "next/dist/build/templates/pages";

@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Stack } from "@mantine/core";
+import { Box, Button, Container, Flex, Stack } from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../../searchbar/searchbar";
 import { GymCard } from "../../ui/card/gym-card/gym-card";
@@ -68,8 +68,8 @@ export default function GymTab() {
   };
 
   return (
-    <>
-      <Stack mt={120} p={20}>
+    <Container size={1024}>
+      <Stack mt={24}>
         <Flex gap={20} justify="space-between">
           <SearchBar
             searchQuery={searchQuery}
@@ -113,6 +113,6 @@ export default function GymTab() {
       </Stack>
 
       <GymModal opened={opened} close={close} />
-    </>
+    </Container>
   );
 }
