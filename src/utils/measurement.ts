@@ -1,3 +1,4 @@
+import * as Yup from "yup";
 import { IMeasurement } from "@/db/interfaces/IMeasurement";
 import { MeasurementFormValues } from "@/types/admin";
 import { generateId } from "lucia";
@@ -188,7 +189,7 @@ export const prepareMeasurementForInsert = (
         measure_uom: "cm",
         measure_value: payload.circumferenceCalf ?? 0,
       },
-    }
+    },
   };
 
   return preparedMeasurement;
@@ -377,3 +378,136 @@ export const getLabelColoBySection = (section: string): string => {
       return "gray.5";
   }
 };
+
+export const measurementFormValidationSchema = Yup.object().shape({
+  user_id: Yup.string().required("El nombre del cliente es obligatorio"),
+  report_url: Yup.string(),
+  weight: Yup.number().min(0, "El peso no puede ser negativo"),
+  weightStatus: Yup.string(),
+  bmi: Yup.number().min(0, "El IMC no puede ser negativo"),
+  bmiStatus: Yup.string(),
+  bodyFat: Yup.number().min(0, "La grasa corporal no puede ser negativa"),
+  bodyFatStatus: Yup.string(),
+  viscFat: Yup.number().min(0, "La grasa visceral no puede ser negativa"),
+  viscFatStatus: Yup.string(),
+  muscleMass: Yup.number().min(0, "La masa muscular no puede ser negativa"),
+  muscleMassStatus: Yup.string(),
+  muscleQuality: Yup.number().min(
+    0,
+    "La calidad muscular no puede ser negativa"
+  ),
+  muscleQualityStatus: Yup.string(),
+  boneMass: Yup.number().min(0, "La masa ósea no puede ser negativa"),
+  boneMassStatus: Yup.string(),
+  bmr: Yup.number().min(0, "El TMB no puede ser negativo"),
+  bmrStatus: Yup.string(),
+  metabAge: Yup.number().min(0, "La edad metabólica no puede ser negativa"),
+  metabAgeStatus: Yup.string(),
+  bodyWater: Yup.number().min(0, "El agua corporal no puede ser negativa"),
+  bodyWaterStatus: Yup.string(),
+  physiqueRating: Yup.number().min(0, "El rating físico no puede ser negativo"),
+  physiqueRatingStatus: Yup.string(),
+  armLeftMuscleMass: Yup.number().min(
+    0,
+    "La masa muscular no puede ser negativa"
+  ),
+  armLeftMuscleMassStatus: Yup.string(),
+  armLeftBodyFat: Yup.number().min(
+    0,
+    "La grasa corporal no puede ser negativa"
+  ),
+  armLeftBodyFatStatus: Yup.string(),
+  armLeftMuscleQuality: Yup.number().min(
+    0,
+    "La calidad muscular no puede ser negativa"
+  ),
+  armLeftMuscleQualityStatus: Yup.string(),
+  armRightMuscleMass: Yup.number().min(
+    0,
+    "La masa muscular no puede ser negativa"
+  ),
+  armRightMuscleMassStatus: Yup.string(),
+  armRightBodyFat: Yup.number().min(
+    0,
+    "La grasa corporal no puede ser negativa"
+  ),
+  armRightBodyFatStatus: Yup.string(),
+  armRightMuscleQuality: Yup.number().min(
+    0,
+    "La calidad muscular no puede ser negativa"
+  ),
+  armRightMuscleQualityStatus: Yup.string(),
+  legLeftMuscleMass: Yup.number().min(
+    0,
+    "La masa muscular no puede ser negativa"
+  ),
+  legLeftMuscleMassStatus: Yup.string(),
+  legLeftBodyFat: Yup.number().min(
+    0,
+    "La grasa corporal no puede ser negativa"
+  ),
+  legLeftBodyFatStatus: Yup.string(),
+  legLeftMuscleQuality: Yup.number().min(
+    0,
+    "La calidad muscular no puede ser negativa"
+  ),
+  legLeftMuscleQualityStatus: Yup.string(),
+  legRightMuscleMass: Yup.number().min(
+    0,
+    "La masa muscular no puede ser negativa"
+  ),
+  legRightMuscleMassStatus: Yup.string(),
+  legRightBodyFat: Yup.number().min(
+    0,
+    "La grasa corporal no puede ser negativa"
+  ),
+  legRightBodyFatStatus: Yup.string(),
+  legRightMuscleQuality: Yup.number().min(
+    0,
+    "La calidad muscular no puede ser negativa"
+  ),
+  legRightMuscleQualityStatus: Yup.string(),
+  trunkMuscleMass: Yup.number().min(
+    0,
+    "La masa muscular no puede ser negativa"
+  ),
+  trunkMuscleMassStatus: Yup.string(),
+  trunkBodyFat: Yup.number().min(0, "La grasa corporal no puede ser negativa"),
+  trunkBodyFatStatus: Yup.string(),
+  circumferenceNeck: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceChest: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceShoulders: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceArms: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceWaist: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceHips: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceGlutes: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceQuads: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceCalf: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+});
