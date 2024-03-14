@@ -23,6 +23,10 @@ const userSchema = new Schema<DatabaseUser>({
     type: String,
     required: true,
   },
+  gender: {
+    type: String,
+    required: true,
+  },
   user_type: {
     type: String,
     required: true,
