@@ -12,6 +12,7 @@ export interface DatabaseUser {
 	email: string;
 	dni: string;
 	password: string;
+	gender: string;
 	user_type: string;
 	role: string;
 }
