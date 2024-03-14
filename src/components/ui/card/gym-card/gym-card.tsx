@@ -24,7 +24,7 @@ export const GymCard: React.FC<GymCardProps> = ({
   const theme = useMantineTheme();
 
   return (
-    <Card bg="dark.7" radius="md" withBorder>
+    <Card bg="dark.7" radius="md" withBorder w="30%">
       <Stack p={12} gap={12}>
         <Group gap={8} align="center">
           <Stack
