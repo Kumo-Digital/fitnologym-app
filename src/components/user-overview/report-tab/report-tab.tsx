@@ -24,7 +24,14 @@ const getRows = (reports: ReportEntry[]) =>
       </Table.Td>
       <Table.Td>
         {report.report_url ? (
-          <Anchor href={report.report_url} size="sm" fw={600} c="lime.5">
+          <Anchor
+            href={report.report_url}
+            target="_blank"
+            rel="noreferrer"
+            size="sm"
+            fw={600}
+            c="lime.5"
+          >
             Ver Reporte
           </Anchor>
         ) : (
