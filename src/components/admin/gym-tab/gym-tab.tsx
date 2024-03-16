@@ -1,4 +1,4 @@
-import { Button, Container, Flex, Stack } from "@mantine/core";
+import { Button, Container, Flex, Group, Stack } from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../../searchbar/searchbar";
 import { GymCard } from "../../ui/card/gym-card/gym-card";
@@ -69,7 +69,7 @@ export default function GymTab() {
   return (
     <Container size={1024}>
       <Stack mt={24}>
-        <Flex gap={20} justify="space-between">
+        <Group gap={16}>
           <SearchBar
             searchValue={searchQuery}
             sortValue={sortOption}
@@ -87,7 +87,7 @@ export default function GymTab() {
           >
             Agregar
           </Button>
-        </Flex>
+        </Group>
 
         {gymCards.length > 0 ? (
           <Flex

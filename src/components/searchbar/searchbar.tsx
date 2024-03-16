@@ -20,7 +20,7 @@ export default function SearchBar({
   sortOptions,
 }: SearchBar) {
   return (
-    <Group gap={16} align="center">
+    <Group gap={16} align="center" style={{ flexGrow: 1 }}>
       <TextInput
         placeholder={searchPlaceholder}
         value={searchValue}
