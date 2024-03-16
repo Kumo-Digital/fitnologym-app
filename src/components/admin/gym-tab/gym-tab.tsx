@@ -82,7 +82,7 @@ export default function GymTab() {
             size="sm"
             variant="filled"
             c="black"
-            rightSection={<IconPlus size={15} />}
+            rightSection={<IconPlus size={14} />}
             w={150}
           >
             Agregar
