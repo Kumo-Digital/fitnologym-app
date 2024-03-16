@@ -20,6 +20,7 @@ const UserOverview = () => {
   const { query } = useRouter();
   const { user, isLoading } = useUniqueUser({ id: query.userId as string });
 
+  if (query.userId === "undefined") return <div>this gym has no users</div>;
   if (isLoading) return <div>Loading...</div>;
   return (
     <Stack gap={16} style={{ flexGrow: 1 }}>
