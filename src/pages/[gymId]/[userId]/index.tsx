@@ -1,5 +1,6 @@
 import AnalysisTab from "@/components/user-overview/analysis-tab/analysis-tab";
 import OverviewTab from "@/components/user-overview/overview-tab/overview-tab";
+import ReportTab from "@/components/user-overview/report-tab/report-tab";
 import ResourcesTab from "@/components/user-overview/resources-tab/resources-tab";
 import { useUniqueUser } from "@/hooks/users";
 import { withRootLayout } from "@/utils/layouts";
@@ -73,6 +74,9 @@ const UserOverview = () => {
         </Tabs.Panel>
         <Tabs.Panel value="analysis">
           <AnalysisTab user={user} />
+        </Tabs.Panel>
+        <Tabs.Panel value="report">
+          <ReportTab user={user} />
         </Tabs.Panel>
         <Tabs.Panel value="resources">
           <ResourcesTab />
