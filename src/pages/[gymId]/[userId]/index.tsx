@@ -27,7 +27,7 @@ const UserOverview = () => {
   return (
     <Stack gap={16} style={{ flexGrow: 1 }}>
       {/* TAB LIST */}
-      <Tabs defaultValue="overview">
+      <Tabs defaultValue="overview" keepMounted={false}>
         <Tabs.List>
           <Tabs.Tab value="overview">Overview</Tabs.Tab>
           <Tabs.Tab value="analysis">Análisis</Tabs.Tab>

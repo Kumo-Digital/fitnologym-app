@@ -72,12 +72,12 @@ export const FitnologymBreadcrumb = () => {
 
   const usersComboboxMenu =
     users
-      ?.filter((user: any) => user.gym_id === parseInt(query.gymId as string))
+      ?.filter((user: any) => user.gym_id === query.gymId)
       .filter((user: any) =>
         user.fullname.toLowerCase().includes(userSearch.toLowerCase().trim())
       )
       .map((user: any) => (
-        <Combobox.Option value={user.id} key={`${user.fullname}-${user.id}`}>
+        <Combobox.Option value={user._id} key={`${user.fullname}-${user.id}`}>
           <Text py={8}>{user.fullname}</Text>
         </Combobox.Option>
       )) || [];
@@ -93,9 +93,8 @@ export const FitnologymBreadcrumb = () => {
       ? [
           {
             title:
-              gyms?.find(
-                (gym: any) => gym.id === parseInt(query.gymId as string)
-              )?.name || "Gimnasio",
+              gyms?.find((gym: any) => gym.id === query.gymId)?.name ||
+              "Gimnasio",
             // href: `/${query.gymId}/${query.userId}`,
             action: "menu-gyms",
           },
@@ -105,9 +104,8 @@ export const FitnologymBreadcrumb = () => {
       ? [
           {
             title:
-              users?.find(
-                (user: any) => user.id === parseInt(query.userId as string)
-              )?.fullname || "Usuario",
+              users?.find((user: any) => user._id === query.userId)?.fullname ||
+              "Sin Usuarios",
             href: `/${query.gymId}/${query.userId}`,
             action: "menu-users",
           },
@@ -162,9 +160,9 @@ export const FitnologymBreadcrumb = () => {
               gymsCombobox.closeDropdown();
 
               const firstGymUser =
-                users?.find((user: any) => user.gym_id === parseInt(val)) || 0;
+                users?.find((user: any) => user.gym_id === val) || "";
 
-              push(`/${val}/${firstGymUser.id}`);
+              push(`/${val}/${firstGymUser._id}`);
             }
             if (item.action === "menu-users") {
               setSelectedUser(val);
