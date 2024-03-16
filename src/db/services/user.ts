@@ -51,7 +51,7 @@ class UserService {
   }
 
   async createUser(userData: DatabaseUser): Promise<NextResponse> {
-    const { email, dni, fullname, user_type, gender } = userData;
+    const { email, dni, fullname, user_type, gender, gym_id } = userData;
 
     try {
       // Hash password
@@ -67,6 +67,7 @@ class UserService {
         password: hashedPassword,
         gender,
         user_type,
+        gym_id: gym_id,
         role: "user",
       };
 
