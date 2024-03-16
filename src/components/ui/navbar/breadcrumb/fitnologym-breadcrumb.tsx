@@ -26,7 +26,7 @@ interface BreadcrumbsItem {
 
 export const FitnologymBreadcrumb = () => {
   const { push, query } = useRouter();
-  const { users, isLoading: isLoadingUsers } = useUsers();
+  const { users, isLoading: isLoadingUsers } = useUsers({ but: "admins" });
   const { gyms, isLoading: isLoadingGyms } = useGyms();
 
   // GYMS COMBOBOX
