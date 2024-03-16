@@ -1,7 +1,5 @@
-import { useGyms, useUsers } from "@/hooks/mock";
 import {
   ActionIcon,
-  Anchor,
   Avatar,
   Breadcrumbs,
   Combobox,
@@ -16,6 +14,8 @@ import { IconSelector } from "@tabler/icons-react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useUsers } from "@/hooks/users";
+import { useGyms } from "@/hooks/gyms";
 
 interface BreadcrumbsItem {
   title: string;
@@ -164,14 +164,14 @@ export const FitnologymBreadcrumb = () => {
               const firstGymUser =
                 users?.find((user: any) => user.gym_id === parseInt(val)) || 0;
 
-              push(`/mock/${val}/${firstGymUser.id}`);
+              push(`/${val}/${firstGymUser.id}`);
             }
             if (item.action === "menu-users") {
               setSelectedUser(val);
               usersCombobox.closeDropdown();
               usersCombobox.closeDropdown();
 
-              push(`/mock/${query.gymId}/${val}`);
+              push(`/${query.gymId}/${val}`);
             }
           }}
         >
