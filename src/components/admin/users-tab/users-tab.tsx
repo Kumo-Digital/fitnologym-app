@@ -1,8 +1,10 @@
+import SearchBar from "@/components/searchbar/searchbar";
 import { UserCard } from "@/components/ui/card/user-card/user-card";
 import { useGyms } from "@/hooks/gyms";
 import { useUsers } from "@/hooks/users";
 import { Container, SimpleGrid, Skeleton, Stack } from "@mantine/core";
 import { useState } from "react";
+import UsersTabSkeleton from "./users-tab-skeleton";
 
 const sortOptions = [
   { value: "fullname", label: "Nombre" },
@@ -23,14 +25,16 @@ const UsersTab = () => {
     setSortInput(value);
   };
 
-  // filter and sort users based on search and sort input
   const filteredUsers = users
     ?.filter((user) => {
       const regex = new RegExp(searchInput, "i");
       return regex.test(user.fullname);
     })
     .sort((a: any, b: any) => {
-      if (sortInput === "name") {
+      if (sortInput === "fullname") {
+        return a.fullname.localeCompare(b.fullname);
+      }
+      if (sortInput === "gym") {
         return a.fullname.localeCompare(b.fullname);
       }
       if (sortInput === "date") {
@@ -39,11 +43,18 @@ const UsersTab = () => {
       return 0;
     });
 
-  if (isLoading || isLoadingGyms) return <p>loading ...</p>;
+  if (isLoading || isLoadingGyms) return <UsersTabSkeleton />;
   return (
     <Container size={1024}>
       <Stack gap={24}>
-        <Skeleton h={40} />
+        <SearchBar
+          searchValue={searchInput}
+          sortValue={sortInput}
+          sortOptions={sortOptions}
+          handleSearch={handleSearch}
+          handleSort={handleSort}
+          searchPlaceholder="Buscar Usuarios..."
+        />
         <SimpleGrid cols={3} spacing={24} verticalSpacing={24}>
           {filteredUsers.map((user) => {
             const userGym = gyms.find((gym: any) => gym.id === user.gym_id);
