@@ -27,7 +27,7 @@ const UserOverviewEmpty = () => {
       <Button
         leftSection={<IconPlus size={14} />}
         c="black"
-        onClick={() => push("/admin?tab=users)")}
+        onClick={() => push("/admin")}
       >
         Agregar Usuario
       </Button>
