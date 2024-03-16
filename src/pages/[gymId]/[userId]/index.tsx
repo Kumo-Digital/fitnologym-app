@@ -1,6 +1,8 @@
 import AnalysisTab from "@/components/user-overview/analysis-tab/analysis-tab";
 import OverviewTab from "@/components/user-overview/overview-tab/overview-tab";
 import ResourcesTab from "@/components/user-overview/resources-tab/resources-tab";
+import UserOverviewEmpty from "@/components/user-overview/user-overview-empty";
+import { UserOverviewSkeleton } from "@/components/user-overview/user-overview-skeleton";
 import { useUniqueUser } from "@/hooks/users";
 import { withRootLayout } from "@/utils/layouts";
 import {
@@ -20,8 +22,8 @@ const UserOverview = () => {
   const { query } = useRouter();
   const { user, isLoading } = useUniqueUser({ id: query.userId as string });
 
-  if (query.userId === "undefined") return <div>this gym has no users</div>;
-  if (isLoading) return <div>Loading...</div>;
+  if (query.userId === "undefined") return <UserOverviewEmpty />;
+  if (isLoading) return <UserOverviewSkeleton />;
   return (
     <Stack gap={16} style={{ flexGrow: 1 }}>
       {/* TAB LIST */}
