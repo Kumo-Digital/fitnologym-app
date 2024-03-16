@@ -17,6 +17,15 @@ export type User = {
   createdAt: string;
 };
 
+export type UserForm = {
+  fullname: string;
+  email: string;
+  dni: string;
+  user_type: UserType;
+  gym_id: string;
+  gender: "male" | "female";
+};
+
 export type UserItem = {
   value: string;
   label: string;
