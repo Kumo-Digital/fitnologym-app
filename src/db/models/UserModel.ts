@@ -24,6 +24,10 @@ const userSchema = new Schema<DatabaseUser>(
       type: String,
       required: true,
     },
+    gym_id: {
+      type: String,
+      required: true,
+    },
     gender: {
       type: String,
       required: true,
