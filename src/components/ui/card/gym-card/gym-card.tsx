@@ -1,30 +1,22 @@
 import React from "react";
-import {
-  Card,
-  ActionIcon,
-  Text,
-  Group,
-  Stack,
-  useMantineTheme,
-} from "@mantine/core";
-import { IconDotsVertical } from "@tabler/icons-react";
+import { Card, Text, Group, Stack } from "@mantine/core";
 
 interface GymCardProps {
   title: string;
   subtitle: string;
   description: string;
   color?: string;
+  link?: string;
 }
 
 export const GymCard: React.FC<GymCardProps> = ({
   title,
   subtitle,
   description,
+  link,
 }) => {
-  const theme = useMantineTheme();
-
   return (
-    <Card bg="dark.7" radius="md" withBorder w="30%">
+    <Card bg="dark.7" radius="md" withBorder p={0}>
       <Stack p={12} gap={12}>
         <Group gap={8} align="center">
           <Stack
@@ -40,13 +32,17 @@ export const GymCard: React.FC<GymCardProps> = ({
               {subtitle}
             </Text>
           </Stack>
-          <ActionIcon title="Options" variant="transparent">
-            <IconDotsVertical
+          {/* <ActionIcon
+            title="Ver Gimnasio"
+            variant="subtle"
+            onClick={() => push(link)}
+          >
+            <IconChevronRight
               color={theme.colors.gray[6]}
               aria-label="Options"
               size={16}
             />
-          </ActionIcon>
+          </ActionIcon> */}
         </Group>
         <Text size="xs" c="gray.5">
           {description}
