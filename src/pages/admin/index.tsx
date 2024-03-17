@@ -8,6 +8,7 @@ import type { User } from "lucia";
 import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import type { FormEvent } from "react";
 import { NextPageWithLayout } from "../_app";
+import MeasurementsTab from "@/components/admin/measurements-tab/measurements-tab";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -71,7 +72,7 @@ const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
           <GymTab />
         </Tabs.Panel>
         <Tabs.Panel value="measurements">
-          <div>MEDICIONES</div>
+          <MeasurementsTab />
         </Tabs.Panel>
       </Tabs>
     </Stack>
