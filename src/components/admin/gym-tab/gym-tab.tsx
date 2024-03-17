@@ -33,7 +33,8 @@ export default function GymTab() {
   const filteredGyms = gyms
     ?.filter((gym: any) => {
       const regex = new RegExp(searchInput, "i");
-      return regex.test(gym.name);
+      const valuesToTest = [gym.name, gym.city, gym.address];
+      return valuesToTest.some((value) => regex.test(value));
     })
     .sort((a: any, b: any) => {
       if (sortInput === "name") {
