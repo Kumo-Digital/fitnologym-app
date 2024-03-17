@@ -100,7 +100,7 @@ const UsersTab = () => {
                   title={user.fullname}
                   subtitle={userGym?.name || "Sin Asignar"}
                   description={`Se unió el ${userDate}`}
-                  // link={`${userGym!.id}/${user._id}`}
+                  link={`${userGym!.id}/${user._id}`}
                 />
               );
             })}
