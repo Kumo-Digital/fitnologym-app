@@ -23,8 +23,8 @@ import { appUrls } from "@/lib/appUrls";
 // TODO: update users and gyms types -- already being worked on another branch
 const getRows = (measurements: Measurement[], users: any, gyms: any) =>
   measurements.map((measure, index) => {
-    const user = users.find((user: any) => user._id === measure.user_id);
-    const gym = gyms.find((gym: any) => gym.id === user.gym_id);
+    const user = users?.find((user: any) => user._id === measure.user_id);
+    const gym = gyms?.find((gym: any) => gym.id === user.gym_id);
 
     return (
       <Table.Tr key={`${measure.date}-${index}`}>
