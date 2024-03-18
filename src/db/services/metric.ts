@@ -15,7 +15,7 @@ class MetricService {
         {
           $match: {
             user_id: userId,
-            createdAt: {
+            date: {
               $gte: new Date(startDate),
               $lte: new Date(endDate),
             }
@@ -24,15 +24,15 @@ class MetricService {
         {
           $project: {
             _id: 0,
-            uom: `$values.${metric}.measure_uom`,
+            uom: `$metrics.${metric}.measure_uom`,
             filtered_metrics: {
-              date: "$createdAt",
-              overview: `$values.${metric}.measure_value`,
-              left_arm: `$values.left_arm.${metric}.measure_value`,
-              right_arm: `$values.right_arm.${metric}.measure_value`,
-              torso: `$values.trunk.${metric}.measure_value`,
-              left_leg: `$values.left_leg.${metric}.measure_value`,
-              right_leg: `$values.right_leg.${metric}.measure_value`,
+              date: "$date",
+              overview: `$metrics.${metric}.measure_value`,
+              left_arm: `$metrics.left_arm.${metric}.measure_value`,
+              right_arm: `$metrics.right_arm.${metric}.measure_value`,
+              torso: `$metrics.trunk.${metric}.measure_value`,
+              left_leg: `$metrics.left_leg.${metric}.measure_value`,
+              right_leg: `$metrics.right_leg.${metric}.measure_value`,
             }
           }
         },
@@ -62,7 +62,7 @@ class MetricService {
         {
           $match: {
             user_id: userId,
-            createdAt: {
+            date: {
               $gte: new Date(startDate),
               $lte: new Date(endDate),
             }
@@ -73,16 +73,16 @@ class MetricService {
             _id: 0,
             uom: 'cm',
             filtered_metrics: {
-              date: "$createdAt",
-              circumferenceNeck: '$values.circumferenceNeck.measure_value',
-              circumferenceChest: '$values.circumferenceChest.measure_value',
-              circumferenceShoulders: '$values.circumferenceShoulders.measure_value',
-              circumferenceArms: '$values.circumferenceArms.measure_value',
-              circumferenceWaist: '$values.circumferenceWaist.measure_value',
-              circumferenceHips: '$values.circumferenceHips.measure_value',
-              circumferenceGlutes: '$values.circumferenceGlutes.measure_value',
-              circumferenceQuads: '$values.circumferenceQuads.measure_value',
-              circumferenceCalf: '$values.circumferenceCalf.measure_value',
+              date: "$date",
+              circumferenceNeck: '$metrics.circumferenceNeck.measure_value',
+              circumferenceChest: '$metrics.circumferenceChest.measure_value',
+              circumferenceShoulders: '$metrics.circumferenceShoulders.measure_value',
+              circumferenceArms: '$metrics.circumferenceArms.measure_value',
+              circumferenceWaist: '$metrics.circumferenceWaist.measure_value',
+              circumferenceHips: '$metrics.circumferenceHips.measure_value',
+              circumferenceGlutes: '$metrics.circumferenceGlutes.measure_value',
+              circumferenceQuads: '$metrics.circumferenceQuads.measure_value',
+              circumferenceCalf: '$metrics.circumferenceCalf.measure_value',
             }
           }
         },
@@ -112,7 +112,7 @@ class MetricService {
         {
           $match: {
             user_id: userId,
-            createdAt: {
+            date: {
               $gte: new Date(startDate),
               $lte: new Date(endDate),
             }
@@ -121,10 +121,10 @@ class MetricService {
         {
           $project: {
             _id: 0,
-            uom: `$values.${metric}.measure_uom`,
+            uom: `$metrics.${metric}.measure_uom`,
             filtered_metrics: {
-              date: "$createdAt",
-              overview: `$values.${metric}.measure_value`
+              date: "$date",
+              overview: `$metrics.${metric}.measure_value`
             }
           }
         },

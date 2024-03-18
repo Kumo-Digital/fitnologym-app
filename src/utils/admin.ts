@@ -1,6 +1,7 @@
 export const measurementFormInitialValues = {
   user_id: '',
   report_url: '',
+  date: '',
   weight: 0,
   weightStatus: '2',
   bmi: 0,
