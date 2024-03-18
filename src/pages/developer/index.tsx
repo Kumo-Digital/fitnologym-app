@@ -1,17 +1,13 @@
-import Head from "next/head";
+import { withRootLayout } from "@/utils/layouts";
+import { Title } from "@mantine/core";
 
-export default function Login() {
+function Login() {
   return (
     <>
-      <Head>
-        <title>Fitnologym - Components</title>
-        <meta name="description" content="Login" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-
-      </main>
+      <Title>Page for Testing Components</Title>
     </>
   );
 }
+
+withRootLayout(Login);
+export default Login;
