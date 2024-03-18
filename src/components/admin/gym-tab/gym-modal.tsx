@@ -1,4 +1,7 @@
+import { createGym } from "@/services/gyms";
 import { Button, Group, Modal, Stack, TextInput } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import { until } from "@open-draft/until";
 import { Form, Formik, FormikHelpers } from "formik";
 import * as Yup from "yup";
 
@@ -10,9 +13,11 @@ interface GymForm {
 const GymModal = ({
   opened,
   close,
+  refetch,
 }: {
   opened: boolean;
   close: () => void;
+  refetch: any;
 }) => {
   const initialValues: GymForm = {
     name: "",
@@ -36,13 +41,30 @@ const GymModal = ({
     >
       <Formik
         initialValues={initialValues}
-        onSubmit={(
+        onSubmit={async (
           values: GymForm,
           { setSubmitting }: FormikHelpers<GymForm>
         ) => {
-          console.log("YEAH BOY");
-          console.log(values);
+          const { data, error } = await until(() => createGym(values));
+
+          if (error) {
+            console.error(error);
+            setSubmitting(false);
+            notifications.show({
+              color: "red",
+              title: "Error",
+              message: "Ha ocurrido un error al intentar añadir un gimnasio.",
+            });
+          }
+          
+          notifications.show({
+            title: "Usuario Creado",
+            message: `El gimnasio ${data.name} ha sido creado exitosamente`,
+            color: "lime",
+          });
+          refetch();
           close();
+
         }}
         validationSchema={validationSchema}
       >
