@@ -1,5 +1,3 @@
-import { Document } from "mongoose";
-
 interface MeasurementObject {
   measure_uom?: string;
   measure_value?: number;
@@ -14,9 +12,9 @@ interface CircumferenceObject {
 export interface IMeasurement {
   _id: string;
   user_id: string;
-  date: Date;
+  date?: Date;
   report_url?: string;
-  values: {
+  metrics: {
     weight: MeasurementObject;
     bmi: MeasurementObject;
     body_fat: MeasurementObject;

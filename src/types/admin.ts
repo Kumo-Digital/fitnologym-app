@@ -1,6 +1,7 @@
 export interface MeasurementFormValues {
   user_id: string;
   report_url?: string | undefined;
+  date?: Date | undefined;
   weight: number;
   weightStatus: string;
   bmi: number;

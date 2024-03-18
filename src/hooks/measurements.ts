@@ -15,3 +15,18 @@ export const useUniqueLastMeasure = (userId: string): any => {
     refetch: mutate,
   };
 };
+
+export const useUniqueFirstMeasure = (userId: string): any => {
+  const { data, error, isLoading, mutate } = useSWR(
+    apiUrls.measurements.getFirstMeasureByUser(userId),
+    apiFetcher
+  );
+  console.log(data);
+
+  return {
+    firstMeasure: data,
+    error,
+    isLoading,
+    refetch: mutate,
+  };
+};

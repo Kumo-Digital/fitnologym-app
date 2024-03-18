@@ -25,11 +25,8 @@ export default async function handler(
     try {
       await connectDB();
       const measurementService = new MeasurementService();
-      const measurement = req.body;
-      console.log('Me llega como body:', measurement);
       
       const preparedMeasurement = prepareMeasurementForInsert(req.body);
-      console.log('La measure PREPARADA queda como:', preparedMeasurement);
       const newMeasurement = await measurementService.createMeasurement(preparedMeasurement);
 
       if (!newMeasurement)
