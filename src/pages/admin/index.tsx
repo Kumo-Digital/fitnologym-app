@@ -9,6 +9,7 @@ import type { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import type { FormEvent } from "react";
 import { NextPageWithLayout } from "../_app";
 import MeasurementsTab from "@/components/admin/measurements-tab/measurements-tab";
+import UsersTab from "@/components/admin/users-tab/users-tab";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -58,15 +59,15 @@ const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
 
   return (
     <Stack gap={24} style={{ flexGrow: 1 }}>
-      <Tabs defaultValue="clients">
+      <Tabs defaultValue="users">
         <Tabs.List mb={24}>
-          <Tabs.Tab value="clients">Clientes</Tabs.Tab>
+          <Tabs.Tab value="users">Usuarios</Tabs.Tab>
           <Tabs.Tab value="gyms">Gimnasios</Tabs.Tab>
           <Tabs.Tab value="measurements">Mediciones</Tabs.Tab>
         </Tabs.List>
 
-        <Tabs.Panel value="clients">
-          <div>CLIENTES</div>
+        <Tabs.Panel value="users">
+          <UsersTab />
         </Tabs.Panel>
         <Tabs.Panel value="gyms">
           <GymTab />

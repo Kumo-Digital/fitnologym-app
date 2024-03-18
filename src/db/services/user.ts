@@ -50,7 +50,7 @@ class UserService {
     return user;
   }
 
-  async createUser(userData: DatabaseUser): Promise<NextResponse> {
+  async createUser(userData: DatabaseUser): Promise<any> {
     const { email, dni, fullname, user_type, gender, gym_id } = userData;
 
     try {
@@ -67,27 +67,15 @@ class UserService {
         password: hashedPassword,
         gender,
         user_type,
-        gym_id: gym_id,
+        gym_id,
         role: "user",
       };
 
       const newUser = await UserModel.create(newData);
 
-      return NextResponse.json(
-        {
-          message: "Usuario registrado",
-          success: true,
-        },
-        { status: 200 }
-      );
+      return newUser;
     } catch (error) {
-      return NextResponse.json(
-        {
-          message: error,
-          success: false,
-        },
-        { status: 400 }
-      );
+      console.error("Error creating user", error);
     }
   }
 }

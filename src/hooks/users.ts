@@ -1,18 +1,19 @@
 import { apiUrls } from "@/lib/apiUrls";
+import { User } from "@/types/user";
 import { apiFetcher } from "@/utils/apiUtils";
 import useSWR from "swr";
 
 type UseUsersProps = { but: "admins" | "basic" | "plus" | "premium" };
 type UseUniqueUserProps = { id: string } | { email: string };
 interface UseUsersPayload {
-  users: any;
+  users: User[];
   isLoading: boolean;
   isError: any;
   refetch: any;
 }
 
 interface UseUniqueUserPayload {
-  user: any;
+  user: User;
   isLoading: boolean;
   isError: any;
   refetch: any;

@@ -1,11 +1,12 @@
-import { Formik } from "formik";
-import { Box, Group, Select, SelectProps, Text } from "@mantine/core";
+import { Form, Formik } from "formik";
+import { Box, Button, Group, Select, SelectProps, Text } from "@mantine/core";
 import { MonthPickerInput } from "@mantine/dates";
 import {
   getLabelColoBySection,
   metricsSelectOptions,
 } from "@/utils/measurement";
 import { AnalysisTableFiltersProps } from "@/types/analysis";
+import { analysisFilterFormValidationSchema } from "@/utils/analysis";
 
 const renderSelectOption: SelectProps["renderOption"] = ({
   option,
@@ -33,43 +34,56 @@ const renderSelectOption: SelectProps["renderOption"] = ({
 const AnalysisTableFilters = ({
   filters,
   handleFiltersChange,
+  firstMeasure,
 }: AnalysisTableFiltersProps) => {
   return (
     <Formik
       initialValues={filters}
+      validationSchema={analysisFilterFormValidationSchema}
       onSubmit={(values): void => {
         handleFiltersChange(values);
       }}
     >
-      {({ values, setFieldValue, setFieldTouched, submitForm }) => (
-        <Group>
-          <Select
-            name="metric"
-            data={metricsSelectOptions}
-            label="Métrica"
-            value={values.metric}
-            renderOption={renderSelectOption}
-            onChange={(value) => {
-              setFieldValue("metric", value);
-              setFieldTouched("metric", true);
-              submitForm();
-            }}
-            miw={300}
-          />
-          <MonthPickerInput
-            type="range"
-            label="Periodo"
-            value={values.dateRange}
-            maxDate={new Date()}
-            onChange={(e) => {
-              setFieldValue("dateRange", e);
-              setFieldTouched("dateRange", true);
-              submitForm();
-            }}
-            miw={300}
-          />
-        </Group>
-      )}
+      {({ values, setFieldValue, setFieldTouched, handleSubmit, handleBlur, touched, errors }) => {
+        return (
+        <Form onSubmit={handleSubmit}>
+          <Group align="stretch">
+            <Select
+              name="metric"
+              data={metricsSelectOptions}
+              onBlur={handleBlur}
+              allowDeselect={false}
+              label="Métrica"
+              value={values.metric}
+              renderOption={renderSelectOption}
+              error={touched.metric && errors.metric}
+              onChange={(value) => {
+                setFieldValue("metric", value);
+                setFieldTouched("metric", true);
+              }}
+              miw={300}
+            />
+            <MonthPickerInput
+              name="dateRange"
+              type="range"
+              allowSingleDateInRange={false}
+              label="Periodo"
+              value={values.dateRange}
+              onBlur={() => setFieldTouched("dateRange", true)}
+              error={(touched.dateRange && errors.dateRange !== undefined) && 'Debe seleccionar 2 meses'}
+              minDate={firstMeasure?.date ? new Date(firstMeasure.date) : undefined}
+              maxDate={new Date()}
+              onChange={(e) => {
+                setFieldValue("dateRange", e);
+              }}
+              miw={300}
+            />
+            <Button c="black" type="submit" mt={24}>
+              Filtrar
+            </Button>
+          </Group>
+        </Form>
+      )}}
     </Formik>
   );
 };

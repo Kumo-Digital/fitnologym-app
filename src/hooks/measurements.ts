@@ -17,6 +17,20 @@ export const useUniqueLastMeasure = (userId: string): any => {
   };
 };
 
+export const useUniqueFirstMeasure = (userId: string): any => {
+  const { data, error, isLoading, mutate } = useSWR(
+    apiUrls.measurements.getFirstMeasureByUser(userId),
+    apiFetcher
+  );
+
+  return {
+    firstMeasure: data,
+    error,
+    isLoading,
+    refetch: mutate,
+  };
+};
+
 interface UseMeasurementsReturn {
   measurements: Measurement[];
   error: any;
@@ -34,6 +48,6 @@ export const useMeasurements = (): UseMeasurementsReturn => {
     measurements: data,
     error,
     isLoading,
-    refetch: mutate,
-  };
-};
+    refetch: mutate
+  }
+}
