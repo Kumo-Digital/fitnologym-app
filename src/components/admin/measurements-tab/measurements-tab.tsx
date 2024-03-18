@@ -82,11 +82,11 @@ const MeasurementsTab = () => {
   const filteredMeasurements = measurements
     ?.filter((measure) => {
       const regex = new RegExp(searchInput, "i");
-      const user = users.find((user: any) => user._id === measure.user_id);
-      const gym = gyms.find((gym: any) => gym.id === user.gym_id);
+      const user = users?.find((user: any) => user._id === measure.user_id);
+      const gym = gyms?.find((gym: any) => gym.id === user?.gym_id);
 
-      const valuesToTest = [user.fullname, gym.name, parseDate(measure.date)];
-      return valuesToTest.some((value) => regex.test(value));
+      const valuesToTest = [user?.fullname, gym?.name, parseDate(measure.date)];
+      return valuesToTest.some((value) => regex.test(value as string));
     })
     .sort((a: any, b: any) => {
       if (sortInput === "name") {

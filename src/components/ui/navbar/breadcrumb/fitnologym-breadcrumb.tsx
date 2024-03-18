@@ -162,7 +162,9 @@ export const FitnologymBreadcrumb = () => {
               const firstGymUser =
                 users?.find((user: any) => user.gym_id === val) || "";
 
-              push(`/${val}/${firstGymUser._id}`);
+              if (firstGymUser) {
+                push(`/${val}/${firstGymUser._id}`);
+              }
             }
             if (item.action === "menu-users") {
               setSelectedUser(val);
