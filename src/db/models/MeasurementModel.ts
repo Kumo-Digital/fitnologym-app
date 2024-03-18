@@ -44,7 +44,7 @@ const measurementSchema = new Schema<IMeasurement>({
     type: String,
     required: false,
   },
-  values: {
+  metrics: {
     weight: MeasurementObjSchema,
     bmi: MeasurementObjSchema,
     body_fat: MeasurementObjSchema,

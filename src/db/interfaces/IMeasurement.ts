@@ -1,5 +1,3 @@
-import { Document } from "mongoose";
-
 interface MeasurementObject {
   measure_uom?: string;
   measure_value?: number;

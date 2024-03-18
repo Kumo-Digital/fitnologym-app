@@ -14,9 +14,7 @@ export async function getServerSideProps(
     allUsers: UserItem[];
   }>
 > {
-  console.log(context.req.cookies);
   const { user } = await validateRequest(context.req, context.res);
-  console.log(user);
   if (!user) {
     return {
       redirect: {
@@ -26,7 +24,6 @@ export async function getServerSideProps(
     };
   }
   if (user.role !== "administrator") {
-    console.log("NO PUEDES ESTAR AQUI!!!");
     return {
       redirect: {
         permanent: false,

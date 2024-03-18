@@ -51,7 +51,6 @@ export default function MeasurementForm({ users }: { users: UserItem[] }) {
       initialValues={measurementFormInitialValues}
       validationSchema={measurementFormValidationSchema}
       onSubmit={async (values: any, { setSubmitting }: FormikHelpers<any>) => {
-        console.log(values);
         const { error } = await until(() => createMeasurement(values));
 
         if (error) {

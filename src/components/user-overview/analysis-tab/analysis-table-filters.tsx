@@ -41,12 +41,10 @@ const AnalysisTableFilters = ({
       initialValues={filters}
       validationSchema={analysisFilterFormValidationSchema}
       onSubmit={(values): void => {
-        console.log(values);
         handleFiltersChange(values);
       }}
     >
       {({ values, setFieldValue, setFieldTouched, handleSubmit, handleBlur, touched, errors }) => {
-        console.log(firstMeasure);
         return (
         <Form onSubmit={handleSubmit}>
           <Group align="stretch">

@@ -55,9 +55,7 @@ export async function validateRequest(
   req: IncomingMessage,
   res: ServerResponse
 ): Promise<{ user: User; session: Session } | { user: null; session: null }> {
-  console.log("la cookie debería ser:", req.headers.cookie);
   const sessionId = lucia.readSessionCookie(req.headers.cookie ?? "");
-  console.log("la sessionId queda:", sessionId);
   if (!sessionId) {
     return {
       user: null,

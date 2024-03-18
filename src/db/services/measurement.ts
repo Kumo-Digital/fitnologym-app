@@ -60,7 +60,6 @@ class MeasurementService {
   async createMeasurement(MeasurementData: IMeasurement): Promise<any> {
     try {
       const newMeasurement = await MeasurementModel.create(MeasurementData);
-
       return newMeasurement;
     } catch (error) {
       return error;
