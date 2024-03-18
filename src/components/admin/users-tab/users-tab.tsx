@@ -40,7 +40,7 @@ const UsersTab = () => {
   const filteredUsers = users
     ?.filter((user) => {
       const regex = new RegExp(searchInput, "i");
-      const gym = gyms.find((gym) => gym.id === user.gym_id) || { name: "" };
+      const gym = gyms?.find((gym) => gym.id === user.gym_id) || { name: "" };
       const valuesToTest = [user.fullname, user.email, gym.name];
 
       return valuesToTest.some((value) => regex.test(value));
