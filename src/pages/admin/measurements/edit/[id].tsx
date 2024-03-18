@@ -9,6 +9,7 @@ import type {
 import type { User } from "lucia";
 import type { FormEvent } from "react";
 import { API_URL_V1, apiUrls } from "@/lib/apiUrls";
+import { withRootLayout } from "@/utils/layouts";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -49,7 +50,7 @@ export async function getServerSideProps(
   };
 }
 
-export default function Page({
+function Page({
   user,
   id,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -61,3 +62,6 @@ export default function Page({
     </>
   );
 }
+
+withRootLayout(Page);
+export default Page;
