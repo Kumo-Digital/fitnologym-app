@@ -1,3 +1,6 @@
 export const appUrls = {
-  admin: '/admin',
-}
+  admin: "/admin",
+  measurements: {
+    new: "/admin/measurements/new",
+  },
+};
