@@ -21,6 +21,8 @@ export const apiUrls = {
     get: "/measurements",
     getLastMeasureByUser: (id: string) =>
       `/measurements/get-last-measure-by-user/${id}`,
+      getFirstMeasureByUser: (id: string) =>
+      `/measurements/get-first-measure-by-user/${id}`,
     create: "/measurements",
   },
   metrics: {

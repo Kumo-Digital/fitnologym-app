@@ -41,6 +41,22 @@ class MeasurementService {
     return measurement;
   }
 
+  async getFirstMeasureByUser(userId: string): Promise<IMeasurement> {
+    const measurement = await MeasurementModel.findOne(
+      {
+        user_id: userId,
+      },
+      {},
+      {
+        sort: {
+          date: 1,
+        },
+      }
+    );
+
+    return measurement;
+  }
+
   async createMeasurement(MeasurementData: IMeasurement): Promise<any> {
     try {
       const newMeasurement = await MeasurementModel.create(MeasurementData);

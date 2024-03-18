@@ -27,6 +27,7 @@ import { appUrls } from "@/lib/appUrls";
 import { measurementFormValidationSchema } from "@/utils/measurement";
 import { notifications } from "@mantine/notifications";
 import { createMeasurement } from "@/services/measurements";
+import { DateInput } from "@mantine/dates";
 
 const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   <Group flex="1" gap="xs">
@@ -50,6 +51,7 @@ export default function MeasurementForm({ users }: { users: UserItem[] }) {
       initialValues={measurementFormInitialValues}
       validationSchema={measurementFormValidationSchema}
       onSubmit={async (values: any, { setSubmitting }: FormikHelpers<any>) => {
+        console.log(values);
         const { error } = await until(() => createMeasurement(values));
 
         if (error) {
@@ -133,6 +135,24 @@ export default function MeasurementForm({ users }: { users: UserItem[] }) {
                           onBlur={form.handleBlur}
                           error={meta.touched && meta.error}
                         />
+                      )}
+                    </FastField>
+
+                    <FastField
+                      name="date"
+                    >
+                      {({ field, form, meta }: any) => (
+                      <DateInput
+                        {...field}
+                        value={meta.value}
+                        onChange={(e) => form.setFieldValue("date", e)}
+                        onBlur={form.handleBlur}
+                        error={meta.touched && meta.error}
+                        label="Fecha de Medición"
+                        maxDate={new Date()}
+                        valueFormat="DD, MMM YYYY"
+                        placeholder="Fecha de medición"
+                      />
                       )}
                     </FastField>
                   </Stack>

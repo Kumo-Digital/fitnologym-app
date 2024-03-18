@@ -10,9 +10,9 @@ export const prepareMeasurementForInsert = (
   const preparedMeasurement = {
     _id: measurementId,
     user_id: payload.user_id,
-    date: new Date(),
+    date: payload.date,
     report_url: payload.report_url ?? "",
-    values: {
+    metrics: {
       weight: {
         measure_uom: "kg",
         measure_value: payload.weight ?? 0,
@@ -382,6 +382,7 @@ export const getLabelColoBySection = (section: string): string => {
 export const measurementFormValidationSchema = Yup.object().shape({
   user_id: Yup.string().required("El nombre del cliente es obligatorio"),
   report_url: Yup.string(),
+  date: Yup.date().required("La fecha de la medida es obligatoria"),
   weight: Yup.number().min(0, "El peso no puede ser negativo"),
   weightStatus: Yup.string(),
   bmi: Yup.number().min(0, "El IMC no puede ser negativo"),
