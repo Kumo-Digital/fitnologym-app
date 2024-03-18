@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Stack } from "@mantine/core";
+import { Button, Container, Flex, Group, Stack } from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../../searchbar/searchbar";
 import { GymCard } from "../../ui/card/gym-card/gym-card";
@@ -35,12 +35,11 @@ export default function GymTab() {
   const [sortOption, setSortOption] = useState("");
   const [opened, { open, close }] = useDisclosure(false);
 
-  const handleSearchInputChange = (event: any) => {
-    const query = event.target.value.toLowerCase();
-    setSearchQuery(query);
+  const handleSearchInputChange = (value: string) => {
+    setSearchQuery(value);
 
     const regex = new RegExp(
-      query.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"),
+      value.replace(/[-/\\^$*+?.()|[\]{}]/g, "\\$&"),
       "i"
     );
 
@@ -70,13 +69,13 @@ export default function GymTab() {
   return (
     <Container size={1024}>
       <Stack mt={24}>
-        <Flex gap={20} justify="space-between">
+        <Group gap={16}>
           <SearchBar
-            searchQuery={searchQuery}
-            handleSearchInputChange={handleSearchInputChange}
-            sortOption={sortOption}
-            handleSortOptionChange={handleSortOptionChange}
-            data={data}
+            searchValue={searchQuery}
+            sortValue={sortOption}
+            sortOptions={data}
+            handleSearch={handleSearchInputChange}
+            handleSort={handleSortOptionChange}
           />
           <Button
             onClick={open}
@@ -88,7 +87,7 @@ export default function GymTab() {
           >
             Agregar
           </Button>
-        </Flex>
+        </Group>
 
         {gymCards.length > 0 ? (
           <Flex

@@ -1,6 +1,9 @@
 import AnalysisTab from "@/components/user-overview/analysis-tab/analysis-tab";
 import OverviewTab from "@/components/user-overview/overview-tab/overview-tab";
+import ReportTab from "@/components/user-overview/report-tab/report-tab";
 import ResourcesTab from "@/components/user-overview/resources-tab/resources-tab";
+import UserOverviewEmpty from "@/components/user-overview/user-overview-empty";
+import { UserOverviewSkeleton } from "@/components/user-overview/user-overview-skeleton";
 import { useUniqueUser } from "@/hooks/users";
 import { withRootLayout } from "@/utils/layouts";
 import {
@@ -20,11 +23,12 @@ const UserOverview = () => {
   const { query } = useRouter();
   const { user, isLoading } = useUniqueUser({ id: query.userId as string });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (query.userId === "undefined") return <UserOverviewEmpty />;
+  if (isLoading) return <UserOverviewSkeleton />;
   return (
     <Stack gap={16} style={{ flexGrow: 1 }}>
       {/* TAB LIST */}
-      <Tabs defaultValue="overview">
+      <Tabs defaultValue="overview" keepMounted={false}>
         <Tabs.List>
           <Tabs.Tab value="overview">Overview</Tabs.Tab>
           <Tabs.Tab value="analysis">Análisis</Tabs.Tab>
@@ -73,6 +77,9 @@ const UserOverview = () => {
         </Tabs.Panel>
         <Tabs.Panel value="analysis">
           <AnalysisTab user={user} />
+        </Tabs.Panel>
+        <Tabs.Panel value="report">
+          <ReportTab user={user} />
         </Tabs.Panel>
         <Tabs.Panel value="resources">
           <ResourcesTab />

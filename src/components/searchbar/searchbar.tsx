@@ -1,34 +1,43 @@
 import React from "react";
-import { Flex, Input, Select } from "@mantine/core";
+import { Group, Select, TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 
+interface SearchBar {
+  searchValue: string;
+  sortValue: string;
+  handleSearch: (event: any) => void;
+  handleSort: (event: any) => void;
+  searchPlaceholder?: string;
+  sortOptions: string[] | { value: string; label: string }[];
+}
+
 export default function SearchBar({
-  searchQuery,
-  handleSearchInputChange,
-  sortOption,
-  handleSortOptionChange,
-  data,
-}: any) {
+  searchValue,
+  sortValue,
+  handleSearch,
+  handleSort,
+  searchPlaceholder = "Buscar Clientes o Gimnasios...",
+  sortOptions,
+}: SearchBar) {
   return (
-    <Flex align="center" gap={18} w="100%">
-      <Input
-        placeholder="Buscar Clientes o Gimnasios..."
-        value={searchQuery}
-        onChange={handleSearchInputChange}
-        w="100%"
-        max="100%"
+    <Group gap={16} align="center" style={{ flexGrow: 1 }}>
+      <TextInput
+        placeholder={searchPlaceholder}
+        value={searchValue}
+        onChange={(e) => handleSearch(e.target.value.toLowerCase())}
         leftSection={<IconSearch size={16} />}
+        style={{ flexGrow: 1 }}
       />
 
       <Select
-        data={data}
+        data={sortOptions}
         searchable
-        max="100%"
-        w="25%"
+        maw={200}
+        allowDeselect={false}
         placeholder="Ordenar por..."
-        value={sortOption}
-        onChange={handleSortOptionChange}
+        value={sortValue}
+        onChange={handleSort}
       />
-    </Flex>
+    </Group>
   );
 }

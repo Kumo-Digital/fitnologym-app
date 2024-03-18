@@ -14,6 +14,7 @@ export interface DatabaseUser {
   password: string;
   gender: string;
   user_type: string;
+  gym_id: string;
   role: string;
 }
 
