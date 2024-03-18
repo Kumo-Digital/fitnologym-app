@@ -9,9 +9,7 @@ interface GymPayload {
 }
 
 export const createGym = async (payload: GymPayload) => {
-  const { data } = await apiClient.post(apiUrls.gyms.create, {
-    ...payload,
-  });
+  const { data } = await apiClient.post(apiUrls.gyms.create, payload);
 
   return data;
 };

@@ -16,7 +16,7 @@ const sortOptions = [
 ];
 
 export default function GymTab() {
-  const { gyms, isLoading } = useGyms();
+  const { gyms, isLoading, refetch } = useGyms();
 
   const [searchInput, setSearchInput] = useState<string>("");
   const [sortInput, setSortInput] = useState<string>("date");
@@ -88,7 +88,7 @@ export default function GymTab() {
         </SimpleGrid>
       </Stack>
 
-      <GymModal opened={opened} close={close} />
+      <GymModal opened={opened} close={close} refetch={refetch} />
     </Container>
   );
 }
