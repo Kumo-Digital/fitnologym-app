@@ -49,7 +49,7 @@ const UserOverview = () => {
               </Badge>
             </Group>
           </Tabs.Tab>
-          <Tabs.Tab value="resources">Recursos</Tabs.Tab>{" "}
+          <Tabs.Tab value="resources">Beneficios</Tabs.Tab>
         </Tabs.List>
 
         {/* USER HEADER */}
