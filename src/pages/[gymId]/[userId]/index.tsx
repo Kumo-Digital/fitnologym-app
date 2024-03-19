@@ -3,23 +3,40 @@ import OverviewTab from "@/components/user-overview/overview-tab/overview-tab";
 import ReportTab from "@/components/user-overview/report-tab/report-tab";
 import ResourcesTab from "@/components/user-overview/resources-tab/resources-tab";
 import UserOverviewEmpty from "@/components/user-overview/user-overview-empty";
+import UserOverviewHeader from "@/components/user-overview/user-overview-header";
 import { UserOverviewSkeleton } from "@/components/user-overview/user-overview-skeleton";
 import { useUniqueUser } from "@/hooks/users";
+import { validateRequest } from "@/lib/auth";
+import { User } from "@/types/user";
 import { withRootLayout } from "@/utils/layouts";
-import {
-  Badge,
-  Group,
-  Stack,
-  Text,
-  Tabs,
-  Title,
-  Button,
-  Divider,
-} from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
+import { Badge, Group, Stack, Tabs } from "@mantine/core";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { useRouter } from "next/router";
 
-const UserOverview = () => {
+export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
+	GetServerSidePropsResult<{
+		sessionUser: User;
+	}>
+> {
+  console.log(context.req.cookies);
+	const { user } = await validateRequest(context.req, context.res);
+	console.log(user);
+	if (!user) {
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/login"
+			}
+		};
+	}
+	return {
+		props: {
+			sessionUser: user
+		}
+	} as any;
+}
+
+const UserOverview = ({sessionUser}: {sessionUser: User}) => {
   const { query } = useRouter();
   const { user, isLoading } = useUniqueUser({ id: query.userId as string });
 
@@ -53,23 +70,7 @@ const UserOverview = () => {
         </Tabs.List>
 
         {/* USER HEADER */}
-        <Stack gap={0}>
-          <Group justify="space-between" h={120}>
-            <Title order={1} size={32} c="gray.0">
-              JohnDoe
-            </Title>
-            <Group>
-              <Text size="sm" c="gray.5">
-                La última medición fue realizada hoy
-              </Text>
-
-              <Button c="black" leftSection={<IconPlus />}>
-                Nueva Medición
-              </Button>
-            </Group>
-          </Group>
-          <Divider size="sm" />
-        </Stack>
+        <UserOverviewHeader user={user} sessionUser={sessionUser} />
 
         {/* PANELS */}
         <Tabs.Panel value="overview">
