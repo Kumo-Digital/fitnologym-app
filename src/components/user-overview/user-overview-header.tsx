@@ -4,7 +4,7 @@ import { parseDate } from "@/utils/utils";
 import { Group, Stack, Title, Text, Button, Divider } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 
-const UserOverviewHeader = ({ user }: { user: User }) => {
+const UserOverviewHeader = ({ user, sessionUser }: { user: User, sessionUser: User }) => {
   const { lastMeasure } = useUniqueLastMeasure(user._id);
 
   return (
@@ -23,7 +23,7 @@ const UserOverviewHeader = ({ user }: { user: User }) => {
               Sin mediciones a la fecha del dia de hoy
             </Text>
           )}
-          {user.role === "administrator" && (
+          {sessionUser.role === "administrator" && (
             <Button c="black" leftSection={<IconPlus />}>
               Nueva Medición
             </Button>

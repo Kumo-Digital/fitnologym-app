@@ -6,11 +6,37 @@ import UserOverviewEmpty from "@/components/user-overview/user-overview-empty";
 import UserOverviewHeader from "@/components/user-overview/user-overview-header";
 import { UserOverviewSkeleton } from "@/components/user-overview/user-overview-skeleton";
 import { useUniqueUser } from "@/hooks/users";
+import { validateRequest } from "@/lib/auth";
+import { User } from "@/types/user";
 import { withRootLayout } from "@/utils/layouts";
 import { Badge, Group, Stack, Tabs } from "@mantine/core";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { useRouter } from "next/router";
 
-const UserOverview = () => {
+export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
+	GetServerSidePropsResult<{
+		sessionUser: User;
+	}>
+> {
+  console.log(context.req.cookies);
+	const { user } = await validateRequest(context.req, context.res);
+	console.log(user);
+	if (!user) {
+		return {
+			redirect: {
+				permanent: false,
+				destination: "/login"
+			}
+		};
+	}
+	return {
+		props: {
+			sessionUser: user
+		}
+	} as any;
+}
+
+const UserOverview = ({sessionUser}: {sessionUser: User}) => {
   const { query } = useRouter();
   const { user, isLoading } = useUniqueUser({ id: query.userId as string });
 
@@ -44,7 +70,7 @@ const UserOverview = () => {
         </Tabs.List>
 
         {/* USER HEADER */}
-        <UserOverviewHeader user={user} />
+        <UserOverviewHeader user={user} sessionUser={sessionUser} />
 
         {/* PANELS */}
         <Tabs.Panel value="overview">
