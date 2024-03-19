@@ -13,3 +13,8 @@ export interface ReportEntry {
   date: string;
   report_url: string | null;
 }
+
+export interface Metrics {
+  uom: string;
+  filtered_metrics: Record<string, number | string>[];
+}

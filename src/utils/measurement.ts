@@ -2,6 +2,7 @@ import * as Yup from "yup";
 import { IMeasurement } from "@/db/interfaces/IMeasurement";
 import { MeasurementFormValues } from "@/types/admin";
 import { generateId } from "lucia";
+import { Metrics } from "@/types/measurements";
 
 export const prepareMeasurementForInsert = (
   payload: MeasurementFormValues
@@ -195,6 +196,49 @@ export const prepareMeasurementForInsert = (
   return preparedMeasurement;
 };
 
+const metricLabels = [
+  { key: "Generales", value: "overview" },
+  { key: "Torso", value: "trunk" },
+  { key: "Brazo Izquierdo", value: "left_arm" },
+  { key: "Brazo Derecho", value: "right_arm" },
+  { key: "Pierna Izquierda", value: "left_leg" },
+  { key: "Pierna Derecha", value: "right_leg" },
+  { key: "Cuello", value: "circumferenceNeck" },
+  { key: "Pecho", value: "circumferenceChest" },
+  { key: "Hombros", value: "circumferenceShoulders" },
+  { key: "Brasos", value: "circumferenceArms" },
+  { key: "Cintura", value: "circumferenceWaist" },
+  { key: "Cadera", value: "circumferenceHips" },
+  { key: "Glúteos", value: "circumferenceGlutes" },
+  { key: "Cuádriceps", value: "circumferenceQuads" },
+  { key: "Pantorrillas", value: "circumferenceCalf" },
+];
+
+export const prepareMeasurementForDisplay = (
+  payload: Metrics
+): Record<string, any>[] => {
+  if (!payload.filtered_metrics) return [];
+  const preparedMeasurement = payload.filtered_metrics.map((entry) => {
+    return metricLabels.reduce(
+      (acc: any, curr) => {
+        if (entry[curr.value] !== undefined) {
+          acc[curr.key] = entry[curr.value];
+        }
+        return acc;
+      },
+      {
+        date: new Date(entry.date).toLocaleDateString("es-AR", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }),
+      }
+    );
+  });
+
+  return preparedMeasurement;
+};
+
 export const getMeasureStatusColor = (status: number): string => {
   switch (status) {
     case 0:
@@ -359,6 +403,27 @@ export const metricsSelectOptions = [
 ];
 
 export const getLabelColoBySection = (section: string): string => {
+  switch (section) {
+    case "Generales":
+      return "orange.5";
+    case "Torso":
+      return "red.6";
+    case "Pierna Izquierda":
+      return "grape.5";
+    case "Pierna Derecha":
+      return "violet.5";
+    case "Brazo Izquierdo":
+      return "cyan.5";
+    case "Brazo Derecho":
+      return "teal.5";
+    case "Circunferencias":
+      return "gray.5";
+    default:
+      return "gray.5";
+  }
+};
+
+export const getCategoryColoBySection = (section: string): string => {
   switch (section) {
     case "overview":
       return "orange.5";

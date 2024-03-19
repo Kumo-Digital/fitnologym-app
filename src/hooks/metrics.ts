@@ -1,8 +1,16 @@
 import { apiUrls } from "@/lib/apiUrls";
-import { apiFetcher, mockFetcher } from "@/utils/apiUtils";
+import { Metrics } from "@/types/measurements";
+import { apiFetcher } from "@/utils/apiUtils";
 import useSWR from "swr";
 
-export const useMetrics = (filters: URLSearchParams) => {
+interface MetricsResponse {
+  metrics: Metrics;
+  isLoading: boolean;
+  isError: boolean;
+  refetch: () => Promise<Metrics>;
+}
+
+export const useMetrics = (filters: URLSearchParams): MetricsResponse => {
   const params = new URLSearchParams(filters);
 
   const { data, error, isLoading, mutate } = useSWR(
