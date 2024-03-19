@@ -25,10 +25,12 @@ interface OverviewTabProps {
 }
 
 const OverviewTab = ({ user }: OverviewTabProps) => {
-  const { lastMeasure, isLoading } = useUniqueLastMeasure(user._id);
   const { ref, height } = useElementSize();
+  const { lastMeasure, isLoading } = useUniqueLastMeasure(user._id);
+
   const [selectedBodySection, setSelectedBodySection] =
     useState<string>("overview");
+
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
 
   if (isLoading) return <OverviewTabSkeleton />;

@@ -194,13 +194,15 @@ type Measure = { [key: string]: any };
 
 export const BodySectionOverview = ({ lastMeasure }: any) => {
   const overviewMeasures: Measure[] = Object.entries(
-    mockMeasures.measures
-  ).reduce((metricList: Measure[], [metric, values]) => {
+    lastMeasure.metrics
+  ).reduce((metricList: Measure[], [metric, values]: any) => {
     if (overviewBodyMetrics.includes(metric)) {
       metricList = [...metricList, { metricName: metric, ...values }];
     }
     return metricList;
   }, []);
+
+  // console.log("overviewMeasures", overviewMeasures);
 
   return (
     <Stack>
