@@ -358,7 +358,7 @@ export const metricsSelectOptions = [
     label: "Grasa Corporal",
     sections: [
       "overview",
-      "torso",
+      "trunk",
       "left_leg",
       "right_leg",
       "left_arm",
@@ -370,7 +370,7 @@ export const metricsSelectOptions = [
     label: "Masa Muscular",
     sections: [
       "overview",
-      "torso",
+      "trunk",
       "left_leg",
       "right_leg",
       "left_arm",
@@ -382,7 +382,7 @@ export const metricsSelectOptions = [
     label: "Calidad Muscular",
     sections: [
       "overview",
-      "torso",
+      "trunk",
       "left_leg",
       "right_leg",
       "left_arm",
@@ -427,7 +427,7 @@ export const getCategoryColoBySection = (section: string): string => {
   switch (section) {
     case "overview":
       return "orange.5";
-    case "torso":
+    case "trunk":
       return "red.6";
     case "left_leg":
       return "grape.5";

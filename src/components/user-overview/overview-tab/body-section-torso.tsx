@@ -193,7 +193,7 @@ const mockMeasures = {
 
 type Measure = { [key: string]: any };
 type TorsoMeasures = {
-  torso: { [key: string]: any }[];
+  trunk: { [key: string]: any }[];
   circumferences: { [key: string]: any }[];
 };
 
@@ -226,7 +226,7 @@ export const BodySectionTorso = ({ lastMeasure }: any) => {
     <Stack>
       <Title order={4}>Torso</Title>
       <Stack gap={16}>
-        {torsoMeasures.torso.map((value: Measure, index: number) => (
+        {torsoMeasures.trunk.map((value: Measure, index: number) => (
           <MeasureCard
             key={`${value.metricName}-${index}`}
             measureTitle={value.metricName}

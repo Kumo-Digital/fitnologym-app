@@ -30,7 +30,7 @@ class MetricService {
               overview: `$metrics.${metric}.measure_value`,
               left_arm: `$metrics.left_arm.${metric}.measure_value`,
               right_arm: `$metrics.right_arm.${metric}.measure_value`,
-              torso: `$metrics.trunk.${metric}.measure_value`,
+              trunk: `$metrics.trunk.${metric}.measure_value`,
               left_leg: `$metrics.left_leg.${metric}.measure_value`,
               right_leg: `$metrics.right_leg.${metric}.measure_value`,
             }
