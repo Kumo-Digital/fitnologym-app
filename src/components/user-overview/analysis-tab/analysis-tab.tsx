@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   getLabelColoBySection,
   metricsSelectOptions,
+  prepareMeasurementForDisplay,
 } from "@/utils/measurement";
 import AnalysisTableFilters from "./analysis-table-filters";
 import AnalysisTabSkeleton from "./analysis-tab-skeleton";
@@ -29,24 +30,18 @@ const AnalysisTab = ({ user }: any) => {
     endMonth: filters.dateRange[1]?.toISOString() || undefined,
   };
 
-  const { firstMeasure, isLoading: isFirstMeasureLoading } = useUniqueFirstMeasure(query.userId as string);
-
+  const { firstMeasure, isLoading: isFirstMeasureLoading } =
+    useUniqueFirstMeasure(query.userId as string);
   const { metrics, isLoading } = useMetrics(new URLSearchParams(searchParams));
 
   const handleFiltersChange = (filterValues: Filters) => {
     setFilters(filterValues);
   };
 
-  const filteredMetrics = metrics?.filtered_metrics?.map((entry: any) => {
-    return {
-      ...entry,
-      date: new Date(entry.date).toLocaleDateString("es-AR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }),
-    }
-  });
+  console.log(metrics, "metrics");
+
+  const filteredMetrics = prepareMeasurementForDisplay(metrics);
+
   if (isLoading || isFirstMeasureLoading) return <AnalysisTabSkeleton />;
   return (
     <Stack mt={32} gap={32}>
@@ -63,12 +58,16 @@ const AnalysisTab = ({ user }: any) => {
         curveType="natural"
         withLegend
         tooltipAnimationDuration={200}
-        series={(filteredMetrics) ? Object.keys(filteredMetrics[0])
-          .filter((section) => section !== "date")
-          .map((section) => ({
-            name: section,
-            color: getLabelColoBySection(section),
-          })) : [{name: '', color: ''}]}
+        series={
+          filteredMetrics
+            ? Object.keys(filteredMetrics[0])
+                .filter((section) => section !== "date")
+                .map((section) => ({
+                  name: section,
+                  color: getLabelColoBySection(section),
+                }))
+            : [{ name: "", color: "" }]
+        }
       />
     </Stack>
   );
