@@ -10,7 +10,7 @@ export type User = {
   email: string;
   dni: string;
   user_type: UserType;
-  role: "admin" | "user";
+  role: "administrator" | "user";
   gender: "female" | "male";
   gym_id: string;
   updatedAt: string;
