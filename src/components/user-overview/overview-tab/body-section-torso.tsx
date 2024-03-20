@@ -1,5 +1,6 @@
 import { CircumferenceCard } from "@/components/ui/card/circumference-card/circumference-card";
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
+import { BodySectionProps } from "@/types/measurements";
 import { torsoBodyMetrics } from "@/utils/measurement";
 import { Stack, Title } from "@mantine/core";
 
@@ -9,7 +10,7 @@ type TorsoMeasures = {
   circumferences: { [key: string]: any }[];
 };
 
-export const BodySectionTorso = ({ lastMeasure }: any) => {
+export const BodySectionTorso = ({ lastMeasure, evolution }: BodySectionProps ) => {
   const torsoMeasures: TorsoMeasures = Object.entries(
     lastMeasure.metrics
   ).reduce((measures, [metricName, value]: any) => {
@@ -17,22 +18,27 @@ export const BodySectionTorso = ({ lastMeasure }: any) => {
 
     if (metricName === "trunk") {
       const torsoMetrics = Object.entries(value).map((metric: any) => ({
-        metricName: metric[0],
         ...metric[1],
+        metricName: metric[0],
+        evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
       }));
       return {
         ...measures,
         torso: torsoMetrics,
       };
     } else {
+      console.log(`EL CUELLO ES: ${evolution?.metrics['circumferenceNeck'].measure_evolution}`)
+      console.log(`${metricName}: ${JSON.stringify(evolution?.metrics[metricName])}`)
       return {
         ...measures,
         circumferences: measures?.circumferences
-          ? [...measures?.circumferences, { metricName, ...value }]
+          ? [...measures?.circumferences, { metricName, evolution: evolution?.metrics[metricName].measure_evolution, ...value }]
           : [{ metricName, ...value }],
       };
     }
   }, {} as TorsoMeasures);
+
+  console.log('LOS TORSO MEASURES:', torsoMeasures);
 
   return (
     <Stack>
@@ -44,7 +50,7 @@ export const BodySectionTorso = ({ lastMeasure }: any) => {
             measureTitle={value.metricName}
             measureValue={value.measure_value}
             measureUnit={value.measure_uom}
-            evolutionValue={12}
+            evolutionValue={value.evolution}
             measureStatus={value.measure_status}
           />
         ))}
@@ -57,7 +63,7 @@ export const BodySectionTorso = ({ lastMeasure }: any) => {
             measureTitle={value.metricName}
             measureValue={value.measure_value}
             measureUnit={value.measure_uom}
-            evolutionValue={12}
+            evolutionValue={value.evolution}
           />
         ))}
       </Stack>

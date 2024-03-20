@@ -31,6 +31,20 @@ export const useUniqueFirstMeasure = (userId: string): any => {
   };
 };
 
+export const useCalculateEvolution = (userId: string): any => {
+  const { data, error, isLoading, mutate } = useSWR(
+    apiUrls.measurements.getEvolution(userId),
+    apiFetcher
+  );
+
+  return {
+    evolution: data,
+    error,
+    isLoading,
+    refetch: mutate,
+  };
+};
+
 interface UseMeasurementsReturn {
   measurements: Measurement[];
   error: any;

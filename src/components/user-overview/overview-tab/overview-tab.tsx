@@ -3,7 +3,7 @@ import { Group, ScrollArea, SegmentedControl, Stack } from "@mantine/core";
 import { useState } from "react";
 import { useElementSize } from "@mantine/hooks";
 import { UserType } from "@/types/user";
-import { useUniqueLastMeasure } from "@/hooks/measurements";
+import { useCalculateEvolution, useUniqueLastMeasure, useUniquePreviousToLastMeasure } from "@/hooks/measurements";
 import { BodySectionOverview } from "./body-section-overview";
 import { BodySectionTorso } from "./body-section-torso";
 import { BodySectionArms } from "./body-section-arms";
@@ -27,13 +27,14 @@ interface OverviewTabProps {
 const OverviewTab = ({ user }: OverviewTabProps) => {
   const { ref, height } = useElementSize();
   const { lastMeasure, isLoading } = useUniqueLastMeasure(user._id);
+  const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(user._id);
 
   const [selectedBodySection, setSelectedBodySection] =
     useState<string>("overview");
 
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
 
-  if (isLoading) return <OverviewTabSkeleton />;
+  if (isLoading || isLoadingEvolution) return <OverviewTabSkeleton />;
   return (
     <Group gap={0} grow align="stretch">
       <Stack ref={ref} style={{ flexGrow: 1 }}>
@@ -54,16 +55,16 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
         {/* Height = ref stack heigh - vertical padding - segmented control - gap */}
         <ScrollArea style={{ flexGrow: 1 }} h={`${height - 64 - 40 - 32}px`}>
           {selectedBodySection === "overview" && (
-            <BodySectionOverview lastMeasure={lastMeasure} />
+            <BodySectionOverview lastMeasure={lastMeasure} evolution={evolution} />
           )}
           {selectedBodySection === "torso" && (
-            <BodySectionTorso lastMeasure={lastMeasure} />
+            <BodySectionTorso lastMeasure={lastMeasure} evolution={evolution} />
           )}
           {selectedBodySection === "arms" && (
-            <BodySectionArms lastMeasure={lastMeasure} />
+            <BodySectionArms lastMeasure={lastMeasure} evolution={evolution} />
           )}
           {selectedBodySection === "legs" && (
-            <BodySectionLegs lastMeasure={lastMeasure} />
+            <BodySectionLegs lastMeasure={lastMeasure} evolution={evolution} />
           )}
         </ScrollArea>
       </Stack>
