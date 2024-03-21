@@ -1,5 +1,6 @@
 import { CircumferenceCard } from "@/components/ui/card/circumference-card/circumference-card";
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
+import { BodySectionProps } from "@/types/measurements";
 import { armsBodyMetrics } from "@/utils/measurement";
 import { Group, Stack, Title } from "@mantine/core";
 
@@ -10,8 +11,13 @@ type ArmMeasures = {
   circumferences: { [key: string]: any }[];
 };
 
-export const BodySectionArms = ({ lastMeasure }: any) => {
-  const armMeasures: ArmMeasures = Object.entries(lastMeasure.metrics).reduce(
+export const BodySectionArms = ({
+  lastMeasure,
+  evolution,
+}: BodySectionProps) => {
+  const armMeasures: ArmMeasures = Object.entries(
+    lastMeasure.metrics
+  ).reduce(
     (measures, [metricName, value]: any) => {
       if (!armsBodyMetrics.includes(metricName)) return measures;
 
@@ -19,6 +25,7 @@ export const BodySectionArms = ({ lastMeasure }: any) => {
         const leftArmMetrics = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
+          evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
         }));
         return {
           ...measures,
@@ -28,6 +35,7 @@ export const BodySectionArms = ({ lastMeasure }: any) => {
         const rightArmMetrics = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
+          evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
         }));
         return {
           ...measures,
@@ -37,8 +45,21 @@ export const BodySectionArms = ({ lastMeasure }: any) => {
         return {
           ...measures,
           circumferences: measures?.circumferences
-            ? [...measures?.circumferences, { metricName, ...value }]
-            : [{ metricName, ...value }],
+            ? [
+                ...measures?.circumferences,
+                {
+                  metricName,
+                  evolution: evolution?.metrics[metricName].measure_evolution,
+                  ...value,
+                },
+              ]
+            : [
+                {
+                  metricName,
+                  ...value,
+                  evolution: evolution?.metrics[metricName].measure_evolution,
+                },
+              ],
         };
       }
     },
@@ -57,7 +78,7 @@ export const BodySectionArms = ({ lastMeasure }: any) => {
               measureValue={value.measure_value}
               measureUnit={value.measure_uom}
               measureStatus={value.measure_status}
-              evolutionValue={12}
+              evolutionValue={value.evolution}
             />
           ))}
         </Stack>
@@ -70,7 +91,7 @@ export const BodySectionArms = ({ lastMeasure }: any) => {
               measureValue={value.measure_value}
               measureUnit={value.measure_uom}
               measureStatus={value.measure_status}
-              evolutionValue={12}
+              evolutionValue={value.evolution}
             />
           ))}
         </Stack>
@@ -83,7 +104,7 @@ export const BodySectionArms = ({ lastMeasure }: any) => {
             measureTitle={value.metricName}
             measureValue={value.measure_value}
             measureUnit={value.measure_uom}
-            evolutionValue={12}
+            evolutionValue={value.evolution}
           />
         ))}
       </Stack>
