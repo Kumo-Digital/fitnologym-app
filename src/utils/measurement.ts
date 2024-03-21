@@ -577,3 +577,14 @@ export const measurementFormValidationSchema = Yup.object().shape({
     "La circunferencia no puede ser negativa"
   ),
 });
+
+export const getRemainingPercentage = (
+  currentValue: number,
+  targetValue: number
+) => {
+  if (currentValue < targetValue) {
+    return (currentValue / targetValue) * 100;
+  } else {
+    return (targetValue / currentValue) * 100;
+  }
+};

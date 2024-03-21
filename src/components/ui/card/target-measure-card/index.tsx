@@ -1,3 +1,4 @@
+import { getRemainingPercentage } from "@/utils/measurement";
 import {
   Card,
   Group,
@@ -21,17 +22,11 @@ export const TargetMeasureCard = ({
 }: TargetMeasureCardProps) => {
   const theme = useMantineTheme();
 
-  const evolutionValue =
-    ((currentValue - targetValue) / currentValue) * 100 <= 0
-      ? Math.abs(((currentValue - targetValue) / currentValue) * 100) - 100
-      : ((currentValue - targetValue) / currentValue) * 100;
+  const evolutionValue = getRemainingPercentage(currentValue, targetValue);
 
-  console.log("currentValue", currentValue);
-  console.log("targetValue", targetValue);
-  console.log("evolutionValue", evolutionValue);
   return (
     <Card radius="md" withBorder p={0}>
-      <Group gap={16} py={24} pl={16} pr={24} align="stretch">
+      <Group gap={16} px={16} align="center" justify="center">
         <Stack
           justify="center"
           align="center"

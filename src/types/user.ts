@@ -4,6 +4,11 @@ export enum UserType {
   PREMIUM = "premium",
 }
 
+type UserTarget = {
+  target_metric: string;
+  target_value: number;
+};
+
 export type User = {
   _id: string;
   fullname: string;
@@ -13,6 +18,7 @@ export type User = {
   role: "administrator" | "user";
   gender: "female" | "male";
   gym_id: string;
+  target: UserTarget[];
   updatedAt: string;
   createdAt: string;
 };
@@ -24,6 +30,8 @@ export type UserForm = {
   user_type: UserType;
   gym_id: string;
   gender: "male" | "female";
+  target_metric: string;
+  target_value: number;
 };
 
 export type UserItem = {

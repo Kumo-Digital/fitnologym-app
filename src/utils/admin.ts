@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
 export const measurementFormInitialValues = {
-  user_id: '',
-  report_url: '',
-  date: '',
+  user_id: "",
+  report_url: "",
+  date: "",
   weight: 0,
   weightStatus: "2",
   bmi: 0,
@@ -110,4 +110,6 @@ export const newUserFormValidationSchema = Yup.object().shape({
   gym_id: Yup.string().required("El gimnasio es requerido"),
   user_type: Yup.string().required("La suscripción es requerida"),
   gender: Yup.string().required("El género es requerido"),
+  target_metric: Yup.string().required("La métrica objetivo es requerida"),
+  target_value: Yup.number().required("El valor objetivo es requerido"),
 });

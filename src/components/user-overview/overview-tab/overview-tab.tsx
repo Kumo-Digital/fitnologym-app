@@ -2,7 +2,7 @@ import { BodyModel } from "@/components/ui/body-model/body-model";
 import { Group, ScrollArea, SegmentedControl, Stack } from "@mantine/core";
 import { useState } from "react";
 import { useElementSize } from "@mantine/hooks";
-import { UserType } from "@/types/user";
+import { User, UserType } from "@/types/user";
 import { useUniqueLastMeasure } from "@/hooks/measurements";
 import { BodySectionOverview } from "./body-section-overview";
 import { BodySectionTorso } from "./body-section-torso";
@@ -10,22 +10,8 @@ import { BodySectionArms } from "./body-section-arms";
 import { BodySectionLegs } from "./body-section-legs";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
 
-interface MockUser {
-  _id: string;
-  fullname: string;
-  email: string;
-  dni: string;
-  user_type: UserType;
-  role: string;
-  gender: "male" | "female";
-  target: {
-    target_measure: "string";
-    target_value: number;
-  };
-}
-
 interface OverviewTabProps {
-  user: MockUser;
+  user: User;
 }
 
 const OverviewTab = ({ user }: OverviewTabProps) => {

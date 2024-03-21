@@ -51,7 +51,16 @@ class UserService {
   }
 
   async createUser(userData: DatabaseUser): Promise<any> {
-    const { email, dni, fullname, user_type, gender, gym_id } = userData;
+    const {
+      email,
+      dni,
+      fullname,
+      user_type,
+      gender,
+      gym_id,
+      target_metric,
+      target_value,
+    } = userData;
 
     try {
       // Hash password
@@ -68,6 +77,12 @@ class UserService {
         gender,
         user_type,
         gym_id,
+        targets: [
+          {
+            target_metric,
+            target_value,
+          },
+        ],
         role: "user",
       };
 

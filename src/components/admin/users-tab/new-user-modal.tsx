@@ -8,8 +8,10 @@ import {
 import {
   Box,
   Button,
+  Divider,
   Group,
   Modal,
+  NumberInput,
   Radio,
   Select,
   SelectProps,
@@ -35,6 +37,8 @@ const newUserInitialValues: UserForm = {
   user_type: UserType.BASIC,
   gym_id: "",
   gender: "male",
+  target_metric: "weight",
+  target_value: 0,
 };
 
 const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
@@ -176,6 +180,45 @@ const NewUserModal = ({ isOpen, close, gyms, refetch }: NewUserModalProps) => {
                   <Radio value="female" label="Mujer" />
                 </Group>
               </Radio.Group>
+              <Divider />
+              <Stack gap={4}>
+                <Text>Objetivos del Usuario</Text>
+                <Text size="sm">
+                  Define metas específicas y medibles adaptadas a tu trayectoria
+                  fitness. Haz un seguimiento del progreso, mantente motivado y
+                  conquista tus aspiraciones fitness con precisión y claridad.
+                </Text>
+              </Stack>
+              <Group gap={16} align="stretch">
+                <Select
+                  name="target_metric"
+                  label="Métrica Objetivo"
+                  placeholder="Seleccionar una Métrica"
+                  disabled
+                  data={[{ label: "Peso", value: "weight" }]}
+                  value={values.target_metric}
+                  onChange={(e) => setFieldValue("target_metric", e)}
+                  onBlur={() => setFieldTouched("target_metric", true)}
+                  error={touched.target_metric && errors.target_metric}
+                  flex="1"
+                />
+                <NumberInput
+                  name="target_value"
+                  label="Objetivo"
+                  placeholder="Kgs"
+                  value={values.target_value}
+                  onChange={(e) => setFieldValue("target_value", e)}
+                  onBlur={() => setFieldTouched("target_value", true)}
+                  error={touched.target_value && errors.target_value}
+                  min={0}
+                  rightSection={
+                    <Text size="sm" mr={4}>
+                      Kg
+                    </Text>
+                  }
+                  w={150}
+                />
+              </Group>
               <Group justify="flex-end">
                 <Button variant="subtle" onClick={close}>
                   Cancelar

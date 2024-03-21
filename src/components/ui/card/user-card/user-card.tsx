@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { IconChevronRight, IconDotsVertical } from "@tabler/icons-react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface UserCardProps {
   title: string;
@@ -37,9 +38,11 @@ export const UserCard: React.FC<UserCardProps> = ({
             }}
             gap={0}
           >
-            <Text size="md" c="gray.0">
-              {title}
-            </Text>
+            <Link href={"#"}>
+              <Text size="md" c="gray.0">
+                {title}
+              </Text>
+            </Link>
             <Text size="sm" c="gray.5">
               {subtitle}
             </Text>

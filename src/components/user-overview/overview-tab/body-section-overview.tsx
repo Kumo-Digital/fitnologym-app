@@ -191,8 +191,6 @@ const mockMeasures = {
   },
 };
 
-const mockTargetMeasure = { target_measure: "weight", target_value: 61 };
-
 type Measure = { [key: string]: any };
 
 export const BodySectionOverview = ({ lastMeasure, targetMeasure }: any) => {
@@ -208,12 +206,8 @@ export const BodySectionOverview = ({ lastMeasure, targetMeasure }: any) => {
   return (
     <Stack>
       <Title order={4}>Generales</Title>
-      <TargetMeasureCard
-        // currentValue={mockMeasures.measures.weight.measure_value}
-        // targetValue={mockTargetMeasure.target_value}
-        currentValue={55}
-        targetValue={80}
-      />
+      {}
+      <TargetMeasureCard currentValue={75} targetValue={70} />
       <SimpleGrid cols={2} spacing={16} verticalSpacing={16}>
         {overviewMeasures.map((value: Measure, index: number) => (
           <MeasureCard
