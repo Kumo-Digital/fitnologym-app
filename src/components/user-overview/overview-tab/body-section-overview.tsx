@@ -1,4 +1,5 @@
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
+import { BodySectionOverviewProps, BodySectionProps, Evolution } from "@/types/measurements";
 import { overviewBodyMetrics } from "@/utils/measurement";
 import { SimpleGrid, Stack, Title } from "@mantine/core";
 
@@ -192,12 +193,12 @@ const mockMeasures = {
 
 type Measure = { [key: string]: any };
 
-export const BodySectionOverview = ({ lastMeasure }: any) => {
+export const BodySectionOverview = ({ lastMeasure, evolution }: BodySectionProps) => {
   const overviewMeasures: Measure[] = Object.entries(
-    mockMeasures.measures
-  ).reduce((metricList: Measure[], [metric, values]) => {
+    lastMeasure.metrics
+  ).reduce((metricList: Measure[], [metric, values]: any) => {
     if (overviewBodyMetrics.includes(metric)) {
-      metricList = [...metricList, { metricName: metric, ...values }];
+      metricList = [...metricList, { metricName: metric, evolution: evolution?.metrics[metric].measure_evolution, ...values }];
     }
     return metricList;
   }, []);
@@ -210,7 +211,7 @@ export const BodySectionOverview = ({ lastMeasure }: any) => {
           <MeasureCard
             measureTitle={value.metricName}
             measureValue={value.measure_value}
-            evolutionValue={12}
+            evolutionValue={value.evolution}
             measureUnit={value.measure_uom}
             measureStatus={value.measure_status}
             key={`${value.metricName}-${index}`}

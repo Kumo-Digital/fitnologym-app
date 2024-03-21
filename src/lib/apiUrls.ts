@@ -26,6 +26,8 @@ export const apiUrls = {
     getAllMeasurementsByUser: (id: string) =>
       `/measurements/get-all-measurements-by-user/${id}`,
     create: "/measurements",
+    getEvolution: (id: string) =>
+    `/measurements/get-evolution/${id}`,
   },
   metrics: {
     get: (filters: string) => `/metrics?${filters}`,
