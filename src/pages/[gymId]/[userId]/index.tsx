@@ -5,6 +5,7 @@ import ResourcesTab from "@/components/user-overview/resources-tab/resources-tab
 import UserOverviewEmpty from "@/components/user-overview/user-overview-empty";
 import UserOverviewHeader from "@/components/user-overview/user-overview-header";
 import { UserOverviewSkeleton } from "@/components/user-overview/user-overview-skeleton";
+import { useUniqueLastMeasure } from "@/hooks/measurements";
 import { useUniqueUser } from "@/hooks/users";
 import { validateRequest } from "@/lib/auth";
 import { User } from "@/types/user";
@@ -39,17 +40,18 @@ export async function getServerSideProps(context: GetServerSidePropsContext): Pr
 const UserOverview = ({sessionUser}: {sessionUser: User}) => {
   const { query } = useRouter();
   const { user, isLoading } = useUniqueUser({ id: query.userId as string });
+  const { lastMeasure, isLoading: isLoadingLastMeasure } = useUniqueLastMeasure(query.userId as string);
 
   if (query.userId === "undefined") return <UserOverviewEmpty />;
-  if (isLoading) return <UserOverviewSkeleton />;
+  if (isLoading || isLoadingLastMeasure) return <UserOverviewSkeleton />;
   return (
     <Stack gap={16} style={{ flexGrow: 1 }}>
       {/* TAB LIST */}
       <Tabs defaultValue="overview" keepMounted={false}>
         <Tabs.List>
           <Tabs.Tab value="overview">Overview</Tabs.Tab>
-          <Tabs.Tab value="analysis">Análisis</Tabs.Tab>
-          <Tabs.Tab value="report">Diagnóstico</Tabs.Tab>
+          <Tabs.Tab value="analysis" disabled={!lastMeasure}>Análisis</Tabs.Tab>
+          <Tabs.Tab value="report" disabled={!lastMeasure}>Diagnóstico</Tabs.Tab>
           <Tabs.Tab value="exercise-plan" disabled>
             <Group align="center" gap={8}>
               Mi Rutina
