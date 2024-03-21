@@ -1,4 +1,5 @@
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
+import { TargetMeasureCard } from "@/components/ui/card/target-measure-card";
 import { overviewBodyMetrics } from "@/utils/measurement";
 import { SimpleGrid, Stack, Title } from "@mantine/core";
 
@@ -190,9 +191,11 @@ const mockMeasures = {
   },
 };
 
+const mockTargetMeasure = { target_measure: "weight", target_value: 61 };
+
 type Measure = { [key: string]: any };
 
-export const BodySectionOverview = ({ lastMeasure }: any) => {
+export const BodySectionOverview = ({ lastMeasure, targetMeasure }: any) => {
   const overviewMeasures: Measure[] = Object.entries(
     mockMeasures.measures
   ).reduce((metricList: Measure[], [metric, values]) => {
@@ -205,6 +208,12 @@ export const BodySectionOverview = ({ lastMeasure }: any) => {
   return (
     <Stack>
       <Title order={4}>Generales</Title>
+      <TargetMeasureCard
+        // currentValue={mockMeasures.measures.weight.measure_value}
+        // targetValue={mockTargetMeasure.target_value}
+        currentValue={55}
+        targetValue={80}
+      />
       <SimpleGrid cols={2} spacing={16} verticalSpacing={16}>
         {overviewMeasures.map((value: Measure, index: number) => (
           <MeasureCard

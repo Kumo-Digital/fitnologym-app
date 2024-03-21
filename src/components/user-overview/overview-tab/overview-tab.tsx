@@ -18,6 +18,10 @@ interface MockUser {
   user_type: UserType;
   role: string;
   gender: "male" | "female";
+  target: {
+    target_measure: "string";
+    target_value: number;
+  };
 }
 
 interface OverviewTabProps {
@@ -52,7 +56,10 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
         {/* Height = ref stack heigh - vertical padding - segmented control - gap */}
         <ScrollArea style={{ flexGrow: 1 }} h={`${height - 64 - 40 - 32}px`}>
           {selectedBodySection === "overview" && (
-            <BodySectionOverview lastMeasure={lastMeasure} />
+            <BodySectionOverview
+              lastMeasure={lastMeasure}
+              targetMeasure={user.target}
+            />
           )}
           {selectedBodySection === "torso" && (
             <BodySectionTorso lastMeasure={lastMeasure} />
