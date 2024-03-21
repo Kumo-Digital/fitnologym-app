@@ -10,7 +10,10 @@ type TorsoMeasures = {
   circumferences: { [key: string]: any }[];
 };
 
-export const BodySectionTorso = ({ lastMeasure, evolution }: BodySectionProps ) => {
+export const BodySectionTorso = ({
+  lastMeasure,
+  evolution,
+}: BodySectionProps) => {
   const torsoMeasures: TorsoMeasures = Object.entries(
     lastMeasure.metrics
   ).reduce((measures, [metricName, value]: any) => {
@@ -27,18 +30,29 @@ export const BodySectionTorso = ({ lastMeasure, evolution }: BodySectionProps ) 
         torso: torsoMetrics,
       };
     } else {
-      console.log(`EL CUELLO ES: ${evolution?.metrics['circumferenceNeck'].measure_evolution}`)
-      console.log(`${metricName}: ${JSON.stringify(evolution?.metrics[metricName])}`)
       return {
         ...measures,
         circumferences: measures?.circumferences
-          ? [...measures?.circumferences, { metricName, evolution: evolution?.metrics[metricName].measure_evolution, ...value }]
-          : [{ metricName, ...value }],
+          ? [
+              ...measures?.circumferences,
+              {
+                metricName,
+                evolution: evolution?.metrics[metricName].measure_evolution,
+                ...value,
+              },
+            ]
+          : [
+              {
+                metricName,
+                ...value,
+                evolution: evolution?.metrics[metricName].measure_evolution,
+              },
+            ],
       };
     }
   }, {} as TorsoMeasures);
 
-  console.log('LOS TORSO MEASURES:', torsoMeasures);
+  console.log("torsoMeasures", torsoMeasures);
 
   return (
     <Stack>

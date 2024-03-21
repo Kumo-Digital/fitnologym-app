@@ -30,8 +30,6 @@ export const CircumferenceCard = ({
   evolutionValue,
 }: CircumferenceCardProps) => {
   const theme = useMantineTheme();
-  console.log(measureTitle);
-  console.log(evolutionValue);
   return (
     <Card radius="md" withBorder p={0}>
       <Group gap={16} p={16} align="stretch">
