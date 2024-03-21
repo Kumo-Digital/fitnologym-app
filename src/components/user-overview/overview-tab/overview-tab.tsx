@@ -1,5 +1,5 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
-import { Group, ScrollArea, SegmentedControl, Stack } from "@mantine/core";
+import { Group, ScrollArea, SegmentedControl, Stack, Text } from "@mantine/core";
 import { useState } from "react";
 import { useElementSize } from "@mantine/hooks";
 import { UserType } from "@/types/user";
@@ -9,6 +9,7 @@ import { BodySectionTorso } from "./body-section-torso";
 import { BodySectionArms } from "./body-section-arms";
 import { BodySectionLegs } from "./body-section-legs";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
+import OverviewTabEmpty from "./overview-tab-empty";
 
 interface MockUser {
   _id: string;
@@ -33,6 +34,8 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
     useState<string>("overview");
 
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
+
+  if (!lastMeasure) return <OverviewTabEmpty />;
 
   if (isLoading || isLoadingEvolution) return <OverviewTabSkeleton />;
   return (
