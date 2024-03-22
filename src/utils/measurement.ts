@@ -7,7 +7,8 @@ import { Metrics } from "@/types/measurements";
 export const prepareMeasurementForInsert = (
   payload: MeasurementFormValues
 ): IMeasurement => {
-  const measurementId = generateId(18);
+  const measurementId =
+    payload._id !== undefined ? payload._id : generateId(18);
   const preparedMeasurement = {
     _id: measurementId,
     user_id: payload.user_id,
@@ -16,181 +17,275 @@ export const prepareMeasurementForInsert = (
     metrics: {
       weight: {
         measure_uom: "kg",
-        measure_value: payload.weight ?? 0,
+        measure_value: payload.weight ?? null,
         measure_status: parseInt(payload.weightStatus) ?? 2,
       },
       bmi: {
         measure_uom: "u",
-        measure_value: payload.bmi ?? 0,
+        measure_value: payload.bmi ?? null,
         measure_status: parseInt(payload.bmiStatus) ?? 2,
       },
       body_fat: {
         measure_uom: "%",
-        measure_value: payload.bodyFat ?? 0,
+        measure_value: payload.bodyFat ?? null,
         measure_status: parseInt(payload.bodyFatStatus) ?? 2,
       },
       visc_fat: {
         measure_uom: "u",
-        measure_value: payload.viscFat ?? 0,
+        measure_value: payload.viscFat ?? null,
         measure_status: parseInt(payload.viscFatStatus) ?? 2,
       },
       muscle_mass: {
         measure_uom: "kg",
-        measure_value: payload.muscleMass ?? 0,
+        measure_value: payload.muscleMass ?? null,
         measure_status: parseInt(payload.muscleMassStatus) ?? 2,
       },
       muscle_quality: {
         measure_uom: "u",
-        measure_value: payload.muscleQuality ?? 0,
+        measure_value: payload.muscleQuality ?? null,
         measure_status: parseInt(payload.muscleQualityStatus) ?? 2,
       },
       bone_mass: {
         measure_uom: "kg",
-        measure_value: payload.boneMass ?? 0,
+        measure_value: payload.boneMass ?? null,
         measure_status: parseInt(payload.boneMassStatus) ?? 2,
       },
       bmr: {
         measure_uom: "kcal",
-        measure_value: payload.bmr ?? 0,
+        measure_value: payload.bmr ?? null,
         measure_status: parseInt(payload.bmrStatus) ?? 2,
       },
       metab_age: {
-        measure_uom: "u",
-        measure_value: payload.metabAge ?? 0,
+        measure_uom: "años",
+        measure_value: payload.metabAge ?? null,
         measure_status: parseInt(payload.metabAgeStatus) ?? 2,
       },
       body_water: {
-        measure_uom: "%",
-        measure_value: payload.bodyWater ?? 0,
+        measure_uom: "lts",
+        measure_value: payload.bodyWater ?? null,
         measure_status: parseInt(payload.bodyWaterStatus) ?? 2,
       },
       physique_rating: {
         measure_uom: "u",
-        measure_value: payload.physiqueRating ?? 0,
+        measure_value: payload.physiqueRating ?? null,
         measure_status: parseInt(payload.physiqueRatingStatus) ?? 2,
       },
       left_arm: {
         muscle_mass: {
           measure_uom: "kg",
-          measure_value: payload.armLeftMuscleMass ?? 0,
+          measure_value: payload.armLeftMuscleMass ?? null,
           measure_status: parseInt(payload.armLeftMuscleMassStatus) ?? 2,
         },
         body_fat: {
           measure_uom: "%",
-          measure_value: payload.armLeftBodyFat ?? 0,
+          measure_value: payload.armLeftBodyFat ?? null,
           measure_status: parseInt(payload.armLeftBodyFatStatus) ?? 2,
         },
         muscle_quality: {
           measure_uom: "u",
-          measure_value: payload.armLeftMuscleQuality ?? 0,
+          measure_value: payload.armLeftMuscleQuality ?? null,
           measure_status: parseInt(payload.armLeftMuscleQualityStatus) ?? 2,
         },
       },
       right_arm: {
         muscle_mass: {
           measure_uom: "kg",
-          measure_value: payload.armRightMuscleMass ?? 0,
+          measure_value: payload.armRightMuscleMass ?? null,
           measure_status: parseInt(payload.armRightMuscleMassStatus) ?? 2,
         },
         body_fat: {
           measure_uom: "%",
-          measure_value: payload.armRightBodyFat ?? 0,
+          measure_value: payload.armRightBodyFat ?? null,
           measure_status: parseInt(payload.armRightBodyFatStatus) ?? 2,
         },
         muscle_quality: {
           measure_uom: "u",
-          measure_value: payload.armRightMuscleQuality ?? 0,
+          measure_value: payload.armRightMuscleQuality ?? null,
           measure_status: parseInt(payload.armRightMuscleQualityStatus) ?? 2,
         },
       },
       left_leg: {
         muscle_mass: {
           measure_uom: "kg",
-          measure_value: payload.legLeftMuscleMass ?? 0,
+          measure_value: payload.legLeftMuscleMass ?? null,
           measure_status: parseInt(payload.legLeftMuscleMassStatus) ?? 2,
         },
         body_fat: {
           measure_uom: "%",
-          measure_value: payload.legLeftBodyFat ?? 0,
+          measure_value: payload.legLeftBodyFat ?? null,
           measure_status: parseInt(payload.legLeftBodyFatStatus) ?? 2,
         },
         muscle_quality: {
           measure_uom: "u",
-          measure_value: payload.legLeftMuscleQuality ?? 0,
+          measure_value: payload.legLeftMuscleQuality ?? null,
           measure_status: parseInt(payload.legLeftMuscleQualityStatus) ?? 2,
         },
       },
       right_leg: {
         muscle_mass: {
           measure_uom: "kg",
-          measure_value: payload.legRightMuscleMass ?? 0,
+          measure_value: payload.legRightMuscleMass ?? null,
           measure_status: parseInt(payload.legRightMuscleMassStatus) ?? 2,
         },
         body_fat: {
           measure_uom: "%",
-          measure_value: payload.legRightBodyFat ?? 0,
+          measure_value: payload.legRightBodyFat ?? null,
           measure_status: parseInt(payload.legRightBodyFatStatus) ?? 2,
         },
         muscle_quality: {
           measure_uom: "u",
-          measure_value: payload.legRightMuscleQuality ?? 0,
+          measure_value: payload.legRightMuscleQuality ?? null,
           measure_status: parseInt(payload.legRightMuscleQualityStatus) ?? 2,
         },
       },
       trunk: {
         muscle_mass: {
           measure_uom: "kg",
-          measure_value: payload.trunkMuscleMass ?? 0,
+          measure_value: payload.trunkMuscleMass ?? null,
           measure_status: parseInt(payload.trunkMuscleMassStatus) ?? 2,
         },
         body_fat: {
           measure_uom: "%",
-          measure_value: payload.trunkBodyFat ?? 0,
+          measure_value: payload.trunkBodyFat ?? null,
           measure_status: parseInt(payload.trunkBodyFatStatus) ?? 2,
         },
         muscle_quality: {
           measure_uom: "u",
-          measure_value: payload.trunkMuscleQuality ?? 0,
+          measure_value: payload.trunkMuscleQuality ?? null,
           measure_status: parseInt(payload.trunkMuscleQualityStatus) ?? 2,
         },
       },
       circumferenceNeck: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceNeck ?? 0,
+        measure_value: payload.circumferenceNeck ?? null,
       },
       circumferenceChest: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceChest ?? 0,
+        measure_value: payload.circumferenceChest ?? null,
       },
       circumferenceShoulders: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceShoulders ?? 0,
+        measure_value: payload.circumferenceShoulders ?? null,
       },
       circumferenceArms: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceArms ?? 0,
+        measure_value: payload.circumferenceArms ?? null,
       },
       circumferenceWaist: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceWaist ?? 0,
+        measure_value: payload.circumferenceWaist ?? null,
       },
       circumferenceHips: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceHips ?? 0,
+        measure_value: payload.circumferenceHips ?? null,
       },
       circumferenceGlutes: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceGlutes ?? 0,
+        measure_value: payload.circumferenceGlutes ?? null,
       },
       circumferenceQuads: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceQuads ?? 0,
+        measure_value: payload.circumferenceQuads ?? null,
       },
       circumferenceCalf: {
         measure_uom: "cm",
-        measure_value: payload.circumferenceCalf ?? 0,
+        measure_value: payload.circumferenceCalf ?? null,
       },
     },
+  };
+
+  return preparedMeasurement;
+};
+
+export const prepareMeasurementForEditForm = (
+  payload: IMeasurement
+): MeasurementFormValues | undefined => {
+  if (!payload) return undefined;
+  const preparedMeasurement = {
+    user_id: payload.user_id,
+    report_url: payload.report_url,
+    date: new Date(payload.date),
+    weight: payload.metrics.weight.measure_value || 0,
+    weightStatus: payload.metrics.weight.measure_status || 2,
+    bmi: payload.metrics.bmi.measure_value || 0,
+    bmiStatus: payload.metrics.bmi.measure_status || 2,
+    bodyFat: payload.metrics.body_fat.measure_value || 0,
+    bodyFatStatus: payload.metrics.body_fat.measure_status || 2,
+    viscFat: payload.metrics.visc_fat.measure_value || 0,
+    viscFatStatus: payload.metrics.visc_fat.measure_status || 2,
+    muscleMass: payload.metrics.muscle_mass.measure_value || 0,
+    muscleMassStatus: payload.metrics.muscle_mass.measure_status || 2,
+    boneMass: payload.metrics.bone_mass.measure_value || 0,
+    boneMassStatus: payload.metrics.bone_mass.measure_status || 2,
+    bmr: payload.metrics.bmr.measure_value || 0,
+    bmrStatus: payload.metrics.bmr.measure_status || 2,
+    metabAge: payload.metrics.metab_age.measure_value || 0,
+    metabAgeStatus: payload.metrics.metab_age.measure_status || 2,
+    bodyWater: payload.metrics.body_water.measure_value || 0,
+    bodyWaterStatus: payload.metrics.body_water.measure_status || 2,
+    muscleQuality: payload.metrics.muscle_quality.measure_value || 0,
+    muscleQualityStatus: payload.metrics.muscle_quality.measure_status || 2,
+    physiqueRating: payload.metrics.physique_rating.measure_value || 0,
+    physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
+    trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
+    trunkMuscleMassStatus:
+      payload.metrics.trunk.muscle_mass.measure_status || 2,
+    trunkMuscleQuality: payload.metrics.trunk.muscle_quality.measure_value || 0,
+    trunkMuscleQualityStatus:
+      payload.metrics.trunk.muscle_quality.measure_status || 2,
+    trunkBodyFat: payload.metrics.trunk.body_fat.measure_value || 0,
+    trunkBodyFatStatus: payload.metrics.trunk.body_fat.measure_status || 2,
+    armLeftMuscleMass: payload.metrics.left_arm.muscle_mass.measure_value || 0,
+    armLeftMuscleMassStatus:
+      payload.metrics.left_arm.muscle_mass.measure_status || 2,
+    armLeftMuscleQuality:
+      payload.metrics.left_arm.muscle_quality.measure_value || 0,
+    armLeftMuscleQualityStatus:
+      payload.metrics.left_arm.muscle_quality.measure_status || 2,
+    armLeftBodyFat: payload.metrics.left_arm.body_fat.measure_value || 0,
+    armLeftBodyFatStatus: payload.metrics.left_arm.body_fat.measure_status || 2,
+    armRightMuscleMass:
+      payload.metrics.right_arm.muscle_mass.measure_value || 0,
+    armRightMuscleMassStatus:
+      payload.metrics.right_arm.muscle_mass.measure_status || 2,
+    armRightMuscleQuality:
+      payload.metrics.right_arm.muscle_quality.measure_value || 0,
+    armRightMuscleQualityStatus:
+      payload.metrics.right_arm.muscle_quality.measure_status || 2,
+    armRightBodyFat: payload.metrics.right_arm.body_fat.measure_value || 0,
+    armRightBodyFatStatus:
+      payload.metrics.right_arm.body_fat.measure_status || 2,
+    legLeftMuscleMass: payload.metrics.left_leg.muscle_mass.measure_value || 0,
+    legLeftMuscleMassStatus:
+      payload.metrics.left_leg.muscle_mass.measure_status || 2,
+    legLeftMuscleQuality:
+      payload.metrics.left_leg.muscle_quality.measure_value || 0,
+    legLeftMuscleQualityStatus:
+      payload.metrics.left_leg.muscle_quality.measure_status || 2,
+    legLeftBodyFat: payload.metrics.left_leg.body_fat.measure_value || 0,
+    legLeftBodyFatStatus: payload.metrics.left_leg.body_fat.measure_status || 2,
+    legRightMuscleMass:
+      payload.metrics.right_leg.muscle_mass.measure_value || 0,
+    legRightMuscleMassStatus:
+      payload.metrics.right_leg.muscle_mass.measure_status || 2,
+    legRightMuscleQuality:
+      payload.metrics.right_leg.muscle_quality.measure_value || 0,
+    legRightMuscleQualityStatus:
+      payload.metrics.right_leg.muscle_quality.measure_status || 2,
+    legRightBodyFat: payload.metrics.right_leg.body_fat.measure_value || 0,
+    legRightBodyFatStatus:
+      payload.metrics.right_leg.body_fat.measure_status || 2,
+    circumferenceNeck: payload.metrics.circumferenceNeck?.measure_value || 0,
+    circumferenceChest: payload.metrics.circumferenceChest?.measure_value || 0,
+    circumferenceShoulders:
+      payload.metrics.circumferenceShoulders?.measure_value || 0,
+    circumferenceArms: payload.metrics.circumferenceArms?.measure_value || 0,
+    circumferenceWaist: payload.metrics.circumferenceWaist?.measure_value || 0,
+    circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
+    circumferenceGlutes:
+      payload.metrics.circumferenceGlutes?.measure_value || 0,
+    circumferenceQuads: payload.metrics.circumferenceQuads?.measure_value || 0,
+    circumferenceCalf: payload.metrics.circumferenceCalf?.measure_value || 0,
   };
 
   return preparedMeasurement;
@@ -242,12 +337,16 @@ export const prepareMeasurementForDisplay = (
 export const getMeasureStatusColor = (status: number): string => {
   switch (status) {
     case 0:
+      // Bajo peso
       return "blue.5";
     case 1:
+      // Normal
       return "lime.5";
     case 2:
+      // Sobrepeso
       return "orange.5";
     case 3:
+      // Obesidad
       return "violet.5";
     default:
       return "gray.5";
@@ -587,4 +686,14 @@ export const getRemainingPercentage = (
   } else {
     return (targetValue / currentValue) * 100;
   }
+};
+
+export const getRemainingPercentageFromMeasures = (
+  previousToLastValue: number,
+  lastValue: number
+): number => {
+  const result =
+    ((previousToLastValue - lastValue) / previousToLastValue) * 100;
+
+  return result;
 };

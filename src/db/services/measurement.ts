@@ -9,9 +9,9 @@ class MeasurementService {
     return measurements;
   }
 
-  async getMeasurementById(measureId: string): Promise<IMeasurement> {
+  async getMeasurementById(measurementId: string): Promise<IMeasurement> {
     const measurement = await MeasurementModel.findOne({
-      _id: measureId,
+      _id: measurementId,
     });
 
     return measurement;
@@ -57,10 +57,40 @@ class MeasurementService {
     return measurement;
   }
 
+  async getPreviousToLastMeasureByUser(userId: string): Promise<IMeasurement> {
+    const measurement = await MeasurementModel.findOne(
+      {
+        user_id: userId,
+      },
+      {},
+      {
+        sort: {
+          date: -1,
+        },
+        skip: 1,
+      }
+    );
+
+    return measurement;
+  }
+
   async createMeasurement(MeasurementData: IMeasurement): Promise<any> {
     try {
       const newMeasurement = await MeasurementModel.create(MeasurementData);
       return newMeasurement;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async updateMeasurement(MeasurementData: IMeasurement, measurementId: string): Promise<any> {
+    try {
+      const updatedMeasurement = await MeasurementModel.findOneAndUpdate({
+        _id: measurementId,
+      },
+      MeasurementData);
+      return updatedMeasurement;
+
     } catch (error) {
       return error;
     }

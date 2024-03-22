@@ -3,6 +3,20 @@ import { Measurement } from "@/types/measurements";
 import { apiFetcher } from "@/utils/apiUtils";
 import useSWR from "swr";
 
+export const useUniqueMeasure = (measurementId: string): any => {
+  const { data, error, isLoading, mutate } = useSWR(
+    apiUrls.measurements.getMeasurement(measurementId),
+    apiFetcher
+  );
+
+  return {
+    measurement: data,
+    error,
+    isLoading,
+    refetch: mutate,
+  };
+};
+
 export const useUniqueLastMeasure = (userId: string): any => {
   const { data, error, isLoading, mutate } = useSWR(
     apiUrls.measurements.getLastMeasureByUser(userId),
@@ -25,6 +39,20 @@ export const useUniqueFirstMeasure = (userId: string): any => {
 
   return {
     firstMeasure: data,
+    error,
+    isLoading,
+    refetch: mutate,
+  };
+};
+
+export const useCalculateEvolution = (userId: string): any => {
+  const { data, error, isLoading, mutate } = useSWR(
+    apiUrls.measurements.getEvolution(userId),
+    apiFetcher
+  );
+
+  return {
+    evolution: data,
     error,
     isLoading,
     refetch: mutate,

@@ -24,9 +24,9 @@ import { Formik, Form, FormikHelpers, FastField } from "formik";
 import { until } from "@open-draft/until";
 import { useRouter } from "next/router";
 import { appUrls } from "@/lib/appUrls";
-import { measurementFormValidationSchema } from "@/utils/measurement";
+import { measurementFormValidationSchema, prepareMeasurementForEditForm } from "@/utils/measurement";
 import { notifications } from "@mantine/notifications";
-import { createMeasurement } from "@/services/measurements";
+import { createMeasurement, updateMeasurement } from "@/services/measurements";
 import { DateInput } from "@mantine/dates";
 
 const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
@@ -43,15 +43,24 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   </Group>
 );
 
-export default function MeasurementForm({ users }: { users: UserItem[] }) {
+export default function MeasurementForm({ users, measurement }: { users: UserItem[] | undefined, measurement: any }) {
   const { push } = useRouter();
+  const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
+
+  const userSelectData = [
+    {
+      value: users._id,
+      label: users.fullname,
+    }
+  ]
 
   return (
     <Formik
-      initialValues={measurementFormInitialValues}
+      initialValues={initialValuesForEdit ?? measurementFormInitialValues}
+      enableReinitialize={true}
       validationSchema={measurementFormValidationSchema}
       onSubmit={async (values: any, { setSubmitting }: FormikHelpers<any>) => {
-        const { error } = await until(() => createMeasurement(values));
+        const { error } = await until(() => (!measurement ? createMeasurement(values) : updateMeasurement({...values, _id: measurement?._id})));
 
         if (error) {
           console.error(error);
@@ -111,11 +120,12 @@ export default function MeasurementForm({ users }: { users: UserItem[] }) {
                           searchable
                           withCheckIcon={false}
                           allowDeselect={false}
-                          data={users}
+                          data={!measurement ? users : userSelectData}
                           value={meta.value}
                           onChange={(e) => form.setFieldValue("user_id", e)}
                           onBlur={form.handleBlur}
                           error={meta.touched && meta.error}
+                          disabled={measurement}
                         />
                       )}
                     </FastField>
@@ -1954,7 +1964,7 @@ export default function MeasurementForm({ users }: { users: UserItem[] }) {
                   loading={isSubmitting}
                   disabled={isSubmitting}
                 >
-                  Agregar
+                  {(!measurement) ? 'Agregar' : 'Editar'}
                 </Button>
               </Group>
             </Stack>
