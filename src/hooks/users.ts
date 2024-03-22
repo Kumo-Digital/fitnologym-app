@@ -52,7 +52,7 @@ export const useUniqueUser = (
 ): UseUniqueUserPayload => {
   if ("id" in identifier) {
     const { data, error, isLoading, mutate } = useSWR(
-      apiUrls.users.getById(identifier.id),
+      () => apiUrls.users.getById(identifier.id),
       apiFetcher
     );
 

@@ -37,4 +37,21 @@ export default async function handler(
       console.error(e);
     }
   }
+
+  if (req.method === "PUT") {
+    try {
+      await connectDB();
+      const measurementService = new MeasurementService();
+      
+      const preparedMeasurement = prepareMeasurementForInsert(req.body);
+      const updatedMeasurement = await measurementService.updateMeasurement(preparedMeasurement, req.body._id);
+
+      if (!updatedMeasurement)
+        return res.status(400).json({ message: "Measurement was not updated" });
+
+      return res.status(200).json(updatedMeasurement);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 }
