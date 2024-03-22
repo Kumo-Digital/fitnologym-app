@@ -7,6 +7,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { useGyms } from "@/hooks/gyms";
 import GymTabSkeleton from "./gym-tab-skeleton";
+import { modals } from "@mantine/modals";
 
 const sortOptions = [
   { value: "date", label: "Fecha" },
@@ -22,6 +23,13 @@ export default function GymTab() {
   const [sortInput, setSortInput] = useState<string>("date");
 
   const [opened, { open, close }] = useDisclosure(false);
+
+  const gymModal = () =>
+    modals.open({
+      title: "Agregar Gimnasio",
+      centered: true,
+      children: <GymModal close={modals.closeAll} refetch={refetch} />,
+    });
 
   const handleSearch = (value: string) => {
     setSearchInput(value);
@@ -65,7 +73,7 @@ export default function GymTab() {
             handleSort={handleSort}
           />
           <Button
-            onClick={open}
+            onClick={() => gymModal()}
             size="sm"
             variant="filled"
             c="black"
@@ -87,8 +95,6 @@ export default function GymTab() {
           ))}
         </SimpleGrid>
       </Stack>
-
-      <GymModal opened={opened} close={close} refetch={refetch} />
     </Container>
   );
 }
