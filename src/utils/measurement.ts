@@ -7,7 +7,8 @@ import { Metrics } from "@/types/measurements";
 export const prepareMeasurementForInsert = (
   payload: MeasurementFormValues
 ): IMeasurement => {
-  const measurementId = (payload._id !== undefined ? payload._id : generateId(18));
+  const measurementId =
+    payload._id !== undefined ? payload._id : generateId(18);
   const preparedMeasurement = {
     _id: measurementId,
     user_id: payload.user_id,
@@ -227,46 +228,66 @@ export const prepareMeasurementForEditForm = (
     physiqueRating: payload.metrics.physique_rating.measure_value || 0,
     physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
-    trunkMuscleMassStatus: payload.metrics.trunk.muscle_mass.measure_status || 2,
+    trunkMuscleMassStatus:
+      payload.metrics.trunk.muscle_mass.measure_status || 2,
     trunkMuscleQuality: payload.metrics.trunk.muscle_quality.measure_value || 0,
-    trunkMuscleQualityStatus: payload.metrics.trunk.muscle_quality.measure_status || 2,
+    trunkMuscleQualityStatus:
+      payload.metrics.trunk.muscle_quality.measure_status || 2,
     trunkBodyFat: payload.metrics.trunk.body_fat.measure_value || 0,
     trunkBodyFatStatus: payload.metrics.trunk.body_fat.measure_status || 2,
     armLeftMuscleMass: payload.metrics.left_arm.muscle_mass.measure_value || 0,
-    armLeftMuscleMassStatus: payload.metrics.left_arm.muscle_mass.measure_status || 2,
-    armLeftMuscleQuality: payload.metrics.left_arm.muscle_quality.measure_value || 0,
-    armLeftMuscleQualityStatus: payload.metrics.left_arm.muscle_quality.measure_status || 2,
+    armLeftMuscleMassStatus:
+      payload.metrics.left_arm.muscle_mass.measure_status || 2,
+    armLeftMuscleQuality:
+      payload.metrics.left_arm.muscle_quality.measure_value || 0,
+    armLeftMuscleQualityStatus:
+      payload.metrics.left_arm.muscle_quality.measure_status || 2,
     armLeftBodyFat: payload.metrics.left_arm.body_fat.measure_value || 0,
     armLeftBodyFatStatus: payload.metrics.left_arm.body_fat.measure_status || 2,
-    armRightMuscleMass: payload.metrics.right_arm.muscle_mass.measure_value || 0,
-    armRightMuscleMassStatus: payload.metrics.right_arm.muscle_mass.measure_status || 2,
-    armRightMuscleQuality: payload.metrics.right_arm.muscle_quality.measure_value || 0,
-    armRightMuscleQualityStatus: payload.metrics.right_arm.muscle_quality.measure_status || 2,
+    armRightMuscleMass:
+      payload.metrics.right_arm.muscle_mass.measure_value || 0,
+    armRightMuscleMassStatus:
+      payload.metrics.right_arm.muscle_mass.measure_status || 2,
+    armRightMuscleQuality:
+      payload.metrics.right_arm.muscle_quality.measure_value || 0,
+    armRightMuscleQualityStatus:
+      payload.metrics.right_arm.muscle_quality.measure_status || 2,
     armRightBodyFat: payload.metrics.right_arm.body_fat.measure_value || 0,
-    armRightBodyFatStatus: payload.metrics.right_arm.body_fat.measure_status || 2,
+    armRightBodyFatStatus:
+      payload.metrics.right_arm.body_fat.measure_status || 2,
     legLeftMuscleMass: payload.metrics.left_leg.muscle_mass.measure_value || 0,
-    legLeftMuscleMassStatus: payload.metrics.left_leg.muscle_mass.measure_status || 2,
-    legLeftMuscleQuality: payload.metrics.left_leg.muscle_quality.measure_value || 0,
-    legLeftMuscleQualityStatus: payload.metrics.left_leg.muscle_quality.measure_status || 2,
+    legLeftMuscleMassStatus:
+      payload.metrics.left_leg.muscle_mass.measure_status || 2,
+    legLeftMuscleQuality:
+      payload.metrics.left_leg.muscle_quality.measure_value || 0,
+    legLeftMuscleQualityStatus:
+      payload.metrics.left_leg.muscle_quality.measure_status || 2,
     legLeftBodyFat: payload.metrics.left_leg.body_fat.measure_value || 0,
     legLeftBodyFatStatus: payload.metrics.left_leg.body_fat.measure_status || 2,
-    legRightMuscleMass: payload.metrics.right_leg.muscle_mass.measure_value || 0,
-    legRightMuscleMassStatus: payload.metrics.right_leg.muscle_mass.measure_status || 2,
-    legRightMuscleQuality: payload.metrics.right_leg.muscle_quality.measure_value || 0,
-    legRightMuscleQualityStatus: payload.metrics.right_leg.muscle_quality.measure_status || 2,
+    legRightMuscleMass:
+      payload.metrics.right_leg.muscle_mass.measure_value || 0,
+    legRightMuscleMassStatus:
+      payload.metrics.right_leg.muscle_mass.measure_status || 2,
+    legRightMuscleQuality:
+      payload.metrics.right_leg.muscle_quality.measure_value || 0,
+    legRightMuscleQualityStatus:
+      payload.metrics.right_leg.muscle_quality.measure_status || 2,
     legRightBodyFat: payload.metrics.right_leg.body_fat.measure_value || 0,
-    legRightBodyFatStatus: payload.metrics.right_leg.body_fat.measure_status || 2,
+    legRightBodyFatStatus:
+      payload.metrics.right_leg.body_fat.measure_status || 2,
     circumferenceNeck: payload.metrics.circumferenceNeck?.measure_value || 0,
     circumferenceChest: payload.metrics.circumferenceChest?.measure_value || 0,
-    circumferenceShoulders: payload.metrics.circumferenceShoulders?.measure_value || 0,
+    circumferenceShoulders:
+      payload.metrics.circumferenceShoulders?.measure_value || 0,
     circumferenceArms: payload.metrics.circumferenceArms?.measure_value || 0,
     circumferenceWaist: payload.metrics.circumferenceWaist?.measure_value || 0,
     circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
-    circumferenceGlutes: payload.metrics.circumferenceGlutes?.measure_value || 0,
+    circumferenceGlutes:
+      payload.metrics.circumferenceGlutes?.measure_value || 0,
     circumferenceQuads: payload.metrics.circumferenceQuads?.measure_value || 0,
     circumferenceCalf: payload.metrics.circumferenceCalf?.measure_value || 0,
   };
-  
+
   return preparedMeasurement;
 };
 
@@ -656,8 +677,23 @@ export const measurementFormValidationSchema = Yup.object().shape({
   ),
 });
 
-export const getRemainingPercentageFromMeasures = (previousToLastValue: number, lastValue: number): number => {
-  const result = ((previousToLastValue - lastValue) / previousToLastValue) * 100;
+export const getRemainingPercentage = (
+  currentValue: number,
+  targetValue: number
+) => {
+  if (currentValue < targetValue) {
+    return (currentValue / targetValue) * 100;
+  } else {
+    return (targetValue / currentValue) * 100;
+  }
+};
+
+export const getRemainingPercentageFromMeasures = (
+  previousToLastValue: number,
+  lastValue: number
+): number => {
+  const result =
+    ((previousToLastValue - lastValue) / previousToLastValue) * 100;
 
   return result;
-}
+};

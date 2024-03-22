@@ -1,34 +1,29 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
-import { Group, ScrollArea, SegmentedControl, Stack, Text } from "@mantine/core";
+import { Group, ScrollArea, SegmentedControl, Stack } from "@mantine/core";
 import { useState } from "react";
 import { useElementSize } from "@mantine/hooks";
-import { UserType } from "@/types/user";
-import { useCalculateEvolution, useUniqueLastMeasure, useUniquePreviousToLastMeasure } from "@/hooks/measurements";
+import {
+  useCalculateEvolution,
+  useUniqueLastMeasure,
+} from "@/hooks/measurements";
 import { BodySectionOverview } from "./body-section-overview";
 import { BodySectionTorso } from "./body-section-torso";
 import { BodySectionArms } from "./body-section-arms";
 import { BodySectionLegs } from "./body-section-legs";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
 import OverviewTabEmpty from "./overview-tab-empty";
-
-interface MockUser {
-  _id: string;
-  fullname: string;
-  email: string;
-  dni: string;
-  user_type: UserType;
-  role: string;
-  gender: "male" | "female";
-}
+import { User } from "@/types/user";
 
 interface OverviewTabProps {
-  user: MockUser;
+  user: User;
 }
 
 const OverviewTab = ({ user }: OverviewTabProps) => {
   const { ref, height } = useElementSize();
   const { lastMeasure, isLoading } = useUniqueLastMeasure(user._id);
-  const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(user._id);
+  const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(
+    user._id
+  );
 
   const [selectedBodySection, setSelectedBodySection] =
     useState<string>("overview");
@@ -58,7 +53,11 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
         {/* Height = ref stack heigh - vertical padding - segmented control - gap */}
         <ScrollArea style={{ flexGrow: 1 }} h={`${height - 64 - 40 - 32}px`}>
           {selectedBodySection === "overview" && (
-            <BodySectionOverview lastMeasure={lastMeasure} evolution={evolution} />
+            <BodySectionOverview
+              lastMeasure={lastMeasure}
+              evolution={evolution}
+              targetMeasure={user.target}
+            />
           )}
           {selectedBodySection === "torso" && (
             <BodySectionTorso lastMeasure={lastMeasure} evolution={evolution} />

@@ -1,7 +1,8 @@
-import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
-import { BodySectionOverviewProps, BodySectionProps, Evolution } from "@/types/measurements";
-import { overviewBodyMetrics } from "@/utils/measurement";
 import { SimpleGrid, Stack, Title } from "@mantine/core";
+import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
+import { overviewBodyMetrics } from "@/utils/measurement";
+import { BodySectionProps } from "@/types/measurements";
+import { TargetMeasureCard } from "@/components/ui/card/target-measure-card";
 
 const mockMeasures = {
   _id: "mlf0bsq283dx9h81h3",
@@ -193,12 +194,23 @@ const mockMeasures = {
 
 type Measure = { [key: string]: any };
 
-export const BodySectionOverview = ({ lastMeasure, evolution }: BodySectionProps) => {
+export const BodySectionOverview = ({
+  lastMeasure,
+  evolution,
+  targetMeasure,
+}: BodySectionProps) => {
   const overviewMeasures: Measure[] = Object.entries(
     lastMeasure.metrics
   ).reduce((metricList: Measure[], [metric, values]: any) => {
     if (overviewBodyMetrics.includes(metric)) {
-      metricList = [...metricList, { metricName: metric, evolution: evolution?.metrics[metric].measure_evolution, ...values }];
+      metricList = [
+        ...metricList,
+        {
+          metricName: metric,
+          evolution: evolution?.metrics[metric].measure_evolution,
+          ...values,
+        },
+      ];
     }
     return metricList;
   }, []);
@@ -206,6 +218,8 @@ export const BodySectionOverview = ({ lastMeasure, evolution }: BodySectionProps
   return (
     <Stack>
       <Title order={4}>Generales</Title>
+      {}
+      <TargetMeasureCard currentValue={75} targetValue={70} />
       <SimpleGrid cols={2} spacing={16} verticalSpacing={16}>
         {overviewMeasures.map((value: Measure, index: number) => (
           <MeasureCard

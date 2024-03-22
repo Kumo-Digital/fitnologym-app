@@ -2,19 +2,13 @@ import SearchBar from "@/components/searchbar/searchbar";
 import { UserCard } from "@/components/ui/card/user-card/user-card";
 import { useGyms } from "@/hooks/gyms";
 import { useUsers } from "@/hooks/users";
-import {
-  Button,
-  Container,
-  Group,
-  SimpleGrid,
-  Skeleton,
-  Stack,
-} from "@mantine/core";
+import { Button, Container, Group, SimpleGrid, Stack } from "@mantine/core";
 import { useState } from "react";
 import UsersTabSkeleton from "./users-tab-skeleton";
 import { IconPlus } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import NewUserModal from "./new-user-modal";
+import { parseDate } from "@/utils/utils";
 
 const sortOptions = [
   { value: "fullname", label: "Nombre" },
@@ -86,21 +80,14 @@ const UsersTab = () => {
           <SimpleGrid cols={3} spacing={24} verticalSpacing={24}>
             {filteredUsers.map((user) => {
               const userGym = gyms.find((gym) => gym.id === user.gym_id);
-              const userDate = new Date(user.createdAt).toLocaleDateString(
-                "es-AR",
-                {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }
-              );
+              const userDate = parseDate(user.createdAt);
               return (
                 <UserCard
                   key={user._id}
                   title={user.fullname}
                   subtitle={userGym?.name || "Sin Asignar"}
                   description={`Se unió el ${userDate}`}
-                  link={`${userGym!.id}/${user._id}`}
+                  link={`/${userGym!.id}/${user._id}`}
                 />
               );
             })}

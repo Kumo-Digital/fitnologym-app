@@ -16,6 +16,8 @@ export interface DatabaseUser {
   user_type: string;
   gym_id: string;
   role: string;
+  target_metric: string;
+  target_value: number;
 }
 
 const adapter = new MongodbAdapter(
