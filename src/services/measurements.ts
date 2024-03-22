@@ -7,3 +7,9 @@ export const createMeasurement = async (payload: MeasurementFormValues) => {
 
   return data;
 };
+
+export const updateMeasurement = async (payload: MeasurementFormValues) => {
+  const { data } = await apiClient.put(apiUrls.measurements.update, payload);
+
+  return data;
+};

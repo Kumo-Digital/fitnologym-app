@@ -1,4 +1,5 @@
 export interface MeasurementFormValues {
+  _id?: string | undefined;
   user_id: string;
   report_url?: string | undefined;
   date?: Date | undefined;

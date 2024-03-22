@@ -7,7 +7,7 @@ import { Metrics } from "@/types/measurements";
 export const prepareMeasurementForInsert = (
   payload: MeasurementFormValues
 ): IMeasurement => {
-  const measurementId = generateId(18);
+  const measurementId = (payload._id !== undefined ? payload._id : generateId(18));
   const preparedMeasurement = {
     _id: measurementId,
     user_id: payload.user_id,
@@ -193,6 +193,80 @@ export const prepareMeasurementForInsert = (
     },
   };
 
+  return preparedMeasurement;
+};
+
+export const prepareMeasurementForEditForm = (
+  payload: IMeasurement
+): MeasurementFormValues | undefined => {
+  if (!payload) return undefined;
+  const preparedMeasurement = {
+    user_id: payload.user_id,
+    report_url: payload.report_url,
+    date: new Date(payload.date),
+    weight: payload.metrics.weight.measure_value || 0,
+    weightStatus: payload.metrics.weight.measure_status || 2,
+    bmi: payload.metrics.bmi.measure_value || 0,
+    bmiStatus: payload.metrics.bmi.measure_status || 2,
+    bodyFat: payload.metrics.body_fat.measure_value || 0,
+    bodyFatStatus: payload.metrics.body_fat.measure_status || 2,
+    viscFat: payload.metrics.visc_fat.measure_value || 0,
+    viscFatStatus: payload.metrics.visc_fat.measure_status || 2,
+    muscleMass: payload.metrics.muscle_mass.measure_value || 0,
+    muscleMassStatus: payload.metrics.muscle_mass.measure_status || 2,
+    boneMass: payload.metrics.bone_mass.measure_value || 0,
+    boneMassStatus: payload.metrics.bone_mass.measure_status || 2,
+    bmr: payload.metrics.bmr.measure_value || 0,
+    bmrStatus: payload.metrics.bmr.measure_status || 2,
+    metabAge: payload.metrics.metab_age.measure_value || 0,
+    metabAgeStatus: payload.metrics.metab_age.measure_status || 2,
+    bodyWater: payload.metrics.body_water.measure_value || 0,
+    bodyWaterStatus: payload.metrics.body_water.measure_status || 2,
+    muscleQuality: payload.metrics.muscle_quality.measure_value || 0,
+    muscleQualityStatus: payload.metrics.muscle_quality.measure_status || 2,
+    physiqueRating: payload.metrics.physique_rating.measure_value || 0,
+    physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
+    trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
+    trunkMuscleMassStatus: payload.metrics.trunk.muscle_mass.measure_status || 2,
+    trunkMuscleQuality: payload.metrics.trunk.muscle_quality.measure_value || 0,
+    trunkMuscleQualityStatus: payload.metrics.trunk.muscle_quality.measure_status || 2,
+    trunkBodyFat: payload.metrics.trunk.body_fat.measure_value || 0,
+    trunkBodyFatStatus: payload.metrics.trunk.body_fat.measure_status || 2,
+    armLeftMuscleMass: payload.metrics.left_arm.muscle_mass.measure_value || 0,
+    armLeftMuscleMassStatus: payload.metrics.left_arm.muscle_mass.measure_status || 2,
+    armLeftMuscleQuality: payload.metrics.left_arm.muscle_quality.measure_value || 0,
+    armLeftMuscleQualityStatus: payload.metrics.left_arm.muscle_quality.measure_status || 2,
+    armLeftBodyFat: payload.metrics.left_arm.body_fat.measure_value || 0,
+    armLeftBodyFatStatus: payload.metrics.left_arm.body_fat.measure_status || 2,
+    armRightMuscleMass: payload.metrics.right_arm.muscle_mass.measure_value || 0,
+    armRightMuscleMassStatus: payload.metrics.right_arm.muscle_mass.measure_status || 2,
+    armRightMuscleQuality: payload.metrics.right_arm.muscle_quality.measure_value || 0,
+    armRightMuscleQualityStatus: payload.metrics.right_arm.muscle_quality.measure_status || 2,
+    armRightBodyFat: payload.metrics.right_arm.body_fat.measure_value || 0,
+    armRightBodyFatStatus: payload.metrics.right_arm.body_fat.measure_status || 2,
+    legLeftMuscleMass: payload.metrics.left_leg.muscle_mass.measure_value || 0,
+    legLeftMuscleMassStatus: payload.metrics.left_leg.muscle_mass.measure_status || 2,
+    legLeftMuscleQuality: payload.metrics.left_leg.muscle_quality.measure_value || 0,
+    legLeftMuscleQualityStatus: payload.metrics.left_leg.muscle_quality.measure_status || 2,
+    legLeftBodyFat: payload.metrics.left_leg.body_fat.measure_value || 0,
+    legLeftBodyFatStatus: payload.metrics.left_leg.body_fat.measure_status || 2,
+    legRightMuscleMass: payload.metrics.right_leg.muscle_mass.measure_value || 0,
+    legRightMuscleMassStatus: payload.metrics.right_leg.muscle_mass.measure_status || 2,
+    legRightMuscleQuality: payload.metrics.right_leg.muscle_quality.measure_value || 0,
+    legRightMuscleQualityStatus: payload.metrics.right_leg.muscle_quality.measure_status || 2,
+    legRightBodyFat: payload.metrics.right_leg.body_fat.measure_value || 0,
+    legRightBodyFatStatus: payload.metrics.right_leg.body_fat.measure_status || 2,
+    circumferenceNeck: payload.metrics.circumferenceNeck?.measure_value || 0,
+    circumferenceChest: payload.metrics.circumferenceChest?.measure_value || 0,
+    circumferenceShoulders: payload.metrics.circumferenceShoulders?.measure_value || 0,
+    circumferenceArms: payload.metrics.circumferenceArms?.measure_value || 0,
+    circumferenceWaist: payload.metrics.circumferenceWaist?.measure_value || 0,
+    circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
+    circumferenceGlutes: payload.metrics.circumferenceGlutes?.measure_value || 0,
+    circumferenceQuads: payload.metrics.circumferenceQuads?.measure_value || 0,
+    circumferenceCalf: payload.metrics.circumferenceCalf?.measure_value || 0,
+  };
+  
   return preparedMeasurement;
 };
 
