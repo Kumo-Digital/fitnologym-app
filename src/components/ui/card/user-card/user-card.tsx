@@ -11,19 +11,11 @@ import {
 } from "@mantine/core";
 import {
   IconArrowUpRight,
-  IconArrowsLeftRight,
-  IconChevronRight,
   IconDotsVertical,
   IconEdit,
-  IconMessageCircle,
-  IconPhoto,
-  IconSearch,
-  IconSettings,
   IconTrash,
 } from "@tabler/icons-react";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import { appUrls } from "@/lib/appUrls";
 
 interface UserCardProps {
   title: string;
@@ -40,7 +32,6 @@ export const UserCard: React.FC<UserCardProps> = ({
   link,
 }) => {
   const theme = useMantineTheme();
-  const { push } = useRouter();
 
   return (
     <Card bg="dark.7" radius="md" p={0} withBorder>
