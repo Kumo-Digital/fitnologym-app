@@ -10,3 +10,18 @@ export const createUser = async (payload: UserForm) => {
 
   return data;
 };
+
+export const editUser = async (payload: UserForm, userId: string) => {
+  const { data } = await apiClient.put(apiUrls.users.edit(userId), {
+    ...payload,
+    role: "user",
+  });
+
+  return data;
+};
+
+export const deleteUser = async (userId: string) => {
+  const { data } = await apiClient.delete(apiUrls.users.delete(userId));
+
+  return data;
+};

@@ -18,7 +18,7 @@ export type User = {
   role: "administrator" | "user";
   gender: "female" | "male";
   gym_id: string;
-  target: UserTarget[];
+  targets: UserTarget[];
   updatedAt: string;
   createdAt: string;
 };

@@ -11,6 +11,8 @@ export const apiUrls = {
     getAllUsersButAdmins: "/users/getAllUsersButAdmins",
     getById: (id: string) => `/users/${id}`,
     create: "/users",
+    edit: (id: string) => `/users/${id}`,
+    delete: (id: string) => `/users/${id}`,
   },
   gyms: {
     get: "/gyms",
@@ -19,8 +21,7 @@ export const apiUrls = {
   },
   measurements: {
     get: "/measurements",
-    getMeasurement: (id: string) =>
-      `/measurements/get-measurement/${id}`,
+    getMeasurement: (id: string) => `/measurements/get-measurement/${id}`,
     getLastMeasureByUser: (id: string) =>
       `/measurements/get-last-measure-by-user/${id}`,
     getFirstMeasureByUser: (id: string) =>
@@ -29,8 +30,7 @@ export const apiUrls = {
       `/measurements/get-all-measurements-by-user/${id}`,
     create: "/measurements",
     update: "/measurements",
-    getEvolution: (id: string) =>
-    `/measurements/get-evolution/${id}`,
+    getEvolution: (id: string) => `/measurements/get-evolution/${id}`,
   },
   metrics: {
     get: (filters: string) => `/metrics?${filters}`,
