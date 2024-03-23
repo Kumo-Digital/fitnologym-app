@@ -1,6 +1,7 @@
 import GymModel from "@/db/models/GymModel";
 import { IGym } from "@/db/interfaces/IGym";
 import { generateId } from "lucia";
+import { DeleteResult } from "mongodb";
 
 class GymService {
   async getAllGyms(): Promise<IGym[]> {
@@ -22,6 +23,28 @@ class GymService {
 
     const newGym = await GymModel.create({ ...gymData, id: gymId });
     return newGym;
+  }
+
+  async editGym(gymData: IGym, id: string): Promise<any> {
+    try {
+      const editedGym = await GymModel.findOneAndUpdate({ id: id }, gymData, {
+        new: true,
+      });
+
+      return editedGym;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async deleteGym(id: string): Promise<any> {
+    try {
+      const deletedGym = await GymModel.findOneAndDelete({ id: id });
+
+      return deletedGym;
+    } catch (e) {
+      console.error(e);
+    }
   }
 }
 
