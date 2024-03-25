@@ -18,6 +18,8 @@ export const apiUrls = {
     get: "/gyms",
     getById: (id: string) => `/gyms/${id}`,
     create: "/gyms",
+    edit: (id: string) => `/gyms/${id}`,
+    delete: (id: string) => `/gyms/${id}`,
   },
   measurements: {
     get: "/measurements",

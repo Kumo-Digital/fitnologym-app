@@ -13,3 +13,15 @@ export const createGym = async (payload: GymPayload) => {
 
   return data;
 };
+
+export const editGym = async (payload: GymPayload, id: string) => {
+  const { data } = await apiClient.put(apiUrls.gyms.edit(id), payload);
+
+  return data;
+};
+
+export const deleteGym = async (id: string) => {
+  const { data } = await apiClient.delete(apiUrls.gyms.delete(id));
+
+  return data;
+};

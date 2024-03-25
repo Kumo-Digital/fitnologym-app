@@ -88,9 +88,11 @@ export default function GymTab() {
           {filteredGyms.map((gym: any) => (
             <GymCard
               key={gym.id}
+              gymId={gym.id}
               title={gym.name}
               subtitle={gym.city}
               description={gym.address}
+              refetch={refetch}
             />
           ))}
         </SimpleGrid>
