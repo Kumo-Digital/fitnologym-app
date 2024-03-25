@@ -16,20 +16,29 @@ import {
   IconTrash,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import { modals } from "@mantine/modals";
+import { deleteUser } from "@/services/users";
+import { until } from "@open-draft/until";
+import { notifications } from "@mantine/notifications";
+import EditUserModal from "@/components/admin/users-tab/edit-user-modal";
 
 interface UserCardProps {
   title: string;
   subtitle: string;
   description: string;
   color?: string;
+  userId: string;
   link?: string;
+  refetch: () => void;
 }
 
 export const UserCard: React.FC<UserCardProps> = ({
   title,
   subtitle,
   description,
+  userId,
   link,
+  refetch,
 }) => {
   const theme = useMantineTheme();
 
@@ -66,7 +75,7 @@ export const UserCard: React.FC<UserCardProps> = ({
                   />
                 </ActionIcon>
               </Menu.Target>
-              <UserMenuDropdown />
+              <UserMenuDropdown userId={userId} refetch={refetch} />
             </Menu>
           )}
         </Group>
@@ -78,11 +87,58 @@ export const UserCard: React.FC<UserCardProps> = ({
   );
 };
 
-export const UserMenuDropdown = () => {
+export const UserMenuDropdown = ({
+  userId,
+  refetch,
+}: {
+  userId: string;
+  refetch: () => void;
+}) => {
+  const userEditModal = () =>
+    modals.open({
+      title: "Editar Usuario",
+      centered: true,
+      children: (
+        <EditUserModal
+          userId={userId}
+          refetch={refetch}
+          close={modals.closeAll}
+        />
+      ),
+    });
+
+  const userDeleteModal = () =>
+    modals.openConfirmModal({
+      title: "Eliminar Usuario",
+      labels: { confirm: "Eliminar", cancel: "Cancel" },
+      confirmProps: { color: "red" },
+      centered: true,
+      children: (
+        <Text size="sm">
+          Estás seguro que quieres borrar este usuario? Esta acción no tiene
+          recuperación.
+        </Text>
+      ),
+      onConfirm: async () => {
+        const { error } = await until(() => deleteUser(userId));
+
+        if (error)
+          notifications.show({
+            title: "Eliminar Usuario",
+            message:
+              "Hubo un error borrando el usuario, por favor intente de nuevo.",
+            color: "red",
+          });
+
+        refetch();
+      },
+      onCancel: () => modals.closeAll(),
+    });
   return (
     <Menu.Dropdown>
       <Menu.Item
         leftSection={<IconEdit style={{ width: rem(14), height: rem(14) }} />}
+        onClick={() => userEditModal()}
       >
         Editar Usuario
       </Menu.Item>
@@ -91,6 +147,7 @@ export const UserMenuDropdown = () => {
       <Menu.Item
         color="red"
         leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}
+        onClick={() => userDeleteModal()}
       >
         Borrar Usuario
       </Menu.Item>

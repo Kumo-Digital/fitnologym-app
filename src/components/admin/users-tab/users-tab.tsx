@@ -6,7 +6,6 @@ import { Button, Container, Group, SimpleGrid, Stack } from "@mantine/core";
 import { useState } from "react";
 import UsersTabSkeleton from "./users-tab-skeleton";
 import { IconPlus } from "@tabler/icons-react";
-import { useDisclosure } from "@mantine/hooks";
 import NewUserModal from "./new-user-modal";
 import { parseDate } from "@/utils/utils";
 import { modals } from "@mantine/modals";
@@ -92,10 +91,12 @@ const UsersTab = () => {
             return (
               <UserCard
                 key={user._id}
+                userId={user._id}
                 title={user.fullname}
                 subtitle={userGym?.name || "Sin Asignar"}
                 description={`Se unió el ${userDate}`}
                 link={`/${userGym!.id}/${user._id}`}
+                refetch={refetch}
               />
             );
           })}

@@ -1,7 +1,7 @@
 import UserModel from "@/db/models/UserModel";
 import { DatabaseUser } from "@/lib/auth";
+import { UserForm } from "@/types/user";
 import { generateId } from "lucia";
-import { NextResponse } from "next/server";
 import { Argon2id } from "oslo/password";
 
 class UserService {
@@ -50,7 +50,7 @@ class UserService {
     return user;
   }
 
-  async createUser(userData: DatabaseUser): Promise<any> {
+  async createUser(userData: UserForm): Promise<any> {
     const {
       email,
       dni,
@@ -91,6 +91,27 @@ class UserService {
       return newUser;
     } catch (error) {
       console.error("Error creating user", error);
+    }
+  }
+
+  async editUser(userData: DatabaseUser, userId: string): Promise<any> {
+    try {
+      const user = await UserModel.findOneAndUpdate({ _id: userId }, userData, {
+        new: true,
+      });
+      return user;
+    } catch (error) {
+      console.error("Error editing user", error);
+    }
+  }
+
+  async deleteUser(userId: string): Promise<any> {
+    try {
+      const user = await UserModel.findOneAndDelete({ _id: userId });
+
+      return user;
+    } catch (error) {
+      console.error("Error deleting user", error);
     }
   }
 }

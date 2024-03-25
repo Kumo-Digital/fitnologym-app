@@ -1,6 +1,5 @@
 import connectDB from "@/lib/db";
 import UserService from "@/db/services/user";
-import { IUser } from "@/db/interfaces/IUser";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -41,6 +40,54 @@ export default async function handler(
       } catch (e) {
         console.error(e);
       }
+    }
+  }
+
+  if (req.method === "PUT") {
+    if (!req.query.identifier)
+      return res.status(400).json({
+        message:
+          "Missing identifier in request URL. Please provide a valid user id or email.",
+      });
+
+    try {
+      await connectDB();
+      const userService = new UserService();
+
+      const { target_metric, target_value, ...rest } = req.body;
+      const editUserData = {
+        ...rest,
+        targets: [{ target_metric, target_value }],
+      };
+
+      const userId = req.query.identifier as string;
+      const user = await userService.editUser(editUserData, userId);
+
+      if (!user) res.status(404).json({ message: "User not found" });
+      res.status(200).json(user);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  if (req.method === "DELETE") {
+    if (!req.query.identifier)
+      return res.status(400).json({
+        message:
+          "Missing identifier in request URL. Please provide a valid user id or email.",
+      });
+
+    try {
+      await connectDB();
+      const userService = new UserService();
+
+      const userId = req.query.identifier as string;
+      const user = await userService.deleteUser(userId);
+
+      if (!user) res.status(404).json({ message: "User not found" });
+      res.status(200).json(user);
+    } catch (e) {
+      console.error(e);
     }
   }
 }

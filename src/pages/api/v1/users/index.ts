@@ -2,6 +2,7 @@ import connectDB from "@/lib/db";
 import UserService from "@/db/services/user";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { DatabaseUser } from "@/lib/auth";
+import { UserForm } from "@/types/user";
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,7 +25,7 @@ export default async function handler(
     try {
       await connectDB();
       const userService = new UserService();
-      const user = req.body as DatabaseUser;
+      const user = req.body as UserForm;
       const newUser = await userService.createUser(user);
 
       if (!newUser)
