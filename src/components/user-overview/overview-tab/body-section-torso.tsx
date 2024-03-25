@@ -27,7 +27,7 @@ export const BodySectionTorso = ({
       }));
       return {
         ...measures,
-        torso: torsoMetrics,
+        trunk: torsoMetrics,
       };
     } else {
       return {

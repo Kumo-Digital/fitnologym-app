@@ -42,6 +42,7 @@ const Page: NextPageWithLayout = () => {
 
   if (isLoadingMeasure || isLoadingUser) {
     return "La wea fome";
+    // TODO: Add Skeleton to isLoading MeasurementForm
   }
   return (
     <MeasurementForm users={user} measurement={measurement} />
