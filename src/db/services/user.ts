@@ -1,5 +1,6 @@
 import UserModel from "@/db/models/UserModel";
 import { DatabaseUser } from "@/lib/auth";
+import { UserForm } from "@/types/user";
 import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 
@@ -49,7 +50,7 @@ class UserService {
     return user;
   }
 
-  async createUser(userData: DatabaseUser): Promise<any> {
+  async createUser(userData: UserForm): Promise<any> {
     const {
       email,
       dni,

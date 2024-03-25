@@ -40,14 +40,14 @@ const userSchema = new Schema<DatabaseUser>(
       type: String,
       required: true,
     },
-    target_metric: {
-      type: String,
+    targets: {
+      type: [{
+          target_metric: { type: String, required: true },
+          target_value: { type: Number, required: true },
+          _id: false,
+      }],
       required: true,
-    },
-    target_value: {
-      type: Number,
-      required: true,
-    },
+    }
   } as const,
   {
     timestamps: true,
