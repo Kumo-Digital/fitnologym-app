@@ -45,7 +45,7 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
 );
 
 const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
-  const { user, isLoading } = useUniqueUser({ id: userId });
+  const { user, isLoading, refetch: userRefetch } = useUniqueUser({ id: userId });
   const { gyms, isLoading: isLoadingGyms } = useGyms();
 
   const userTypeOptions = [
@@ -71,7 +71,7 @@ const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
     <Formik
       initialValues={editUserInitialValues}
       validationSchema={newUserFormValidationSchema}
-      onSubmit={async (values) => {
+      onSubmit={async (values, { resetForm }) => {
         const { data, error } = await until(() => editUser(values, userId));
 
         if (error) {
@@ -85,10 +85,11 @@ const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
         }
 
         notifications.show({
-          title: "Usuario Creado",
+          title: "Usuario Editado",
           message: `El usuario ${data.fullname} ha sido editado exitosamente`,
           color: "lime",
         });
+        userRefetch();
         refetch();
         close();
       }}
