@@ -12,3 +12,7 @@ export const loginUser = async (payload: LoginUserPayload) => {
 
   return data;
 };
+
+export const logoutUser = async () => {
+  await apiClient.post(apiUrls.auth.logout);
+};

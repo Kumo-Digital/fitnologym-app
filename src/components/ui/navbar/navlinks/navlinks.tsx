@@ -1,22 +1,25 @@
-import { ActionIcon, Avatar, Group, Text } from "@mantine/core";
-import Link from "next/link";
+import { logoutUser } from "@/services/auth";
+import { Avatar, Button, Group } from "@mantine/core";
+import { useRouter } from "next/router";
 
 export const NavLinks = () => {
+  const { push } = useRouter();
   return (
-    <Group gap={16}>
-      <Link href="#">
-        <Text size="sm" c="gray.5" px={16}>
-          Contacto
-        </Text>
-      </Link>
-      <Link href="#">
-        <Text size="sm" c="gray.5" px={16}>
-          Admin
-        </Text>
-      </Link>
-      <ActionIcon variant="transparent" aria-label="Settings" size="xl">
-        <Avatar radius="md" />
-      </ActionIcon>
+    <Group gap={32}>
+      <Button
+        variant="subtle"
+        color="gray"
+        onClick={() => {
+          logoutUser();
+          push("/login");
+        }}
+      >
+        Cerrar Sesión
+      </Button>
+
+      {/* <ActionIcon variant="transparent" aria-label="Settings" size="xl"> */}
+      <Avatar radius="md" />
+      {/* </ActionIcon> */}
     </Group>
   );
 };
