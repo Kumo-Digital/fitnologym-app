@@ -21,7 +21,7 @@ const EditGymModal = ({
   close: () => void;
   refetch: any;
 }) => {
-  const { gym, isLoading } = useUniqueGym(gymId);
+  const { gym, isLoading, refetch: gymRefetch } = useUniqueGym(gymId);
   const editGymInitialValues: GymForm = {
     name: gym?.name || "",
     city: gym?.city || "",
@@ -59,6 +59,7 @@ const EditGymModal = ({
           message: `El gimnasio ${data.name} ha sido editado exitosamente`,
           color: "lime",
         });
+        gymRefetch();
         refetch();
         close();
       }}
