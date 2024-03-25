@@ -1,7 +1,4 @@
-import { apiClient } from "@/lib/apiClient";
-import { apiUrls } from "@/lib/apiUrls";
-import { MeasurementFormValues } from "@/types/admin";
-import { UserItem } from "@/types/user";
+import { User } from "@/types/user";
 import {
   StatusColors,
   StatusValues,
@@ -24,7 +21,10 @@ import { Formik, Form, FormikHelpers, FastField } from "formik";
 import { until } from "@open-draft/until";
 import { useRouter } from "next/router";
 import { appUrls } from "@/lib/appUrls";
-import { measurementFormValidationSchema, prepareMeasurementForEditForm } from "@/utils/measurement";
+import {
+  measurementFormValidationSchema,
+  prepareMeasurementForEditForm,
+} from "@/utils/measurement";
 import { notifications } from "@mantine/notifications";
 import { createMeasurement, updateMeasurement } from "@/services/measurements";
 import { DateInput } from "@mantine/dates";
@@ -43,16 +43,22 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   </Group>
 );
 
-export default function MeasurementForm({ users, measurement }: { users: UserItem[] | undefined, measurement: any }) {
+export default function MeasurementForm({
+  users,
+  measurement,
+}: {
+  users: User | undefined;
+  measurement: any;
+}) {
   const { push } = useRouter();
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
 
   const userSelectData = [
     {
-      value: users._id,
-      label: users.fullname,
-    }
-  ]
+      value: users?._id,
+      label: users?.fullname,
+    },
+  ];
 
   return (
     <Formik
@@ -60,7 +66,11 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
       enableReinitialize={true}
       validationSchema={measurementFormValidationSchema}
       onSubmit={async (values: any, { setSubmitting }: FormikHelpers<any>) => {
-        const { error } = await until(() => (!measurement ? createMeasurement(values) : updateMeasurement({...values, _id: measurement?._id})));
+        const { error } = await until(() =>
+          !measurement
+            ? createMeasurement(values)
+            : updateMeasurement({ ...values, _id: measurement?._id })
+        );
 
         if (error) {
           console.error(error);
@@ -147,21 +157,19 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       )}
                     </FastField>
 
-                    <FastField
-                      name="date"
-                    >
+                    <FastField name="date">
                       {({ field, form, meta }: any) => (
-                      <DateInput
-                        {...field}
-                        value={meta.value}
-                        onChange={(e) => form.setFieldValue("date", e)}
-                        onBlur={form.handleBlur}
-                        error={meta.touched && meta.error}
-                        label="Fecha de Medición"
-                        maxDate={new Date()}
-                        valueFormat="DD, MMM YYYY"
-                        placeholder="Fecha de medición"
-                      />
+                        <DateInput
+                          {...field}
+                          value={meta.value}
+                          onChange={(e) => form.setFieldValue("date", e)}
+                          onBlur={form.handleBlur}
+                          error={meta.touched && meta.error}
+                          label="Fecha de Medición"
+                          maxDate={new Date()}
+                          valueFormat="DD, MMM YYYY"
+                          placeholder="Fecha de medición"
+                        />
                       )}
                     </FastField>
                   </Stack>
@@ -1964,7 +1972,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                   loading={isSubmitting}
                   disabled={isSubmitting}
                 >
-                  {(!measurement) ? 'Agregar' : 'Editar'}
+                  {!measurement ? "Agregar" : "Editar"}
                 </Button>
               </Group>
             </Stack>
