@@ -4,3 +4,9 @@ export const parseDate = (date: string) =>
     month: "long",
     day: "numeric",
   });
+
+export const parseNameToInitials = (name: string) =>
+  name
+    .split(" ")
+    .map((word) => word.charAt(0))
+    .join("");

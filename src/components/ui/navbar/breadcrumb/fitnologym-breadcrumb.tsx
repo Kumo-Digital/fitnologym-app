@@ -6,6 +6,7 @@ import {
   Group,
   ScrollArea,
   Text,
+  em,
   useCombobox,
 } from "@mantine/core";
 import type { ComboboxStore, UseComboboxOptions } from "@mantine/core";
@@ -16,16 +17,21 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useUsers } from "@/hooks/users";
 import { useGyms } from "@/hooks/gyms";
+import { useMediaQuery } from "@mantine/hooks";
+import { parseNameToInitials } from "@/utils/utils";
 
 interface BreadcrumbsItem {
   title: string;
   href?: string;
   icon?: string;
   action?: string | null;
+  isVisible?: boolean;
 }
 
 export const FitnologymBreadcrumb = () => {
   const { push, query } = useRouter();
+  const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
+  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
   const { users, isLoading: isLoadingUsers } = useUsers({ but: "admins" });
   const { gyms, isLoading: isLoadingGyms } = useGyms();
 
@@ -88,6 +94,7 @@ export const FitnologymBreadcrumb = () => {
       href: "/",
       icon: "💪",
       action: null,
+      isVisible: !isMobileMD,
     },
     ...(query?.gymId
       ? [
@@ -97,6 +104,7 @@ export const FitnologymBreadcrumb = () => {
               "Gimnasio",
             // href: `/${query.gymId}/${query.userId}`,
             action: "menu-gyms",
+            isVisible: true,
           },
         ]
       : []),
@@ -108,49 +116,56 @@ export const FitnologymBreadcrumb = () => {
               "Sin Usuarios",
             href: `/${query.gymId}/${query.userId}`,
             action: "menu-users",
+            isVisible: true,
           },
         ]
       : []),
   ];
 
   const breadcrumbLinks = breadcrumbItems.map((item, index) => (
-    <Group gap={8} key={`${item.title}-${index}`}>
+    <Group gap={8} key={`${item.title}-${index}`} wrap="nowrap">
       {item.icon && (
         <Avatar variant="transparent" radius="sm">
           {item.icon}
         </Avatar>
       )}
-      {item.href ? (
-        <Link
-          href={item.href}
-          key={`${item.title}-${index}`}
-          style={{
-            textDecoration: "none",
-            color: "inherit",
-          }}
-        >
+      {item.isVisible ? (
+        item.href ? (
+          <Link
+            href={item.href}
+            key={`${item.title}-${index}`}
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <Text
+              size={index === 0 ? "xl" : "md"}
+              c="gray.0"
+              fw={index === 0 ? 600 : 400}
+            >
+              {item.title}
+            </Text>
+          </Link>
+        ) : (
           <Text
             size={index === 0 ? "xl" : "md"}
             c="gray.0"
             fw={index === 0 ? 600 : 400}
           >
-            {item.title}
+            {item.action === "menu-gyms" && isMobileSM
+              ? parseNameToInitials(item.title)
+              : item.title}
           </Text>
-        </Link>
+        )
       ) : (
-        <Text
-          size={index === 0 ? "xl" : "md"}
-          c="gray.0"
-          fw={index === 0 ? 600 : 400}
-        >
-          {item.title}
-        </Text>
+        <></>
       )}
       {item.action && (
         <Combobox
           store={item.action === "menu-gyms" ? gymsCombobox : usersCombobox}
           width={250}
-          position="bottom-start"
+          position="bottom-end"
           withArrow
           withinPortal={false}
           onOptionSubmit={(val) => {
