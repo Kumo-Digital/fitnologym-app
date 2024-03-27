@@ -8,6 +8,7 @@ import {
   useMantineTheme,
   Menu,
   rem,
+  em,
 } from "@mantine/core";
 import {
   IconArrowUpRight,
@@ -21,6 +22,7 @@ import { deleteUser } from "@/services/users";
 import { until } from "@open-draft/until";
 import { notifications } from "@mantine/notifications";
 import EditUserModal from "@/components/admin/users-tab/edit-user-modal";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface UserCardProps {
   title: string;
@@ -41,11 +43,12 @@ export const UserCard: React.FC<UserCardProps> = ({
   refetch,
 }) => {
   const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${em(475)})`);
 
   return (
     <Card bg="dark.7" radius="md" p={0} withBorder>
       <Stack p={12} gap={12}>
-        <Group gap={8} align="flex-start">
+        <Group gap={8} align="flex-start" wrap="nowrap">
           <Stack
             style={{
               flexGrow: 1,
@@ -53,8 +56,8 @@ export const UserCard: React.FC<UserCardProps> = ({
             gap={0}
           >
             <Link href={link as string} style={{ textDecoration: "none" }}>
-              <Group gap={4}>
-                <Text size="md" c="gray.0">
+              <Group gap={4} wrap="nowrap" align="flex-start">
+                <Text size="md" c="gray.0" lineClamp={1}>
                   {title}
                 </Text>
                 <IconArrowUpRight color={theme.colors.gray[5]} size={14} />
