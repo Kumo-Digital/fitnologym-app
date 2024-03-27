@@ -26,7 +26,7 @@ const sortOptions = [
 ];
 
 const UsersTab = () => {
-  const isMobile = useMediaQuery(`(max-width: ${em(475)})`);
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const { users, isLoading, refetch } = useUsers({ but: "admins" });
   const { gyms, isLoading: isLoadingGyms } = useGyms();
   const [searchInput, setSearchInput] = useState<string>("");
@@ -74,7 +74,7 @@ const UsersTab = () => {
   return (
     <Container size={1024}>
       <Stack gap={24}>
-        <Group gap={16} wrap="nowrap" align="flex-start">
+        <Group gap={16} align="flex-start">
           <SearchBar
             searchValue={searchInput}
             sortValue={sortInput}
@@ -83,29 +83,17 @@ const UsersTab = () => {
             handleSort={handleSort}
             searchPlaceholder="Buscar Usuarios..."
           />
-          {isMobile ? (
-            <ActionIcon
-              miw={36}
-              h={36}
-              variant="filled"
-              aria-label="Add new user"
-              c="black"
-              onClick={() => newUserModal()}
-            >
-              <IconPlus size={16} />
-            </ActionIcon>
-          ) : (
-            <Button
-              onClick={() => newUserModal()}
-              size="sm"
-              variant="filled"
-              c="black"
-              rightSection={<IconPlus size={14} />}
-              w={150}
-            >
-              Agregar
-            </Button>
-          )}
+          <Button
+            onClick={() => newUserModal()}
+            size="sm"
+            variant="filled"
+            c="black"
+            rightSection={<IconPlus size={14} />}
+            w={150}
+            flex={isMobile ? "1 0 0" : "0 0 auto"}
+          >
+            Agregar
+          </Button>
         </Group>
         <SimpleGrid
           cols={{ base: 1, sm: 2, md: 3 }}

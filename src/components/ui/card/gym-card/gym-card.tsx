@@ -37,14 +37,14 @@ export const GymCard: React.FC<GymCardProps> = ({
   return (
     <Card bg="dark.7" radius="md" withBorder p={0}>
       <Stack p={12} gap={12}>
-        <Group gap={8} align="center">
+        <Group gap={8} align="center" wrap="nowrap">
           <Stack
             style={{
               flexGrow: 1,
             }}
             gap={0}
           >
-            <Text size="md" c="gray.0">
+            <Text size="md" c="gray.0" lineClamp={1}>
               {title}
             </Text>
             <Text size="sm" c="gray.5">

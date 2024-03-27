@@ -1,9 +1,9 @@
-import { Button, Container, Group, SimpleGrid, Stack } from "@mantine/core";
+import { Button, Container, Group, SimpleGrid, Stack, em } from "@mantine/core";
 import { useState } from "react";
 import SearchBar from "../../searchbar/searchbar";
 import { GymCard } from "../../ui/card/gym-card/gym-card";
 import GymModal from "./gym-modal";
-import { useDisclosure } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { useGyms } from "@/hooks/gyms";
 import GymTabSkeleton from "./gym-tab-skeleton";
@@ -17,12 +17,11 @@ const sortOptions = [
 ];
 
 export default function GymTab() {
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const { gyms, isLoading, refetch } = useGyms();
 
   const [searchInput, setSearchInput] = useState<string>("");
   const [sortInput, setSortInput] = useState<string>("date");
-
-  const [opened, { open, close }] = useDisclosure(false);
 
   const gymModal = () =>
     modals.open({
@@ -63,8 +62,8 @@ export default function GymTab() {
   if (isLoading) return <GymTabSkeleton />;
   return (
     <Container size={1024}>
-      <Stack mt={24}>
-        <Group gap={16}>
+      <Stack gap={24}>
+        <Group gap={16} align="flex-start">
           <SearchBar
             searchValue={searchInput}
             sortValue={sortInput}
@@ -79,12 +78,17 @@ export default function GymTab() {
             c="black"
             rightSection={<IconPlus size={14} />}
             w={150}
+            flex={isMobile ? "1 0 0" : "0 0 auto"}
           >
             Agregar
           </Button>
         </Group>
 
-        <SimpleGrid cols={3} spacing={24} verticalSpacing={24}>
+        <SimpleGrid
+          cols={{ base: 1, sm: 2, md: 3 }}
+          spacing={24}
+          verticalSpacing={24}
+        >
           {filteredGyms.map((gym: any) => (
             <GymCard
               key={gym.id}
