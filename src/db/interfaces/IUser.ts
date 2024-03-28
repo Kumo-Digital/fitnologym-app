@@ -7,7 +7,7 @@ export interface IUser extends Document {
     dni: string;
     email: string;
     password: string;
-    gym_id: number;
+    gym_id: string;
     gender: string;
     role: string;
     user_type: UserType;

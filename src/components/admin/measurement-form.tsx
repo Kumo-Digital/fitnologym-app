@@ -50,7 +50,7 @@ export default function MeasurementForm({
   users: User | undefined;
   measurement: any;
 }) {
-  const { push } = useRouter();
+  const { push, query } = useRouter();
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
 
   const userSelectData = [
@@ -131,11 +131,11 @@ export default function MeasurementForm({
                           withCheckIcon={false}
                           allowDeselect={false}
                           data={!measurement ? users : userSelectData}
-                          value={meta.value}
+                          value={!query.userId ? meta.value : query.userId}
                           onChange={(e) => form.setFieldValue("user_id", e)}
                           onBlur={form.handleBlur}
                           error={meta.touched && meta.error}
-                          disabled={measurement}
+                          disabled={measurement || query.userId}
                         />
                       )}
                     </FastField>

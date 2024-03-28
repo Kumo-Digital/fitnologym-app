@@ -1,10 +1,14 @@
 import { useUniqueLastMeasure } from "@/hooks/measurements";
+import { appUrls } from "@/lib/appUrls";
 import { User } from "@/types/user";
 import { parseDate } from "@/utils/utils";
 import { Group, Stack, Title, Text, Button, Divider } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
+import { useRouter } from "next/router";
 
 const UserOverviewHeader = ({ user, sessionUser }: { user: User, sessionUser: User }) => {
+  const { push } = useRouter();
+
   const { lastMeasure } = useUniqueLastMeasure(user._id);
 
   return (
@@ -24,7 +28,7 @@ const UserOverviewHeader = ({ user, sessionUser }: { user: User, sessionUser: Us
             </Text>
           )}
           {sessionUser.role === "administrator" && (
-            <Button c="black" leftSection={<IconPlus />}>
+            <Button c="black" leftSection={<IconPlus />} onClick={() => push(`${appUrls.measurements.new}?userId=${user._id}`)}>
               Nueva Medición
             </Button>
           )}
