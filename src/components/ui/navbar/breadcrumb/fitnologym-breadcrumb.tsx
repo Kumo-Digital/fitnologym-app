@@ -162,6 +162,10 @@ export const FitnologymBreadcrumb = () => {
               const firstGymUser =
                 users?.find((user: any) => user.gym_id === val) || "";
 
+              if (firstGymUser === "") {
+                push(`/${val}/undefined`);
+              }
+
               if (firstGymUser) {
                 push(`/${val}/${firstGymUser._id}`);
               }
