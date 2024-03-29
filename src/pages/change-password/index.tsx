@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { withRootLayout } from '@/utils/layouts';
-import { Text, Paper, PasswordInput, Stack, Button } from '@mantine/core';
+import { Text, Paper, PasswordInput, Stack, Button, Title } from '@mantine/core';
 import { Form, Formik } from 'formik';
 import { until } from "@open-draft/until";
 import { useRouter } from "next/router";
@@ -47,7 +47,8 @@ const ChangePassword: NextPageWithLayout<{ user: User }> = ({ user }) => {
 
     return (
         <Paper shadow="xs" p="md">
-        <Text>Le recomendamos cambiar su contraseña para tener mayor seguridad</Text>
+        <Title order={2}>Cambiar contraseña</Title>
+        <Text>¡Le recomendamos cambiar su contraseña para una mayor seguridad!</Text>
             <Formik
             initialValues={{ current_password: "", new_password: "", confirm_new_password: "" } as InitialValues}
             validationSchema={Yup.object().shape({
