@@ -45,7 +45,11 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
 );
 
 const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
-  const { user, isLoading, refetch: userRefetch } = useUniqueUser({ id: userId });
+  const {
+    user,
+    isLoading,
+    refetch: userRefetch,
+  } = useUniqueUser({ id: userId });
   const { gyms, isLoading: isLoadingGyms } = useGyms();
 
   const userTypeOptions = [
@@ -134,6 +138,7 @@ const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
                 onBlur={handleBlur}
                 error={touched.dni && errors.dni}
                 flex={"1 0 0"}
+                miw={150}
               />
               <Select
                 name="user_type"
@@ -157,6 +162,8 @@ const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
                 error={touched.user_type && errors.user_type}
                 allowDeselect={false}
                 withCheckIcon={false}
+                flex={"1 0 0"}
+                miw={150}
               />
             </Group>
             <Select
@@ -200,7 +207,8 @@ const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
                 onChange={(e) => setFieldValue("target_metric", e)}
                 onBlur={() => setFieldTouched("target_metric", true)}
                 error={touched.target_metric && errors.target_metric}
-                flex="1"
+                flex="1 0 0"
+                miw={150}
               />
               <NumberInput
                 name="target_value"
@@ -216,7 +224,8 @@ const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
                     Kg
                   </Text>
                 }
-                w={150}
+                flex={"1 0 0"}
+                miw={150}
               />
             </Group>
             <Group justify="flex-end">
