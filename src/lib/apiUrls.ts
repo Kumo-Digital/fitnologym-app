@@ -13,6 +13,7 @@ export const apiUrls = {
     create: "/users",
     edit: (id: string) => `/users/${id}`,
     delete: (id: string) => `/users/${id}`,
+    changePassword: (id: string) => `/users/change-password/${id}`,
   },
   gyms: {
     get: "/gyms",
