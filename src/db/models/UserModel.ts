@@ -47,6 +47,10 @@ const userSchema = new Schema<DatabaseUser>(
           _id: false,
       }],
       required: true,
+    },
+    last_logged_in: {
+      type: Date,
+      required: false,
     }
   } as const,
   {

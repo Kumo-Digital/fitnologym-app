@@ -1,6 +1,6 @@
 import UserModel from "@/db/models/UserModel";
 import { DatabaseUser } from "@/lib/auth";
-import { UserForm } from "@/types/user";
+import { ChangePasswordForm, UserForm } from "@/types/user";
 import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 
@@ -84,6 +84,7 @@ class UserService {
           },
         ],
         role: "user",
+        last_logged_in: null,
       };
 
       const newUser = await UserModel.create(newData);
@@ -112,6 +113,45 @@ class UserService {
       return user;
     } catch (error) {
       console.error("Error deleting user", error);
+    }
+  }
+
+  async changePassword(userId: string, passwordData: ChangePasswordForm): Promise<any> {
+    try {
+      const existingUser = await UserModel.findOne({
+        _id: userId,
+      });
+
+      if (!existingUser) {
+        console.error('There is no existing user!');
+      }
+
+      // Check if old password is valid
+      const validPassword = await new Argon2id().verify(
+        existingUser.password,
+        passwordData.current_password,
+      );
+
+      if (!validPassword) {
+        console.error('La contraseña actual no coincide');
+      }
+
+      // Hash new password
+      const hashedNewPassword = await new Argon2id().hash(passwordData.new_password);
+
+      const updateUser = await UserModel.findOneAndUpdate(
+        {
+          _id: userId
+        },
+        {
+          password: hashedNewPassword,
+        },
+      );
+      
+      return updateUser;
+
+    } catch (error) {
+      console.error("Error changing password", error);
     }
   }
 }
