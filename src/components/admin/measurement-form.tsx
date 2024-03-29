@@ -11,6 +11,7 @@ import {
   Box,
   Button,
   Divider,
+  Flex,
   Group,
   NumberInput,
   Select,
@@ -19,15 +20,20 @@ import {
   Text,
   TextInput,
   Title,
+  em,
 } from "@mantine/core";
 import { Formik, Form, FormikHelpers, FastField } from "formik";
 import { until } from "@open-draft/until";
 import { useRouter } from "next/router";
 import { appUrls } from "@/lib/appUrls";
-import { measurementFormValidationSchema, prepareMeasurementForEditForm } from "@/utils/measurement";
+import {
+  measurementFormValidationSchema,
+  prepareMeasurementForEditForm,
+} from "@/utils/measurement";
 import { notifications } from "@mantine/notifications";
 import { createMeasurement, updateMeasurement } from "@/services/measurements";
 import { DateInput } from "@mantine/dates";
+import { useMediaQuery } from "@mantine/hooks";
 
 const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   <Group flex="1" gap="xs">
@@ -43,16 +49,23 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   </Group>
 );
 
-export default function MeasurementForm({ users, measurement }: { users: UserItem[] | undefined, measurement: any }) {
+export default function MeasurementForm({
+  users,
+  measurement,
+}: {
+  users: UserItem[] | undefined;
+  measurement: any;
+}) {
   const { push } = useRouter();
+  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
 
   const userSelectData = [
     {
       value: users._id,
       label: users.fullname,
-    }
-  ]
+    },
+  ];
 
   return (
     <Formik
@@ -60,7 +73,11 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
       enableReinitialize={true}
       validationSchema={measurementFormValidationSchema}
       onSubmit={async (values: any, { setSubmitting }: FormikHelpers<any>) => {
-        const { error } = await until(() => (!measurement ? createMeasurement(values) : updateMeasurement({...values, _id: measurement?._id})));
+        const { error } = await until(() =>
+          !measurement
+            ? createMeasurement(values)
+            : updateMeasurement({ ...values, _id: measurement?._id })
+        );
 
         if (error) {
           console.error(error);
@@ -91,12 +108,20 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
               </Group>
 
               <Stack mb={32}>
-                <Group id="report" grow align="start" gap={24}>
+                <Flex
+                  id="report"
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                  gap={24}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Reporte</Title>
@@ -111,7 +136,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack id="value-user">
+                  <Stack id="value-user" flex={"1 0 0"}>
                     <FastField name="user_id" placeholder="Nombre del cliente">
                       {({ field, form, meta }: any) => (
                         <Select
@@ -147,34 +172,40 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       )}
                     </FastField>
 
-                    <FastField
-                      name="date"
-                    >
+                    <FastField name="date">
                       {({ field, form, meta }: any) => (
-                      <DateInput
-                        {...field}
-                        value={meta.value}
-                        onChange={(e) => form.setFieldValue("date", e)}
-                        onBlur={form.handleBlur}
-                        error={meta.touched && meta.error}
-                        label="Fecha de Medición"
-                        maxDate={new Date()}
-                        valueFormat="DD, MMM YYYY"
-                        placeholder="Fecha de medición"
-                      />
+                        <DateInput
+                          {...field}
+                          value={meta.value}
+                          onChange={(e) => form.setFieldValue("date", e)}
+                          onBlur={form.handleBlur}
+                          error={meta.touched && meta.error}
+                          label="Fecha de Medición"
+                          maxDate={new Date()}
+                          valueFormat="DD, MMM YYYY"
+                          placeholder="Fecha de medición"
+                        />
                       )}
                     </FastField>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="general" grow align="start" gap={24}>
+                <Flex
+                  id="general"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Generales</Title>
@@ -189,7 +220,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack>
+                  <Stack flex={"1 0 0"}>
                     <Group grow id="value-weight">
                       <FastField name="weight" placeholder="Peso">
                         {({ field, form, meta }: any) => (
@@ -755,16 +786,24 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="trunk" grow align="start" gap={24}>
+                <Flex
+                  id="trunk"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Torso</Title>
@@ -779,7 +818,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack>
+                  <Stack flex={"1 0 0"}>
                     <Group grow id="value-trunkMuscleMass">
                       <FastField
                         name="trunkMuscleMass"
@@ -949,16 +988,24 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="arms" grow align="start" gap={24}>
+                <Flex
+                  id="arms"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Brazos</Title>
@@ -973,7 +1020,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack gap={8}>
+                  <Stack gap={8} flex={"1 0 0"}>
                     <Text size="sm" c="gray.6" fw="600">
                       Brazo Derecho
                     </Text>
@@ -1330,16 +1377,24 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="legs" grow align="start" gap={24}>
+                <Flex
+                  id="legs"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Piernas</Title>
@@ -1354,7 +1409,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack gap={8}>
+                  <Stack gap={8} flex={"1 0 0"}>
                     <Text size="sm" c="gray.6" fw="600">
                       Pierna Derecha
                     </Text>
@@ -1711,16 +1766,24 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="circumferences" grow align="start" gap={24}>
+                <Flex
+                  id="circumferences"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Circunferencias</Title>
@@ -1735,7 +1798,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack gap={8}>
+                  <Stack gap={8} flex={"1 0 0"}>
                     <Group grow id="value-circumferenceNeck">
                       <FastField name="circumferenceNeck" placeholder="Cuello">
                         {({ field, form, meta }: any) => (
@@ -1950,7 +2013,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Group justify="flex-end">
@@ -1964,7 +2027,7 @@ export default function MeasurementForm({ users, measurement }: { users: UserIte
                   loading={isSubmitting}
                   disabled={isSubmitting}
                 >
-                  {(!measurement) ? 'Agregar' : 'Editar'}
+                  {!measurement ? "Agregar" : "Editar"}
                 </Button>
               </Group>
             </Stack>
