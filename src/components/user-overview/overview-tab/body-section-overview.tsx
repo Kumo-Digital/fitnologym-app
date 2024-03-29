@@ -1,8 +1,9 @@
-import { SimpleGrid, Stack, Title } from "@mantine/core";
+import { SimpleGrid, Stack, Title, em } from "@mantine/core";
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { overviewBodyMetrics } from "@/utils/measurement";
 import { BodySectionProps } from "@/types/measurements";
 import { TargetMeasureCard } from "@/components/ui/card/target-measure-card";
+import { useMediaQuery } from "@mantine/hooks";
 
 const mockMeasures = {
   _id: "mlf0bsq283dx9h81h3",
@@ -199,6 +200,9 @@ export const BodySectionOverview = ({
   evolution,
   targetMeasure,
 }: BodySectionProps) => {
+  const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
+  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
+  const isMobileLG = useMediaQuery(`(max-width: ${em(1024)})`);
   const overviewMeasures: Measure[] = Object.entries(
     lastMeasure.metrics
   ).reduce((metricList: Measure[], [metric, values]: any) => {
@@ -218,9 +222,12 @@ export const BodySectionOverview = ({
   return (
     <Stack>
       <Title order={4}>Generales</Title>
-      {}
       <TargetMeasureCard currentValue={75} targetValue={70} />
-      <SimpleGrid cols={2} spacing={16} verticalSpacing={16}>
+      <SimpleGrid
+        cols={isMobileSM ? 1 : isMobileMD ? 2 : isMobileLG ? 1 : 2}
+        spacing={16}
+        verticalSpacing={16}
+      >
         {overviewMeasures.map((value: Measure, index: number) => (
           <MeasureCard
             measureTitle={value.metricName}

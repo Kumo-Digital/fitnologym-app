@@ -4,12 +4,18 @@ import { parseDate } from "@/utils/utils";
 import { Group, Stack, Title, Text, Button, Divider } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 
-const UserOverviewHeader = ({ user, sessionUser }: { user: User, sessionUser: User }) => {
+const UserOverviewHeader = ({
+  user,
+  sessionUser,
+}: {
+  user: User;
+  sessionUser: User;
+}) => {
   const { lastMeasure } = useUniqueLastMeasure(user._id);
 
   return (
     <Stack gap={0}>
-      <Group justify="space-between" h={120}>
+      <Group justify="space-between" mih={120} py={32}>
         <Title order={1} size={32} c="gray.0">
           {user.fullname}
         </Title>

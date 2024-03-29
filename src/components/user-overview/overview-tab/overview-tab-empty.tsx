@@ -13,9 +13,10 @@ const OverviewTabEmpty = () => {
       h="60vh"
       flex={"1 0 0"}
       style={{ border: `2px dashed ${theme.colors.gray[7]}`, borderRadius: 12 }}
+      mt={24}
     >
-      <Stack gap={8} justify="center" align="center">
-        <Title order={1} c="gray.5">
+      <Stack gap={8} justify="center" align="center" p={8}>
+        <Title order={1} c="gray.5" ta="center">
           Aún no hay medidas cargadas
         </Title>
         <Text c="gray.0" maw={500} ta="center">

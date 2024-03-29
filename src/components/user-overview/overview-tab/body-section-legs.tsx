@@ -2,7 +2,8 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { legsBodyMetrics } from "@/utils/measurement";
-import { Group, Stack, Title } from "@mantine/core";
+import { Flex, Group, Stack, Title, em } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
 type legMeasures = {
@@ -13,8 +14,11 @@ type legMeasures = {
 
 export const BodySectionLegs = ({
   lastMeasure,
-  evolution
+  evolution,
 }: BodySectionProps) => {
+  const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
+  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
+  const isMobileLG = useMediaQuery(`(max-width: ${em(1024)})`);
   const legMeasures: legMeasures = Object.entries(lastMeasure.metrics).reduce(
     (measures, [metricName, value]: any) => {
       if (!legsBodyMetrics.includes(metricName)) return measures;
@@ -23,7 +27,8 @@ export const BodySectionLegs = ({
         const leftLegMetric = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
-          evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
+          evolution:
+            evolution?.metrics[metricName][metric[0]].measure_evolution,
         }));
         return {
           ...measures,
@@ -33,7 +38,8 @@ export const BodySectionLegs = ({
         const rightLegMetric = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
-          evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
+          evolution:
+            evolution?.metrics[metricName][metric[0]].measure_evolution,
         }));
         return {
           ...measures,
@@ -66,8 +72,19 @@ export const BodySectionLegs = ({
 
   return (
     <Stack>
-      <Group grow gap={16}>
-        <Stack>
+      <Flex
+        direction={
+          isMobileSM
+            ? "column"
+            : isMobileMD
+            ? "row"
+            : isMobileLG
+            ? "column"
+            : "row"
+        }
+        gap={16}
+      >
+        <Stack flex={"1 0 0"}>
           <Title order={4}>Pierna Izquierda</Title>
           {legMeasures.left_leg.map((value: Measure, index: number) => (
             <MeasureCard
@@ -80,7 +97,7 @@ export const BodySectionLegs = ({
             />
           ))}
         </Stack>
-        <Stack>
+        <Stack flex={"1 0 0"}>
           <Title order={4}>Pierna Derecha</Title>
           {legMeasures.right_leg.map((value: Measure, index: number) => (
             <MeasureCard
@@ -93,7 +110,7 @@ export const BodySectionLegs = ({
             />
           ))}
         </Stack>
-      </Group>
+      </Flex>
       <Stack>
         <Title order={4}>Circunferencias</Title>
         {legMeasures.circumferences.map((value: Measure, index: number) => (

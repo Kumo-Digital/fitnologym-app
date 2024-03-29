@@ -2,7 +2,8 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { armsBodyMetrics } from "@/utils/measurement";
-import { Group, Stack, Title } from "@mantine/core";
+import { Flex, Group, Stack, Title, em } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
 type ArmMeasures = {
@@ -15,9 +16,10 @@ export const BodySectionArms = ({
   lastMeasure,
   evolution,
 }: BodySectionProps) => {
-  const armMeasures: ArmMeasures = Object.entries(
-    lastMeasure.metrics
-  ).reduce(
+  const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
+  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
+  const isMobileLG = useMediaQuery(`(max-width: ${em(1024)})`);
+  const armMeasures: ArmMeasures = Object.entries(lastMeasure.metrics).reduce(
     (measures, [metricName, value]: any) => {
       if (!armsBodyMetrics.includes(metricName)) return measures;
 
@@ -25,7 +27,8 @@ export const BodySectionArms = ({
         const leftArmMetrics = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
-          evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
+          evolution:
+            evolution?.metrics[metricName][metric[0]].measure_evolution,
         }));
         return {
           ...measures,
@@ -35,7 +38,8 @@ export const BodySectionArms = ({
         const rightArmMetrics = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
-          evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
+          evolution:
+            evolution?.metrics[metricName][metric[0]].measure_evolution,
         }));
         return {
           ...measures,
@@ -68,8 +72,19 @@ export const BodySectionArms = ({
 
   return (
     <Stack>
-      <Group grow gap={16}>
-        <Stack>
+      <Flex
+        direction={
+          isMobileSM
+            ? "column"
+            : isMobileMD
+            ? "row"
+            : isMobileLG
+            ? "column"
+            : "row"
+        }
+        gap={16}
+      >
+        <Stack flex={"1 0 0"}>
           <Title order={4}>Brazo Izquierdo</Title>
           {armMeasures.left_arm.map((value: Measure, index: number) => (
             <MeasureCard
@@ -82,7 +97,7 @@ export const BodySectionArms = ({
             />
           ))}
         </Stack>
-        <Stack>
+        <Stack flex={"1 0 0"}>
           <Title order={4}>Brazo Derecho</Title>
           {armMeasures.right_arm.map((value: Measure, index: number) => (
             <MeasureCard
@@ -95,7 +110,7 @@ export const BodySectionArms = ({
             />
           ))}
         </Stack>
-      </Group>
+      </Flex>
       <Stack>
         <Title order={4}>Circunferencias</Title>
         {armMeasures.circumferences.map((value: Measure, index: number) => (
