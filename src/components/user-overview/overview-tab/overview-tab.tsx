@@ -56,7 +56,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
             <BodySectionOverview
               lastMeasure={lastMeasure}
               evolution={evolution}
-              targetMeasure={user.target}
+              targetMeasure={user.targets}
             />
           )}
           {selectedBodySection === "torso" && (
