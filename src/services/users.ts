@@ -6,6 +6,7 @@ export const createUser = async (payload: UserForm) => {
   const { data } = await apiClient.post(apiUrls.users.create, {
     ...payload,
     role: "user",
+    last_logged_in: null,
   });
 
   return data;

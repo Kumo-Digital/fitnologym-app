@@ -21,6 +21,7 @@ export interface DatabaseUser {
       target_metric: string;
       target_value: number;
     }[];
+  last_logged_in?: Date | null;
 }
 
 const adapter = new MongodbAdapter(
@@ -44,6 +45,7 @@ export const lucia = new Lucia(adapter, {
       dni: attributes.dni,
       user_type: attributes.user_type,
       role: attributes.role,
+      last_logged_in: attributes.last_logged_in,
     };
   },
   sessionExpiresIn: new TimeSpan(30, "d"), // no more active/idle

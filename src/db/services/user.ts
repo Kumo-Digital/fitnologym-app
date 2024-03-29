@@ -84,6 +84,7 @@ class UserService {
           },
         ],
         role: "user",
+        last_logged_in: null,
       };
 
       const newUser = await UserModel.create(newData);

@@ -19,6 +19,7 @@ export type User = {
   gender: "female" | "male";
   gym_id: string;
   targets: UserTarget[];
+  last_logged_in: string | null;
   updatedAt: string;
   createdAt: string;
 };
