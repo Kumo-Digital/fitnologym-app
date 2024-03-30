@@ -8,7 +8,7 @@ export const Navbar = () => {
 
   return (
     <nav style={{ height: "64px" }}>
-      <Group justify="space-between" gap={16} h="100%">
+      <Group justify="space-between" gap={16} h="100%" grow>
         <FitnologymBreadcrumb />
         {!isMobile && <NavLinks />}
       </Group>

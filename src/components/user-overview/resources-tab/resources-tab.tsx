@@ -9,8 +9,10 @@ import {
   Stack,
   Text,
   alpha,
+  em,
   useMantineTheme,
 } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { IconExternalLink } from "@tabler/icons-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -22,6 +24,8 @@ const sortOptions = [
 
 const ResourcesTab = () => {
   const theme = useMantineTheme();
+  const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
+  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
   const getThemeColor = (cssVariable: string) => {
     const [color, shade] = cssVariable.split("-");
     return theme.colors[color][parseInt(shade)];
@@ -76,7 +80,11 @@ const ResourcesTab = () => {
             <Text size="xl" fw={500}>
               Nutrición
             </Text>
-            <SimpleGrid cols={3} spacing={24} verticalSpacing={24}>
+            <SimpleGrid
+              cols={isMobileSM ? 1 : isMobileMD ? 2 : 3}
+              spacing={24}
+              verticalSpacing={24}
+            >
               {dietCategory.map((resource) => {
                 const Icon: any = resource.icon;
 
@@ -139,7 +147,11 @@ const ResourcesTab = () => {
               Ejercicios
             </Text>
 
-            <SimpleGrid cols={3} spacing={24} verticalSpacing={24}>
+            <SimpleGrid
+              spacing={24}
+              verticalSpacing={24}
+              cols={isMobileSM ? 1 : isMobileMD ? 2 : 3}
+            >
               {exerciseCategory.map((resource) => {
                 const Icon: any = resource.icon;
 
