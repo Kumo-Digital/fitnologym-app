@@ -18,7 +18,7 @@ import Link from "next/link";
 import { useUsers } from "@/hooks/users";
 import { useGyms } from "@/hooks/gyms";
 import { useMediaQuery } from "@mantine/hooks";
-import { parseNameToInitials } from "@/utils/utils";
+import { getFirstName, parseNameToInitials } from "@/utils/utils";
 
 interface BreadcrumbsItem {
   title: string;
@@ -144,7 +144,7 @@ export const FitnologymBreadcrumb = () => {
               c="gray.0"
               fw={index === 0 ? 600 : 400}
             >
-              {item.title}
+              {isMobileSM ? getFirstName(item.title) : item.title}
             </Text>
           </Link>
         ) : (

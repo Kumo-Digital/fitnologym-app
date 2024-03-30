@@ -10,3 +10,5 @@ export const parseNameToInitials = (name: string) =>
     .split(" ")
     .map((word) => word.charAt(0))
     .join("");
+
+export const getFirstName = (name: string) => name.split(" ")[0];
