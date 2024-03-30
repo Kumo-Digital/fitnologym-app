@@ -1,10 +1,12 @@
-import { Group, SimpleGrid, Skeleton, Stack } from "@mantine/core";
+import { Flex, SimpleGrid, Skeleton, Stack, em } from "@mantine/core";
 import classes from "./overview-tab-skeleton.module.css";
+import { useMediaQuery } from "@mantine/hooks";
 
 export const OverviewTabSkeleton = () => {
+  const isMobile = useMediaQuery(`(max-width: ${em(768)}`);
   return (
-    <Group grow>
-      <Stack style={{ aspectRatio: "1/1" }}>
+    <Flex direction={isMobile ? "column" : "row"}>
+      <Stack style={{ aspectRatio: "1/1" }} flex={"1 0 0"}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100%"
@@ -29,12 +31,16 @@ export const OverviewTabSkeleton = () => {
           </g>
         </svg>
       </Stack>
-      <Stack py={32} gap={32}>
+      <Stack py={32} gap={32} flex={"1 0 0"}>
         <Skeleton height={40} />
         <Stack gap={16}>
           <Skeleton height={26} w={250} />
           <Skeleton height={120} />
-          <SimpleGrid cols={2} spacing={16} verticalSpacing={16}>
+          <SimpleGrid
+            cols={{ base: 1, sm: 2, md: 3 }}
+            spacing={16}
+            verticalSpacing={16}
+          >
             <Skeleton height={120} />
             <Skeleton height={120} />
             <Skeleton height={120} />
@@ -42,6 +48,6 @@ export const OverviewTabSkeleton = () => {
           </SimpleGrid>
         </Stack>
       </Stack>
-    </Group>
+    </Flex>
   );
 };

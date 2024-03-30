@@ -8,7 +8,11 @@ const UsersTabSkeleton = () => {
           <Skeleton h={36} flex={"1 0 0"} />
           <Skeleton h={36} w={200} />
         </Group>
-        <SimpleGrid cols={3} spacing={24} verticalSpacing={24}>
+        <SimpleGrid
+          cols={{ base: 1, sm: 2, md: 3 }}
+          spacing={24}
+          verticalSpacing={24}
+        >
           <Skeleton h={96} />
           <Skeleton h={96} />
           <Skeleton h={96} />
