@@ -26,7 +26,6 @@ interface OverviewTabProps {
 }
 
 const OverviewTab = ({ user }: OverviewTabProps) => {
-  const { ref, height } = useElementSize();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const { lastMeasure, isLoading } = useUniqueLastMeasure(user._id);
   const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(
@@ -39,12 +38,10 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
 
   if (!lastMeasure) return <OverviewTabEmpty />;
-
   if (isLoading || isLoadingEvolution) return <OverviewTabSkeleton />;
   return (
     <Flex
       gap={0}
-      ref={ref}
       direction={isMobile ? "column" : "row"}
       align={isMobile ? "stretch" : "flex-start"}
       flex={"1 0 0"}
@@ -64,17 +61,13 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           value={selectedBodySection}
           onChange={setSelectedBodySection}
         />
-        {/* Height = ref stack heigh - vertical padding - segmented control - gap */}
-        <ScrollArea.Autosize
-          style={{ flexGrow: 1 }}
-          h={`${height - 64 - 40 - 32}px`}
-          // h={"100%"}
-        >
+        {/* Height = 448px is the sum of all the fixed height elements */}
+        <ScrollArea.Autosize h={isMobile ? "auto" : `calc(100vh - 448px)`}>
           {selectedBodySection === "overview" && (
             <BodySectionOverview
               lastMeasure={lastMeasure}
               evolution={evolution}
-              targetMeasure={user.target}
+              targetMeasure={user.targets}
             />
           )}
           {selectedBodySection === "torso" && (
