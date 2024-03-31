@@ -30,19 +30,21 @@ export default function SearchBar({
         onChange={(e) => handleSearch(e.target.value.toLowerCase())}
         leftSection={<IconSearch size={16} />}
         style={{ flexGrow: 1 }}
+        miw={200}
+        flex={"1 0 0"}
       />
 
       <Select
         data={sortOptions}
         searchable
-        flex={1}
-        // maw={isMobile ? "100%" : 200}
         allowDeselect={false}
         leftSectionPointerEvents="none"
         leftSection={<IconSortDescending size={16} />}
         placeholder={isMobile ? "" : "Ordenar por..."}
         value={sortValue}
         onChange={handleSort}
+        miw={200}
+        flex={"1 0 0"}
       />
     </Group>
   );
