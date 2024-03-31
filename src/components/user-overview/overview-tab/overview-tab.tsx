@@ -1,7 +1,14 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
-import { Group, ScrollArea, SegmentedControl, Stack } from "@mantine/core";
+import {
+  Flex,
+  Group,
+  ScrollArea,
+  SegmentedControl,
+  Stack,
+  em,
+} from "@mantine/core";
 import { useState } from "react";
-import { useElementSize } from "@mantine/hooks";
+import { useElementSize, useMediaQuery } from "@mantine/hooks";
 import {
   useCalculateEvolution,
   useUniqueLastMeasure,
@@ -19,7 +26,7 @@ interface OverviewTabProps {
 }
 
 const OverviewTab = ({ user }: OverviewTabProps) => {
-  const { ref, height } = useElementSize();
+  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const { lastMeasure, isLoading } = useUniqueLastMeasure(user._id);
   const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(
     user._id
@@ -31,14 +38,18 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
 
   if (!lastMeasure) return <OverviewTabEmpty />;
-
   if (isLoading || isLoadingEvolution) return <OverviewTabSkeleton />;
   return (
-    <Group gap={0} grow align="stretch">
-      <Stack ref={ref} style={{ flexGrow: 1 }}>
+    <Flex
+      gap={0}
+      direction={isMobile ? "column" : "row"}
+      align={isMobile ? "stretch" : "flex-start"}
+      flex={"1 0 0"}
+    >
+      <Stack flex={"1 0 0"}>
         <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
       </Stack>
-      <Stack gap={32} py={32}>
+      <Stack gap={32} py={32} flex={"1 0 0"}>
         <SegmentedControl
           data={[
             { label: "Generales", value: "overview" },
@@ -50,8 +61,8 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           value={selectedBodySection}
           onChange={setSelectedBodySection}
         />
-        {/* Height = ref stack heigh - vertical padding - segmented control - gap */}
-        <ScrollArea style={{ flexGrow: 1 }} h={`${height - 64 - 40 - 32}px`}>
+        {/* Height = 448px is the sum of all the fixed height elements */}
+        <ScrollArea.Autosize h={isMobile ? "auto" : `calc(100vh - 448px)`}>
           {selectedBodySection === "overview" && (
             <BodySectionOverview
               lastMeasure={lastMeasure}
@@ -68,9 +79,9 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           {selectedBodySection === "legs" && (
             <BodySectionLegs lastMeasure={lastMeasure} evolution={evolution} />
           )}
-        </ScrollArea>
+        </ScrollArea.Autosize>
       </Stack>
-    </Group>
+    </Flex>
   );
 };
 

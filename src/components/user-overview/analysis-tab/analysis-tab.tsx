@@ -1,6 +1,6 @@
-import { Stack } from "@mantine/core";
-import { LineChart } from "@mantine/charts";
-import { useState } from "react";
+import { Stack, em } from "@mantine/core";
+import { AreaChart, LineChart } from "@mantine/charts";
+import { use, useState } from "react";
 import {
   getLabelColoBySection,
   metricsSelectOptions,
@@ -12,12 +12,14 @@ import { useMetrics } from "@/hooks/metrics";
 import { useRouter } from "next/router";
 import { Filters } from "@/types/analysis";
 import { useUniqueFirstMeasure } from "@/hooks/measurements";
+import { useMediaQuery } from "@mantine/hooks";
 
 const oneMonthAgo = new Date();
 oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
 
 const AnalysisTab = ({ user }: any) => {
   const { query } = useRouter();
+  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const [filters, setFilters] = useState({
     metric: metricsSelectOptions[0].value,
     dateRange: [oneMonthAgo, new Date()] as [Date, Date],
@@ -50,14 +52,15 @@ const AnalysisTab = ({ user }: any) => {
         handleFiltersChange={handleFiltersChange}
         firstMeasure={firstMeasure}
       />
-      <LineChart
+      <AreaChart
         h={500}
         data={filteredMetrics}
         dataKey="date"
         unit={metrics.uom}
         curveType="natural"
-        withLegend
         tooltipAnimationDuration={200}
+        withLegend
+        legendProps={{ height: isMobile ? 100 : 50 }}
         series={
           filteredMetrics
             ? Object.keys(filteredMetrics[0])
@@ -66,7 +69,7 @@ const AnalysisTab = ({ user }: any) => {
                   name: section,
                   color: getLabelColoBySection(section),
                 }))
-            : [{ name: "", color: "" }]
+            : []
         }
       />
     </Stack>

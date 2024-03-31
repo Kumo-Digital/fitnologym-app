@@ -2,13 +2,22 @@ import SearchBar from "@/components/searchbar/searchbar";
 import { UserCard } from "@/components/ui/card/user-card/user-card";
 import { useGyms } from "@/hooks/gyms";
 import { useUsers } from "@/hooks/users";
-import { Button, Container, Group, SimpleGrid, Stack } from "@mantine/core";
+import {
+  ActionIcon,
+  Button,
+  Container,
+  Group,
+  SimpleGrid,
+  Stack,
+  em,
+} from "@mantine/core";
 import { useState } from "react";
 import UsersTabSkeleton from "./users-tab-skeleton";
 import { IconPlus } from "@tabler/icons-react";
 import NewUserModal from "./new-user-modal";
 import { parseDate } from "@/utils/utils";
 import { modals } from "@mantine/modals";
+import { useMediaQuery } from "@mantine/hooks";
 
 const sortOptions = [
   { value: "fullname", label: "Nombre" },
@@ -17,6 +26,7 @@ const sortOptions = [
 ];
 
 const UsersTab = () => {
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const { users, isLoading, refetch } = useUsers({ but: "admins" });
   const { gyms, isLoading: isLoadingGyms } = useGyms();
   const [searchInput, setSearchInput] = useState<string>("");
@@ -64,7 +74,7 @@ const UsersTab = () => {
   return (
     <Container size={1024}>
       <Stack gap={24}>
-        <Group gap={16}>
+        <Group gap={16} align="flex-start">
           <SearchBar
             searchValue={searchInput}
             sortValue={sortInput}
@@ -80,11 +90,16 @@ const UsersTab = () => {
             c="black"
             rightSection={<IconPlus size={14} />}
             w={150}
+            flex={isMobile ? "1 0 0" : "0 0 auto"}
           >
             Agregar
           </Button>
         </Group>
-        <SimpleGrid cols={3} spacing={24} verticalSpacing={24}>
+        <SimpleGrid
+          cols={{ base: 1, sm: 2, md: 3 }}
+          spacing={24}
+          verticalSpacing={24}
+        >
           {filteredUsers.map((user) => {
             const userGym = gyms.find((gym) => gym.id === user.gym_id);
             const userDate = parseDate(user.createdAt);

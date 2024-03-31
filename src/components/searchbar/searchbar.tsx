@@ -1,6 +1,7 @@
 import React from "react";
-import { Group, Select, TextInput } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
+import { Group, Select, TextInput, em } from "@mantine/core";
+import { IconSearch, IconSortDescending } from "@tabler/icons-react";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface SearchBar {
   searchValue: string;
@@ -19,6 +20,8 @@ export default function SearchBar({
   searchPlaceholder = "Buscar Clientes o Gimnasios...",
   sortOptions,
 }: SearchBar) {
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
+
   return (
     <Group gap={16} align="center" style={{ flexGrow: 1 }}>
       <TextInput
@@ -27,16 +30,21 @@ export default function SearchBar({
         onChange={(e) => handleSearch(e.target.value.toLowerCase())}
         leftSection={<IconSearch size={16} />}
         style={{ flexGrow: 1 }}
+        miw={200}
+        flex={"1 0 0"}
       />
 
       <Select
         data={sortOptions}
         searchable
-        maw={200}
         allowDeselect={false}
-        placeholder="Ordenar por..."
+        leftSectionPointerEvents="none"
+        leftSection={<IconSortDescending size={16} />}
+        placeholder={isMobile ? "" : "Ordenar por..."}
         value={sortValue}
         onChange={handleSort}
+        miw={200}
+        flex={"1 0 0"}
       />
     </Group>
   );

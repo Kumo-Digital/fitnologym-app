@@ -126,6 +126,7 @@ const NewUserModal = ({ close, gyms, refetch }: NewUserModalProps) => {
                 onBlur={handleBlur}
                 error={touched.dni && errors.dni}
                 flex={"1 0 0"}
+                miw={150}
               />
               <Select
                 name="user_type"
@@ -149,6 +150,8 @@ const NewUserModal = ({ close, gyms, refetch }: NewUserModalProps) => {
                 error={touched.user_type && errors.user_type}
                 allowDeselect={false}
                 withCheckIcon={false}
+                flex={"1 0 0"}
+                miw={150}
               />
             </Group>
             <Select
@@ -192,7 +195,8 @@ const NewUserModal = ({ close, gyms, refetch }: NewUserModalProps) => {
                 onChange={(e) => setFieldValue("target_metric", e)}
                 onBlur={() => setFieldTouched("target_metric", true)}
                 error={touched.target_metric && errors.target_metric}
-                flex="1"
+                flex="1 0 0"
+                miw={150}
               />
               <NumberInput
                 name="target_value"
@@ -208,7 +212,8 @@ const NewUserModal = ({ close, gyms, refetch }: NewUserModalProps) => {
                     Kg
                   </Text>
                 }
-                w={150}
+                flex={"1 0 0"}
+                miw={150}
               />
             </Group>
             <Group justify="flex-end">

@@ -1,28 +1,30 @@
-import { Divider, Group, Skeleton, Stack } from "@mantine/core";
+import { Divider, Flex, Group, Skeleton, Stack, em } from "@mantine/core";
 import {
   ButtonGroupSkeleton,
   InputFieldSkeleton,
   InputRadioSkeleton,
 } from "@/components/ui/loading-skeletons/input-fields";
+import { useMediaQuery } from "@mantine/hooks";
 
 const UserModalSkeleton = () => {
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   return (
     <Stack gap={16}>
       <InputFieldSkeleton />
       <InputFieldSkeleton />
-      <Group gap={16} align="stretch" grow>
+      <Flex gap={16} align="stretch" direction={isMobile ? "column" : "row"}>
         <InputFieldSkeleton />
         <InputFieldSkeleton />
-      </Group>
+      </Flex>
       <InputFieldSkeleton />
       <InputRadioSkeleton count={2} />
       <Divider />
       <Skeleton w={150} h={25} />
       <Skeleton h={60} />
-      <Group gap={16} align="stretch" grow>
+      <Flex gap={16} align="stretch" direction={isMobile ? "column" : "row"}>
         <InputFieldSkeleton />
         <InputFieldSkeleton />
-      </Group>
+      </Flex>
       <ButtonGroupSkeleton count={2} />
     </Stack>
   );

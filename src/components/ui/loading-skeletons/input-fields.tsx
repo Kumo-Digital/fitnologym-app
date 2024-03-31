@@ -1,7 +1,7 @@
 import { Group, Skeleton, Stack } from "@mantine/core";
 
 export const InputFieldSkeleton = () => (
-  <Stack gap={2}>
+  <Stack gap={2} flex={"1 0 0"}>
     <Skeleton height={18} w={120} radius="sm" />
     <Skeleton height={36} radius="sm" />
   </Stack>

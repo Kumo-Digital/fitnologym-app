@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Divider,
+  Flex,
   Group,
   NumberInput,
   Select,
@@ -16,6 +17,7 @@ import {
   Text,
   TextInput,
   Title,
+  em,
 } from "@mantine/core";
 import { Formik, Form, FormikHelpers, FastField } from "formik";
 import { until } from "@open-draft/until";
@@ -28,6 +30,7 @@ import {
 import { notifications } from "@mantine/notifications";
 import { createMeasurement, updateMeasurement } from "@/services/measurements";
 import { DateInput } from "@mantine/dates";
+import { useMediaQuery } from "@mantine/hooks";
 
 const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   <Group flex="1" gap="xs">
@@ -51,6 +54,7 @@ export default function MeasurementForm({
   measurement: any;
 }) {
   const { push, query } = useRouter();
+  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
 
   const userSelectData = [
@@ -101,12 +105,20 @@ export default function MeasurementForm({
               </Group>
 
               <Stack mb={32}>
-                <Group id="report" grow align="start" gap={24}>
+                <Flex
+                  id="report"
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                  gap={24}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Reporte</Title>
@@ -121,7 +133,7 @@ export default function MeasurementForm({
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack id="value-user">
+                  <Stack id="value-user" flex={"1 0 0"}>
                     <FastField name="user_id" placeholder="Nombre del cliente">
                       {({ field, form, meta }: any) => (
                         <Select
@@ -173,16 +185,24 @@ export default function MeasurementForm({
                       )}
                     </FastField>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="general" grow align="start" gap={24}>
+                <Flex
+                  id="general"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Generales</Title>
@@ -197,7 +217,7 @@ export default function MeasurementForm({
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack>
+                  <Stack flex={"1 0 0"}>
                     <Group grow id="value-weight">
                       <FastField name="weight" placeholder="Peso">
                         {({ field, form, meta }: any) => (
@@ -763,16 +783,24 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="trunk" grow align="start" gap={24}>
+                <Flex
+                  id="trunk"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Torso</Title>
@@ -787,7 +815,7 @@ export default function MeasurementForm({
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack>
+                  <Stack flex={"1 0 0"}>
                     <Group grow id="value-trunkMuscleMass">
                       <FastField
                         name="trunkMuscleMass"
@@ -957,16 +985,24 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="arms" grow align="start" gap={24}>
+                <Flex
+                  id="arms"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Brazos</Title>
@@ -981,7 +1017,7 @@ export default function MeasurementForm({
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack gap={8}>
+                  <Stack gap={8} flex={"1 0 0"}>
                     <Text size="sm" c="gray.6" fw="600">
                       Brazo Derecho
                     </Text>
@@ -1338,16 +1374,24 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="legs" grow align="start" gap={24}>
+                <Flex
+                  id="legs"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Piernas</Title>
@@ -1362,7 +1406,7 @@ export default function MeasurementForm({
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack gap={8}>
+                  <Stack gap={8} flex={"1 0 0"}>
                     <Text size="sm" c="gray.6" fw="600">
                       Pierna Derecha
                     </Text>
@@ -1719,16 +1763,24 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Stack mb={32}>
-                <Group id="circumferences" grow align="start" gap={24}>
+                <Flex
+                  id="circumferences"
+                  gap={24}
+                  direction={isMobile ? "column" : "row"}
+                  align={isMobile ? "stretch" : "start"}
+                >
                   <Stack
                     style={{
                       position: "sticky",
                       top: "32px",
+                      zIndex: 100,
                     }}
+                    bg={"dark.7"}
+                    flex={"1 0 0"}
                   >
                     <Group wrap="nowrap">
                       <Title order={4}>Circunferencias</Title>
@@ -1743,7 +1795,7 @@ export default function MeasurementForm({
                       ultrices neque nunc et.
                     </Text>
                   </Stack>
-                  <Stack gap={8}>
+                  <Stack gap={8} flex={"1 0 0"}>
                     <Group grow id="value-circumferenceNeck">
                       <FastField name="circumferenceNeck" placeholder="Cuello">
                         {({ field, form, meta }: any) => (
@@ -1958,7 +2010,7 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                   </Stack>
-                </Group>
+                </Flex>
               </Stack>
 
               <Group justify="flex-end">

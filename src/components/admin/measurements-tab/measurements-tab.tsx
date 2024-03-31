@@ -12,6 +12,7 @@ import {
   Stack,
   Table,
   Text,
+  em,
 } from "@mantine/core";
 import { IconClipboardList, IconPlus } from "@tabler/icons-react";
 import Link from "next/link";
@@ -19,6 +20,7 @@ import { useState } from "react";
 import MeasurementTabSkeleton from "./measurement-tab-skeleton";
 import { useRouter } from "next/router";
 import { appUrls } from "@/lib/appUrls";
+import { useMediaQuery } from "@mantine/hooks";
 
 // TODO: update users and gyms types -- already being worked on another branch
 const getRows = (measurements: Measurement[], users: any, gyms: any) =>
@@ -64,6 +66,7 @@ const sortOptions = [
 ];
 
 const MeasurementsTab = () => {
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const { push } = useRouter();
   const { users, isLoading } = useUsers({ but: "admins" });
   const { gyms, isLoading: isLoadingGyms } = useGyms();
@@ -122,6 +125,7 @@ const MeasurementsTab = () => {
             c="black"
             rightSection={<IconPlus size={14} />}
             w={150}
+            flex={isMobile ? "1 0 0" : "0 0 auto"}
           >
             Agregar
           </Button>
