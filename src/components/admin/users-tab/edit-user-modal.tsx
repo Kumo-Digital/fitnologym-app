@@ -66,8 +66,8 @@ const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
     user_type: user?.user_type,
     gym_id: user?.gym_id,
     gender: user?.gender,
-    target_metric: user?.targets ? user?.targets[0].target_metric : "weight",
-    target_value: user?.targets ? user?.targets[0].target_value : 0,
+    target_metric: user?.targets ? user?.targets[0]?.target_metric : "weight",
+    target_value: user?.targets ? user?.targets[0]?.target_value : 0,
   };
 
   if (isLoading || isLoadingGyms) return <UserModalSkeleton />;

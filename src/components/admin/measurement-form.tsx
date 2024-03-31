@@ -1,7 +1,4 @@
-import { apiClient } from "@/lib/apiClient";
-import { apiUrls } from "@/lib/apiUrls";
-import { MeasurementFormValues } from "@/types/admin";
-import { UserItem } from "@/types/user";
+import { User } from "@/types/user";
 import {
   StatusColors,
   StatusValues,
@@ -53,17 +50,17 @@ export default function MeasurementForm({
   users,
   measurement,
 }: {
-  users: UserItem[] | undefined;
+  users: User | undefined;
   measurement: any;
 }) {
-  const { push } = useRouter();
+  const { push, query } = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
 
   const userSelectData = [
     {
-      value: users._id,
-      label: users.fullname,
+      value: users?._id,
+      label: users?.fullname,
     },
   ];
 
@@ -146,11 +143,11 @@ export default function MeasurementForm({
                           withCheckIcon={false}
                           allowDeselect={false}
                           data={!measurement ? users : userSelectData}
-                          value={meta.value}
+                          value={!query.userId ? meta.value : query.userId}
                           onChange={(e) => form.setFieldValue("user_id", e)}
                           onBlur={form.handleBlur}
                           error={meta.touched && meta.error}
-                          disabled={measurement}
+                          disabled={measurement || query.userId}
                         />
                       )}
                     </FastField>

@@ -52,7 +52,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
             Evolución
           </Text>
           <Group align="baseline" gap={8}>
-            {evolutionValue === 0 &&
+            {(evolutionValue === 0 || !evolutionValue) &&
             <IconLineDashed
             color={theme.colors.gray[5]}
             aria-label="Options"
@@ -97,13 +97,13 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
             />
             }
             <Tooltip
-              label={"Crecimiento respecto a la última medida"}
+              label={(!evolutionValue ? "Aún no hay medidas suficientes para contrastar" : "Crecimiento respecto a la última medida")}
               position="bottom"
               multiline
               withArrow
               w={160}
             >
-              {evolutionValue === 0 || evolutionValue === null ?
+              {evolutionValue === 0 || evolutionValue === null || !evolutionValue ?
               <Group align="baseline" gap={8}>
                 <Text size="xl" c="gray.0" fw={600}>
                   0
