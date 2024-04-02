@@ -154,6 +154,23 @@ class UserService {
       console.error("Error changing password", error);
     }
   }
+
+  async saveLastLoggedInDate(userId: string): Promise<any> {
+    try {
+      await UserModel.findOneAndUpdate(
+        {
+          _id: userId,
+        },
+        {
+          last_logged_in: new Date(),
+        }
+      );
+
+      return true;
+    } catch (error) {
+      console.error("Error saving last logged in date", error);
+    }
+  }
 }
 
 export default UserService;

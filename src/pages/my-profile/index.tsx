@@ -14,6 +14,10 @@ import { withRootLayout } from "@/utils/layouts";
 import { Badge, Group, Stack, Tabs, Tooltip } from "@mantine/core";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { NextPageWithLayout } from "../_app";
+import { modals } from "@mantine/modals";
+import WelcomeModal from "@/components/ui/modal/welcome-modal/welcome-modal";
+import { useEffect } from "react";
+import { saveLastLoggedInDate } from "@/services/users";
 
 export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
 	GetServerSidePropsResult<{
@@ -31,20 +35,54 @@ export async function getServerSideProps(context: GetServerSidePropsContext): Pr
 			}
 		};
 	}
+
+  if (user.role === 'administrator') {
+    return {
+			redirect: {
+				permanent: false,
+				destination: "/admin"
+			}
+		};
+  }
+
 	return {
 		props: {
-			sessionUser: user
+			sessionUser: JSON.parse(JSON.stringify(user)),
 		}
 	} as any;
 }
 
 const UserOverview: NextPageWithLayout<{ sessionUser: LuciaUser }> = ({ sessionUser }) => {
-
   const { user, isLoading } = useUniqueUser({ id: sessionUser.id as string });
   const { lastMeasure, isLoading: isLoadingLastMeasure } = useUniqueLastMeasure(sessionUser.id as string);
   const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(
     sessionUser.id as string
   );
+
+  const onLastLogin = async () => {
+    modals.closeAll();
+    await saveLastLoggedInDate(sessionUser.id as string);
+  }
+
+  const welcomeModal = () =>
+    modals.open({
+      centered: true,
+      withCloseButton: false,
+      onClose: () => onLastLogin,
+      closeOnClickOutside: false,
+      closeOnEscape: false,
+      size: "lg",
+      padding: "xl",
+      children: (
+        <WelcomeModal onLastLogin={onLastLogin} />
+      ),
+    });
+
+  useEffect(() => {
+    if (sessionUser.last_logged_in === null) {
+      welcomeModal();
+    }
+  }, []);
 
   if (sessionUser.id === "undefined") return <UserOverviewEmpty />;
   if (isLoading || isLoadingLastMeasure || isLoadingEvolution) return <UserOverviewSkeleton />;
