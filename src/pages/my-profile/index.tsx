@@ -59,23 +59,28 @@ const UserOverview: NextPageWithLayout<{ sessionUser: LuciaUser }> = ({ sessionU
     sessionUser.id as string
   );
 
+  const onLastLogin = async () => {
+    modals.closeAll();
+    await saveLastLoggedInDate(sessionUser.id as string);
+  }
+
   const welcomeModal = () =>
     modals.open({
-      title: "Bienvenido a Fitnologym",
       centered: true,
+      withCloseButton: false,
+      onClose: () => onLastLogin,
+      closeOnClickOutside: false,
+      closeOnEscape: false,
+      size: "lg",
+      padding: "xl",
       children: (
-        <WelcomeModal />
+        <WelcomeModal onLastLogin={onLastLogin} />
       ),
     });
 
   useEffect(() => {
-    const saveLastLoggedIn = async () => {
-      await saveLastLoggedInDate(sessionUser.id as string);
-    }
-
     if (sessionUser.last_logged_in === null) {
       welcomeModal();
-      // saveLastLoggedIn();
     }
   }, []);
 
