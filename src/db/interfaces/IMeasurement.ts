@@ -12,7 +12,7 @@ interface CircumferenceObject {
 export interface IMeasurement {
   _id: string;
   user_id: string;
-  date?: Date;
+  date: Date;
   report_url?: string;
   metrics: {
     weight: MeasurementObject;
