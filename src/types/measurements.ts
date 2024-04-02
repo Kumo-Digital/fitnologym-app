@@ -142,6 +142,6 @@ export interface Evolution {
 
 export interface BodySectionProps {
   lastMeasure: any;
-  evolution?: Evolution;
+  evolution?: Record<string, any>;
   targetMeasure?: any;
 }
