@@ -14,6 +14,7 @@ import { Formik } from "formik";
 import { until } from "@open-draft/until";
 import { loginUser } from "@/services/auth";
 import { useRouter } from "next/router";
+import { notifications } from "@mantine/notifications";
 
 interface InitialValues {
   email: string;
@@ -45,8 +46,11 @@ const Login = () => {
 
           if (error) {
             actions.setSubmitting(false);
-            console.log("Error al logearse", error);
-            // show the error with a toast
+            notifications.show({
+              title: "Error al logearse",
+              message: "Por favor, verifique los datos ingresados",
+              color: "red",
+            });
           }
         }}
       >
