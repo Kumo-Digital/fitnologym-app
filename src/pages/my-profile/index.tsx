@@ -17,6 +17,7 @@ import { NextPageWithLayout } from "../_app";
 import { modals } from "@mantine/modals";
 import WelcomeModal from "@/components/ui/modal/welcome-modal/welcome-modal";
 import { useEffect } from "react";
+import { saveLastLoggedInDate } from "@/services/users";
 
 export async function getServerSideProps(context: GetServerSidePropsContext): Promise<
 	GetServerSidePropsResult<{
@@ -46,7 +47,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext): Pr
 
 	return {
 		props: {
-			sessionUser: user
+			sessionUser: JSON.parse(JSON.stringify(user)),
 		}
 	} as any;
 }
@@ -68,8 +69,13 @@ const UserOverview: NextPageWithLayout<{ sessionUser: LuciaUser }> = ({ sessionU
     });
 
   useEffect(() => {
+    const saveLastLoggedIn = async () => {
+      await saveLastLoggedInDate(sessionUser.id as string);
+    }
+
     if (sessionUser.last_logged_in === null) {
       welcomeModal();
+      // saveLastLoggedIn();
     }
   }, []);
 
