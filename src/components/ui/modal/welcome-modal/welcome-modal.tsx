@@ -10,17 +10,14 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { IconInfoCircle } from "@tabler/icons-react";
 import NextImage from "next/image";
 
 const WelcomeModal = () => {
-  const [opened, { open, close }] = useDisclosure(false);
   const icon = <IconInfoCircle />;
 
   return (
-    <>
-      <Modal opened={opened} onClose={close} size="lg">
+    <Stack>
         <Box style={{ textAlign: "center" }} m={20}>
           <Title order={1}>Bienvenido a Fitnologym !</Title>
         </Box>
@@ -72,12 +69,7 @@ const WelcomeModal = () => {
             </Button>
           </Group>
         </Stack>
-      </Modal>
-
-      <Button onClick={open} size="sm" variant="filled" c="black">
-        Agregar
-      </Button>
-    </>
+    </Stack>
   );
 };
 
