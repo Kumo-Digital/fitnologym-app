@@ -24,9 +24,8 @@ export async function getServerSideProps(
     sessionUser: User;
   }>
 > {
-  console.log(context.req.cookies);
   const { user } = await validateRequest(context.req, context.res);
-  console.log(user);
+
   if (!user) {
     return {
       redirect: {

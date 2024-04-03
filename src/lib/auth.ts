@@ -70,7 +70,7 @@ export async function validateRequest(
     };
   }
   const result = await lucia.validateSession(sessionId);
-  console.log("el result es:", result);
+
   if (result.session && result.session.fresh) {
     res.appendHeader(
       "Set-Cookie",
