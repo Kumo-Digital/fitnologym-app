@@ -51,8 +51,8 @@ const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
   const isMobile = useMediaQuery(`(max-width: ${em(475)})`);
 
   return (
-    <Stack gap={24} style={{ flexGrow: 1 }}>
-      <Tabs defaultValue="users">
+    <Stack gap={24} flex={"1 0 0"}>
+      <Tabs defaultValue="users" flex={"1 0 0"}>
         <Tabs.List mb={24} grow={isMobile ? true : false}>
           <Tabs.Tab value="users" leftSection={isMobile ? <IconUsers /> : null}>
             {isMobile ? "" : "Usuarios"}
@@ -71,13 +71,13 @@ const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
           </Tabs.Tab>
         </Tabs.List>
 
-        <Tabs.Panel value="users">
+        <Tabs.Panel value="users" h="100%">
           <UsersTab />
         </Tabs.Panel>
-        <Tabs.Panel value="gyms">
+        <Tabs.Panel value="gyms" h="100%">
           <GymTab />
         </Tabs.Panel>
-        <Tabs.Panel value="measurements">
+        <Tabs.Panel value="measurements" h="100%">
           <MeasurementsTab />
         </Tabs.Panel>
       </Tabs>

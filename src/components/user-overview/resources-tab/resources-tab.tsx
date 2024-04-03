@@ -1,4 +1,5 @@
 import SearchBar from "@/components/searchbar/searchbar";
+import Empty from "@/components/ui/empty/empty";
 import { userResources } from "@/utils/resources";
 import {
   Button,
@@ -74,140 +75,159 @@ const ResourcesTab = () => {
         handleSort={handleSort}
         searchPlaceholder="Buscaar recursos gratuitos . . ."
       />
-      <Stack gap={32}>
-        {dietCategory.length > 0 && (
-          <Stack gap={16}>
-            <Text size="xl" fw={500}>
-              Nutrición
-            </Text>
-            <SimpleGrid
-              cols={isMobileSM ? 1 : isMobileMD ? 2 : 3}
-              spacing={24}
-              verticalSpacing={24}
-            >
-              {dietCategory.map((resource) => {
-                const Icon: any = resource.icon;
+      {filteredResources.length === 0 ? (
+        <Empty
+          title="No se encontraron recursos"
+          description="No se encontraron recursos que coincidan con tu búsqueda"
+        />
+      ) : (
+        <Stack gap={32}>
+          {dietCategory.length > 0 && (
+            <Stack gap={16}>
+              <Text size="xl" fw={500}>
+                Nutrición
+              </Text>
+              <SimpleGrid
+                cols={isMobileSM ? 1 : isMobileMD ? 2 : 3}
+                spacing={24}
+                verticalSpacing={24}
+              >
+                {dietCategory.map((resource) => {
+                  const Icon: any = resource.icon;
 
-                return (
-                  <Card withBorder key={resource.id}>
-                    <Stack style={{ flexGrow: 1 }}>
-                      <Group gap={8}>
-                        <Flex
-                          w={48}
-                          h={48}
-                          bg={alpha(
-                            `var(--mantine-color-${resource.color})`,
-                            0.2
-                          )}
-                          justify="center"
-                          align="center"
-                          style={{ borderRadius: 8 }}
-                        >
-                          <Icon
-                            size={32}
-                            color={getThemeColor(resource.color)}
-                          />
-                        </Flex>
-                        <Text size="xl" fw={600} c="gray.0" maw={200} lh={1.3}>
-                          {resource.title}
-                        </Text>
-                      </Group>
-                      <Stack h="100%" style={{ flexGrow: 1 }}>
-                        {resource.description.map((line, index) => (
-                          <Text size="sm" c="gray.5" key={`${line}-${index}`}>
-                            {line}
+                  return (
+                    <Card withBorder key={resource.id}>
+                      <Stack style={{ flexGrow: 1 }}>
+                        <Group gap={8}>
+                          <Flex
+                            w={48}
+                            h={48}
+                            bg={alpha(
+                              `var(--mantine-color-${resource.color})`,
+                              0.2
+                            )}
+                            justify="center"
+                            align="center"
+                            style={{ borderRadius: 8 }}
+                          >
+                            <Icon
+                              size={32}
+                              color={getThemeColor(resource.color)}
+                            />
+                          </Flex>
+                          <Text
+                            size="xl"
+                            fw={600}
+                            c="gray.0"
+                            maw={200}
+                            lh={1.3}
+                          >
+                            {resource.title}
                           </Text>
-                        ))}
+                        </Group>
+                        <Stack h="100%" style={{ flexGrow: 1 }}>
+                          {resource.description.map((line, index) => (
+                            <Text size="sm" c="gray.5" key={`${line}-${index}`}>
+                              {line}
+                            </Text>
+                          ))}
+                        </Stack>
+                        <Link
+                          href={resource.resource_link}
+                          target="_blank"
+                          rel="noreferrer"
+                          passHref
+                        >
+                          <Button
+                            c="black"
+                            fullWidth
+                            rightSection={<IconExternalLink size={14} />}
+                          >
+                            Abrir
+                          </Button>
+                        </Link>
                       </Stack>
-                      <Link
-                        href={resource.resource_link}
-                        target="_blank"
-                        rel="noreferrer"
-                        passHref
-                      >
-                        <Button
-                          c="black"
-                          fullWidth
-                          rightSection={<IconExternalLink size={14} />}
-                        >
-                          Abrir
-                        </Button>
-                      </Link>
-                    </Stack>
-                  </Card>
-                );
-              })}
-            </SimpleGrid>
-          </Stack>
-        )}
+                    </Card>
+                  );
+                })}
+              </SimpleGrid>
+            </Stack>
+          )}
 
-        {exerciseCategory.length > 0 && (
-          <Stack gap={16}>
-            <Text size="xl" fw={500}>
-              Ejercicios
-            </Text>
+          {exerciseCategory.length > 0 && (
+            <Stack gap={16}>
+              <Text size="xl" fw={500}>
+                Ejercicios
+              </Text>
 
-            <SimpleGrid
-              spacing={24}
-              verticalSpacing={24}
-              cols={isMobileSM ? 1 : isMobileMD ? 2 : 3}
-            >
-              {exerciseCategory.map((resource) => {
-                const Icon: any = resource.icon;
+              <SimpleGrid
+                spacing={24}
+                verticalSpacing={24}
+                cols={isMobileSM ? 1 : isMobileMD ? 2 : 3}
+              >
+                {exerciseCategory.map((resource) => {
+                  const Icon: any = resource.icon;
 
-                return (
-                  <Card withBorder key={resource.id}>
-                    <Stack style={{ flexGrow: 1 }}>
-                      <Group gap={8}>
-                        <Flex
-                          w={48}
-                          h={48}
-                          bg={alpha(
-                            `var(--mantine-color-${resource.color})`,
-                            0.2
-                          )}
-                          justify="center"
-                          align="center"
-                          style={{ borderRadius: 8 }}
-                        >
-                          <Icon
-                            size={32}
-                            color={getThemeColor(resource.color)}
-                          />
-                        </Flex>
-                        <Text size="xl" fw={600} c="gray.0" maw={200} lh={1.3}>
-                          {resource.title}
-                        </Text>
-                      </Group>
-                      <Stack h="100%" style={{ flexGrow: 1 }}>
-                        {resource.description.map((line, index) => (
-                          <Text size="sm" c="gray.5" key={`${line}-${index}`}>
-                            {line}
+                  return (
+                    <Card withBorder key={resource.id}>
+                      <Stack style={{ flexGrow: 1 }}>
+                        <Group gap={8}>
+                          <Flex
+                            w={48}
+                            h={48}
+                            bg={alpha(
+                              `var(--mantine-color-${resource.color})`,
+                              0.2
+                            )}
+                            justify="center"
+                            align="center"
+                            style={{ borderRadius: 8 }}
+                          >
+                            <Icon
+                              size={32}
+                              color={getThemeColor(resource.color)}
+                            />
+                          </Flex>
+                          <Text
+                            size="xl"
+                            fw={600}
+                            c="gray.0"
+                            maw={200}
+                            lh={1.3}
+                          >
+                            {resource.title}
                           </Text>
-                        ))}
-                      </Stack>
-                      <Link
-                        href={resource.resource_link}
-                        target="_blank"
-                        rel="noreferrer"
-                        passHref
-                      >
-                        <Button
-                          c="black"
-                          fullWidth
-                          rightSection={<IconExternalLink size={14} />}
+                        </Group>
+                        <Stack h="100%" style={{ flexGrow: 1 }}>
+                          {resource.description.map((line, index) => (
+                            <Text size="sm" c="gray.5" key={`${line}-${index}`}>
+                              {line}
+                            </Text>
+                          ))}
+                        </Stack>
+                        <Link
+                          href={resource.resource_link}
+                          target="_blank"
+                          rel="noreferrer"
+                          passHref
                         >
-                          Abrir
-                        </Button>
-                      </Link>
-                    </Stack>
-                  </Card>
-                );
-              })}
-            </SimpleGrid>
-          </Stack>
-        )}
-      </Stack>
+                          <Button
+                            c="black"
+                            fullWidth
+                            rightSection={<IconExternalLink size={14} />}
+                          >
+                            Abrir
+                          </Button>
+                        </Link>
+                      </Stack>
+                    </Card>
+                  );
+                })}
+              </SimpleGrid>
+            </Stack>
+          )}
+        </Stack>
+      )}
     </Stack>
   );
 };
