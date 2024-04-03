@@ -1,6 +1,6 @@
 import { Stack, em } from "@mantine/core";
-import { AreaChart, LineChart } from "@mantine/charts";
-import { use, useState } from "react";
+import { AreaChart } from "@mantine/charts";
+import { useEffect, useState } from "react";
 import {
   getLabelColoBySection,
   metricsSelectOptions,
@@ -11,40 +11,67 @@ import AnalysisTabSkeleton from "./analysis-tab-skeleton";
 import { useMetrics } from "@/hooks/metrics";
 import { useRouter } from "next/router";
 import { Filters } from "@/types/analysis";
-import { useUniqueFirstMeasure } from "@/hooks/measurements";
+import {
+  useUniqueFirstMeasure,
+  useUniqueLastMeasure,
+} from "@/hooks/measurements";
 import { useMediaQuery } from "@mantine/hooks";
 
-const oneMonthAgo = new Date();
-oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+const twoMonthsAgo = new Date();
+twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
 
 const AnalysisTab = ({ user }: any) => {
   const { query } = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
-  const [filters, setFilters] = useState({
-    metric: metricsSelectOptions[0].value,
-    dateRange: [oneMonthAgo, new Date()] as [Date, Date],
-  });
-
-  const searchParams: any = {
-    userId: query.userId || undefined,
-    metric: filters.metric || undefined,
-    startMonth: filters.dateRange[0]?.toISOString() || undefined,
-    endMonth: filters.dateRange[1]?.toISOString() || undefined,
-  };
 
   const { firstMeasure, isLoading: isFirstMeasureLoading } =
     useUniqueFirstMeasure(query.userId as string);
+
+  const { lastMeasure, isLoading: isLastMeasureLoading } = useUniqueLastMeasure(
+    query.userId as string
+  );
+
+  const [filters, setFilters] = useState({
+    metric: metricsSelectOptions[0].value,
+    dateRange: [
+      firstMeasure ? new Date(firstMeasure.date) : twoMonthsAgo,
+      lastMeasure ? new Date(lastMeasure.date) : new Date(),
+    ] as [Date, Date],
+  });
+
+  console.log("firstMeasure", firstMeasure);
+
+  console.log("filters", filters);
+
+  useEffect(() => {
+    if (firstMeasure && lastMeasure) {
+      setFilters({
+        ...filters,
+        dateRange: [
+          new Date(firstMeasure.date),
+          new Date(lastMeasure.date),
+        ] as [Date, Date],
+      });
+    }
+  }, [firstMeasure, lastMeasure]);
+
+  const searchParams: Record<string, string> = {
+    userId: query.userId as string,
+    metric: filters.metric,
+    startMonth: filters.dateRange[0]?.toISOString(),
+    endMonth: filters.dateRange[1]?.toISOString(),
+  };
   const { metrics, isLoading } = useMetrics(new URLSearchParams(searchParams));
 
   const handleFiltersChange = (filterValues: Filters) => {
     setFilters(filterValues);
   };
 
-  console.log(metrics, "metrics");
-
   const filteredMetrics = prepareMeasurementForDisplay(metrics);
 
-  if (isLoading || isFirstMeasureLoading) return <AnalysisTabSkeleton />;
+  if (isLoading || isFirstMeasureLoading || isLastMeasureLoading) {
+    return <AnalysisTabSkeleton />;
+  }
   return (
     <Stack mt={32} gap={32}>
       <AnalysisTableFilters
