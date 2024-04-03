@@ -24,9 +24,8 @@ export async function getServerSideProps(
     sessionUser: User;
   }>
 > {
-  console.log(context.req.cookies);
   const { user } = await validateRequest(context.req, context.res);
-  console.log(user);
+
   if (!user) {
     return {
       redirect: {
@@ -35,9 +34,17 @@ export async function getServerSideProps(
       },
     };
   }
+  if (user.role !== 'administrator') {
+    return {
+			redirect: {
+				permanent: false,
+				destination: "/my-profile"
+			}
+		};
+  }
   return {
     props: {
-      sessionUser: user,
+      sessionUser: JSON.parse(JSON.stringify(user)),
     },
   } as any;
 }

@@ -52,7 +52,7 @@ export async function getServerSideProps(
 const Page: NextPageWithLayout<{ allUsers: UserItem[] }> = ({ allUsers }) => {
   return (
     <>
-      <MeasurementForm users={allUsers} measurement={undefined} />
+      <MeasurementForm users={allUsers} />
     </>
   );
 };

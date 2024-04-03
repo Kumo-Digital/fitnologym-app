@@ -1,4 +1,4 @@
-import { User } from "@/types/user";
+import { User, UserItem } from "@/types/user";
 import {
   StatusColors,
   StatusValues,
@@ -47,20 +47,23 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
 );
 
 export default function MeasurementForm({
+  user,
   users,
   measurement,
 }: {
-  users: User | undefined;
-  measurement: any;
+  user?: User | undefined;
+  users?: UserItem[] | undefined;
+  measurement?: any;
 }) {
   const { push, query } = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
+  console.log(initialValuesForEdit);
 
   const userSelectData = [
     {
-      value: users?._id,
-      label: users?.fullname,
+      value: user?._id,
+      label: user?.fullname,
     },
   ];
 

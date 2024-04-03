@@ -15,11 +15,39 @@ import { until } from "@open-draft/until";
 import { loginUser } from "@/services/auth";
 import { useRouter } from "next/router";
 import { notifications } from "@mantine/notifications";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { validateRequest } from "@/lib/auth";
+import { User } from "@/types/user";
 
 interface InitialValues {
   email: string;
   password: string;
   // remember: boolean;
+}
+
+export async function getServerSideProps(
+  context: GetServerSidePropsContext
+): Promise<
+  GetServerSidePropsResult<{
+    sessionUser: User;
+  }>
+> {
+  const { user } = await validateRequest(context.req, context.res);
+
+  if (user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/admin",
+      },
+    };
+  }
+
+  return {
+    props: {
+      sessionUser: JSON.parse(JSON.stringify(user)),
+    },
+  } as any;
 }
 
 const Login = () => {

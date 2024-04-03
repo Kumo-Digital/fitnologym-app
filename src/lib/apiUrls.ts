@@ -14,6 +14,7 @@ export const apiUrls = {
     edit: (id: string) => `/users/${id}`,
     delete: (id: string) => `/users/${id}`,
     changePassword: (id: string) => `/users/change-password/${id}`,
+    saveLastLoggedInDate: (id: string) => `/users/save-last-logged-in-date/${id}`,
   },
   gyms: {
     get: "/gyms",

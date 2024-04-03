@@ -29,6 +29,12 @@ export const changePassword = async (userId: string, payload: ChangePasswordForm
   return data;
 };
 
+export const saveLastLoggedInDate = async (userId: string) => {
+  const { data } = await apiClient.post(apiUrls.users.saveLastLoggedInDate(userId));
+
+  return data;
+}
+
 export const deleteUser = async (userId: string) => {
   const { data } = await apiClient.delete(apiUrls.users.delete(userId));
 

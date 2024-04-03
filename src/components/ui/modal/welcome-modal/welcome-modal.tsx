@@ -1,28 +1,21 @@
-import WelcomeImage from "@/assets/images/tatin.png";
 import {
   Blockquote,
   Box,
   Button,
   Group,
-  Image,
-  Modal,
   Stack,
   Text,
   Title,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { IconInfoCircle } from "@tabler/icons-react";
-import NextImage from "next/image";
 
-const WelcomeModal = () => {
-  const [opened, { open, close }] = useDisclosure(false);
+const WelcomeModal = ({ onLastLogin }: { onLastLogin: () => void}) => {
   const icon = <IconInfoCircle />;
 
   return (
-    <>
-      <Modal opened={opened} onClose={close} size="lg">
+    <Stack>
         <Box style={{ textAlign: "center" }} m={20}>
-          <Title order={1}>Bienvenido a Fitnologym !</Title>
+          <Title order={1}>Bienvenid@ a Fitnologym</Title>
         </Box>
 
         <Stack>
@@ -48,36 +41,23 @@ const WelcomeModal = () => {
 
               <Blockquote
                 color="lime"
-                cite="– Roberto Diego Hardie "
+                cite="– Roberto Diego Hardie"
                 icon={icon}
                 mt="md"
               >
                 "La salud es lo más importante que tenemos, cuídala y mantenla."
               </Blockquote>
             </Group>
-
-            <Image
-              radius="md"
-              h={500}
-              component={NextImage}
-              src={WelcomeImage}
-              alt="Welcome Image"
-            />
           </Group>
           <Group justify="center" m={50} grow>
-            <Button variant="filled" c="black" onClick={close}>
+            <Button variant="filled" c="black" onClick={onLastLogin}>
               <Text fw="600" size="xl">
                 Empieza Ahora
               </Text>
             </Button>
           </Group>
         </Stack>
-      </Modal>
-
-      <Button onClick={open} size="sm" variant="filled" c="black">
-        Agregar
-      </Button>
-    </>
+    </Stack>
   );
 };
 

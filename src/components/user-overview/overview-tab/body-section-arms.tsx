@@ -2,7 +2,7 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { armsBodyMetrics } from "@/utils/measurement";
-import { Flex, Group, Stack, Title, em } from "@mantine/core";
+import { Flex, Stack, Title, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -24,7 +24,7 @@ export const BodySectionArms = ({
       if (!armsBodyMetrics.includes(metricName)) return measures;
 
       if (metricName === "left_arm") {
-        const leftArmMetrics = Object.entries(value).map((metric: any) => ({
+        const leftArmMetrics = Object.entries(value).map((metric: [string, any]) => ({
           metricName: metric[0],
           ...metric[1],
           evolution:

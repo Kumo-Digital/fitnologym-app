@@ -50,7 +50,7 @@ const Page: NextPageWithLayout = () => {
   });
 
   if (isLoadingMeasure || isLoadingUser) return <MeasurementFormSkeleton />;
-  return <MeasurementForm users={user} measurement={measurement} />;
+  return <MeasurementForm user={user} measurement={measurement} />;
 };
 
 withRootLayout(Page);
