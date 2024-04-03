@@ -12,32 +12,38 @@ interface BodySectionsProps {
 }
 
 export const BodyModel = ({ gender, onSectionSelect }: BodySectionsProps) => {
-  const { ref, width, height } = useElementSize();
+  // const { ref, width, height } = useElementSize();
 
   return (
-    <section>
-      <Box ref={ref} style={{ position: "relative", aspectRatio: "1/1" }}>
+    <section style={{ width: "100%", height: "100%" }}>
+      {/* <Box ref={ref} style={{ position: "relative", aspectRatio: "1/1" }}> */}
+      <Box
+        style={{
+          position: "relative",
+          aspectRatio: "1/1",
+        }}
+      >
         <Box
           id="body-image"
-          w={width}
-          h={height}
+          w={"100%"}
+          h={"100%"}
           style={{ position: "absolute" }}
         >
           <Image
             src={gender === "male" ? maleBodyImage : femaleBodyImage}
             alt="3D Body Model"
             fill
+            priority
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{
-              width: "100%",
               objectFit: "contain",
             }}
           />
         </Box>
         <Box
           id="body-outlines"
-          w={width}
-          h={height}
+          w={"100%"}
+          h={"100%"}
           style={{ position: "absolute" }}
         >
           <>
