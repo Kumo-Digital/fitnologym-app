@@ -58,7 +58,6 @@ export default function MeasurementForm({
   const { push, query } = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
-  console.log(initialValuesForEdit);
 
   const userSelectData = [
     {

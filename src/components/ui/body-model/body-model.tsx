@@ -26,11 +26,10 @@ export const BodyModel = ({ gender, onSectionSelect }: BodySectionsProps) => {
           <Image
             src={gender === "male" ? maleBodyImage : femaleBodyImage}
             alt="3D Body Model"
-            sizes="100vw"
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{
               width: "100%",
-              // height: "auto",
               objectFit: "contain",
             }}
           />
