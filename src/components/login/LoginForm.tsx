@@ -9,12 +9,12 @@ interface initialCredentials {
 }
 
 export default function LoginForm() {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   async function loginUser(values: initialCredentials) {
     try {
       if (!values.email || !values.password) {
-        setError('Por favor llene todos los campos');
+        setError("Por favor llene todos los campos");
         return;
       }
 
@@ -24,11 +24,10 @@ export default function LoginForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      })
-  
+      });
+
       if (res.ok) {
         // router.push("/");
-        console.log('EStamos todo bien');
       } else {
         setError((await res.json()).error);
       }
@@ -41,8 +40,8 @@ export default function LoginForm() {
     <div>
       <Formik
         initialValues={{
-          email: '',
-          password: '',
+          email: "",
+          password: "",
         }}
         onSubmit={(
           values: initialCredentials,
@@ -61,16 +60,11 @@ export default function LoginForm() {
           <label htmlFor="password">Contraseña</label>
           <Field id="password" type="password" name="password" />
 
-
           <button type="submit">Ingresar</button>
         </Form>
       </Formik>
       <hr />
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      {error && <div>{error}</div>}
     </div>
   );
 }

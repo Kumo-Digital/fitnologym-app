@@ -31,7 +31,6 @@ export async function getServerSideProps(
     };
   }
   if (user.role !== "administrator") {
-    console.log("NO PUEDES ESTAR AQUI!!!");
     return {
       redirect: {
         permanent: false,

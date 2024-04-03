@@ -94,7 +94,6 @@ const UserModal = () => {
             values: UserForm,
             { setSubmitting }: FormikHelpers<UserForm>
           ) => {
-            console.log(values);
             close();
           }}
           validationSchema={validationSchema}
