@@ -35,9 +35,17 @@ export async function getServerSideProps(
       },
     };
   }
+  if (user.role !== 'administrator') {
+    return {
+			redirect: {
+				permanent: false,
+				destination: "/my-profile"
+			}
+		};
+  }
   return {
     props: {
-      sessionUser: user,
+      sessionUser: JSON.parse(JSON.stringify(user)),
     },
   } as any;
 }
