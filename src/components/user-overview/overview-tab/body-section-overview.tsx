@@ -4,6 +4,7 @@ import { overviewBodyMetrics } from "@/utils/measurement";
 import { BodySectionProps } from "@/types/measurements";
 import { TargetMeasureCard } from "@/components/ui/card/target-measure-card";
 import { useMediaQuery } from "@mantine/hooks";
+import { MEASUREMENT_UNITS } from "@/utils/constants";
 
 const mockMeasures = {
   _id: "mlf0bsq283dx9h81h3",
@@ -15,179 +16,179 @@ const mockMeasures = {
   __v: 0,
   measures: {
     weight: {
-      measure_uom: "kg",
+      measure_uom: MEASUREMENT_UNITS.KG,
       measure_value: 58,
       measure_status: 2,
     },
     bmi: {
-      measure_uom: "u",
+      measure_uom: MEASUREMENT_UNITS.UNIT,
       measure_value: 23.6,
       measure_status: 2,
     },
     body_fat: {
-      measure_uom: "%",
+      measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
       measure_value: 30,
       measure_status: 2,
     },
     visc_fat: {
-      measure_uom: "u",
+      measure_uom: MEASUREMENT_UNITS.UNIT,
       measure_value: 18,
       measure_status: 2,
     },
     muscle_mass: {
-      measure_uom: "kg",
+      measure_uom: MEASUREMENT_UNITS.KG,
       measure_value: 25,
       measure_status: 2,
     },
     muscle_quality: {
-      measure_uom: "u",
+      measure_uom: MEASUREMENT_UNITS.UNIT,
       measure_value: 0,
       measure_status: 2,
     },
     bone_mass: {
-      measure_uom: "kg",
+      measure_uom: MEASUREMENT_UNITS.KG,
       measure_value: 7,
       measure_status: 2,
     },
     bmr: {
-      measure_uom: "kcal",
+      measure_uom: MEASUREMENT_UNITS.KCAL,
       measure_value: 0,
       measure_status: 2,
     },
     metab_age: {
-      measure_uom: "u",
+      measure_uom: MEASUREMENT_UNITS.UNIT,
       measure_value: 0,
       measure_status: 2,
     },
     body_water: {
-      measure_uom: "%",
+      measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
       measure_value: 0,
       measure_status: 2,
     },
     physique_rating: {
-      measure_uom: "u",
+      measure_uom: MEASUREMENT_UNITS.UNIT,
       measure_value: 0,
       measure_status: 2,
     },
     left_arm: {
       muscle_mass: {
-        measure_uom: "kg",
+        measure_uom: MEASUREMENT_UNITS.KG,
         measure_value: 0,
         measure_status: 2,
       },
       body_fat: {
-        measure_uom: "%",
+        measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
         measure_value: 0,
         measure_status: 2,
       },
       muscle_quality: {
-        measure_uom: "u",
+        measure_uom: MEASUREMENT_UNITS.UNIT,
         measure_value: 0,
         measure_status: 2,
       },
     },
     right_arm: {
       muscle_mass: {
-        measure_uom: "kg",
+        measure_uom: MEASUREMENT_UNITS.KG,
         measure_value: 0,
         measure_status: 2,
       },
       body_fat: {
-        measure_uom: "%",
+        measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
         measure_value: 0,
         measure_status: 2,
       },
       muscle_quality: {
-        measure_uom: "u",
+        measure_uom: MEASUREMENT_UNITS.UNIT,
         measure_value: 0,
         measure_status: 2,
       },
     },
     left_leg: {
       muscle_mass: {
-        measure_uom: "kg",
+        measure_uom: MEASUREMENT_UNITS.KG,
         measure_value: 0,
         measure_status: 2,
       },
       body_fat: {
-        measure_uom: "%",
+        measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
         measure_value: 0,
         measure_status: 2,
       },
       muscle_quality: {
-        measure_uom: "u",
+        measure_uom: MEASUREMENT_UNITS.UNIT,
         measure_value: 0,
         measure_status: 2,
       },
     },
     right_leg: {
       muscle_mass: {
-        measure_uom: "kg",
+        measure_uom: MEASUREMENT_UNITS.KG,
         measure_value: 0,
         measure_status: 2,
       },
       body_fat: {
-        measure_uom: "%",
+        measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
         measure_value: 0,
         measure_status: 2,
       },
       muscle_quality: {
-        measure_uom: "u",
+        measure_uom: MEASUREMENT_UNITS.UNIT,
         measure_value: 0,
         measure_status: 2,
       },
     },
     trunk: {
       muscle_mass: {
-        measure_uom: "kg",
+        measure_uom: MEASUREMENT_UNITS.KG,
         measure_value: 0,
         measure_status: 2,
       },
       body_fat: {
-        measure_uom: "%",
+        measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
         measure_value: 0,
         measure_status: 2,
       },
       muscle_quality: {
-        measure_uom: "u",
+        measure_uom: MEASUREMENT_UNITS.UNIT,
         measure_value: 0,
         measure_status: 2,
       },
     },
     circumferenceNeck: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 80,
     },
     circumferenceChest: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 50,
     },
     circumferenceShoulders: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 30,
     },
     circumferenceArms: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 25,
     },
     circumferenceWaist: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 60,
     },
     circumferenceHips: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 0,
     },
     circumferenceGlutes: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 0,
     },
     circumferenceQuads: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 0,
     },
     circumferenceCalf: {
-      measure_uom: "cm",
+      measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
       measure_value: 0,
     },
   },
