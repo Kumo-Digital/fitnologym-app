@@ -11,7 +11,7 @@ import { modals } from "@mantine/modals";
 import Empty from "@/components/ui/empty/empty";
 
 const sortOptions = [
-  { value: "date", label: "Fecha" },
+  { value: "date", label: "Fecha de Creación" },
   { value: "name", label: "Nombre" },
   { value: "city", label: "Ciudad" },
   { value: "address", label: "Dirección" },
