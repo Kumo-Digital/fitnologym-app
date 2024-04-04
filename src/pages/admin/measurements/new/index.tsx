@@ -6,6 +6,9 @@ import UserService from "@/db/services/user";
 import { UserItem } from "@/types/user";
 import { withRootLayout } from "@/utils/layouts";
 import { NextPageWithLayout } from "@/pages/_app";
+import { useRouter } from "next/router";
+import { useUniqueUser } from "@/hooks/users";
+import MeasurementFormSkeleton from "../measurement-form-skeleton";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -50,10 +53,14 @@ export async function getServerSideProps(
 }
 
 const Page: NextPageWithLayout<{ allUsers: UserItem[] }> = ({ allUsers }) => {
+  const { query } = useRouter();
+
+  const { user, isLoading: isLoadingUser } = useUniqueUser({
+      id: query.userId as string
+    });
+  if (isLoadingUser) return <MeasurementFormSkeleton />;
   return (
-    <>
-      <MeasurementForm users={allUsers} />
-    </>
+      <MeasurementForm user={user || undefined} users={allUsers} />
   );
 };
 

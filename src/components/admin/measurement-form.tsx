@@ -58,7 +58,16 @@ export default function MeasurementForm({
   const { push, query } = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
-  console.log(initialValuesForEdit);
+
+  // Set measurementFormInitialValues to new variable
+  let formInitialValues = measurementFormInitialValues;
+
+  if (user) {
+    formInitialValues = {
+      ...formInitialValues,
+      user_id: user?._id,
+    }
+  }
 
   const userSelectData = [
     {
@@ -69,7 +78,7 @@ export default function MeasurementForm({
 
   return (
     <Formik
-      initialValues={initialValuesForEdit ?? measurementFormInitialValues}
+      initialValues={initialValuesForEdit ?? formInitialValues}
       enableReinitialize={true}
       validationSchema={measurementFormValidationSchema}
       onSubmit={async (values: any, { setSubmitting }: FormikHelpers<any>) => {
