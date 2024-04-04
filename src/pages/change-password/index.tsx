@@ -36,7 +36,7 @@ interface InitialValues {
     }
     return {
       props: {
-        user,
+        user: JSON.parse(JSON.stringify(user)),
       },
     };
 }
