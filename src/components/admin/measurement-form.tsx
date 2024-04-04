@@ -55,7 +55,7 @@ export default function MeasurementForm({
   users?: UserItem[] | undefined;
   measurement?: any;
 }) {
-  const { push, query } = useRouter();
+  const router = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
 
@@ -99,7 +99,7 @@ export default function MeasurementForm({
           return;
         }
 
-        push({
+        router.push({
           pathname: appUrls.admin,
           query: { tab: "measurements" },
         });
@@ -154,11 +154,11 @@ export default function MeasurementForm({
                           withCheckIcon={false}
                           allowDeselect={false}
                           data={!measurement ? users : userSelectData}
-                          value={!query.userId ? meta.value : query.userId}
+                          value={!router.query.userId ? meta.value : router.query.userId}
                           onChange={(e) => form.setFieldValue("user_id", e)}
                           onBlur={form.handleBlur}
                           error={meta.touched && meta.error}
-                          disabled={measurement || query.userId}
+                          disabled={measurement || router.query.userId}
                         />
                       )}
                     </FastField>
@@ -2025,7 +2025,7 @@ export default function MeasurementForm({
               </Stack>
 
               <Group justify="flex-end">
-                <Button variant="subtle" color="gray" disabled={isSubmitting}>
+                <Button variant="subtle" color="gray" disabled={isSubmitting} onClick={() => router.back()}>
                   Volver
                 </Button>
                 <Button
