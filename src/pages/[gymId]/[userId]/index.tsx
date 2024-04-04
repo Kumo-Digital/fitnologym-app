@@ -124,10 +124,10 @@ const UserOverview = ({ sessionUser }: { sessionUser: User }) => {
         <Tabs.Panel value="analysis">
           <AnalysisTab user={user} />
         </Tabs.Panel>
-        <Tabs.Panel value="report">
+        <Tabs.Panel value="report" h="90%">
           <ReportTab user={user} />
         </Tabs.Panel>
-        <Tabs.Panel value="resources">
+        <Tabs.Panel value="resources" h="90%">
           <ResourcesTab />
         </Tabs.Panel>
       </Tabs>

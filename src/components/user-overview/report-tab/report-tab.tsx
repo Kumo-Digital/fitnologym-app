@@ -5,6 +5,7 @@ import { Container, Stack, Table, Text, Anchor } from "@mantine/core";
 import { IconClipboardList } from "@tabler/icons-react";
 import ReportTabSkeleton from "./report-tab-skeleton";
 import { useState } from "react";
+import Empty from "@/components/ui/empty/empty";
 
 const getRows = (reports: ReportEntry[]) =>
   reports.map((report, index) => (
@@ -60,7 +61,6 @@ const ReportTab = ({ user }: any) => {
     setSortInput(value);
   };
 
-  // filter and sort reports based on search and sort input
   const filteredReports = reports
     ?.filter((report) => {
       const regex = new RegExp(searchInput, "i");
@@ -88,19 +88,26 @@ const ReportTab = ({ user }: any) => {
           handleSort={handleSort}
           searchPlaceholder="Buscar Reportes..."
         />
-        <Table.ScrollContainer minWidth={768}>
-          <Table verticalSpacing="lg" highlightOnHover stickyHeader>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th></Table.Th>
-                <Table.Th>Nombre</Table.Th>
-                <Table.Th>Fecha de Medición</Table.Th>
-                <Table.Th>Reporte</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{getRows(filteredReports)}</Table.Tbody>
-          </Table>
-        </Table.ScrollContainer>
+        {filteredReports.length === 0 ? (
+          <Empty
+            title="No se encontraron reportes"
+            description="No se encontraron reportes con los criterios de búsqueda seleccionados"
+          />
+        ) : (
+          <Table.ScrollContainer minWidth={768}>
+            <Table verticalSpacing="lg" highlightOnHover stickyHeader>
+              <Table.Thead>
+                <Table.Tr>
+                  <Table.Th></Table.Th>
+                  <Table.Th>Nombre</Table.Th>
+                  <Table.Th>Fecha de Medición</Table.Th>
+                  <Table.Th>Reporte</Table.Th>
+                </Table.Tr>
+              </Table.Thead>
+              <Table.Tbody>{getRows(filteredReports)}</Table.Tbody>
+            </Table>
+          </Table.ScrollContainer>
+        )}
       </Stack>
     </Container>
   );
