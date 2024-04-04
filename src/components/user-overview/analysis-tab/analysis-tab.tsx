@@ -39,10 +39,6 @@ const AnalysisTab = ({ user }: any) => {
     ] as [Date, Date],
   });
 
-  console.log("firstMeasure", firstMeasure);
-
-  console.log("filters", filters);
-
   useEffect(() => {
     if (firstMeasure && lastMeasure) {
       setFilters({
