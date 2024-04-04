@@ -222,7 +222,6 @@ export const BodySectionOverview = ({
 
   const currentValue = lastMeasure?.metrics.weight.measure_value;
   const targetValue = targetMeasure[0]?.target_value;
-  console.log("overviewMeasures", overviewMeasures);
 
   return (
     <Stack>
