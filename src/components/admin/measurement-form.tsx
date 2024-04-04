@@ -109,11 +109,10 @@ export default function MeasurementForm({
         return (
           <Form onSubmit={handleSubmit}>
             <Stack>
-              <Group h={120} align="center" justify="space-between">
+              <Group h={120} align="center">
                 <Title order={1} c="white">
-                  Medidas
+                  {(initialValuesForEdit) ? 'Editar Medida' : 'Nueva Medida'}
                 </Title>
-                <Text size="sm">La ultima medición...</Text>
               </Group>
 
               <Stack mb={32}>
