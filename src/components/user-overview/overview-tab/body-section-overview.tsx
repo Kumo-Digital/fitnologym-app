@@ -220,10 +220,17 @@ export const BodySectionOverview = ({
     return metricList;
   }, []);
 
+  const currentValue = lastMeasure?.metrics.weight.measure_value;
+  const targetValue = targetMeasure[0]?.target_value;
+  console.log("overviewMeasures", overviewMeasures);
+
   return (
     <Stack>
       <Title order={4}>Generales</Title>
-      <TargetMeasureCard currentValue={75} targetValue={70} />
+      <TargetMeasureCard
+        currentValue={currentValue}
+        targetValue={targetValue}
+      />
       <SimpleGrid
         cols={isMobileSM ? 1 : isMobileMD ? 2 : isMobileLG ? 1 : 2}
         spacing={16}
