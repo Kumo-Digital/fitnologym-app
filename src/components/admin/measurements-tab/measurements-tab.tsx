@@ -83,20 +83,28 @@ const MeasurementsTab = () => {
   };
 
   const filteredMeasurements = measurements
-    ?.filter((measure) => {
-      const regex = new RegExp(searchInput, "i");
+    ?.map((measure) => {
       const user = users?.find((user: any) => user._id === measure.user_id);
       const gym = gyms?.find((gym: any) => gym.id === user?.gym_id);
 
-      const valuesToTest = [user?.fullname, gym?.name, parseDate(measure.date)];
+      return {
+        ...measure,
+        gym_name: gym?.name,
+        user_name: user?.fullname,
+      }
+    }).filter((measure) => {
+      const regex = new RegExp(searchInput, "i");
+
+      const valuesToTest = [measure.gym_name, measure.user_name, parseDate(measure.date)];
       return valuesToTest.some((value) => regex.test(value as string));
     })
     .sort((a: any, b: any) => {
+
       if (sortInput === "name") {
-        return a.name.localeCompare(b.name);
+        return a.user_name.localeCompare(b.user_name);
       }
       if (sortInput === "gym") {
-        return a.gym.localeCompare(b.gym);
+        return a.gym_name.localeCompare(b.gym_name);
       }
       if (sortInput === "date") {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
