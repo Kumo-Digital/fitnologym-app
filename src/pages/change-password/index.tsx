@@ -10,6 +10,7 @@ import { User } from "lucia";
 import { validateRequest } from "@/lib/auth";
 import { NextPageWithLayout } from "../_app";
 import { notifications } from "@mantine/notifications";
+import Head from "next/head";
 
 interface InitialValues {
     current_password: string;
@@ -45,6 +46,10 @@ const ChangePassword: NextPageWithLayout<{ user: User }> = ({ user }) => {
     const { push } = useRouter();
 
     return (
+      <>
+        <Head>
+          <title>Fitnologym App | Cambiar contraseña</title>
+        </Head>
         <Paper shadow="xs" p="md">
         <Title order={2}>Cambiar contraseña</Title>
         <Text>¡Le recomendamos cambiar su contraseña para una mayor seguridad!</Text>
@@ -129,6 +134,7 @@ const ChangePassword: NextPageWithLayout<{ user: User }> = ({ user }) => {
             )}
             </Formik>
         </Paper>
+      </>
     );
 }
 

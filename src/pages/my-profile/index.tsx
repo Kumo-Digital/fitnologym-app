@@ -21,6 +21,7 @@ import { modals } from "@mantine/modals";
 import WelcomeModal from "@/components/ui/modal/welcome-modal/welcome-modal";
 import { useEffect } from "react";
 import { saveLastLoggedInDate } from "@/services/users";
+import Head from "next/head";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -94,75 +95,80 @@ const UserOverview: NextPageWithLayout<{ sessionUser: LuciaUser }> = ({
   if (isLoading || isLoadingLastMeasure || isLoadingEvolution)
     return <UserOverviewSkeleton />;
   return (
-    <Stack gap={16} style={{ flexGrow: 1 }}>
-      {/* TAB LIST */}
-      <Tabs
-        defaultValue="overview"
-        keepMounted={false}
-        style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
-      >
-        <Tabs.List
-          style={{
-            flexWrap: "nowrap",
-            overflowX: "auto",
-          }}
-        >
-          <Tabs.Tab value="overview">Overview</Tabs.Tab>
-          <Tooltip
-            label={
-              "El análisis estará disponible una vez que tenga más de 1 medida cargada en el sistema"
-            }
-            multiline
-            withArrow
-            disabled={evolution}
-          >
-            <Tabs.Tab value="analysis" disabled={!lastMeasure || !evolution}>
-              Análisis
-            </Tabs.Tab>
-          </Tooltip>
-          <Tabs.Tab value="report" disabled={!lastMeasure}>
-            Diagnóstico
-          </Tabs.Tab>
-          <Tabs.Tab value="exercise-plan" disabled>
-            <Group align="center" gap={8} wrap="nowrap">
-              Mi Rutina
-              <Badge variant="outline" color="lime">
-                Plus
-              </Badge>
-            </Group>
-          </Tabs.Tab>
-          <Tabs.Tab value="diet-plan" disabled>
-            <Group align="center" gap={8} wrap="nowrap">
-              Plan Nutricional
-              <Badge variant="outline" color="lime">
-                Premium
-              </Badge>
-            </Group>
-          </Tabs.Tab>
-          <Tabs.Tab value="resources">Beneficios</Tabs.Tab>
-        </Tabs.List>
-
-        {/* USER HEADER */}
-        <UserOverviewHeader user={user} sessionUser={user} />
-
-        {/* PANELS */}
-        <Tabs.Panel
-          value="overview"
+    <>
+      <Head>
+        <title>Fitnologym App | Mi Perfil</title>
+      </Head>
+      <Stack gap={16} style={{ flexGrow: 1 }}>
+        {/* TAB LIST */}
+        <Tabs
+          defaultValue="overview"
+          keepMounted={false}
           style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
         >
-          <OverviewTab user={user} />
-        </Tabs.Panel>
-        <Tabs.Panel value="analysis">
-          <AnalysisTab user={user} />
-        </Tabs.Panel>
-        <Tabs.Panel value="report">
-          <ReportTab user={user} />
-        </Tabs.Panel>
-        <Tabs.Panel value="resources">
-          <ResourcesTab />
-        </Tabs.Panel>
-      </Tabs>
-    </Stack>
+          <Tabs.List
+            style={{
+              flexWrap: "nowrap",
+              overflowX: "auto",
+            }}
+          >
+            <Tabs.Tab value="overview">Overview</Tabs.Tab>
+            <Tooltip
+              label={
+                "El análisis estará disponible una vez que tenga más de 1 medida cargada en el sistema"
+              }
+              multiline
+              withArrow
+              disabled={evolution}
+            >
+              <Tabs.Tab value="analysis" disabled={!lastMeasure || !evolution}>
+                Análisis
+              </Tabs.Tab>
+            </Tooltip>
+            <Tabs.Tab value="report" disabled={!lastMeasure}>
+              Diagnóstico
+            </Tabs.Tab>
+            <Tabs.Tab value="exercise-plan" disabled>
+              <Group align="center" gap={8} wrap="nowrap">
+                Mi Rutina
+                <Badge variant="outline" color="lime">
+                  Plus
+                </Badge>
+              </Group>
+            </Tabs.Tab>
+            <Tabs.Tab value="diet-plan" disabled>
+              <Group align="center" gap={8} wrap="nowrap">
+                Plan Nutricional
+                <Badge variant="outline" color="lime">
+                  Premium
+                </Badge>
+              </Group>
+            </Tabs.Tab>
+            <Tabs.Tab value="resources">Beneficios</Tabs.Tab>
+          </Tabs.List>
+
+          {/* USER HEADER */}
+          <UserOverviewHeader user={user} sessionUser={user} />
+
+          {/* PANELS */}
+          <Tabs.Panel
+            value="overview"
+            style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}
+          >
+            <OverviewTab user={user} />
+          </Tabs.Panel>
+          <Tabs.Panel value="analysis">
+            <AnalysisTab user={user} />
+          </Tabs.Panel>
+          <Tabs.Panel value="report">
+            <ReportTab user={user} />
+          </Tabs.Panel>
+          <Tabs.Panel value="resources">
+            <ResourcesTab />
+          </Tabs.Panel>
+        </Tabs>
+      </Stack>
+    </>
   );
 };
 

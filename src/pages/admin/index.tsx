@@ -12,6 +12,7 @@ import MeasurementsTab from "@/components/admin/measurements-tab/measurements-ta
 import UsersTab from "@/components/admin/users-tab/users-tab";
 import { IconBarbell, IconRuler, IconUsers } from "@tabler/icons-react";
 import { useMediaQuery } from "@mantine/hooks";
+import Head from "next/head";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -50,37 +51,42 @@ const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
   const isMobile = useMediaQuery(`(max-width: ${em(475)})`);
 
   return (
-    <Stack gap={24} flex={"1 0 0"}>
-      <Tabs defaultValue="users" flex={"1 0 0"}>
-        <Tabs.List mb={24} grow={isMobile ? true : false}>
-          <Tabs.Tab value="users" leftSection={isMobile ? <IconUsers /> : null}>
-            {isMobile ? "" : "Usuarios"}
-          </Tabs.Tab>
-          <Tabs.Tab
-            value="gyms"
-            leftSection={isMobile ? <IconBarbell /> : null}
-          >
-            {isMobile ? "" : "Gimnasios"}
-          </Tabs.Tab>
-          <Tabs.Tab
-            value="measurements"
-            leftSection={isMobile ? <IconRuler /> : null}
-          >
-            {isMobile ? "" : "Mediciones"}
-          </Tabs.Tab>
-        </Tabs.List>
+    <>
+      <Head>
+        <title>Fitnologym App | Administración</title>
+      </Head>
+      <Stack gap={24} flex={"1 0 0"}>
+        <Tabs defaultValue="users" flex={"1 0 0"}>
+          <Tabs.List mb={24} grow={isMobile ? true : false}>
+            <Tabs.Tab value="users" leftSection={isMobile ? <IconUsers /> : null}>
+              {isMobile ? "" : "Usuarios"}
+            </Tabs.Tab>
+            <Tabs.Tab
+              value="gyms"
+              leftSection={isMobile ? <IconBarbell /> : null}
+            >
+              {isMobile ? "" : "Gimnasios"}
+            </Tabs.Tab>
+            <Tabs.Tab
+              value="measurements"
+              leftSection={isMobile ? <IconRuler /> : null}
+            >
+              {isMobile ? "" : "Mediciones"}
+            </Tabs.Tab>
+          </Tabs.List>
 
-        <Tabs.Panel value="users" h="100%">
-          <UsersTab />
-        </Tabs.Panel>
-        <Tabs.Panel value="gyms" h="100%">
-          <GymTab />
-        </Tabs.Panel>
-        <Tabs.Panel value="measurements" h="100%">
-          <MeasurementsTab />
-        </Tabs.Panel>
-      </Tabs>
-    </Stack>
+          <Tabs.Panel value="users" h="100%">
+            <UsersTab />
+          </Tabs.Panel>
+          <Tabs.Panel value="gyms" h="100%">
+            <GymTab />
+          </Tabs.Panel>
+          <Tabs.Panel value="measurements" h="100%">
+            <MeasurementsTab />
+          </Tabs.Panel>
+        </Tabs>
+      </Stack>
+    </>
   );
 };
 
