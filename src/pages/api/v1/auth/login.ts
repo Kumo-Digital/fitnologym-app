@@ -35,7 +35,11 @@ export default async function handler(
             lucia.createSessionCookie(session.id).serialize()
           )
           .status(200)
-          .json({ message: "Login successful" });
+          .json({ data: {
+            last_logged_in: existingUser.last_logged_in,
+            role: existingUser.role,
+          }, 
+          message: "Login successful" });
       }
 
       return res.json("El e-mail no es correcto");
