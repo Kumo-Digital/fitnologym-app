@@ -13,4 +13,5 @@ export const appUrls = {
   privacyPolicy: "/politica-de-privacidad",
   termsAndConditions: "/terminos-y-condiciones",
   contact: "/contacto",
+  changePassword: "/change-password",
 };

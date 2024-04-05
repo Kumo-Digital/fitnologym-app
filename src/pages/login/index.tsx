@@ -19,6 +19,7 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { validateRequest } from "@/lib/auth";
 import { User } from "@/types/user";
 import Head from "next/head";
+import { appUrls } from "@/lib/appUrls";
 
 interface InitialValues {
   email: string;
@@ -74,7 +75,11 @@ const Login = () => {
 
             if (data) {
               actions.setSubmitting(false);
-              push("/admin");
+              if (!data.data.last_logged_in && data.data.role === 'user') {
+                push(appUrls.changePassword);
+              } else {
+                push(appUrls.admin);
+              }
             }
 
             if (error) {
