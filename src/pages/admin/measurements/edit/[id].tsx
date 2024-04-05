@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { User } from "lucia";
 import { useUniqueUser } from "@/hooks/users";
 import MeasurementFormSkeleton from "../measurement-form-skeleton";
+import Head from "next/head";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -50,7 +51,14 @@ const Page: NextPageWithLayout = () => {
   });
 
   if (isLoadingMeasure || isLoadingUser) return <MeasurementFormSkeleton />;
-  return <MeasurementForm user={user} measurement={measurement} />;
+  return (
+  <>
+    <Head>
+      <title>Fitnologym App | Editar Medida</title>
+    </Head>
+    <MeasurementForm user={user} measurement={measurement} />
+  </>
+);
 };
 
 withRootLayout(Page);

@@ -9,6 +9,7 @@ import { NextPageWithLayout } from "@/pages/_app";
 import { useRouter } from "next/router";
 import { useUniqueUser } from "@/hooks/users";
 import MeasurementFormSkeleton from "../measurement-form-skeleton";
+import Head from "next/head";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -60,7 +61,12 @@ const Page: NextPageWithLayout<{ allUsers: UserItem[] }> = ({ allUsers }) => {
     });
   if (isLoadingUser) return <MeasurementFormSkeleton />;
   return (
+    <>
+      <Head>
+          <title>Fitnologym App | Agregar nueva Medida</title>
+      </Head>
       <MeasurementForm user={user || undefined} users={allUsers} />
+    </>
   );
 };
 
