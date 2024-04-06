@@ -7,6 +7,7 @@ import {
   Title,
   Text,
   Anchor,
+  em,
 } from "@mantine/core";
 import classes from "./index.module.css";
 import { withAuthLayout } from "@/utils/layouts";
@@ -20,6 +21,8 @@ import { validateRequest } from "@/lib/auth";
 import { User } from "@/types/user";
 import Head from "next/head";
 import { appUrls } from "@/lib/appUrls";
+import Image from "next/image";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface InitialValues {
   email: string;
@@ -54,6 +57,7 @@ export async function getServerSideProps(
 
 const Login = () => {
   const { push } = useRouter();
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
 
   return (
     <>
@@ -75,7 +79,7 @@ const Login = () => {
 
             if (data) {
               actions.setSubmitting(false);
-              if (!data.data.last_logged_in && data.data.role === 'user') {
+              if (!data.data.last_logged_in && data.data.role === "user") {
                 push(appUrls.changePassword);
               } else {
                 push(appUrls.admin);
@@ -111,7 +115,12 @@ const Login = () => {
                   mt="md"
                   mb={50}
                 >
-                  Bienvenidos a Fitnologym
+                  <Image
+                    src="/assets/images/logo/png/logotype-brand.png"
+                    alt="Fitnologym Logo"
+                    width={isMobile ? 125 : 250}
+                    height={isMobile ? 62 : 125}
+                  />
                 </Title>
                 <form onSubmit={handleSubmit}>
                   <TextInput
