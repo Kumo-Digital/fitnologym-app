@@ -7,3 +7,8 @@ export const MEASUREMENT_UNITS = {
   LITERS: 'lts',
   AGE: 'años',
 }
+
+export const ROLES = {
+  USER: 'user',
+  ADMIN: 'administrator',
+}
