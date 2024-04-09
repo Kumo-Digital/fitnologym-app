@@ -4,6 +4,15 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
+	if (request.nextUrl.pathname.startsWith('/api')) {
+		if (request.headers.get('authorization') === `Bearer ${process.env.ADMIN_TOKEN}`) {
+			return NextResponse.next();
+		} else {
+			return new NextResponse('Forbidden', {
+				status: 403
+			});
+		}
+	}
 	if (request.method === "GET") {
 		return NextResponse.next();
 	}
@@ -20,6 +29,6 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
 export const config = {
   matcher: [
-    "/((?!api|static|.*\\..*|_next|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!static|_next|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };
