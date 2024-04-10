@@ -102,7 +102,6 @@ export const FitnologymBreadcrumb = () => {
             title:
               gyms?.find((gym: any) => gym.id === query.gymId)?.name ||
               "Gimnasio",
-            // href: `/${query.gymId}/${query.userId}`,
             action: "menu-gyms",
             isVisible: true,
           },

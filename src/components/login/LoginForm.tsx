@@ -26,7 +26,6 @@ export default function LoginForm() {
       });
 
       if (res.ok) {
-        // router.push("/");
       } else {
         setError((await res.json()).error);
       }
