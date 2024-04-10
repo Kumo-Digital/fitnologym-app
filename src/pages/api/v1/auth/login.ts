@@ -40,6 +40,8 @@ export default async function handler(
             role: existingUser.role,
           }, 
           message: "Login successful" });
+      } else {
+        throw new Error("No existe un usuario con ese correo. Revise las credenciales.");
       }
 
       return res.json("El e-mail no es correcto");
