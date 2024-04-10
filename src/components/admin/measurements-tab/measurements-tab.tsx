@@ -8,7 +8,6 @@ import {
   Button,
   Container,
   Group,
-  Skeleton,
   Stack,
   Table,
   Text,
@@ -91,15 +90,19 @@ const MeasurementsTab = () => {
         ...measure,
         gym_name: gym?.name,
         user_name: user?.fullname,
-      }
-    }).filter((measure) => {
+      };
+    })
+    .filter((measure) => {
       const regex = new RegExp(searchInput, "i");
 
-      const valuesToTest = [measure.gym_name, measure.user_name, parseDate(measure.date)];
+      const valuesToTest = [
+        measure.gym_name,
+        measure.user_name,
+        parseDate(measure.date),
+      ];
       return valuesToTest.some((value) => regex.test(value as string));
     })
     .sort((a: any, b: any) => {
-
       if (sortInput === "name") {
         return a.user_name.localeCompare(b.user_name);
       }

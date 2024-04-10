@@ -1,7 +1,5 @@
 import MeasurementModel from "@/db/models/MeasurementModel";
 import { IMeasurement } from "@/db/interfaces/IMeasurement";
-import { NextResponse } from "next/server";
-import { generateId } from "lucia";
 
 class MeasurementService {
   async getAll(): Promise<IMeasurement[]> {
@@ -83,14 +81,18 @@ class MeasurementService {
     }
   }
 
-  async updateMeasurement(MeasurementData: IMeasurement, measurementId: string): Promise<any> {
+  async updateMeasurement(
+    MeasurementData: IMeasurement,
+    measurementId: string
+  ): Promise<any> {
     try {
-      const updatedMeasurement = await MeasurementModel.findOneAndUpdate({
-        _id: measurementId,
-      },
-      MeasurementData);
+      const updatedMeasurement = await MeasurementModel.findOneAndUpdate(
+        {
+          _id: measurementId,
+        },
+        MeasurementData
+      );
       return updatedMeasurement;
-
     } catch (error) {
       return error;
     }

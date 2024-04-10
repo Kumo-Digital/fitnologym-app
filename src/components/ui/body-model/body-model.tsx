@@ -30,7 +30,6 @@ export const BodyModel = ({ gender, onSectionSelect }: BodySectionsProps) => {
             fill
             style={{
               width: "100%",
-              // height: "auto",
               objectFit: "contain",
             }}
           />

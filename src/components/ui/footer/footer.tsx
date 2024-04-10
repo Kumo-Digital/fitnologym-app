@@ -1,7 +1,6 @@
 import { Anchor, Flex, Group, Text, em, useMantineTheme } from "@mantine/core";
 import { NavLinks } from "../navbar/navlinks/navlinks";
 import { useMediaQuery } from "@mantine/hooks";
-import Link from "next/link";
 import { appUrls } from "@/lib/appUrls";
 
 export const Footer = () => {
@@ -20,7 +19,34 @@ export const Footer = () => {
       >
         <Group align="center" justify="center" h="100%">
           <Text size="xs" c="gray.5" ta={isMobile ? "center" : "left"}>
-            © 2024 Fitnology 💚 Todos los derechos reservados. | <Anchor title="Política de Privacidad" underline="never" c={theme.colors.lime[5]} href={appUrls.privacyPolicy}>Política de privacidad</Anchor> | <Anchor title="Términos y Condiciones" underline="never" c={theme.colors.lime[5]} href={appUrls.termsAndConditions}>Términos y Condiciones</Anchor> | <Anchor title="Contactanos" underline="never" c={theme.colors.lime[5]} href={appUrls.contact}>Contactanos</Anchor> | Desarrollo por Kumo Digital 🌧
+            © 2024 Fitnology 💚 Todos los derechos reservados. |{" "}
+            <Anchor
+              title="Política de Privacidad"
+              underline="never"
+              c={theme.colors.lime[5]}
+              href={appUrls.privacyPolicy}
+            >
+              Política de privacidad
+            </Anchor>{" "}
+            |{" "}
+            <Anchor
+              title="Términos y Condiciones"
+              underline="never"
+              c={theme.colors.lime[5]}
+              href={appUrls.termsAndConditions}
+            >
+              Términos y Condiciones
+            </Anchor>{" "}
+            |{" "}
+            <Anchor
+              title="Contactanos"
+              underline="never"
+              c={theme.colors.lime[5]}
+              href={appUrls.contact}
+            >
+              Contactanos
+            </Anchor>{" "}
+            | Desarrollo por Kumo Digital 🌧
           </Text>
         </Group>
         {isMobileNavLinks && <NavLinks />}

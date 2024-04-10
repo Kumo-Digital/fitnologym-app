@@ -1,7 +1,6 @@
 import GymModel from "@/db/models/GymModel";
 import { IGym } from "@/db/interfaces/IGym";
 import { generateId } from "lucia";
-import { DeleteResult } from "mongodb";
 
 class GymService {
   async getAllGyms(): Promise<IGym[]> {

@@ -34,13 +34,13 @@ export async function getServerSideProps(
       },
     };
   }
-  if (user.role !== 'administrator') {
+  if (user.role !== "administrator") {
     return {
-			redirect: {
-				permanent: false,
-				destination: "/my-profile"
-			}
-		};
+      redirect: {
+        permanent: false,
+        destination: "/my-profile",
+      },
+    };
   }
   return {
     props: {
@@ -122,7 +122,7 @@ const UserOverview = ({ sessionUser }: { sessionUser: User }) => {
           <OverviewTab user={user} />
         </Tabs.Panel>
         <Tabs.Panel value="analysis">
-          <AnalysisTab user={user} />
+          <AnalysisTab />
         </Tabs.Panel>
         <Tabs.Panel value="report" h="90%">
           <ReportTab user={user} />

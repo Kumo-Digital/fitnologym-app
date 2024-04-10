@@ -19,7 +19,6 @@ import { useUsers } from "@/hooks/users";
 import { useGyms } from "@/hooks/gyms";
 import { useMediaQuery } from "@mantine/hooks";
 import { getFirstName, parseNameToInitials } from "@/utils/utils";
-// import fitnologyLogo from "/public/assets/images/logo/svg/logo-brand.svg";
 
 interface BreadcrumbsItem {
   title: string;
@@ -103,7 +102,6 @@ export const FitnologymBreadcrumb = () => {
             title:
               gyms?.find((gym: any) => gym.id === query.gymId)?.name ||
               "Gimnasio",
-            // href: `/${query.gymId}/${query.userId}`,
             action: "menu-gyms",
             isVisible: true,
           },
@@ -130,7 +128,6 @@ export const FitnologymBreadcrumb = () => {
           href={"/"}
           style={{
             textDecoration: "none",
-            // marginRight: 8,
             color: "inherit",
           }}
         >

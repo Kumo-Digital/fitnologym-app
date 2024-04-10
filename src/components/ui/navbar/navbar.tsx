@@ -1,4 +1,4 @@
-import { Flex, Group, em } from "@mantine/core";
+import { Group, em } from "@mantine/core";
 import { NavLinks } from "./navlinks/navlinks";
 import { FitnologymBreadcrumb } from "./breadcrumb/fitnologym-breadcrumb";
 import { useMediaQuery } from "@mantine/hooks";

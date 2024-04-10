@@ -6,11 +6,11 @@ import { ROLES } from '@/utils/constants';
  
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
-		res.status(404).end();
-		return;
-	}
+    res.status(404).end();
+    return;
+  }
 
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     try {
         await connectDB();
         const userService = new UserService();

@@ -7,7 +7,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    // get id from query
     const { id } = req.query as { id: string };
 
     try {

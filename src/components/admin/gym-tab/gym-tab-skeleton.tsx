@@ -1,16 +1,6 @@
-import {
-  Container,
-  Group,
-  SimpleGrid,
-  Skeleton,
-  Stack,
-  em,
-} from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { Container, Group, SimpleGrid, Skeleton, Stack } from "@mantine/core";
 
 const GymTabSkeleton = () => {
-  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
-
   return (
     <Container size={1024}>
       <Stack gap={24}>

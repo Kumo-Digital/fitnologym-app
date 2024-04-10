@@ -1,5 +1,5 @@
 import { useUniqueGym } from "@/hooks/gyms";
-import { createGym, editGym } from "@/services/gyms";
+import { editGym } from "@/services/gyms";
 import { Button, Group, Stack, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { until } from "@open-draft/until";

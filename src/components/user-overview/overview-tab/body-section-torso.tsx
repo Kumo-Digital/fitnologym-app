@@ -52,8 +52,6 @@ export const BodySectionTorso = ({
     }
   }, {} as TorsoMeasures);
 
-  console.log("torsoMeasures", torsoMeasures);
-
   return (
     <Stack>
       <Title order={4}>Torso</Title>

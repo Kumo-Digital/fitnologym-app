@@ -75,7 +75,7 @@ const EditUserModal = ({ userId, refetch, close }: EditUserModalProps) => {
     <Formik
       initialValues={editUserInitialValues}
       validationSchema={newUserFormValidationSchema}
-      onSubmit={async (values, { resetForm }) => {
+      onSubmit={async (values) => {
         const { data, error } = await until(() => editUser(values, userId));
 
         if (error) {
