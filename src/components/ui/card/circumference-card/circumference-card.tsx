@@ -12,8 +12,6 @@ import {
   IconChevronsDown,
   IconChevronsUp,
   IconLineDashed,
-  IconTrendingDown,
-  IconTrendingUp,
 } from "@tabler/icons-react";
 
 interface CircumferenceCardProps {
@@ -56,17 +54,18 @@ export const CircumferenceCard = ({
               Evolución
             </Text>
             <Group align="baseline" gap={8}>
-              {evolutionValue === 0 || !evolutionValue && (
-                <IconLineDashed
-                  color={theme.colors.gray[5]}
-                  aria-label="Options"
-                  size={20}
-                  style={{
-                    position: "relative",
-                    bottom: "-4px",
-                  }}
-                />
-              )}
+              {evolutionValue === 0 ||
+                (!evolutionValue && (
+                  <IconLineDashed
+                    color={theme.colors.gray[5]}
+                    aria-label="Options"
+                    size={20}
+                    style={{
+                      position: "relative",
+                      bottom: "-4px",
+                    }}
+                  />
+                ))}
               {evolutionValue === null && (
                 <IconLineDashed
                   color={theme.colors.gray[5]}
@@ -107,7 +106,9 @@ export const CircumferenceCard = ({
                 withArrow
                 w={160}
               >
-                {evolutionValue === 0 || evolutionValue === null || !evolutionValue ? (
+                {evolutionValue === 0 ||
+                evolutionValue === null ||
+                !evolutionValue ? (
                   <Group align="baseline" gap={8}>
                     <Text size="xl" c="gray.0" fw={600}>
                       0

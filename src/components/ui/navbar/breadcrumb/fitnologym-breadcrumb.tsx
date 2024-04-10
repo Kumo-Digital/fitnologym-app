@@ -19,7 +19,6 @@ import { useUsers } from "@/hooks/users";
 import { useGyms } from "@/hooks/gyms";
 import { useMediaQuery } from "@mantine/hooks";
 import { getFirstName, parseNameToInitials } from "@/utils/utils";
-// import fitnologyLogo from "/public/assets/images/logo/svg/logo-brand.svg";
 
 interface BreadcrumbsItem {
   title: string;
@@ -130,7 +129,6 @@ export const FitnologymBreadcrumb = () => {
           href={"/"}
           style={{
             textDecoration: "none",
-            // marginRight: 8,
             color: "inherit",
           }}
         >

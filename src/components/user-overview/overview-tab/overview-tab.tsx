@@ -1,14 +1,7 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
-import {
-  Flex,
-  Group,
-  ScrollArea,
-  SegmentedControl,
-  Stack,
-  em,
-} from "@mantine/core";
+import { Flex, ScrollArea, SegmentedControl, Stack, em } from "@mantine/core";
 import { useState } from "react";
-import { useElementSize, useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import {
   useCalculateEvolution,
   useUniqueLastMeasure,

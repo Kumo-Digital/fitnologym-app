@@ -2,15 +2,7 @@ import SearchBar from "@/components/searchbar/searchbar";
 import { UserCard } from "@/components/ui/card/user-card/user-card";
 import { useGyms } from "@/hooks/gyms";
 import { useUsers } from "@/hooks/users";
-import {
-  ActionIcon,
-  Button,
-  Container,
-  Group,
-  SimpleGrid,
-  Stack,
-  em,
-} from "@mantine/core";
+import { Button, Container, Group, SimpleGrid, Stack, em } from "@mantine/core";
 import { useState } from "react";
 import UsersTabSkeleton from "./users-tab-skeleton";
 import { IconPlus } from "@tabler/icons-react";

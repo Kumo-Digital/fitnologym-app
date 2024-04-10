@@ -1,6 +1,5 @@
 import { API_URL_V1, apiUrls } from "@/lib/apiUrls";
-import { Formik, Field, Form, FormikHelpers } from "formik";
-import router from "next/router";
+import { Formik, Field, Form } from "formik";
 import { useState } from "react";
 
 interface initialCredentials {
@@ -9,12 +8,12 @@ interface initialCredentials {
 }
 
 export default function LoginForm() {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   async function loginUser(values: initialCredentials) {
     try {
       if (!values.email || !values.password) {
-        setError('Por favor llene todos los campos');
+        setError("Por favor llene todos los campos");
         return;
       }
 
@@ -24,16 +23,15 @@ export default function LoginForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      })
-  
+      });
+
       if (res.ok) {
         // router.push("/");
-        console.log('EStamos todo bien');
       } else {
         setError((await res.json()).error);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -41,13 +39,10 @@ export default function LoginForm() {
     <div>
       <Formik
         initialValues={{
-          email: '',
-          password: '',
+          email: "",
+          password: "",
         }}
-        onSubmit={(
-          values: initialCredentials,
-          { setSubmitting }: FormikHelpers<initialCredentials>
-        ) => loginUser(values)}
+        onSubmit={(values: initialCredentials) => loginUser(values)}
       >
         <Form>
           <label htmlFor="email">E-mail</label>
@@ -61,16 +56,11 @@ export default function LoginForm() {
           <label htmlFor="password">Contraseña</label>
           <Field id="password" type="password" name="password" />
 
-
           <button type="submit">Ingresar</button>
         </Form>
       </Formik>
       <hr />
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      {error && <div>{error}</div>}
     </div>
   );
 }

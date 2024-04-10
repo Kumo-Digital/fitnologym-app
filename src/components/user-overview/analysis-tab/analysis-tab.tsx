@@ -20,7 +20,7 @@ import { useMediaQuery } from "@mantine/hooks";
 const twoMonthsAgo = new Date();
 twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
 
-const AnalysisTab = ({ user }: any) => {
+const AnalysisTab = () => {
   const { query } = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
