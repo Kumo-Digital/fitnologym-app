@@ -116,6 +116,7 @@ const Login = () => {
                   mb={50}
                 >
                   <Image
+                    priority
                     src="/assets/images/logo/png/logotype-brand.png"
                     alt="Fitnologym Logo"
                     width={isMobile ? 125 : 250}
