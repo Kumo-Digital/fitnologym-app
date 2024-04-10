@@ -7,6 +7,8 @@ import {
   Stack,
   Button,
   Title,
+  Group,
+  em,
 } from "@mantine/core";
 import { Form, Formik } from "formik";
 import { until } from "@open-draft/until";
@@ -18,6 +20,7 @@ import { validateRequest } from "@/lib/auth";
 import { NextPageWithLayout } from "../_app";
 import { notifications } from "@mantine/notifications";
 import Head from "next/head";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface InitialValues {
   current_password: string;
@@ -51,6 +54,7 @@ export async function getServerSideProps(
 
 const ChangePassword: NextPageWithLayout<{ user: User }> = ({ user }) => {
   const { push } = useRouter();
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
 
   return (
     <>
@@ -153,9 +157,14 @@ const ChangePassword: NextPageWithLayout<{ user: User }> = ({ user }) => {
                     touched.confirm_new_password && errors.confirm_new_password
                   }
                 />
-                <Button variant="filled" c="black" type="submit" mt={16}>
-                  Cambiar Contraseña
-                </Button>
+                <Group align="stretch" justify={isMobile ? "center" : "flex-start"} mt={16} grow={isMobile}>
+                  <Button miw={250} variant="subtle" onClick={() => push("/my-profile")}>
+                    Cambiar en otro momento
+                  </Button>
+                  <Button miw={250} variant="filled" c="black" type="submit">
+                    Cambiar Contraseña
+                  </Button>
+                </Group>
               </Stack>
             </Form>
           )}
