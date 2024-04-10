@@ -6,10 +6,13 @@ import {
   Stack,
   Text,
   Title,
+  em,
 } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import { IconInfoCircle } from "@tabler/icons-react";
 
 const WelcomeModal = ({ onLastLogin }: { onLastLogin: () => void}) => {
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const icon = <IconInfoCircle />;
 
   return (
@@ -51,9 +54,7 @@ const WelcomeModal = ({ onLastLogin }: { onLastLogin: () => void}) => {
           </Group>
           <Group justify="center" m={50} grow>
             <Button variant="filled" c="black" onClick={onLastLogin}>
-              <Text fw="600" size="xl">
-                Empieza Ahora
-              </Text>
+              {isMobile ? "Empezar" : "Empezar Ahora" }
             </Button>
           </Group>
         </Stack>
