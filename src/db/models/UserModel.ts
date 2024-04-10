@@ -25,7 +25,7 @@ const userSchema = new Schema<DatabaseUser>(
     },
     gym_id: {
       type: String,
-      required: true,
+      required: false,
     },
     gender: {
       type: String,
@@ -33,7 +33,7 @@ const userSchema = new Schema<DatabaseUser>(
     },
     user_type: {
       type: String,
-      required: true,
+      required: false,
     },
     role: {
       type: String,
@@ -45,9 +45,8 @@ const userSchema = new Schema<DatabaseUser>(
           target_metric: { type: String, required: true },
           target_value: { type: Number, required: true },
           _id: false,
-        },
-      ],
-      required: true,
+      }],
+      required: false,
     },
     last_logged_in: {
       type: Date,
