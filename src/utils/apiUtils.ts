@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { coreClient, mockClient } from "@/utils/apiClient";
+import { coreClient, mockClient } from "@/lib/apiClient";
 
 export const apiFetcher = async (url: string) => {
   return coreClient
