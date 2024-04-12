@@ -1,4 +1,4 @@
-import { Divider, Flex, Group, Skeleton, Stack, em } from "@mantine/core";
+import { Divider, Flex, Skeleton, Stack, em } from "@mantine/core";
 import {
   ButtonGroupSkeleton,
   InputFieldSkeleton,

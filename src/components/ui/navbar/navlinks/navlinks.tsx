@@ -25,9 +25,7 @@ export const NavLinks = () => {
         Cerrar Sesión
       </Button>
 
-      {/* <ActionIcon variant="transparent" aria-label="Settings" size="xl"> */}
       <Avatar radius="md" />
-      {/* </ActionIcon> */}
     </Group>
   );
 };

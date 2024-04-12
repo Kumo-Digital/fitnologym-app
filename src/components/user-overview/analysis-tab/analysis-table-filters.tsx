@@ -3,7 +3,6 @@ import { Box, Button, Group, Select, SelectProps, Text } from "@mantine/core";
 import { MonthPickerInput } from "@mantine/dates";
 import {
   getCategoryColoBySection,
-  getLabelColoBySection,
   metricsSelectOptions,
 } from "@/utils/measurement";
 import { AnalysisTableFiltersProps } from "@/types/analysis";

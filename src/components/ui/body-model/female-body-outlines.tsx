@@ -7,7 +7,6 @@ interface FemaleBodyOutlinesProps {
 
 export const FemaleBodyOutlines = ({
   onSectionSelect,
-  props = {},
 }: FemaleBodyOutlinesProps) => {
   return (
     <svg

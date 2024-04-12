@@ -1,6 +1,4 @@
-import { Button, Stack, Text, Title, useMantineTheme } from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
-import { useRouter } from "next/router";
+import { Stack, Text, Title, useMantineTheme } from "@mantine/core";
 
 const OverviewTabEmpty = () => {
   const theme = useMantineTheme();

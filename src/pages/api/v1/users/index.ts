@@ -3,6 +3,7 @@ import UserService from "@/db/services/user";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { DatabaseUser } from "@/lib/auth";
 import { UserForm } from "@/types/user";
+import { ROLES } from "@/utils/constants";
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,7 +27,13 @@ export default async function handler(
       await connectDB();
       const userService = new UserService();
       const user = req.body as UserForm;
-      const newUser = await userService.createUser(user);
+
+      const existingUser = await userService.getUserByEmail(user.email);
+      if (existingUser) {
+        return res.status(400).json({ message: "Lo sentimos, este correo electrónico ya está registrado. Revise las credenciales." });
+      }
+
+      const newUser = await userService.createUser(user, ROLES.USER);
 
       if (!newUser)
         return res.status(400).json({ message: "User not created" });

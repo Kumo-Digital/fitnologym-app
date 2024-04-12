@@ -7,6 +7,8 @@ import {
   Stack,
   Button,
   Title,
+  Group,
+  em,
 } from "@mantine/core";
 import { Form, Formik } from "formik";
 import { until } from "@open-draft/until";
@@ -17,6 +19,8 @@ import { User } from "lucia";
 import { validateRequest } from "@/lib/auth";
 import { NextPageWithLayout } from "../_app";
 import { notifications } from "@mantine/notifications";
+import Head from "next/head";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface InitialValues {
   current_password: string;
@@ -43,118 +47,139 @@ export async function getServerSideProps(
   }
   return {
     props: {
-      user,
+      user: JSON.parse(JSON.stringify(user)),
     },
   };
 }
 
 const ChangePassword: NextPageWithLayout<{ user: User }> = ({ user }) => {
   const { push } = useRouter();
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
 
   return (
-    <Paper shadow="xs" p="md">
-      <Title order={2}>Cambiar contraseña</Title>
-      <Text>
-        ¡Le recomendamos cambiar su contraseña para una mayor seguridad!
-      </Text>
-      <Formik
-        initialValues={
-          {
-            current_password: "",
-            new_password: "",
-            confirm_new_password: "",
-          } as InitialValues
-        }
-        validationSchema={Yup.object().shape({
-          current_password: Yup.string().required(
-            "La contraseña actual es requerida"
-          ),
-          new_password: Yup.string().required(
-            "La nueva contraseña es requerida"
-          ),
-          confirm_new_password: Yup.string()
-            .oneOf(
-              [Yup.ref("new_password"), ""],
-              "Las nuevas contraseñas deben coincidir"
-            )
-            .required("Necesita reconfirmar la nueva contraseña"),
-        })}
-        onSubmit={async (values, actions) => {
-          const { data, error } = await until(() =>
-            changePassword(user.id, values)
-          );
-
-          if (data) {
-            actions.setSubmitting(false);
-            push("/my-profile");
+    <>
+      <Head>
+        <title>Fitnologym App | Cambiar contraseña</title>
+      </Head>
+      <Paper shadow="xs" p="md">
+        <Title order={2}>Cambiar contraseña</Title>
+        <Text>
+          ¡Le recomendamos cambiar su contraseña para una mayor seguridad!
+        </Text>
+        <Formik
+          initialValues={
+            {
+              current_password: "",
+              new_password: "",
+              confirm_new_password: "",
+            } as InitialValues
           }
+          validationSchema={Yup.object().shape({
+            current_password: Yup.string().required(
+              "La contraseña actual es requerida"
+            ),
+            new_password: Yup.string().required(
+              "La nueva contraseña es requerida"
+            ),
+            confirm_new_password: Yup.string()
+              .oneOf(
+                [Yup.ref("new_password"), ""],
+                "Las nuevas contraseñas deben coincidir"
+              )
+              .required("Necesita reconfirmar la nueva contraseña"),
+          })}
+          onSubmit={async (values, actions) => {
+            const { data, error } = await until(() =>
+              changePassword(user.id, values)
+            );
 
-          if (error) {
-            actions.setSubmitting(false);
-            notifications.show({
-              color: "red",
-              title: "Error",
-              message:
-                "Ha ocurrido un error al intentar cambiar la contraseña.",
-            });
-            return;
-          }
-        }}
-      >
-        {({
-          values,
-          handleSubmit,
-          handleChange,
-          handleBlur,
-          errors,
-          touched,
-        }) => (
-          <Form onSubmit={handleSubmit}>
-            <Stack gap={4}>
-              <PasswordInput
-                name="current_password"
-                label="Contraseña actual"
-                placeholder="Contraseña..."
-                mt="md"
-                size="md"
-                value={values.current_password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.current_password && errors.current_password}
-              />
-              <PasswordInput
-                name="new_password"
-                label="Nueva contraseña"
-                placeholder="Nueva contraseña..."
-                mt="md"
-                size="md"
-                value={values.new_password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={touched.new_password && errors.new_password}
-              />
-              <PasswordInput
-                name="confirm_new_password"
-                label="Confirma nueva contraseña"
-                description="Debe repetir su nueva contraseña"
-                placeholder="Nueva contraseña..."
-                mt="md"
-                size="md"
-                value={values.confirm_new_password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={
-                  touched.confirm_new_password && errors.confirm_new_password
-                }
-              />
-              <Button variant="filled" c="black" type="submit" mt={16}>
-                Cambiar Contraseña
-              </Button>
-            </Stack>
-          </Form>
-        )}
-      </Formik>
-    </Paper>
+            if (data) {
+              actions.setSubmitting(false);
+              push("/my-profile");
+            }
+
+            if (error) {
+              actions.setSubmitting(false);
+              console.error("Error al intentar cambiar la contraseña", error);
+              notifications.show({
+                color: "red",
+                title: "Error",
+                message:
+                  "Ha ocurrido un error al intentar cambiar la contraseña.",
+              });
+              return;
+            }
+          }}
+        >
+          {({
+            values,
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            errors,
+            touched,
+          }) => (
+            <Form onSubmit={handleSubmit}>
+              <Stack gap={4}>
+                <PasswordInput
+                  name="current_password"
+                  label="Contraseña actual"
+                  placeholder="Contraseña..."
+                  mt="md"
+                  size="md"
+                  value={values.current_password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.current_password && errors.current_password}
+                />
+                <PasswordInput
+                  name="new_password"
+                  label="Nueva contraseña"
+                  placeholder="Nueva contraseña..."
+                  mt="md"
+                  size="md"
+                  value={values.new_password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.new_password && errors.new_password}
+                />
+                <PasswordInput
+                  name="confirm_new_password"
+                  label="Confirma nueva contraseña"
+                  description="Debe repetir su nueva contraseña"
+                  placeholder="Nueva contraseña..."
+                  mt="md"
+                  size="md"
+                  value={values.confirm_new_password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={
+                    touched.confirm_new_password && errors.confirm_new_password
+                  }
+                />
+                <Group
+                  align="stretch"
+                  justify={isMobile ? "center" : "flex-start"}
+                  mt={16}
+                  grow={isMobile}
+                >
+                  <Button
+                    miw={250}
+                    variant="subtle"
+                    onClick={() => push("/my-profile")}
+                  >
+                    Cambiar en otro momento
+                  </Button>
+                  <Button miw={250} variant="filled" c="black" type="submit">
+                    Cambiar Contraseña
+                  </Button>
+                </Group>
+              </Stack>
+            </Form>
+          )}
+        </Formik>
+      </Paper>
+    </>
   );
 };
 

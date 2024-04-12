@@ -102,7 +102,6 @@ export const FitnologymBreadcrumb = () => {
             title:
               gyms?.find((gym: any) => gym.id === query.gymId)?.name ||
               "Gimnasio",
-            // href: `/${query.gymId}/${query.userId}`,
             action: "menu-gyms",
             isVisible: true,
           },
@@ -125,9 +124,20 @@ export const FitnologymBreadcrumb = () => {
   const breadcrumbLinks = breadcrumbItems.map((item, index) => (
     <Group gap={8} key={`${item.title}-${index}`} wrap="nowrap">
       {item.icon && (
-        <Avatar variant="transparent" radius="sm">
-          {item.icon}
-        </Avatar>
+        <Link
+          href={"/"}
+          style={{
+            textDecoration: "none",
+            color: "inherit",
+          }}
+        >
+          <Avatar
+            src={"/assets/images/logo/svg/logo-brand.svg"}
+            size={20}
+            variant="transparent"
+            radius="sm"
+          />
+        </Link>
       )}
       {item.isVisible ? (
         item.href ? (

@@ -8,7 +8,6 @@ import {
   Button,
   Container,
   Group,
-  Skeleton,
   Stack,
   Table,
   Text,
@@ -21,8 +20,8 @@ import MeasurementTabSkeleton from "./measurement-tab-skeleton";
 import { useRouter } from "next/router";
 import { appUrls } from "@/lib/appUrls";
 import { useMediaQuery } from "@mantine/hooks";
+import Empty from "@/components/ui/empty/empty";
 
-// TODO: update users and gyms types -- already being worked on another branch
 const getRows = (measurements: Measurement[], users: any, gyms: any) =>
   measurements.map((measure, index) => {
     const user = users?.find((user: any) => user._id === measure.user_id);
@@ -83,20 +82,32 @@ const MeasurementsTab = () => {
   };
 
   const filteredMeasurements = measurements
-    ?.filter((measure) => {
-      const regex = new RegExp(searchInput, "i");
+    ?.map((measure) => {
       const user = users?.find((user: any) => user._id === measure.user_id);
       const gym = gyms?.find((gym: any) => gym.id === user?.gym_id);
 
-      const valuesToTest = [user?.fullname, gym?.name, parseDate(measure.date)];
+      return {
+        ...measure,
+        gym_name: gym?.name,
+        user_name: user?.fullname,
+      };
+    })
+    .filter((measure) => {
+      const regex = new RegExp(searchInput, "i");
+
+      const valuesToTest = [
+        measure.gym_name,
+        measure.user_name,
+        parseDate(measure.date),
+      ];
       return valuesToTest.some((value) => regex.test(value as string));
     })
     .sort((a: any, b: any) => {
       if (sortInput === "name") {
-        return a.name.localeCompare(b.name);
+        return a.user_name.localeCompare(b.user_name);
       }
       if (sortInput === "gym") {
-        return a.gym.localeCompare(b.gym);
+        return a.gym_name.localeCompare(b.gym_name);
       }
       if (sortInput === "date") {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -107,8 +118,8 @@ const MeasurementsTab = () => {
   if (isLoading || isLoadingGyms || isLoadingMeasurements)
     return <MeasurementTabSkeleton />;
   return (
-    <Container size={1024}>
-      <Stack gap={24}>
+    <Container size={1024} h="100%">
+      <Stack gap={24} h="90%">
         <Group gap={16}>
           <SearchBar
             searchValue={searchInput}
@@ -130,22 +141,29 @@ const MeasurementsTab = () => {
             Agregar
           </Button>
         </Group>
-        <Table.ScrollContainer minWidth={768}>
-          <Table verticalSpacing="lg" highlightOnHover stickyHeader>
-            <Table.Thead>
-              <Table.Tr>
-                <Table.Th></Table.Th>
-                <Table.Th>Nombre</Table.Th>
-                <Table.Th>Gimnasio</Table.Th>
-                <Table.Th>Fecha de Medición</Table.Th>
-                <Table.Th>Acción</Table.Th>
-              </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>
-              {getRows(filteredMeasurements, users, gyms)}
-            </Table.Tbody>
-          </Table>
-        </Table.ScrollContainer>
+        {filteredMeasurements.length === 0 ? (
+          <Empty
+            title="No hay Mediciones"
+            description="Parece que no hay mediciones registradas en el sistema."
+          />
+        ) : (
+          <Table.ScrollContainer minWidth={768}>
+            <Table verticalSpacing="lg" highlightOnHover stickyHeader>
+              <Table.Thead>
+                <Table.Tr>
+                  <Table.Th></Table.Th>
+                  <Table.Th>Nombre</Table.Th>
+                  <Table.Th>Gimnasio</Table.Th>
+                  <Table.Th>Fecha de Medición</Table.Th>
+                  <Table.Th>Acción</Table.Th>
+                </Table.Tr>
+              </Table.Thead>
+              <Table.Tbody>
+                {getRows(filteredMeasurements, users, gyms)}
+              </Table.Tbody>
+            </Table>
+          </Table.ScrollContainer>
+        )}
       </Stack>
     </Container>
   );

@@ -13,7 +13,7 @@ import {
   Text,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
 export const SuscriptionColors = ["lime", "blue", "yellow"];
@@ -90,10 +90,7 @@ const UserModal = () => {
       >
         <Formik
           initialValues={initialValues}
-          onSubmit={(
-            values: UserForm,
-            { setSubmitting }: FormikHelpers<UserForm>
-          ) => {
+          onSubmit={(values: UserForm) => {
             close();
           }}
           validationSchema={validationSchema}

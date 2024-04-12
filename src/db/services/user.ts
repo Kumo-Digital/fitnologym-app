@@ -1,6 +1,7 @@
 import UserModel from "@/db/models/UserModel";
 import { DatabaseUser } from "@/lib/auth";
 import { ChangePasswordForm, UserForm } from "@/types/user";
+import { ROLES } from "@/utils/constants";
 import { generateId } from "lucia";
 import { Argon2id } from "oslo/password";
 
@@ -50,7 +51,7 @@ class UserService {
     return user;
   }
 
-  async createUser(userData: UserForm): Promise<any> {
+  async createUser(userData: UserForm, role: string): Promise<any> {
     const {
       email,
       dni,
@@ -68,26 +69,44 @@ class UserService {
       // const hashedPassword = await bcrypt.hash(dni, Number(process.env.BCRYPT_SALT_ROUNDS));
       const userId = generateId(15);
 
-      const newData = {
-        _id: userId,
-        fullname,
-        dni,
-        email,
-        password: hashedPassword,
-        gender,
-        user_type,
-        gym_id,
-        targets: [
-          {
-            target_metric,
-            target_value,
-          },
-        ],
-        role: "user",
-        last_logged_in: null,
-      };
+      let userData;
 
-      const newUser = await UserModel.create(newData);
+      if (role === ROLES.USER) {
+        userData = {
+          _id: userId,
+          fullname,
+          dni,
+          email,
+          password: hashedPassword,
+          gender,
+          user_type,
+          gym_id,
+          targets: [
+            {
+              target_metric,
+              target_value,
+            },
+          ],
+          role,
+          last_logged_in: null,
+        };
+      } else {
+        userData = {
+          _id: userId,
+          fullname,
+          dni,
+          email,
+          password: hashedPassword,
+          gender,
+          user_type: undefined,
+          gym_id: undefined,
+          targets: undefined,
+          role,
+          last_logged_in: null,
+        }
+      }
+
+      const newUser = await UserModel.create(userData);
 
       return newUser;
     } catch (error) {

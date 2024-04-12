@@ -55,9 +55,19 @@ export default function MeasurementForm({
   users?: UserItem[] | undefined;
   measurement?: any;
 }) {
-  const { push, query } = useRouter();
+  const router = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
+
+  // Set measurementFormInitialValues to new variable
+  let formInitialValues = measurementFormInitialValues;
+
+  if (user) {
+    formInitialValues = {
+      ...formInitialValues,
+      user_id: user?._id,
+    };
+  }
 
   const userSelectData = [
     {
@@ -68,7 +78,7 @@ export default function MeasurementForm({
 
   return (
     <Formik
-      initialValues={initialValuesForEdit ?? measurementFormInitialValues}
+      initialValues={initialValuesForEdit ?? formInitialValues}
       enableReinitialize={true}
       validationSchema={measurementFormValidationSchema}
       onSubmit={async (values: any, { setSubmitting }: FormikHelpers<any>) => {
@@ -89,7 +99,7 @@ export default function MeasurementForm({
           return;
         }
 
-        push({
+        router.push({
           pathname: appUrls.admin,
           query: { tab: "measurements" },
         });
@@ -99,11 +109,10 @@ export default function MeasurementForm({
         return (
           <Form onSubmit={handleSubmit}>
             <Stack>
-              <Group h={120} align="center" justify="space-between">
+              <Group h={120} align="center">
                 <Title order={1} c="white">
-                  Medidas
+                  {initialValuesForEdit ? "Editar Medida" : "Nueva Medida"}
                 </Title>
-                <Text size="sm">La ultima medición...</Text>
               </Group>
 
               <Stack mb={32}>
@@ -126,14 +135,6 @@ export default function MeasurementForm({
                       <Title order={4}>Reporte</Title>
                       <Divider w="100%" />
                     </Group>
-                    <Text size="sm" w="100%">
-                      Lorem ipsum dolor sit amet consectetur. Amet arcu gravida
-                      vitae varius posuere. Sit molestie proin mi accumsan
-                      viverra tempus sed turpis felis. Tellus sed nulla morbi
-                      facilisis euismod. Arcu ligula egestas eu nisl nibh amet
-                      mauris quis urna. Etiam viverra leo risus pretium dictum
-                      ultrices neque nunc et.
-                    </Text>
                   </Stack>
                   <Stack id="value-user" flex={"1 0 0"}>
                     <FastField name="user_id" placeholder="Nombre del cliente">
@@ -145,11 +146,15 @@ export default function MeasurementForm({
                           withCheckIcon={false}
                           allowDeselect={false}
                           data={!measurement ? users : userSelectData}
-                          value={!query.userId ? meta.value : query.userId}
+                          value={
+                            !router.query.userId
+                              ? meta.value
+                              : router.query.userId
+                          }
                           onChange={(e) => form.setFieldValue("user_id", e)}
                           onBlur={form.handleBlur}
                           error={meta.touched && meta.error}
-                          disabled={measurement || query.userId}
+                          disabled={measurement || router.query.userId}
                         />
                       )}
                     </FastField>
@@ -210,14 +215,6 @@ export default function MeasurementForm({
                       <Title order={4}>Generales</Title>
                       <Divider w="100%" />
                     </Group>
-                    <Text size="sm" w="100%">
-                      Lorem ipsum dolor sit amet consectetur. Amet arcu gravida
-                      vitae varius posuere. Sit molestie proin mi accumsan
-                      viverra tempus sed turpis felis. Tellus sed nulla morbi
-                      facilisis euismod. Arcu ligula egestas eu nisl nibh amet
-                      mauris quis urna. Etiam viverra leo risus pretium dictum
-                      ultrices neque nunc et.
-                    </Text>
                   </Stack>
                   <Stack flex={"1 0 0"}>
                     <Group grow id="value-weight">
@@ -808,14 +805,6 @@ export default function MeasurementForm({
                       <Title order={4}>Torso</Title>
                       <Divider w="100%" />
                     </Group>
-                    <Text size="sm" w="100%">
-                      Lorem ipsum dolor sit amet consectetur. Amet arcu gravida
-                      vitae varius posuere. Sit molestie proin mi accumsan
-                      viverra tempus sed turpis felis. Tellus sed nulla morbi
-                      facilisis euismod. Arcu ligula egestas eu nisl nibh amet
-                      mauris quis urna. Etiam viverra leo risus pretium dictum
-                      ultrices neque nunc et.
-                    </Text>
                   </Stack>
                   <Stack flex={"1 0 0"}>
                     <Group grow id="value-trunkMuscleMass">
@@ -1010,14 +999,6 @@ export default function MeasurementForm({
                       <Title order={4}>Brazos</Title>
                       <Divider w="100%" />
                     </Group>
-                    <Text size="sm" w="100%">
-                      Lorem ipsum dolor sit amet consectetur. Amet arcu gravida
-                      vitae varius posuere. Sit molestie proin mi accumsan
-                      viverra tempus sed turpis felis. Tellus sed nulla morbi
-                      facilisis euismod. Arcu ligula egestas eu nisl nibh amet
-                      mauris quis urna. Etiam viverra leo risus pretium dictum
-                      ultrices neque nunc et.
-                    </Text>
                   </Stack>
                   <Stack gap={8} flex={"1 0 0"}>
                     <Text size="sm" c="gray.6" fw="600">
@@ -1399,14 +1380,6 @@ export default function MeasurementForm({
                       <Title order={4}>Piernas</Title>
                       <Divider w="100%" />
                     </Group>
-                    <Text size="sm" w="100%">
-                      Lorem ipsum dolor sit amet consectetur. Amet arcu gravida
-                      vitae varius posuere. Sit molestie proin mi accumsan
-                      viverra tempus sed turpis felis. Tellus sed nulla morbi
-                      facilisis euismod. Arcu ligula egestas eu nisl nibh amet
-                      mauris quis urna. Etiam viverra leo risus pretium dictum
-                      ultrices neque nunc et.
-                    </Text>
                   </Stack>
                   <Stack gap={8} flex={"1 0 0"}>
                     <Text size="sm" c="gray.6" fw="600">
@@ -1788,14 +1761,6 @@ export default function MeasurementForm({
                       <Title order={4}>Circunferencias</Title>
                       <Divider w="100%" />
                     </Group>
-                    <Text size="sm" w="100%">
-                      Lorem ipsum dolor sit amet consectetur. Amet arcu gravida
-                      vitae varius posuere. Sit molestie proin mi accumsan
-                      viverra tempus sed turpis felis. Tellus sed nulla morbi
-                      facilisis euismod. Arcu ligula egestas eu nisl nibh amet
-                      mauris quis urna. Etiam viverra leo risus pretium dictum
-                      ultrices neque nunc et.
-                    </Text>
                   </Stack>
                   <Stack gap={8} flex={"1 0 0"}>
                     <Group grow id="value-circumferenceNeck">
@@ -2016,7 +1981,12 @@ export default function MeasurementForm({
               </Stack>
 
               <Group justify="flex-end">
-                <Button variant="subtle" color="gray" disabled={isSubmitting}>
+                <Button
+                  variant="subtle"
+                  color="gray"
+                  disabled={isSubmitting}
+                  onClick={() => router.back()}
+                >
                   Volver
                 </Button>
                 <Button

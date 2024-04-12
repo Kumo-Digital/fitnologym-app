@@ -4,10 +4,12 @@ import "@mantine/dates/styles.css";
 import "@mantine/charts/styles.css";
 import "@mantine/notifications/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
+import "dayjs/locale/es";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
+import { DatesProvider } from "@mantine/dates";
 
 const theme = createTheme({
   fontFamily: "Roboto, sans-serif",
@@ -30,10 +32,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <MantineProvider theme={theme} defaultColorScheme="dark">
-      <ModalsProvider>
-        <Notifications limit={5} autoClose={7000} />
-        {getLayout(<Component {...pageProps} />)}
-      </ModalsProvider>
+      <DatesProvider settings={{ locale: "es" }}>
+        <ModalsProvider>
+          <Notifications limit={5} autoClose={7000} />
+          {getLayout(<Component {...pageProps} />)}
+        </ModalsProvider>
+      </DatesProvider>
     </MantineProvider>
   );
 }

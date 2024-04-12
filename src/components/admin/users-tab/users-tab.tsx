@@ -2,15 +2,7 @@ import SearchBar from "@/components/searchbar/searchbar";
 import { UserCard } from "@/components/ui/card/user-card/user-card";
 import { useGyms } from "@/hooks/gyms";
 import { useUsers } from "@/hooks/users";
-import {
-  ActionIcon,
-  Button,
-  Container,
-  Group,
-  SimpleGrid,
-  Stack,
-  em,
-} from "@mantine/core";
+import { Button, Container, Group, SimpleGrid, Stack, em } from "@mantine/core";
 import { useState } from "react";
 import UsersTabSkeleton from "./users-tab-skeleton";
 import { IconPlus } from "@tabler/icons-react";
@@ -18,6 +10,7 @@ import NewUserModal from "./new-user-modal";
 import { parseDate } from "@/utils/utils";
 import { modals } from "@mantine/modals";
 import { useMediaQuery } from "@mantine/hooks";
+import Empty from "@/components/ui/empty/empty";
 
 const sortOptions = [
   { value: "fullname", label: "Nombre" },
@@ -72,8 +65,8 @@ const UsersTab = () => {
 
   if (isLoading || isLoadingGyms) return <UsersTabSkeleton />;
   return (
-    <Container size={1024}>
-      <Stack gap={24}>
+    <Container size={1024} h="100%">
+      <Stack gap={24} h="90%">
         <Group gap={16} align="flex-start">
           <SearchBar
             searchValue={searchInput}
@@ -95,6 +88,12 @@ const UsersTab = () => {
             Agregar
           </Button>
         </Group>
+        {filteredUsers.length === 0 && (
+          <Empty
+            title="No se encontraron usuarios"
+            description="Intenta con otro término de búsqueda, o agrega un nuevo usuario."
+          />
+        )}
         <SimpleGrid
           cols={{ base: 1, sm: 2, md: 3 }}
           spacing={24}

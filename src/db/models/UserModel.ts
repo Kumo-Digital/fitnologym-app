@@ -1,7 +1,6 @@
 import { DatabaseUser } from "@/lib/auth";
 import { Schema, model, models } from "mongoose";
 
-// Define the Mongoose schema for the User model
 const userSchema = new Schema<DatabaseUser>(
   {
     _id: {
@@ -26,7 +25,7 @@ const userSchema = new Schema<DatabaseUser>(
     },
     gym_id: {
       type: String,
-      required: true,
+      required: false,
     },
     gender: {
       type: String,
@@ -34,24 +33,25 @@ const userSchema = new Schema<DatabaseUser>(
     },
     user_type: {
       type: String,
-      required: true,
+      required: false,
     },
     role: {
       type: String,
       required: true,
     },
     targets: {
-      type: [{
+      type: [
+        {
           target_metric: { type: String, required: true },
           target_value: { type: Number, required: true },
           _id: false,
       }],
-      required: true,
+      required: false,
     },
     last_logged_in: {
       type: Date,
       required: false,
-    }
+    },
   } as const,
   {
     timestamps: true,

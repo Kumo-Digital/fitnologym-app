@@ -1,101 +1,127 @@
 import { InputFieldSkeleton } from "@/components/ui/loading-skeletons/input-fields";
-import { Divider, Group, Skeleton, Stack } from "@mantine/core";
+import { Flex, Group, Skeleton, Stack, em } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
 
 const MeasurementFormSkeleton = () => {
+  const isMobile = useMediaQuery(`(max-width: ${em(768)}`);
+
   return (
     <Stack>
-      <Group h={120} align="center" justify="space-between">
+      <Flex
+        direction={isMobile ? "column" : "row"}
+        h={120}
+        align={isMobile ? "flex-start" : "center"}
+        justify={isMobile ? "center" : "space-between"}
+      >
         <Skeleton w={130} h={44} />
-      </Group>
+      </Flex>
       <Stack mb={32}>
-        <Group grow align="start" gap={24}>
-          <Stack>
-            <Group wrap="nowrap">
-              <Skeleton w={65} h={26} />
-            </Group>
-            <Skeleton h={80} />
+        <Flex direction={isMobile ? "column" : "row"} align="start" gap={24}>
+          <Stack flex="1 0 0">
+            <Flex
+              direction={isMobile ? "column" : "row"}
+              wrap="nowrap"
+              flex="1 0 0"
+            >
+              <Skeleton w={200} h={26} />
+            </Flex>
           </Stack>
-          <Stack>
+          <Stack flex="1 0 0" w="100%">
             {Array.from({ length: 3 }).map((_, index) => (
               <InputFieldSkeleton
                 key={`field-${Math.random() * (index + 1)}`}
               />
             ))}
           </Stack>
-        </Group>
+        </Flex>
       </Stack>
       <Stack mb={32}>
-        <Group grow align="start" gap={24}>
-          <Stack>
-            <Group wrap="nowrap">
-              <Skeleton w={65} h={26} />
-            </Group>
-            <Skeleton h={80} />
+        <Flex direction={isMobile ? "column" : "row"} align="start" gap={24}>
+          <Stack flex="1 0 0">
+            <Flex direction={isMobile ? "column" : "row"} wrap="nowrap">
+              <Skeleton w={200} h={26} />
+            </Flex>
           </Stack>
-          <Stack>
+          <Stack flex="1 0 0" w="100%">
             {Array.from({ length: 11 }).map((_, index) => (
-              <Group gap={16} grow key={`field-${Math.random() * (index + 1)}`}>
+              <Flex
+                direction={isMobile ? "column" : "row"}
+                gap={16}
+                key={`field-${Math.random() * (index + 1)}`}
+              >
                 <InputFieldSkeleton />
                 <InputFieldSkeleton />
-              </Group>
+              </Flex>
             ))}
           </Stack>
-        </Group>
+        </Flex>
       </Stack>
       <Stack mb={32}>
-        <Group grow align="start" gap={24}>
-          <Stack>
-            <Group wrap="nowrap">
-              <Skeleton w={65} h={26} />
-            </Group>
+        <Flex direction={isMobile ? "column" : "row"} align="start" gap={24}>
+          <Stack flex="1 0 0">
+            <Flex direction={isMobile ? "column" : "row"} wrap="nowrap">
+              <Skeleton w={200} h={26} />
+            </Flex>
             <Skeleton h={80} />
           </Stack>
-          <Stack>
+          <Stack flex="1 0 0" w="100%">
             {Array.from({ length: 6 }).map((_, index) => (
-              <Group gap={16} grow key={`field-${Math.random() * (index + 1)}`}>
+              <Flex
+                direction={isMobile ? "column" : "row"}
+                gap={16}
+                key={`field-${Math.random() * (index + 1)}`}
+              >
                 <InputFieldSkeleton />
                 <InputFieldSkeleton />
-              </Group>
+              </Flex>
             ))}
           </Stack>
-        </Group>
+        </Flex>
       </Stack>
       <Stack mb={32}>
-        <Group grow align="start" gap={24}>
-          <Stack>
-            <Group wrap="nowrap">
-              <Skeleton w={65} h={26} />
-            </Group>
+        <Flex direction={isMobile ? "column" : "row"} align="start" gap={24}>
+          <Stack flex="1 0 0">
+            <Flex direction={isMobile ? "column" : "row"} wrap="nowrap">
+              <Skeleton w={200} h={26} />
+            </Flex>
             <Skeleton h={80} />
           </Stack>
-          <Stack>
+          <Stack flex="1 0 0" w="100%">
             {Array.from({ length: 6 }).map((_, index) => (
-              <Group gap={16} grow key={`field-${Math.random() * (index + 1)}`}>
+              <Flex
+                direction={isMobile ? "column" : "row"}
+                gap={16}
+                key={`field-${Math.random() * (index + 1)}`}
+              >
                 <InputFieldSkeleton />
                 <InputFieldSkeleton />
-              </Group>
+              </Flex>
             ))}
           </Stack>
-        </Group>
+        </Flex>
       </Stack>
       <Stack mb={32}>
-        <Group grow align="start" gap={24}>
-          <Stack>
-            <Group wrap="nowrap">
-              <Skeleton w={65} h={26} />
-            </Group>
+        <Flex direction={isMobile ? "column" : "row"} align="start" gap={24}>
+          <Stack flex="1 0 0">
+            <Flex direction={isMobile ? "column" : "row"} wrap="nowrap">
+              <Skeleton w={200} h={26} />
+            </Flex>
             <Skeleton h={80} />
           </Stack>
-          <Stack>
+          <Stack flex="1 0 0" w="100%">
             {Array.from({ length: 9 }).map((_, index) => (
-              <Group gap={16} grow key={`field-${Math.random() * (index + 1)}`}>
+              <Flex
+                direction={isMobile ? "column" : "row"}
+                gap={16}
+                key={`field-${Math.random() * (index + 1)}`}
+              >
                 <InputFieldSkeleton />
                 <InputFieldSkeleton />
-              </Group>
+              </Flex>
             ))}
           </Stack>
-        </Group>
+        </Flex>
       </Stack>
     </Stack>
   );

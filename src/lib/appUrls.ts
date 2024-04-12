@@ -10,4 +10,8 @@ export const appUrls = {
   user: {
     my_profile: "/my-profile",
   },
+  privacyPolicy: "/politica-de-privacidad",
+  termsAndConditions: "/terminos-y-condiciones",
+  contact: "/contacto",
+  changePassword: "/change-password",
 };

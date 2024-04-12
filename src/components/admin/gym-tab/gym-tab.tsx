@@ -8,9 +8,10 @@ import { IconPlus } from "@tabler/icons-react";
 import { useGyms } from "@/hooks/gyms";
 import GymTabSkeleton from "./gym-tab-skeleton";
 import { modals } from "@mantine/modals";
+import Empty from "@/components/ui/empty/empty";
 
 const sortOptions = [
-  { value: "date", label: "Fecha" },
+  { value: "date", label: "Fecha de Creación" },
   { value: "name", label: "Nombre" },
   { value: "city", label: "Ciudad" },
   { value: "address", label: "Dirección" },
@@ -61,8 +62,8 @@ export default function GymTab() {
 
   if (isLoading) return <GymTabSkeleton />;
   return (
-    <Container size={1024}>
-      <Stack gap={24}>
+    <Container size={1024} h="100%">
+      <Stack gap={24} h="90%">
         <Group gap={16} align="flex-start">
           <SearchBar
             searchValue={searchInput}
@@ -84,6 +85,12 @@ export default function GymTab() {
           </Button>
         </Group>
 
+        {filteredGyms.length === 0 && (
+          <Empty
+            title="No se encontraron gimnasios"
+            description="No se encontraron gimnasios con los criterios de búsqueda seleccionados, o agregue uno nuevo."
+          />
+        )}
         <SimpleGrid
           cols={{ base: 1, sm: 2, md: 3 }}
           spacing={24}
