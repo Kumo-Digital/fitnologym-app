@@ -157,8 +157,17 @@ const ChangePassword: NextPageWithLayout<{ user: User }> = ({ user }) => {
                     touched.confirm_new_password && errors.confirm_new_password
                   }
                 />
-                <Group align="stretch" justify={isMobile ? "center" : "flex-start"} mt={16} grow={isMobile}>
-                  <Button miw={250} variant="subtle" onClick={() => push("/my-profile")}>
+                <Group
+                  align="stretch"
+                  justify={isMobile ? "center" : "flex-start"}
+                  mt={16}
+                  grow={isMobile}
+                >
+                  <Button
+                    miw={250}
+                    variant="subtle"
+                    onClick={() => push("/my-profile")}
+                  >
                     Cambiar en otro momento
                   </Button>
                   <Button miw={250} variant="filled" c="black" type="submit">
