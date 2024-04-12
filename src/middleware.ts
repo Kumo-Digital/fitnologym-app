@@ -30,4 +30,8 @@ export const config = {
   matcher: [
     "/((?!static|_next|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
+	api: {
+		bodyParser: false,
+		externalResolver: true,
+	},
 };
