@@ -19,6 +19,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 	// NOTE: You may need to use `X-Forwarded-Host` instead
 	const hostHeader = request.headers.get("Host");
 	if (!originHeader || !hostHeader || !verifyRequestOrigin(originHeader, [hostHeader])) {
+		console.log('ESTO NO SE ESTÁ CUMPLIENDO!');
 		return new NextResponse(null, {
 			status: 403
 		});
