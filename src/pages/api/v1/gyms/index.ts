@@ -13,7 +13,7 @@ export default async function handler(
       const gyms = await gymService.getAllGyms();
 
       if (!gyms) res.status(404).json({ message: "Gyms not found" });
-      res.status(200).json(gyms);
+      return res.status(200).json(gyms);
     } catch (e) {
       console.error(e);
     }
