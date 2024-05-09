@@ -52,7 +52,7 @@ const Page: NextPageWithLayout<{ user: User }> = ({ user }) => {
         <title>Fitnologym App | Administración</title>
       </Head>
       <Stack gap={24} flex={"1 0 0"}>
-        <Tabs defaultValue="users" flex={"1 0 0"}>
+        <Tabs keepMounted={false} defaultValue="users" flex={"1 0 0"}>
           <Tabs.List mb={24} grow={isMobile ? true : false}>
             <Tabs.Tab
               value="users"
