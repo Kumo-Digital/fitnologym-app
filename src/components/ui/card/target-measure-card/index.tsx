@@ -66,10 +66,10 @@ export const TargetMeasureCard = ({
             </Text>
             <Group gap={4}>
               <Title order={2} c="gray.0">
-                {targetValue}
+                {targetValue ? targetValue : "Sin objetivo"}
               </Title>
               <Text size="xs" c="gray.5">
-                kg
+                {targetValue ? "kg" : ""}
               </Text>
             </Group>
           </Stack>
@@ -77,7 +77,7 @@ export const TargetMeasureCard = ({
             sections={[{ value: Math.round(evolutionValue), color: "lime" }]}
             label={
               <Text c="lime.5" fw={700} ta="center" size="xl">
-                {Math.round(evolutionValue)}%
+                {evolutionValue ? Math.round(evolutionValue) : "-"}
               </Text>
             }
             roundCaps
