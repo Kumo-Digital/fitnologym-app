@@ -13,11 +13,8 @@ export default async function handler(
       const { email, password } = req.body;
 
       await connectDB();
-      console.log('1) Me conecté a la DB...');
       const userService = new UserService();
-      console.log('2) Creé el Service de Usuarios...');
       const existingUser = await userService.getLoginUserByEmail(email);
-      console.log('3) Busqué el usuario existente con el User Service...');
 
       if (existingUser) {
         const validPassword = await new Argon2id().verify(
