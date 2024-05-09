@@ -10,10 +10,13 @@ export default async function handler(
     try {
       await connectDB();
       const gymService = new GymService();
+      console.log('ya generé un gymService:', gymService);
       const gyms = await gymService.getAllGyms();
+      console.log('ya obtuve los gyms del método del service:', gyms);
 
       if (!gyms) res.status(404).json({ message: "Gyms not found" });
-      return res.status(200).json(gyms);
+      res.status(200).json(gyms);
+      res.end();
     } catch (e) {
       console.error(e);
     }
