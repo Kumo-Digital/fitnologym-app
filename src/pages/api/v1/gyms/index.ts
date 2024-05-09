@@ -12,10 +12,16 @@ export default async function handler(
       const gymService = new GymService();
       const gyms = await gymService.getAllGyms();
 
-      if (!gyms) res.status(404).json({ message: "Gyms not found" });
+      if (!gyms) {
+        res.status(404).json({ message: "Gyms not found" });
+        return;
+      }
       res.status(200).json(gyms);
+      return;
     } catch (e) {
       console.error(e);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
     }
   }
 
@@ -27,8 +33,11 @@ export default async function handler(
       const newGym = await gymService.createGym(gym);
 
       res.status(201).json(newGym);
+      return;
     } catch (e) {
       console.error(e);
+      res.status(500).json({ error: "Internal Server Error" });
+      return;
     }
   }
 }
