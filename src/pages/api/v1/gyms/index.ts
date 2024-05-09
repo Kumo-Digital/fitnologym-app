@@ -14,7 +14,6 @@ export default async function handler(
 
       if (!gyms) res.status(404).json({ message: "Gyms not found" });
       res.status(200).json(gyms);
-      res.end();
     } catch (e) {
       console.error(e);
     }
