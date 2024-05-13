@@ -12,6 +12,7 @@ import {
 import {
   IconChevronsDown,
   IconChevronsUp,
+  IconExclamationCircle,
   IconLineDashed,
 } from "@tabler/icons-react";
 import { getMeasureName, getMeasureStatusColor } from "@/utils/measurement";
@@ -94,9 +95,41 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
           justify="space-between"
           style={{ flexGrow: 1 }}
         >
-          <Text size="md" c="gray.0" fw={600} maw={150}>
-            {getMeasureName(measureTitle)}
-          </Text>
+          <Group>
+            {measureTitle !== "muscle_quality" && (
+              <Text size="md" c="gray.0" fw={600} maw={150}>
+                {getMeasureName(measureTitle)}
+              </Text>
+            )}
+            {measureTitle === "muscle_quality" && (
+              <Tooltip
+                label=""
+                position="top"
+                withArrow
+                style={{
+                  backgroundImage: `url(${url})`,
+                  backgroundSize: "cover",
+                  width: "50vh",
+                  height: "30vh",
+                  border: "2px solid #74b816",
+                  boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.5)",
+                }}
+                onClick={handleToggleTooltip}
+              >
+                <Group gap={4}>
+                  <Text size="md" c="gray.0" fw={600} maw={150}>
+                    {getMeasureName(measureTitle)}
+                  </Text>
+                  <IconExclamationCircle
+                    size={16}
+                    stroke={2}
+                    onMouseEnter={handleHover}
+                    onMouseLeave={handleHoverExit}
+                  />
+                </Group>
+              </Tooltip>
+            )}
+          </Group>
           <Group align="baseline" gap={4}>
             <Title order={2} c="gray.0" fw={600}>
               {measureValue}
