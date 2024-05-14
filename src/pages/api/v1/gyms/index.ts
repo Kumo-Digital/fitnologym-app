@@ -1,6 +1,7 @@
 import connectDB from "@/lib/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import GymService from "@/db/services/gym";
+import { NextResponse } from "next/server";
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,15 +14,18 @@ export default async function handler(
       const gyms = await gymService.getAllGyms();
 
       if (!gyms) {
-        res.status(404).json({ message: "Gyms not found" });
-        return;
+        return NextResponse.json({ error: 'Gyms not found' }, { status: 404 })
+        // res.status(404).json({ message: "Gyms not found" });
+        // return;
       }
-      res.status(200).json(gyms);
-      return;
+      return NextResponse.json(gyms, { status: 200 });
+      // res.status(200).json(gyms);
+      // return;
     } catch (e) {
       console.error(e);
-      res.status(500).json({ error: "Internal Server Error" });
-      return;
+      return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+      // res.status(500).json({ error: "Internal Server Error" });
+      // return;
     }
   }
 
