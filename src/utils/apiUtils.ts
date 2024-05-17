@@ -1,10 +1,11 @@
 const coreUrl = process.env.NEXT_PUBLIC_API_URL;
 const mockUrl = process.env.NEXT_PUBLIC_MOCK_API_URL;
 const token = `Bearer ${process.env.NEXT_PUBLIC_ADMIN_TOKEN}`;
+const API_URL_V1 = "/api/v1";
 
 export const apiFetcher = async (url: string) => {
   try {
-    const response = await fetch(`${coreUrl}${url}`, {
+    const response = await fetch(`${API_URL_V1}${url}`, {
       headers: {
         Authorization: token,
       },
