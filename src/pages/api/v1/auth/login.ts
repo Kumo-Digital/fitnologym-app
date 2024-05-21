@@ -19,8 +19,9 @@ export default async function handler(
       if (existingUser) {
         const validPassword = await new Argon2id().verify(
           existingUser.password,
-          password,
+          password
         );
+
         if (!validPassword) {
           res.status(400).json({
             error: "Incorrect username or password",
@@ -35,16 +36,18 @@ export default async function handler(
             lucia.createSessionCookie(session.id).serialize()
           )
           .status(200)
-          .json({ data: {
-            last_logged_in: existingUser.last_logged_in,
-            role: existingUser.role,
-          }, 
-          message: "Login successful" });
+          .json({
+            data: {
+              last_logged_in: existingUser.last_logged_in,
+              role: existingUser.role,
+            },
+            message: "Login successful",
+          });
       } else {
-        throw new Error("No existe un usuario con ese correo. Revise las credenciales.");
+        throw new Error(
+          "No existe un usuario con ese correo. Revise las credenciales."
+        );
       }
-
-      return res.json("El e-mail no es correcto");
     } catch (e) {
       console.error(e);
       res.status(400).json({

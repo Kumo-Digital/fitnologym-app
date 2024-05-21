@@ -7,11 +7,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    if (!req.query.identifier)
-      return res.status(400).json({
+    if (!req.query.identifier) {
+      res.status(400).json({
         message:
           "Missing identifier in request URL. Please provide a valid user id or email.",
       });
+
+      return;
+    }
 
     const isEmail = req.query.identifier.includes("@");
     if (isEmail) {
@@ -22,10 +25,15 @@ export default async function handler(
         const email = decodeURIComponent(req.query.identifier as string);
         const user = await userService.getUserByEmail(email);
 
-        if (!user) res.status(404).json({ message: "User not found" });
+        if (!user) {
+          res.status(404).json({ message: "User not found" });
+          return;
+        }
+
         res.status(200).json(user);
       } catch (e) {
         console.error(e);
+        return;
       }
     } else {
       try {
@@ -35,20 +43,27 @@ export default async function handler(
         const userId = req.query.identifier as string;
         const user = await userService.getUserById(userId);
 
-        if (!user) res.status(404).json({ message: "User not found" });
+        if (!user) {
+          res.status(404).json({ message: "User not found" });
+          return;
+        }
         res.status(200).json(user);
       } catch (e) {
         console.error(e);
+        return;
       }
     }
   }
 
   if (req.method === "PUT") {
-    if (!req.query.identifier)
-      return res.status(400).json({
+    if (!req.query.identifier) {
+      res.status(400).json({
         message:
           "Missing identifier in request URL. Please provide a valid user id or email.",
       });
+
+      return;
+    }
 
     try {
       await connectDB();
@@ -63,19 +78,27 @@ export default async function handler(
       const userId = req.query.identifier as string;
       const user = await userService.editUser(editUserData, userId);
 
-      if (!user) res.status(404).json({ message: "User not found" });
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+
       res.status(200).json(user);
     } catch (e) {
       console.error(e);
+      return;
     }
   }
 
   if (req.method === "DELETE") {
-    if (!req.query.identifier)
-      return res.status(400).json({
+    if (!req.query.identifier) {
+      res.status(400).json({
         message:
           "Missing identifier in request URL. Please provide a valid user id or email.",
       });
+
+      return;
+    }
 
     try {
       await connectDB();
@@ -84,10 +107,15 @@ export default async function handler(
       const userId = req.query.identifier as string;
       const user = await userService.deleteUser(userId);
 
-      if (!user) res.status(404).json({ message: "User not found" });
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+        return;
+      }
+
       res.status(200).json(user);
     } catch (e) {
       console.error(e);
+      return;
     }
   }
 }
