@@ -67,7 +67,8 @@ export const measurementFormInitialValues = {
   circumferenceCalf: 0,
 };
 
-export const StatusValues = [
+// Status Values & Colors
+export const STATUS_VALUES = [
   {
     value: "1",
     label: "Bajo Peso",
@@ -86,7 +87,71 @@ export const StatusValues = [
   },
 ];
 
-export const StatusColors = ["blue", "lime", "yellow", "red"];
+export const STATUS_COLORS = ["blue", "lime", "yellow", "red"];
+
+export const VISC_FAT_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Normal",
+  },
+  {
+    value: "2",
+    label: "Alto",
+  },
+];
+
+export const VISC_FAT_STATUS_COLORS = ["lime", "red"];
+
+export const MUSCLE_MASS_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Principiante",
+  },
+  {
+    value: "2",
+    label: "Regular",
+  },
+  {
+    value: "3",
+    label: "Avanzado",
+  }
+];
+
+export const MUSCLE_MASS_STATUS_COLORS = ["red", "lime", "blue"];
+
+export const BONE_MASS_BODY_WATER_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Alto",
+  },
+];
+
+export const BONE_MASS_BODY_WATER_STATUS_COLORS = ["red", "lime", "blue"];
+
+export const MUSCLE_QUALITY_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Baja",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Elevada",
+  },
+];
+
+export const MUSCLE_QUALITY_STATUS_COLORS = ["lime", "blue", "violet"];
 
 export const getSubscriptionColor = (user_type: string) => {
   switch (user_type) {
