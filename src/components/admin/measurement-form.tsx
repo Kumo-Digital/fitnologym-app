@@ -1,7 +1,15 @@
 import { User, UserItem } from "@/types/user";
 import {
-  StatusColors,
-  StatusValues,
+  BONE_MASS_BODY_WATER_STATUS_COLORS,
+  BONE_MASS_BODY_WATER_STATUS_VALUES,
+  MUSCLE_MASS_STATUS_COLORS,
+  MUSCLE_MASS_STATUS_VALUES,
+  MUSCLE_QUALITY_STATUS_COLORS,
+  MUSCLE_QUALITY_STATUS_VALUES,
+  STATUS_COLORS,
+  STATUS_VALUES,
+  VISC_FAT_STATUS_COLORS,
+  VISC_FAT_STATUS_VALUES,
   measurementFormInitialValues,
 } from "@/utils/admin";
 import {
@@ -37,7 +45,63 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
     <Box
       w={8}
       h={8}
-      bg={StatusColors[Number(option.value) - 1]}
+      bg={STATUS_COLORS[Number(option.value) - 1]}
+      style={{
+        borderRadius: "100%",
+      }}
+    ></Box>
+    <Text size="sm">{option.label}</Text>
+  </Group>
+);
+
+const renderSelectOptionViscFat: SelectProps["renderOption"] = ({ option }) => (
+  <Group flex="1" gap="xs">
+    <Box
+      w={8}
+      h={8}
+      bg={VISC_FAT_STATUS_COLORS[Number(option.value) - 1]}
+      style={{
+        borderRadius: "100%",
+      }}
+    ></Box>
+    <Text size="sm">{option.label}</Text>
+  </Group>
+);
+
+const renderSelectOptionMuscleMass: SelectProps["renderOption"] = ({ option }) => (
+  <Group flex="1" gap="xs">
+    <Box
+      w={8}
+      h={8}
+      bg={MUSCLE_MASS_STATUS_COLORS[Number(option.value) - 1]}
+      style={{
+        borderRadius: "100%",
+      }}
+    ></Box>
+    <Text size="sm">{option.label}</Text>
+  </Group>
+);
+
+const renderSelectOptionBoneMassBodyWater: SelectProps["renderOption"] = ({ option }) => (
+  <Group flex="1" gap="xs">
+    <Box
+      w={8}
+      h={8}
+      bg={BONE_MASS_BODY_WATER_STATUS_COLORS[Number(option.value) - 1]}
+      style={{
+        borderRadius: "100%",
+      }}
+    ></Box>
+    <Text size="sm">{option.label}</Text>
+  </Group>
+);
+
+const renderSelectOptionMuscleQuality: SelectProps["renderOption"] = ({ option }) => (
+  <Group flex="1" gap="xs">
+    <Box
+      w={8}
+      h={8}
+      bg={MUSCLE_QUALITY_STATUS_COLORS[Number(option.value) - 1]}
       style={{
         borderRadius: "100%",
       }}
@@ -249,14 +313,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("weightStatus", e)
@@ -299,14 +363,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) => form.setFieldValue("bmiStatus", e)}
                             onBlur={form.handleBlur}
@@ -347,14 +411,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("bodyFatStatus", e)
@@ -397,14 +461,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={VISC_FAT_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionViscFat}
+                            data={VISC_FAT_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("viscFatStatus", e)
@@ -449,14 +513,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={MUSCLE_MASS_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionMuscleMass}
+                            data={MUSCLE_MASS_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("muscleMassStatus", e)
@@ -499,14 +563,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={BONE_MASS_BODY_WATER_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionBoneMassBodyWater}
+                            data={BONE_MASS_BODY_WATER_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("boneMassStatus", e)
@@ -549,14 +613,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) => form.setFieldValue("bmrStatus", e)}
                             onBlur={form.handleBlur}
@@ -597,14 +661,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("metabAgeStatus", e)
@@ -647,14 +711,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={BONE_MASS_BODY_WATER_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionBoneMassBodyWater}
+                            data={BONE_MASS_BODY_WATER_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("bodyWaterStatus", e)
@@ -705,14 +769,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionMuscleQuality}
+                            data={MUSCLE_QUALITY_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("muscleQualityStatus", e)
@@ -763,14 +827,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("physiqueRatingStatus", e)
@@ -846,14 +910,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("trunkMuscleMassStatus", e)
@@ -903,14 +967,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionMuscleQuality}
+                            data={MUSCLE_QUALITY_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("trunkMuscleQualityStatus", e)
@@ -957,14 +1021,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("trunkBodyFatStatus", e)
@@ -1043,14 +1107,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("armRightMuscleMassStatus", e)
@@ -1100,14 +1164,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionMuscleQuality}
+                            data={MUSCLE_QUALITY_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue(
@@ -1160,14 +1224,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("armRightBodyFatStatus", e)
@@ -1221,14 +1285,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("armLeftMuscleMassStatus", e)
@@ -1278,14 +1342,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionMuscleQuality}
+                            data={MUSCLE_QUALITY_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue(
@@ -1338,14 +1402,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("armLeftBodyFatStatus", e)
@@ -1424,14 +1488,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("legRightMuscleMassStatus", e)
@@ -1481,14 +1545,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionMuscleQuality}
+                            data={MUSCLE_QUALITY_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue(
@@ -1541,14 +1605,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("legRightBodyFatStatus", e)
@@ -1602,14 +1666,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("legLeftMuscleMassStatus", e)
@@ -1659,14 +1723,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
-                            data={StatusValues}
+                            renderOption={renderSelectOptionMuscleQuality}
+                            data={MUSCLE_QUALITY_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue(
@@ -1719,14 +1783,14 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={StatusColors[Number(meta.value) - 1]}
+                                bg={STATUS_COLORS[Number(meta.value) - 1]}
                                 style={{
                                   borderRadius: "100%",
                                 }}
                               ></Box>
                             }
                             renderOption={renderSelectOption}
-                            data={StatusValues}
+                            data={STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("legLeftBodyFatStatus", e)
