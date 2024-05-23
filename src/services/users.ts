@@ -40,3 +40,9 @@ export const deleteUser = async (userId: string) => {
 
   return data;
 };
+
+export const getUniqueUser = async (userId: string) => {
+  const { data } = await apiClient.get(apiUrls.users.getById(userId));
+
+  return data;
+};
