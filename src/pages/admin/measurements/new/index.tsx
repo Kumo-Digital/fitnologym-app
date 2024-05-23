@@ -10,6 +10,9 @@ import { useRouter } from "next/router";
 import { useUniqueUser } from "@/hooks/users";
 import MeasurementFormSkeleton from "../measurement-form-skeleton";
 import Head from "next/head";
+import { useEffect, useState } from "react";
+import { getUniqueUser } from "@/services/users";
+import { until } from "@open-draft/until";
 
 export async function getServerSideProps(
   context: GetServerSidePropsContext
@@ -55,17 +58,39 @@ export async function getServerSideProps(
 
 const Page: NextPageWithLayout<{ allUsers: UserItem[] }> = ({ allUsers }) => {
   const { query } = useRouter();
+  const [queryUser, setQueryUser] = useState(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const { user, isLoading: isLoadingUser } = useUniqueUser({
-      id: query.userId as string
-    });
-  if (isLoadingUser) return <MeasurementFormSkeleton />;
+  const fetchUniqueUser = async (userId: string) => {
+    setIsLoading(true);
+    const { data, error } = await until(() => getUniqueUser(userId));
+
+    if (error) {
+      setQueryUser(undefined);
+      setIsLoading(false);
+      return;
+    }
+
+    setQueryUser(data);
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    if (!query.userId) {
+      setIsLoading(false);
+      return;
+    }
+    fetchUniqueUser(query.userId as string);
+
+  }, [query]);
+  
+  if (isLoading) return <MeasurementFormSkeleton />;
   return (
     <>
       <Head>
           <title>Fitnologym App | Agregar nueva Medida</title>
       </Head>
-      <MeasurementForm user={user || undefined} users={allUsers} />
+      <MeasurementForm user={queryUser} users={allUsers} />
     </>
   );
 };
