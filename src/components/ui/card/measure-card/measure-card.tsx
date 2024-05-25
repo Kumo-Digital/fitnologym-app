@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Card,
   Text,
@@ -17,6 +16,8 @@ import {
 } from "@tabler/icons-react";
 import { getMeasureName, getMeasureStatusColor } from "@/utils/measurement";
 import qualityMuscle from "../../../../../public/assets/images/quality-muscle.png";
+import { modals } from "@mantine/modals";
+import Image from "next/image";
 
 interface MeasureCardProps {
   measureTitle: string;
@@ -34,54 +35,54 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
   measureStatus,
 }) => {
   const theme = useMantineTheme();
-  const [isOpen, setIsOpen] = useState(false);
 
-  const [hovered, setHovered] = useState(false);
-  /* para que funcione qualityMuscle como string  le ponemos src */
-  const url = qualityMuscle.src;
+  const qualityMuscleModal = () =>
+    modals.open({
+      children: (
+        <Box
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "247px",
+            borderRadius: 8,
+            overflow: "hidden",
+          }}
+        >
+          <Image
+            src={qualityMuscle}
+            alt="Tabla de calidad muscular"
+            fill
+            sizes="(max-width: 420px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 25vw"
+            style={{ objectFit: "contain" }}
+          />
+        </Box>
+      ),
+      centered: true,
+    });
 
-  const handleHover = () => {
-    setHovered(true);
-  };
-
-  const handleHoverExit = () => {
-    setHovered(false);
-  };
-
-  const handleToggleTooltip = () => {
-    setIsOpen(!isOpen);
-  };
+  const isMuscleQuality = measureTitle === "muscle_quality";
 
   return (
-    <Card radius="md" withBorder p={0}>
+    <Card
+      radius="md"
+      withBorder
+      p={0}
+      onClick={() => {
+        if (isMuscleQuality) qualityMuscleModal();
+      }}
+      style={{ cursor: isMuscleQuality ? "pointer" : "default" }}
+    >
       <Group gap={16} py={24} pl={16} pr={24} align="stretch" wrap="nowrap">
-        {measureTitle === "muscle_quality" && (
-          <Tooltip
-            label=""
-            position="top"
-            withArrow
+        {isMuscleQuality && (
+          <Box
+            miw={8}
+            bg={getMeasureStatusColor(measureStatus ?? 1)}
             style={{
-              backgroundImage: `url(${url})`,
-              backgroundSize: "cover",
-              width: "50vh",
-              height: "30vh",
-              border: "2px solid #74b816",
-              boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.5)",
+              borderRadius: 9999,
             }}
-            onClick={handleToggleTooltip}
-          >
-            <Box
-              miw={8}
-              bg={getMeasureStatusColor(measureStatus ?? 1)}
-              style={{
-                borderRadius: 9999,
-              }}
-              onMouseEnter={handleHover}
-              onMouseLeave={handleHoverExit}
-            ></Box>
-          </Tooltip>
+          ></Box>
         )}
-        {measureTitle !== "muscle_quality" && (
+        {!isMuscleQuality && (
           <Box
             miw={8}
             bg={getMeasureStatusColor(measureStatus ?? 1)}
@@ -96,38 +97,18 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
           style={{ flexGrow: 1 }}
         >
           <Group>
-            {measureTitle !== "muscle_quality" && (
+            {!isMuscleQuality && (
               <Text size="md" c="gray.0" fw={600} maw={150}>
                 {getMeasureName(measureTitle)}
               </Text>
             )}
-            {measureTitle === "muscle_quality" && (
-              <Tooltip
-                label=""
-                position="top"
-                withArrow
-                style={{
-                  backgroundImage: `url(${url})`,
-                  backgroundSize: "cover",
-                  width: "50vh",
-                  height: "30vh",
-                  border: "2px solid #74b816",
-                  boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.5)",
-                }}
-                onClick={handleToggleTooltip}
-              >
-                <Group gap={4}>
-                  <Text size="md" c="gray.0" fw={600} maw={150}>
-                    {getMeasureName(measureTitle)}
-                  </Text>
-                  <IconExclamationCircle
-                    size={16}
-                    stroke={2}
-                    onMouseEnter={handleHover}
-                    onMouseLeave={handleHoverExit}
-                  />
-                </Group>
-              </Tooltip>
+            {isMuscleQuality && (
+              <Group gap={4}>
+                <Text size="md" c="gray.0" fw={600} maw={150}>
+                  {getMeasureName(measureTitle)}
+                </Text>
+                <IconExclamationCircle size={16} stroke={2} />
+              </Group>
             )}
           </Group>
           <Group align="baseline" gap={4}>
