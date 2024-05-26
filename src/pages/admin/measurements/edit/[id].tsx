@@ -36,7 +36,7 @@ export async function getServerSideProps(
   }
   return {
     props: {
-      user,
+      user: JSON.parse(JSON.stringify(user)),
     },
   };
 }
@@ -49,6 +49,7 @@ const Page: NextPageWithLayout = () => {
   const { user, isLoading: isLoadingUser } = useUniqueUser({
     id: measurement?.user_id,
   });
+  console.log(user);
 
   if (isLoadingMeasure || isLoadingUser) return <MeasurementFormSkeleton />;
   return (
