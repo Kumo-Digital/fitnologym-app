@@ -116,12 +116,6 @@ export interface Evolution {
     circumferenceChest: {
       measure_evolution: number;
     };
-    circumferenceShoulders: {
-      measure_evolution: number;
-    };
-    circumferenceArms: {
-      measure_evolution: number;
-    };
     circumferenceWaist: {
       measure_evolution: number;
     };
@@ -131,10 +125,34 @@ export interface Evolution {
     circumferenceGlutes: {
       measure_evolution: number;
     };
-    circumferenceQuads: {
+    circumferenceShouldersLeft: {
       measure_evolution: number;
     };
-    circumferenceCalf: {
+    circumferenceShouldersRight: {
+      measure_evolution: number;
+    };
+    circumferenceArmsLeft: {
+      measure_evolution: number;
+    };
+    circumferenceArmsRight: {
+      measure_evolution: number;
+    };
+    circumferenceFlexedArmsLeft: {
+      measure_evolution: number;
+    };
+    circumferenceFlexedArmsRight: {
+      measure_evolution: number;
+    };
+    circumferenceQuadsLeft: {
+      measure_evolution: number;
+    };
+    circumferenceQuadsRight: {
+      measure_evolution: number;
+    };
+    circumferenceCalfLeft: {
+      measure_evolution: number;
+    };
+    circumferenceCalfRight: {
       measure_evolution: number;
     };
   };
