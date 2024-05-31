@@ -8,6 +8,7 @@ import {
   Text,
   Anchor,
   em,
+  Stack,
 } from "@mantine/core";
 import classes from "./index.module.css";
 import { withAuthLayout } from "@/utils/layouts";
@@ -23,6 +24,7 @@ import Head from "next/head";
 import { appUrls } from "@/lib/appUrls";
 import Image from "next/image";
 import { useMediaQuery } from "@mantine/hooks";
+import { version } from "@/root/package.json";
 
 interface InitialValues {
   email: string;
@@ -107,7 +109,7 @@ const Login = () => {
             isSubmitting,
           }) => {
             return (
-              <Paper className={classes.form} radius={0} p={30}>
+              <Stack className={classes.form} bg="dark.7" p={30}>
                 <Title
                   order={2}
                   className={classes.title}
@@ -123,49 +125,56 @@ const Login = () => {
                     height={isMobile ? 62 : 125}
                   />
                 </Title>
-                <form onSubmit={handleSubmit}>
-                  <TextInput
-                    name="email"
-                    label="Correo Electrónico"
-                    placeholder="usuario@email.com"
-                    size="md"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.email && errors.email}
-                  />
-                  <PasswordInput
-                    name="password"
-                    label="Contraseña"
-                    description="Para el primer ingreso de usuarios, la contraseña es el número de D.N.I."
-                    placeholder="Contraseña"
-                    mt="md"
-                    size="md"
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.password && errors.password}
-                  />
-                  {/* <Checkbox
-                    name="remember"
-                    label="Mantener el inicio de sesión"
-                    mt="xl"
-                    size="md"
-                    checked={values.remember}
-                    onChange={(e) => setFieldValue("remember", e.target.checked)}
-                  /> */}
-                  <Button
-                    fullWidth
-                    mt="xl"
-                    size="md"
-                    c="black"
-                    loading={isSubmitting}
-                    disabled={isSubmitting}
-                    type="submit"
-                  >
-                    Ingresar
-                  </Button>
-                </form>
+                <Stack mb={8}>
+                  <form onSubmit={handleSubmit}>
+                    <TextInput
+                      name="email"
+                      label="Correo Electrónico"
+                      placeholder="usuario@email.com"
+                      size="md"
+                      value={values.email}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={touched.email && errors.email}
+                    />
+                    <PasswordInput
+                      name="password"
+                      label="Contraseña"
+                      description="Para el primer ingreso de usuarios, la contraseña es el número de D.N.I."
+                      placeholder="Contraseña"
+                      mt="md"
+                      size="md"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={touched.password && errors.password}
+                    />
+                    {/* <Checkbox
+                      name="remember"
+                      label="Mantener el inicio de sesión"
+                      mt="xl"
+                      size="md"
+                      checked={values.remember}
+                      onChange={(e) => setFieldValue("remember", e.target.checked)}
+                    /> */}
+                    <Button
+                      fullWidth
+                      mt="xl"
+                      size="md"
+                      c="black"
+                      loading={isSubmitting}
+                      disabled={isSubmitting}
+                      type="submit"
+                    >
+                      Ingresar
+                    </Button>
+                  </form>
+                </Stack>
+                <Stack align="center" style={{flexGrow: 1}} justify="flex-end">
+                  <Text size="xs">
+                    versión <Text style={{ fontWeight: 700 }} component="span">{version}</Text>
+                  </Text>
+                </Stack>
                 {/* <Text ta="center" mt="md">
                   No estás registrado?{" "}
                   <Anchor<"a">
@@ -176,7 +185,7 @@ const Login = () => {
                     Registrarse
                   </Anchor>
                 </Text> */}
-              </Paper>
+              </Stack>
             );
           }}
         </Formik>
