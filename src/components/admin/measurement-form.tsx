@@ -68,7 +68,9 @@ const renderSelectOptionViscFat: SelectProps["renderOption"] = ({ option }) => (
   </Group>
 );
 
-const renderSelectOptionMuscleMass: SelectProps["renderOption"] = ({ option }) => (
+const renderSelectOptionMuscleMass: SelectProps["renderOption"] = ({
+  option,
+}) => (
   <Group flex="1" gap="xs">
     <Box
       w={8}
@@ -82,7 +84,9 @@ const renderSelectOptionMuscleMass: SelectProps["renderOption"] = ({ option }) =
   </Group>
 );
 
-const renderSelectOptionBoneMassBodyWater: SelectProps["renderOption"] = ({ option }) => (
+const renderSelectOptionBoneMassBodyWater: SelectProps["renderOption"] = ({
+  option,
+}) => (
   <Group flex="1" gap="xs">
     <Box
       w={8}
@@ -96,7 +100,9 @@ const renderSelectOptionBoneMassBodyWater: SelectProps["renderOption"] = ({ opti
   </Group>
 );
 
-const renderSelectOptionMuscleQuality: SelectProps["renderOption"] = ({ option }) => (
+const renderSelectOptionMuscleQuality: SelectProps["renderOption"] = ({
+  option,
+}) => (
   <Group flex="1" gap="xs">
     <Box
       w={8}
@@ -461,7 +467,9 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={VISC_FAT_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  VISC_FAT_STATUS_COLORS[Number(meta.value) - 1]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -513,7 +521,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={MUSCLE_MASS_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  MUSCLE_MASS_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -563,7 +575,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={BONE_MASS_BODY_WATER_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  BONE_MASS_BODY_WATER_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -711,7 +727,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={BONE_MASS_BODY_WATER_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  BONE_MASS_BODY_WATER_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -769,7 +789,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  MUSCLE_QUALITY_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -967,7 +991,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  MUSCLE_QUALITY_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -1164,7 +1192,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  MUSCLE_QUALITY_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -1342,7 +1374,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  MUSCLE_QUALITY_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -1545,7 +1581,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  MUSCLE_QUALITY_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -1723,7 +1763,11 @@ export default function MeasurementForm({
                               <Box
                                 w={8}
                                 h={8}
-                                bg={MUSCLE_QUALITY_STATUS_COLORS[Number(meta.value) - 1]}
+                                bg={
+                                  MUSCLE_QUALITY_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
                                 style={{
                                   borderRadius: "100%",
                                 }}
@@ -1874,12 +1918,35 @@ export default function MeasurementForm({
                     <Group grow id="value-circumferenceShoulders">
                       <FastField
                         name="circumferenceShoulders"
-                        placeholder="Hombros"
+                        placeholder="Hombro Izquierdo"
                       >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Hombros"
+                            label="Hombro Izquierdo"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceShoulders", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceShoulders"
+                        placeholder="Hombro Derecho"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Hombro Derecho"
                             value={meta.value}
                             maw="100%"
                             rightSection={
@@ -1897,11 +1964,85 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                     <Group grow id="value-circumferenceArms">
-                      <FastField name="circumferenceArms" placeholder="Brazos">
+                      <FastField
+                        name="circumferenceArms"
+                        placeholder="Brazo Izquierdo"
+                      >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Brazos"
+                            label="Brazo Izquierdo"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceArms", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceArms"
+                        placeholder="Brazo Derecho"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Brazo Derecho"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceArms", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
+                    <Group grow id="value-circumferenceArms">
+                      <FastField
+                        name="circumferenceArms"
+                        placeholder="Brazo Flexionado Izquierdo"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Brazo Flexionado Izquierdo"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceArms", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceArms"
+                        placeholder="Brazo Flexionado Derecho"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Brazo Flexionado Derecho"
                             value={meta.value}
                             maw="100%"
                             rightSection={
@@ -1993,12 +2134,35 @@ export default function MeasurementForm({
                     <Group grow id="value-circumferenceQuads">
                       <FastField
                         name="circumferenceQuads"
-                        placeholder="Cuádriceps"
+                        placeholder="Cuadricep Izquierdo"
                       >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Cuádriceps"
+                            label="Cuadricep Izquierdo"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceQuads", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceQuads"
+                        placeholder="Cuádricep Derecho"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Cuádricep Derecho"
                             value={meta.value}
                             maw="100%"
                             rightSection={
@@ -2018,12 +2182,35 @@ export default function MeasurementForm({
                     <Group grow id="value-circumferenceCalf">
                       <FastField
                         name="circumferenceCalf"
-                        placeholder="Pantorrillas"
+                        placeholder="Pantorrilla Izquierda"
                       >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Pantorrillas"
+                            label="Pantorrilla Izquierda"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceCalf", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceCalf"
+                        placeholder="Pantorrilla Derecha"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Pantorrilla Derecha"
                             value={meta.value}
                             maw="100%"
                             rightSection={
