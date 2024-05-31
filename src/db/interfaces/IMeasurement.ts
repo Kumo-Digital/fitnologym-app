@@ -53,12 +53,28 @@ export interface IMeasurement {
     };
     circumferenceNeck?: CircumferenceObject;
     circumferenceChest?: CircumferenceObject;
-    circumferenceShoulders?: CircumferenceObject;
-    circumferenceArms?: CircumferenceObject;
     circumferenceWaist?: CircumferenceObject;
     circumferenceHips?: CircumferenceObject;
     circumferenceGlutes?: CircumferenceObject;
-    circumferenceQuads?: CircumferenceObject;
-    circumferenceCalf?: CircumferenceObject;
+    circumferenceShoulders?: {
+      left: CircumferenceObject;
+      right: CircumferenceObject;
+    };
+    circumferenceArms?: {
+      left: CircumferenceObject;
+      right: CircumferenceObject;
+    };
+    circumferenceFlexedArms?: {
+      left: CircumferenceObject;
+      right: CircumferenceObject;
+    };
+    circumferenceQuads?: {
+      left: CircumferenceObject;
+      right: CircumferenceObject;
+    };
+    circumferenceCalf?: {
+      left: CircumferenceObject;
+      right: CircumferenceObject;
+    };
   }
 }

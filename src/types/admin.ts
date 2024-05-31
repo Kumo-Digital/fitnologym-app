@@ -57,11 +57,17 @@ export interface MeasurementFormValues {
   legRightBodyFatStatus: number;
   circumferenceNeck: number;
   circumferenceChest: number;
-  circumferenceShoulders: number;
-  circumferenceArms: number;
   circumferenceWaist: number;
   circumferenceHips: number;
   circumferenceGlutes: number;
-  circumferenceQuads: number;
-  circumferenceCalf: number;
+  leftcircumferenceShoulders: number;
+  rightcircumferenceShoulders: number;
+  leftcircumferenceArms: number;
+  rightcircumferenceArms: number;
+  leftcircumferenceFlexedArms: number;
+  rightcircumferenceFlexedArms: number;
+  leftcircumferenceQuads: number;
+  rightcircumferenceQuads: number;
+  leftcircumferenceCalf: number;
+  rightcircumferenceCalf: number;
 }
