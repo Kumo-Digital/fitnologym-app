@@ -1,12 +1,10 @@
 import * as Yup from "yup";
 import {
-  Paper,
   TextInput,
   PasswordInput,
   Button,
   Title,
   Text,
-  Anchor,
   em,
   Stack,
 } from "@mantine/core";
@@ -24,7 +22,7 @@ import Head from "next/head";
 import { appUrls } from "@/lib/appUrls";
 import Image from "next/image";
 import { useMediaQuery } from "@mantine/hooks";
-import { version } from "@/root/package.json";
+import { APP_VERSION } from "@/utils/constants";
 
 interface InitialValues {
   email: string;
@@ -172,7 +170,7 @@ const Login = () => {
                 </Stack>
                 <Stack align="center" style={{flexGrow: 1}} justify="flex-end">
                   <Text size="xs">
-                    versión <Text style={{ fontWeight: 700 }} component="span">{version}</Text>
+                    versión <Text style={{ fontWeight: 700 }} component="span">{APP_VERSION}</Text>
                   </Text>
                 </Stack>
                 {/* <Text ta="center" mt="md">

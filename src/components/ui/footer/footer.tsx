@@ -2,7 +2,7 @@ import { Anchor, Flex, Group, Text, em, useMantineTheme } from "@mantine/core";
 import { NavLinks } from "../navbar/navlinks/navlinks";
 import { useMediaQuery } from "@mantine/hooks";
 import { appUrls } from "@/lib/appUrls";
-import { version } from "@/root/package.json";
+import { APP_VERSION } from "@/utils/constants";
 
 export const Footer = () => {
   const theme = useMantineTheme();
@@ -22,7 +22,7 @@ export const Footer = () => {
           <Text size="xs" c="gray.5" ta={isMobile ? "center" : "left"}>
             © 2024 Fitnology 💚 Todos los derechos reservados. |{" "}
             <Text component="span" size="xs" c="gray.5">
-              v. {version} |{" "}
+              v. {APP_VERSION} |{" "}
             </Text>
             <Anchor
               title="Política de Privacidad"
