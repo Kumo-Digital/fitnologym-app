@@ -179,10 +179,18 @@ export default function MeasurementForm({
         return (
           <Form onSubmit={handleSubmit}>
             <Stack>
-              <Group h={120} align="center">
+              <Group h={120} align="center" justify="space-between">
                 <Title order={1} c="white">
                   {initialValuesForEdit ? "Editar Medida" : "Nueva Medida"}
                 </Title>
+                <Button
+                  variant="subtle"
+                  color="gray"
+                  disabled={isSubmitting}
+                  onClick={() => router.back()}
+                >
+                  Volver
+                </Button>
               </Group>
 
               <Stack mb={32}>

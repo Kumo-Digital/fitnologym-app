@@ -2,7 +2,7 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { armsBodyMetrics } from "@/utils/measurement";
-import { Flex, Stack, Title, em } from "@mantine/core";
+import { Flex, Group, Stack, Title, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -24,12 +24,14 @@ export const BodySectionArms = ({
       if (!armsBodyMetrics.includes(metricName)) return measures;
 
       if (metricName === "left_arm") {
-        const leftArmMetrics = Object.entries(value).map((metric: [string, any]) => ({
-          metricName: metric[0],
-          ...metric[1],
-          evolution:
-            evolution?.metrics[metricName][metric[0]].measure_evolution,
-        }));
+        const leftArmMetrics = Object.entries(value).map(
+          (metric: [string, any]) => ({
+            metricName: metric[0],
+            ...metric[1],
+            evolution:
+              evolution?.metrics[metricName][metric[0]].measure_evolution,
+          })
+        );
         return {
           ...measures,
           left_arm: leftArmMetrics,
@@ -113,15 +115,23 @@ export const BodySectionArms = ({
       </Flex>
       <Stack>
         <Title order={4}>Circunferencias</Title>
-        {armMeasures.circumferences.map((value: Measure, index: number) => (
-          <CircumferenceCard
-            key={`${value.metricName}-${index}`}
-            measureTitle={value.metricName}
-            measureValue={value.measure_value}
-            measureUnit={value.measure_uom}
-            evolutionValue={value.evolution}
-          />
-        ))}
+        {armMeasures.circumferences.map((value: Measure, index: number) => {
+          return (
+            <Group gap={16}>
+              {armMeasures.circumferences.map(
+                (value: Measure, index: number) => (
+                  <CircumferenceCard
+                    key={`${value.metricName}-${index}`}
+                    measureTitle={value.metricName}
+                    measureValue={value.measure_value}
+                    measureUnit={value.measure_uom}
+                    evolutionValue={value.evolution}
+                  />
+                )
+              )}
+            </Group>
+          );
+        })}
       </Stack>
     </Stack>
   );

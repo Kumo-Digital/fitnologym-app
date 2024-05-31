@@ -2,7 +2,7 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { legsBodyMetrics } from "@/utils/measurement";
-import { Flex, Stack, Title, em } from "@mantine/core";
+import { Flex, Group, Stack, Title, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -113,15 +113,35 @@ export const BodySectionLegs = ({
       </Flex>
       <Stack>
         <Title order={4}>Circunferencias</Title>
-        {legMeasures.circumferences.map((value: Measure, index: number) => (
-          <CircumferenceCard
-            key={`${value.metricName}-${index}`}
-            measureTitle={value.metricName}
-            measureValue={value.measure_value}
-            measureUnit={value.measure_uom}
-            evolutionValue={value.evolution}
-          />
-        ))}
+        {legMeasures.circumferences.map((value: Measure, index: number) => {
+          if (value === "circumferenceGlutes") {
+            return (
+              <CircumferenceCard
+                key={`${value.metricName}-${index}`}
+                measureTitle={value.metricName}
+                measureValue={value.measure_value}
+                measureUnit={value.measure_uom}
+                evolutionValue={value.evolution}
+              />
+            );
+          } else {
+            return (
+              <Group gap={16}>
+                {legMeasures.circumferences.map(
+                  (value: Measure, index: number) => (
+                    <CircumferenceCard
+                      key={`${value.metricName}-${index}`}
+                      measureTitle={value.metricName}
+                      measureValue={value.measure_value}
+                      measureUnit={value.measure_uom}
+                      evolutionValue={value.evolution}
+                    />
+                  )
+                )}
+              </Group>
+            );
+          }
+        })}
       </Stack>
     </Stack>
   );
