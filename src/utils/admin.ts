@@ -58,13 +58,19 @@ export const measurementFormInitialValues = {
   legRightBodyFatStatus: "2",
   circumferenceNeck: 0,
   circumferenceChest: 0,
-  circumferenceShoulders: 0,
-  circumferenceArms: 0,
+  leftcircumferenceShoulders: 0,
+  rightcircumferenceShoulders: 0,
+  leftcircumferenceArms: 0,
+  rightcircumferenceArms: 0,
+  leftcircumferenceFlexedArms: 0,
+  rightcircumferenceFlexedArms: 0,
   circumferenceWaist: 0,
   circumferenceHips: 0,
   circumferenceGlutes: 0,
-  circumferenceQuads: 0,
-  circumferenceCalf: 0,
+  leftcircumferenceQuads: 0,
+  rightcircumferenceQuads: 0,
+  leftcircumferenceCalf: 0,
+  rightcircumferenceCalf: 0,
 };
 
 // Status Values & Colors
@@ -114,7 +120,7 @@ export const MUSCLE_MASS_STATUS_VALUES = [
   {
     value: "3",
     label: "Avanzado",
-  }
+  },
 ];
 
 export const MUSCLE_MASS_STATUS_COLORS = ["red", "lime", "blue"];
