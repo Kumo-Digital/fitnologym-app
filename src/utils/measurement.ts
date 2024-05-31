@@ -179,51 +179,51 @@ export const prepareMeasurementForInsert = (
       circumferenceShoulders: {
         left: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.leftcircumferenceShoulders ?? null,
+          measure_value: payload.circumferenceShouldersLeft ?? null,
         },
         right: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.rightcircumferenceShoulders ?? null,
+          measure_value: payload.circumferenceShouldersRight ?? null,
         },
       },
       circumferenceArms: {
         left: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.leftcircumferenceArms ?? null,
+          measure_value: payload.circumferenceArmsLeft ?? null,
         },
         right: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.rightcircumferenceArms ?? null,
+          measure_value: payload.circumferenceArmsRight ?? null,
         },
       },
       circumferenceFlexedArms: {
         left: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.leftcircumferenceFlexedArms ?? null,
+          measure_value: payload.circumferenceFlexedArmsLeft ?? null,
         },
         right: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.rightcircumferenceFlexedArms ?? null,
+          measure_value: payload.circumferenceFlexedArmsRight ?? null,
         },
       },
       circumferenceQuads: {
         left: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.leftcircumferenceQuads ?? null,
+          measure_value: payload.circumferenceQuadsLeft ?? null,
         },
         right: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.rightcircumferenceQuads ?? null,
+          measure_value: payload.circumferenceQuadsRight ?? null,
         },
       },
       circumferenceCalf: {
         left: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.leftcircumferenceCalf ?? null,
+          measure_value: payload.circumferenceCalfLeft ?? null,
         },
         right: {
           measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.rightcircumferenceCalf ?? null,
+          measure_value: payload.circumferenceCalfRight ?? null,
         },
       },
     },
@@ -316,16 +316,16 @@ export const prepareMeasurementForEditForm = (
     circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
     circumferenceGlutes:
       payload.metrics.circumferenceGlutes?.measure_value || 0,
-    leftcircumferenceShoulders: payload.metrics.circumferenceShoulders?.left.measure_value || 0,
-    rightcircumferenceShoulders: payload.metrics.circumferenceShoulders?.right.measure_value || 0,
-    leftcircumferenceArms: payload.metrics.circumferenceArms?.left.measure_value || 0,
-    rightcircumferenceArms: payload.metrics.circumferenceArms?.right.measure_value || 0,
-    leftcircumferenceFlexedArms: payload.metrics.circumferenceFlexedArms?.left.measure_value || 0,
-    rightcircumferenceFlexedArms: payload.metrics.circumferenceFlexedArms?.right.measure_value || 0,
-    leftcircumferenceQuads: payload.metrics.circumferenceQuads?.left.measure_value || 0,
-    rightcircumferenceQuads: payload.metrics.circumferenceQuads?.right.measure_value || 0,
-    leftcircumferenceCalf: payload.metrics.circumferenceCalf?.left.measure_value || 0,
-    rightcircumferenceCalf: payload.metrics.circumferenceCalf?.right.measure_value || 0,
+    circumferenceShouldersLeft: payload.metrics.circumferenceShoulders?.left.measure_value || 0,
+    circumferenceShouldersRight: payload.metrics.circumferenceShoulders?.right.measure_value || 0,
+    circumferenceArmsLeft: payload.metrics.circumferenceArms?.left.measure_value || 0,
+    circumferenceArmsRight: payload.metrics.circumferenceArms?.right.measure_value || 0,
+    circumferenceFlexedArmsLeft: payload.metrics.circumferenceFlexedArms?.left.measure_value || 0,
+    circumferenceFlexedArmsRight: payload.metrics.circumferenceFlexedArms?.right.measure_value || 0,
+    circumferenceQuadsLeft: payload.metrics.circumferenceQuads?.left.measure_value || 0,
+    circumferenceQuadsRight: payload.metrics.circumferenceQuads?.right.measure_value || 0,
+    circumferenceCalfLeft: payload.metrics.circumferenceCalf?.left.measure_value || 0,
+    circumferenceCalfRight: payload.metrics.circumferenceCalf?.right.measure_value || 0,
   };
 
   return preparedMeasurement;
@@ -723,43 +723,43 @@ export const measurementFormValidationSchema = Yup.object().shape({
     0,
     "La circunferencia no puede ser negativa"
   ),
-  leftcircumferenceShoulders: Yup.number().min(
+  circumferenceShouldersLeft: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  rightcircumferenceShoulders: Yup.number().min(
+  circumferenceShouldersRight: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  leftcircumferenceArms: Yup.number().min(
+  circumferenceArmsLeft: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  rightcircumferenceArms: Yup.number().min(
+  circumferenceArmsRight: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  leftcircumferenceFlexedArms: Yup.number().min(
+  circumferenceFlexedArmsLeft: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  rightcircumferenceFlexedArms: Yup.number().min(
+  circumferenceFlexedArmsRight: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  leftcircumferenceQuads: Yup.number().min(
+  circumferenceQuadsLeft: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  rightcircumferenceQuads: Yup.number().min(
+  circumferenceQuadsRight: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  leftcircumferenceCalf: Yup.number().min(
+  circumferenceCalfLeft: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  rightcircumferenceCalf: Yup.number().min(
+  circumferenceCalfRight: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
