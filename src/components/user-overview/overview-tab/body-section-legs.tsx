@@ -178,7 +178,6 @@ export const BodySectionLegs = ({
       <Stack>
         <Title order={4}>Circunferencias</Title>
         {legMeasures.circumferences.map((value: Measure, index: number) => {
-          console.log("legs values", value);
           if (value.metricName === "circumferenceGlutes") {
             return (
               <CircumferenceCard
