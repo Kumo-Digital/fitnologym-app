@@ -316,16 +316,26 @@ export const prepareMeasurementForEditForm = (
     circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
     circumferenceGlutes:
       payload.metrics.circumferenceGlutes?.measure_value || 0,
-    circumferenceShouldersLeft: payload.metrics.circumferenceShoulders?.left.measure_value || 0,
-    circumferenceShouldersRight: payload.metrics.circumferenceShoulders?.right.measure_value || 0,
-    circumferenceArmsLeft: payload.metrics.circumferenceArms?.left.measure_value || 0,
-    circumferenceArmsRight: payload.metrics.circumferenceArms?.right.measure_value || 0,
-    circumferenceFlexedArmsLeft: payload.metrics.circumferenceFlexedArms?.left.measure_value || 0,
-    circumferenceFlexedArmsRight: payload.metrics.circumferenceFlexedArms?.right.measure_value || 0,
-    circumferenceQuadsLeft: payload.metrics.circumferenceQuads?.left.measure_value || 0,
-    circumferenceQuadsRight: payload.metrics.circumferenceQuads?.right.measure_value || 0,
-    circumferenceCalfLeft: payload.metrics.circumferenceCalf?.left.measure_value || 0,
-    circumferenceCalfRight: payload.metrics.circumferenceCalf?.right.measure_value || 0,
+    circumferenceShouldersLeft:
+      payload.metrics.circumferenceShoulders?.left.measure_value || 0,
+    circumferenceShouldersRight:
+      payload.metrics.circumferenceShoulders?.right.measure_value || 0,
+    circumferenceArmsLeft:
+      payload.metrics.circumferenceArms?.left.measure_value || 0,
+    circumferenceArmsRight:
+      payload.metrics.circumferenceArms?.right.measure_value || 0,
+    circumferenceFlexedArmsLeft:
+      payload.metrics.circumferenceFlexedArms?.left.measure_value || 0,
+    circumferenceFlexedArmsRight:
+      payload.metrics.circumferenceFlexedArms?.right.measure_value || 0,
+    circumferenceQuadsLeft:
+      payload.metrics.circumferenceQuads?.left.measure_value || 0,
+    circumferenceQuadsRight:
+      payload.metrics.circumferenceQuads?.right.measure_value || 0,
+    circumferenceCalfLeft:
+      payload.metrics.circumferenceCalf?.left.measure_value || 0,
+    circumferenceCalfRight:
+      payload.metrics.circumferenceCalf?.right.measure_value || 0,
   };
 
   return preparedMeasurement;
@@ -495,12 +505,9 @@ export const torsoBodyMetrics = [
 export const armsBodyMetrics = [
   "left_arm",
   "right_arm",
-  "circumferenceShouldersLeft",
-  "circumferenceShouldersRight",
-  "circumferenceArmsLeft",
-  "circumferenceArmsRight",
-  "circumferenceFlexedArmsLeft",
-  "circumferenceFlexedArmsRight",
+  "circumferenceShoulders",
+  "circumferenceArms",
+  "circumferenceFlexedArms",
 ];
 
 export const legsBodyMetrics = [

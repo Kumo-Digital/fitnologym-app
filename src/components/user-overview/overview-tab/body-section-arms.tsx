@@ -19,6 +19,7 @@ export const BodySectionArms = ({
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
   const isMobileLG = useMediaQuery(`(max-width: ${em(1024)})`);
+
   const armMeasures: ArmMeasures = Object.entries(lastMeasure.metrics).reduce(
     (measures, [metricName, value]: any) => {
       if (!armsBodyMetrics.includes(metricName)) return measures;
@@ -55,15 +56,39 @@ export const BodySectionArms = ({
                 ...measures?.circumferences,
                 {
                   metricName,
-                  evolution: evolution?.metrics[metricName].measure_evolution,
-                  ...value,
+                  metricValue: {
+                    left: {
+                      ...value.left,
+                      measure_evolution:
+                        evolution?.metrics[`${metricName}Left`]
+                          .measure_evolution,
+                    },
+                    right: {
+                      ...value.right,
+                      measure_evolution:
+                        evolution?.metrics[`${metricName}Right`]
+                          .measure_evolution,
+                    },
+                  },
                 },
               ]
             : [
                 {
                   metricName,
-                  ...value,
-                  evolution: evolution?.metrics[metricName].measure_evolution,
+                  metricValue: {
+                    left: {
+                      ...value.left,
+                      measure_evolution:
+                        evolution?.metrics[`${metricName}Left`]
+                          .measure_evolution,
+                    },
+                    right: {
+                      ...value.right,
+                      measure_evolution:
+                        evolution?.metrics[`${metricName}Right`]
+                          .measure_evolution,
+                    },
+                  },
                 },
               ],
         };
@@ -115,23 +140,24 @@ export const BodySectionArms = ({
       </Flex>
       <Stack>
         <Title order={4}>Circunferencias</Title>
-        {armMeasures.circumferences.map((value: Measure, index: number) => {
-          return (
-            <Group gap={16}>
-              {armMeasures.circumferences.map(
-                (value: Measure, index: number) => (
-                  <CircumferenceCard
-                    key={`${value.metricName}-${index}`}
-                    measureTitle={value.metricName}
-                    measureValue={value.measure_value}
-                    measureUnit={value.measure_uom}
-                    evolutionValue={value.evolution}
-                  />
-                )
-              )}
-            </Group>
-          );
-        })}
+        {armMeasures.circumferences.map((value: Measure, index: number) => (
+          <Stack gap={16}>
+            <CircumferenceCard
+              key={`${value.metricName}Left-${index}`}
+              measureTitle={`${value.metricName}Left`}
+              measureValue={value.metricValue.left.measure_value}
+              measureUnit={value.metricValue.left.measure_uom}
+              evolutionValue={value.metricValue.left.evolution}
+            />
+            <CircumferenceCard
+              key={`${value.metricName}Right-${index}`}
+              measureTitle={`${value.metricName}Right`}
+              measureValue={value.metricValue.right.measure_value}
+              measureUnit={value.metricValue.right.measure_uom}
+              evolutionValue={value.metricValue.right.evolution}
+            />
+          </Stack>
+        ))}
       </Stack>
     </Stack>
   );
