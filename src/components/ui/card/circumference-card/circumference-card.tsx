@@ -32,11 +32,11 @@ export const CircumferenceCard = ({
     <Card radius="md" withBorder p={0}>
       <Group gap={16} p={16} align="stretch">
         <Box miw={8} bg="lime.5" style={{ borderRadius: 9999 }}></Box>
-        <Box flex={"1 0 0"}>
-          <Text size="xl" fw={600} c="gray.0" my="auto">
+        <Stack flex={"1 0 0"} align="flex-start" justify="center">
+          <Text size="xl" fw={600} c="gray.0">
             {getMeasureName(measureTitle)}
           </Text>
-        </Box>
+        </Stack>
         <Group gap={32}>
           <Stack align="flex-end" justify="space-between">
             <Text size="md" fw={600} c="gray.5">

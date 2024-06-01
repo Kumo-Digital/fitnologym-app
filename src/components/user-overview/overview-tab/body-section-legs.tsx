@@ -53,35 +53,19 @@ export const BodySectionLegs = ({
                 ...measures?.circumferences,
                 {
                   metricName,
-                  metricValue: {
-                    left: {
-                      ...value.left,
-                      measure_evolution:
-                        evolution?.metrics[metricName].measure_evolution,
-                    },
-                    right: {
-                      ...value.right,
-                      measure_evolution:
-                        evolution?.metrics[metricName].measure_evolution,
-                    },
-                  },
+
+                  ...value,
+                  measure_evolution:
+                    evolution?.metrics[metricName].measure_evolution,
                 },
               ]
             : [
                 {
                   metricName,
-                  metricValue: {
-                    left: {
-                      ...value.left,
-                      measure_evolution:
-                        evolution?.metrics[metricName].measure_evolution,
-                    },
-                    right: {
-                      ...value.right,
-                      measure_evolution:
-                        evolution?.metrics[metricName].measure_evolution,
-                    },
-                  },
+
+                  ...value,
+                  measure_evolution:
+                    evolution?.metrics[metricName].measure_evolution,
                 },
               ],
         };
