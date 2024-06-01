@@ -514,10 +514,8 @@ export const legsBodyMetrics = [
   "left_leg",
   "right_leg",
   "circumferenceGlutes",
-  "circumferenceQuadsLeft",
-  "circumferenceQuadsRight",
-  "circumferenceCalfLeft",
-  "circumferenceCalfRight",
+  "circumferenceQuads",
+  "circumferenceCalf",
 ];
 
 export const metricsSelectOptions = [
