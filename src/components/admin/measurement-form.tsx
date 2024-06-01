@@ -1925,7 +1925,7 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-circumferenceShoulders">
                       <FastField
-                        name="leftcircumferenceShoulders"
+                        name="circumferenceShouldersLeft"
                         placeholder="Hombro Izquierdo"
                       >
                         {({ field, form, meta }: any) => (
@@ -1941,7 +1941,7 @@ export default function MeasurementForm({
                             }
                             onChange={(e) =>
                               form.setFieldValue(
-                                "leftcircumferenceShoulders",
+                                "circumferenceShouldersLeft",
                                 e
                               )
                             }
@@ -1951,7 +1951,7 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                       <FastField
-                        name="rightcircumferenceShoulders"
+                        name="circumferenceShouldersRight"
                         placeholder="Hombro Derecho"
                       >
                         {({ field, form, meta }: any) => (
@@ -1967,7 +1967,7 @@ export default function MeasurementForm({
                             }
                             onChange={(e) =>
                               form.setFieldValue(
-                                "rightcircumferenceShoulders",
+                                "circumferenceShouldersRight",
                                 e
                               )
                             }
@@ -1979,7 +1979,7 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-circumferenceArms">
                       <FastField
-                        name="leftcircumferenceArms"
+                        name="circumferenceArmsLeft"
                         placeholder="Brazo Izquierdo"
                       >
                         {({ field, form, meta }: any) => (
@@ -1994,7 +1994,7 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("leftcircumferenceArms", e)
+                              form.setFieldValue("circumferenceArmsLeft", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -2002,7 +2002,7 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                       <FastField
-                        name="rightcircumferenceArms"
+                        name="circumferenceArmsRight"
                         placeholder="Brazo Derecho"
                       >
                         {({ field, form, meta }: any) => (
@@ -2017,7 +2017,7 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("rightcircumferenceArms", e)
+                              form.setFieldValue("circumferenceArmsRight", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -2027,7 +2027,7 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-circumferenceFlexedArms">
                       <FastField
-                        name="leftcircumferenceFlexedArms"
+                        name="circumferenceFlexedArmsLeft"
                         placeholder="Brazo Flexionado Izquierdo"
                       >
                         {({ field, form, meta }: any) => (
@@ -2043,7 +2043,7 @@ export default function MeasurementForm({
                             }
                             onChange={(e) =>
                               form.setFieldValue(
-                                "leftcircumferenceFlexedArms",
+                                "circumferenceFlexedArmsLeft",
                                 e
                               )
                             }
@@ -2053,7 +2053,7 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                       <FastField
-                        name="rightcircumferenceFlexedArms"
+                        name="circumferenceFlexedArmsRight"
                         placeholder="Brazo Flexionado Derecho"
                       >
                         {({ field, form, meta }: any) => (
@@ -2069,7 +2069,7 @@ export default function MeasurementForm({
                             }
                             onChange={(e) =>
                               form.setFieldValue(
-                                "rightcircumferenceFlexedArms",
+                                "circumferenceFlexedArmsRight",
                                 e
                               )
                             }
@@ -2153,7 +2153,7 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-circumferenceQuads">
                       <FastField
-                        name="leftcircumferenceQuads"
+                        name="circumferenceQuadsLeft"
                         placeholder="Cuadricep Izquierdo"
                       >
                         {({ field, form, meta }: any) => (
@@ -2168,7 +2168,7 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("leftcircumferenceQuads", e)
+                              form.setFieldValue("circumferenceQuadsLeft", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -2176,7 +2176,7 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                       <FastField
-                        name="rightcircumferenceQuads"
+                        name="circumferenceQuadsRight"
                         placeholder="Cuádricep Derecho"
                       >
                         {({ field, form, meta }: any) => (
@@ -2191,7 +2191,7 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("rightcircumferenceQuads", e)
+                              form.setFieldValue("circumferenceQuadsRight", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -2201,7 +2201,7 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-circumferenceCalf">
                       <FastField
-                        name="leftcircumferenceCalf"
+                        name="circumferenceCalfLeft"
                         placeholder="Pantorrilla Izquierda"
                       >
                         {({ field, form, meta }: any) => (
@@ -2216,7 +2216,7 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("leftcircumferenceCalf", e)
+                              form.setFieldValue("circumferenceCalfLeft", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -2224,7 +2224,7 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                       <FastField
-                        name="rightcircumferenceCalf"
+                        name="circumferenceCalfRight"
                         placeholder="Pantorrilla Derecha"
                       >
                         {({ field, form, meta }: any) => (
@@ -2239,7 +2239,7 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("rightcircumferenceCalf", e)
+                              form.setFieldValue("circumferenceCalfRight", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
