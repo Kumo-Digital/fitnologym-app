@@ -313,7 +313,7 @@ const metricLabels = [
 export const prepareMeasurementForDisplay = (
   payload: Metrics
 ): Record<string, any>[] => {
-  if (!payload.filtered_metrics) return [];
+  if (!payload?.filtered_metrics) return [];
   const preparedMeasurement = payload.filtered_metrics.map((entry) => {
     return metricLabels.reduce(
       (acc: any, curr) => {

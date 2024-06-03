@@ -35,6 +35,7 @@ const AnalysisTableFilters = ({
   filters,
   handleFiltersChange,
   firstMeasure,
+  lastMeasure,
 }: AnalysisTableFiltersProps) => {
   return (
     <Formik
@@ -86,7 +87,7 @@ const AnalysisTableFilters = ({
                 minDate={
                   firstMeasure?.date ? new Date(firstMeasure.date) : undefined
                 }
-                maxDate={new Date()}
+                maxDate={lastMeasure.date}
                 onChange={(e) => {
                   setFieldValue("dateRange", e);
                 }}
