@@ -8,11 +8,13 @@ import {
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
+import { modals } from "@mantine/modals";
 import {
   IconChevronsDown,
   IconChevronsUp,
   IconLineDashed,
 } from "@tabler/icons-react";
+import { MeasureCardInfoModal } from "../measure-card/measure-card-info-modal";
 
 interface CircumferenceCardProps {
   measureTitle: string;
@@ -28,8 +30,27 @@ export const CircumferenceCard = ({
   evolutionValue,
 }: CircumferenceCardProps) => {
   const theme = useMantineTheme();
+
+  const measurementModals = {
+    checkModal: (measure: string) =>
+      modals.open({
+        children: <MeasureCardInfoModal measureTitle={measure} />,
+        title: getMeasureName(measure),
+        size: "md",
+        withCloseButton: true,
+        centered: true,
+      }),
+  };
+
   return (
-    <Card radius="md" withBorder p={0}>
+    <Card
+      radius="md"
+      withBorder
+      p={0}
+      onClick={() => {
+        measurementModals.checkModal(measureTitle);
+      }}
+    >
       <Group gap={16} p={16} align="stretch">
         <Box miw={8} bg="lime.5" style={{ borderRadius: 9999 }}></Box>
         <Text size="xl" fw={600} c="gray.0" my="auto" style={{ flexGrow: 1 }}>
