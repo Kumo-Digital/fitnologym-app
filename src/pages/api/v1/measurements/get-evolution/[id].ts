@@ -200,18 +200,6 @@ export default async function handler(
               lastMeasure?.metrics?.circumferenceChest?.measure_value as number
             ),
           },
-          circumferenceShoulders: {
-            measure_evolution: getRemainingPercentageFromMeasures(
-              previousToLastMeasure?.metrics?.circumferenceShoulders?.measure_value as number, 
-              lastMeasure?.metrics?.circumferenceShoulders?.measure_value as number
-            ),
-          },
-          circumferenceArms: {
-            measure_evolution: getRemainingPercentageFromMeasures(
-              previousToLastMeasure?.metrics?.circumferenceArms?.measure_value as number, 
-              lastMeasure?.metrics?.circumferenceArms?.measure_value as number
-            ),
-          },
           circumferenceWaist: {
             measure_evolution: getRemainingPercentageFromMeasures(
               previousToLastMeasure?.metrics?.circumferenceWaist?.measure_value as number, 
@@ -230,16 +218,64 @@ export default async function handler(
               lastMeasure?.metrics?.circumferenceGlutes?.measure_value as number
             ),
           },
-          circumferenceQuads: {
+          circumferenceShouldersLeft: {
             measure_evolution: getRemainingPercentageFromMeasures(
-              previousToLastMeasure?.metrics?.circumferenceQuads?.measure_value as number, 
-              lastMeasure?.metrics?.circumferenceQuads?.measure_value as number
+              previousToLastMeasure?.metrics?.circumferenceShoulders?.left.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceShoulders?.left.measure_value as number
             ),
           },
-          circumferenceCalf: {
+          circumferenceShouldersRight: {
             measure_evolution: getRemainingPercentageFromMeasures(
-              previousToLastMeasure?.metrics?.circumferenceCalf?.measure_value as number, 
-              lastMeasure?.metrics?.circumferenceCalf?.measure_value as number
+              previousToLastMeasure?.metrics?.circumferenceShoulders?.right.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceShoulders?.right.measure_value as number
+            ),
+          },
+          circumferenceArmsLeft: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure?.metrics?.circumferenceArms?.left.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceArms?.left.measure_value as number
+            ),
+          },
+          circumferenceArmsRight: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure?.metrics?.circumferenceArms?.right.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceArms?.right.measure_value as number
+            ),
+          },
+          circumferenceFlexedArmsLeft: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure?.metrics?.circumferenceArms?.left.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceArms?.left.measure_value as number
+            ),
+          },
+          circumferenceFlexedArmsRight: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure?.metrics?.circumferenceArms?.right.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceArms?.right.measure_value as number
+            ),
+          },
+          circumferenceQuadsLeft: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure?.metrics?.circumferenceQuads?.left.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceQuads?.left.measure_value as number
+            ),
+          },
+          circumferenceQuadsRight: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure?.metrics?.circumferenceQuads?.right.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceQuads?.right.measure_value as number
+            ),
+          },
+          circumferenceCalfLeft: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure?.metrics?.circumferenceCalf?.left.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceCalf?.left.measure_value as number
+            ),
+          },
+          circumferenceCalfRight: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure?.metrics?.circumferenceCalf?.right.measure_value as number, 
+              lastMeasure?.metrics?.circumferenceCalf?.right.measure_value as number
             ),
           }
         }

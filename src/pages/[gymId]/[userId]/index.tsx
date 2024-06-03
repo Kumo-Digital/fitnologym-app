@@ -61,8 +61,9 @@ const UserOverview = ({ sessionUser }: { sessionUser: User }) => {
   );
 
   if (query.userId === "undefined") return <UserOverviewEmpty />;
-  if (isLoading || isLoadingLastMeasure || isLoadingEvolution)
+  if (isLoading || isLoadingLastMeasure || isLoadingEvolution) {
     return <UserOverviewSkeleton />;
+  }
   return (
     <>
       <Head>

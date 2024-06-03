@@ -271,10 +271,18 @@ export default function MeasurementForm({
         return (
           <Form onSubmit={handleSubmit}>
             <Stack>
-              <Group h={120} align="center">
+              <Group h={120} align="center" justify="space-between">
                 <Title order={1} c="white">
                   {initialValuesForEdit ? "Editar Medida" : "Nueva Medida"}
                 </Title>
+                <Button
+                  variant="subtle"
+                  color="gray"
+                  disabled={isSubmitting}
+                  onClick={() => router.back()}
+                >
+                  Volver
+                </Button>
               </Group>
 
               <Stack mb={32}>
@@ -2057,13 +2065,13 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-circumferenceShoulders">
                       <FastField
-                        name="circumferenceShoulders"
-                        placeholder="Hombros"
+                        name="circumferenceShouldersLeft"
+                        placeholder="Hombro Izquierdo"
                       >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Hombros"
+                            label="Hombro Izquierdo"
                             value={meta.value}
                             maw="100%"
                             rightSection={
@@ -2072,7 +2080,36 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("circumferenceShoulders", e)
+                              form.setFieldValue(
+                                "circumferenceShouldersLeft",
+                                e
+                              )
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceShouldersRight"
+                        placeholder="Hombro Derecho"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Hombro Derecho"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue(
+                                "circumferenceShouldersRight",
+                                e
+                              )
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -2081,11 +2118,14 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                     <Group grow id="value-circumferenceArms">
-                      <FastField name="circumferenceArms" placeholder="Brazos">
+                      <FastField
+                        name="circumferenceArmsLeft"
+                        placeholder="Brazo Izquierdo"
+                      >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Brazos"
+                            label="Brazo Izquierdo"
                             value={meta.value}
                             maw="100%"
                             rightSection={
@@ -2094,7 +2134,84 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("circumferenceArms", e)
+                              form.setFieldValue("circumferenceArmsLeft", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceArmsRight"
+                        placeholder="Brazo Derecho"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Brazo Derecho"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceArmsRight", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
+                    <Group grow id="value-circumferenceFlexedArms">
+                      <FastField
+                        name="circumferenceFlexedArmsLeft"
+                        placeholder="Brazo Flexionado Izquierdo"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Brazo Flexionado Izquierdo"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue(
+                                "circumferenceFlexedArmsLeft",
+                                e
+                              )
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceFlexedArmsRight"
+                        placeholder="Brazo Flexionado Derecho"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Brazo Flexionado Derecho"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue(
+                                "circumferenceFlexedArmsRight",
+                                e
+                              )
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -2176,13 +2293,13 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-circumferenceQuads">
                       <FastField
-                        name="circumferenceQuads"
-                        placeholder="Cuádriceps"
+                        name="circumferenceQuadsLeft"
+                        placeholder="Cuadricep Izquierdo"
                       >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Cuádriceps"
+                            label="Cuadricep Izquierdo"
                             value={meta.value}
                             maw="100%"
                             rightSection={
@@ -2191,7 +2308,30 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("circumferenceQuads", e)
+                              form.setFieldValue("circumferenceQuadsLeft", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceQuadsRight"
+                        placeholder="Cuádricep Derecho"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Cuádricep Derecho"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceQuadsRight", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -2201,13 +2341,13 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-circumferenceCalf">
                       <FastField
-                        name="circumferenceCalf"
-                        placeholder="Pantorrillas"
+                        name="circumferenceCalfLeft"
+                        placeholder="Pantorrilla Izquierda"
                       >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Pantorrillas"
+                            label="Pantorrilla Izquierda"
                             value={meta.value}
                             maw="100%"
                             rightSection={
@@ -2216,7 +2356,30 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue("circumferenceCalf", e)
+                              form.setFieldValue("circumferenceCalfLeft", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceCalfRight"
+                        placeholder="Pantorrilla Derecha"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Pantorrilla Derecha"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceCalfRight", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}

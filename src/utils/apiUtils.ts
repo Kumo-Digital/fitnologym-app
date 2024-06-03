@@ -1,48 +1,25 @@
+import { coreClient, mockClient } from "@/lib/apiClient";
+import { AxiosError } from "axios";
+
 const coreUrl = process.env.NEXT_PUBLIC_API_URL;
 const mockUrl = process.env.NEXT_PUBLIC_MOCK_API_URL;
 const token = `Bearer ${process.env.NEXT_PUBLIC_ADMIN_TOKEN}`;
 const API_URL_V1 = "/api/v1";
 
 export const apiFetcher = async (url: string) => {
-  try {
-    const response = await fetch(`${API_URL_V1}${url}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-
-    if (!response.ok) {
-      if (response.status === 404) throw new Error("404, Not found");
-      if (response.status === 500)
-        throw new Error("500, internal server error");
-      throw new Error(response.statusText);
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error: ", error);
-    return;
-  }
-};
+  return coreClient
+    .get<any>(url)
+    .then((res) => res.data)
+    .catch((e: AxiosError | any) => {
+      // TODO: Handle Error, should we logout the user from the site?
+  });
+}
 
 export const mockFetcher = async (url: string) => {
-  try {
-    const response = await fetch(`${mockUrl}${url}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-
-    if (!response.ok) {
-      if (response.status === 404) throw new Error("404, Not found");
-      if (response.status === 500)
-        throw new Error("500, internal server error");
-      throw new Error(response.statusText);
-    }
-
-    return response.json();
-  } catch (error) {
-    console.error("Error: ", error);
-    return;
-  }
-};
+  return mockClient
+    .get<any>(url)
+    .then((res) => res.data)
+    .catch((e: AxiosError | any) => {
+      // TODO: Handle Error, should we logout the user from the site?
+  });
+}

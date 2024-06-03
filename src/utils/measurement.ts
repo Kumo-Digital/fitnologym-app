@@ -164,14 +164,6 @@ export const prepareMeasurementForInsert = (
         measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
         measure_value: payload.circumferenceChest ?? null,
       },
-      circumferenceShoulders: {
-        measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-        measure_value: payload.circumferenceShoulders ?? null,
-      },
-      circumferenceArms: {
-        measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-        measure_value: payload.circumferenceArms ?? null,
-      },
       circumferenceWaist: {
         measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
         measure_value: payload.circumferenceWaist ?? null,
@@ -184,13 +176,55 @@ export const prepareMeasurementForInsert = (
         measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
         measure_value: payload.circumferenceGlutes ?? null,
       },
+      circumferenceShoulders: {
+        left: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceShouldersLeft ?? null,
+        },
+        right: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceShouldersRight ?? null,
+        },
+      },
+      circumferenceArms: {
+        left: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceArmsLeft ?? null,
+        },
+        right: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceArmsRight ?? null,
+        },
+      },
+      circumferenceFlexedArms: {
+        left: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceFlexedArmsLeft ?? null,
+        },
+        right: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceFlexedArmsRight ?? null,
+        },
+      },
       circumferenceQuads: {
-        measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-        measure_value: payload.circumferenceQuads ?? null,
+        left: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceQuadsLeft ?? null,
+        },
+        right: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceQuadsRight ?? null,
+        },
       },
       circumferenceCalf: {
-        measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-        measure_value: payload.circumferenceCalf ?? null,
+        left: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceCalfLeft ?? null,
+        },
+        right: {
+          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+          measure_value: payload.circumferenceCalfRight ?? null,
+        },
       },
     },
   };
@@ -278,15 +312,30 @@ export const prepareMeasurementForEditForm = (
       payload.metrics.right_leg.body_fat.measure_status || 2,
     circumferenceNeck: payload.metrics.circumferenceNeck?.measure_value || 0,
     circumferenceChest: payload.metrics.circumferenceChest?.measure_value || 0,
-    circumferenceShoulders:
-      payload.metrics.circumferenceShoulders?.measure_value || 0,
-    circumferenceArms: payload.metrics.circumferenceArms?.measure_value || 0,
     circumferenceWaist: payload.metrics.circumferenceWaist?.measure_value || 0,
     circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
     circumferenceGlutes:
       payload.metrics.circumferenceGlutes?.measure_value || 0,
-    circumferenceQuads: payload.metrics.circumferenceQuads?.measure_value || 0,
-    circumferenceCalf: payload.metrics.circumferenceCalf?.measure_value || 0,
+    circumferenceShouldersLeft:
+      payload.metrics.circumferenceShoulders?.left.measure_value || 0,
+    circumferenceShouldersRight:
+      payload.metrics.circumferenceShoulders?.right.measure_value || 0,
+    circumferenceArmsLeft:
+      payload.metrics.circumferenceArms?.left.measure_value || 0,
+    circumferenceArmsRight:
+      payload.metrics.circumferenceArms?.right.measure_value || 0,
+    circumferenceFlexedArmsLeft:
+      payload.metrics.circumferenceFlexedArms?.left.measure_value || 0,
+    circumferenceFlexedArmsRight:
+      payload.metrics.circumferenceFlexedArms?.right.measure_value || 0,
+    circumferenceQuadsLeft:
+      payload.metrics.circumferenceQuads?.left.measure_value || 0,
+    circumferenceQuadsRight:
+      payload.metrics.circumferenceQuads?.right.measure_value || 0,
+    circumferenceCalfLeft:
+      payload.metrics.circumferenceCalf?.left.measure_value || 0,
+    circumferenceCalfRight:
+      payload.metrics.circumferenceCalf?.right.measure_value || 0,
   };
 
   return preparedMeasurement;
@@ -301,19 +350,25 @@ const metricLabels = [
   { key: "Pierna Derecha", value: "right_leg" },
   { key: "Cuello", value: "circumferenceNeck" },
   { key: "Pecho", value: "circumferenceChest" },
-  { key: "Hombros", value: "circumferenceShoulders" },
-  { key: "Brasos", value: "circumferenceArms" },
   { key: "Cintura", value: "circumferenceWaist" },
   { key: "Cadera", value: "circumferenceHips" },
   { key: "Glúteos", value: "circumferenceGlutes" },
-  { key: "Cuádriceps", value: "circumferenceQuads" },
-  { key: "Pantorrillas", value: "circumferenceCalf" },
+  { key: "Hombro Izquierdo", value: "circumferenceShouldersLeft" },
+  { key: "Hombro Derecho", value: "circumferenceShouldersRight" },
+  { key: "Brazo Izquierdo", value: "circumferenceArmsLeft" },
+  { key: "Brazo Derecho", value: "circumferenceArmsRight" },
+  { key: "Brazo Flexionado Izquierdo", value: "circumferenceFlexedArmsLeft" },
+  { key: "Brazo Flexionado Derecho", value: "circumferenceFlexedArmsRight" },
+  { key: "Cuádriceps Izquierdo", value: "circumferenceQuadsLeft" },
+  { key: "Cuádriceps Derecho", value: "circumferenceQuadsRight" },
+  { key: "Pantorrilla Izquierda", value: "circumferenceCalfLeft" },
+  { key: "Pantorrilla Derecha", value: "circumferenceCalfRight" },
 ];
 
 export const prepareMeasurementForDisplay = (
   payload: Metrics
 ): Record<string, any>[] => {
-  if (!payload.filtered_metrics) return [];
+  if (!payload?.filtered_metrics) return [];
   const preparedMeasurement = payload.filtered_metrics.map((entry) => {
     return metricLabels.reduce(
       (acc: any, curr) => {
@@ -394,20 +449,32 @@ export const getMeasureName = (measure: string): string => {
       return "Cuello";
     case "circumferenceChest":
       return "Pecho";
-    case "circumferenceShoulders":
-      return "Hombros";
-    case "circumferenceArms":
-      return "Brazos";
     case "circumferenceWaist":
       return "Cintura";
     case "circumferenceHips":
       return "Cadera";
     case "circumferenceGlutes":
       return "Glúteos";
-    case "circumferenceQuads":
-      return "Cuádriceps";
-    case "circumferenceCalf":
-      return "Pantorrillas";
+    case "circumferenceShouldersLeft":
+      return "Hombro Izquierdo";
+    case "circumferenceShouldersRight":
+      return "Hombro Derecho";
+    case "circumferenceArmsLeft":
+      return "Brazo Izquierdo";
+    case "circumferenceArmsRight":
+      return "Brazo Derecho";
+    case "circumferenceFlexedArmsLeft":
+      return "Brazo Flexionado Izquierdo";
+    case "circumferenceFlexedArmsRight":
+      return "Brazo Flexionado Derecho";
+    case "circumferenceQuadsLeft":
+      return "Cuádriceps Izquierdo";
+    case "circumferenceQuadsRight":
+      return "Cuádriceps Derecho";
+    case "circumferenceCalfLeft":
+      return "Pantorrilla Izquierda";
+    case "circumferenceCalfRight":
+      return "Pantorrilla Derecha";
     default:
       return "";
   }
@@ -440,6 +507,7 @@ export const armsBodyMetrics = [
   "right_arm",
   "circumferenceShoulders",
   "circumferenceArms",
+  "circumferenceFlexedArms",
 ];
 
 export const legsBodyMetrics = [
@@ -648,14 +716,6 @@ export const measurementFormValidationSchema = Yup.object().shape({
     0,
     "La circunferencia no puede ser negativa"
   ),
-  circumferenceShoulders: Yup.number().min(
-    0,
-    "La circunferencia no puede ser negativa"
-  ),
-  circumferenceArms: Yup.number().min(
-    0,
-    "La circunferencia no puede ser negativa"
-  ),
   circumferenceWaist: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
@@ -668,11 +728,43 @@ export const measurementFormValidationSchema = Yup.object().shape({
     0,
     "La circunferencia no puede ser negativa"
   ),
-  circumferenceQuads: Yup.number().min(
+  circumferenceShouldersLeft: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
-  circumferenceCalf: Yup.number().min(
+  circumferenceShouldersRight: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceArmsLeft: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceArmsRight: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceFlexedArmsLeft: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceFlexedArmsRight: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceQuadsLeft: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceQuadsRight: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceCalfLeft: Yup.number().min(
+    0,
+    "La circunferencia no puede ser negativa"
+  ),
+  circumferenceCalfRight: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
