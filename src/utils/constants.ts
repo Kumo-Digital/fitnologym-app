@@ -12,3 +12,5 @@ export const ROLES = {
   USER: 'user',
   ADMIN: 'administrator',
 }
+
+export const APP_VERSION = "1.0.1";
