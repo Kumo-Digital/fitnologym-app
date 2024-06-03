@@ -20,7 +20,7 @@ export const Footer = () => {
       >
         <Group align="center" justify="center" h="100%">
           <Text size="xs" c="gray.5" ta={isMobile ? "center" : "left"}>
-            © 2024 Fitnology 💚 Todos los derechos reservados. |{" "}
+            © 2024 Fitnologym 💚 Todos los derechos reservados. |{" "}
             <Text component="span" size="xs" c="gray.5">
               v. {APP_VERSION} |{" "}
             </Text>

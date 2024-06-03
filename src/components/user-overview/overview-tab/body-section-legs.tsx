@@ -2,7 +2,7 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { legsBodyMetrics } from "@/utils/measurement";
-import { Flex, Stack, Title, em } from "@mantine/core";
+import { Flex, Group, Stack, Title, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -45,6 +45,30 @@ export const BodySectionLegs = ({
           ...measures,
           right_leg: rightLegMetric,
         };
+      } else if (metricName === "circumferenceGlutes") {
+        return {
+          ...measures,
+          circumferences: measures?.circumferences
+            ? [
+                ...measures?.circumferences,
+                {
+                  metricName,
+
+                  ...value,
+                  measure_evolution:
+                    evolution?.metrics[metricName].measure_evolution,
+                },
+              ]
+            : [
+                {
+                  metricName,
+
+                  ...value,
+                  measure_evolution:
+                    evolution?.metrics[metricName].measure_evolution,
+                },
+              ],
+        };
       } else {
         return {
           ...measures,
@@ -53,15 +77,39 @@ export const BodySectionLegs = ({
                 ...measures?.circumferences,
                 {
                   metricName,
-                  evolution: evolution?.metrics[metricName].measure_evolution,
-                  ...value,
+                  metricValue: {
+                    left: {
+                      ...value.left,
+                      measure_evolution:
+                        evolution?.metrics[`${metricName}Left`]
+                          .measure_evolution,
+                    },
+                    right: {
+                      ...value.right,
+                      measure_evolution:
+                        evolution?.metrics[`${metricName}Right`]
+                          .measure_evolution,
+                    },
+                  },
                 },
               ]
             : [
                 {
                   metricName,
-                  ...value,
-                  evolution: evolution?.metrics[metricName].measure_evolution,
+                  metricValue: {
+                    left: {
+                      ...value.left,
+                      measure_evolution:
+                        evolution?.metrics[`${metricName}Left`]
+                          .measure_evolution,
+                    },
+                    right: {
+                      ...value.right,
+                      measure_evolution:
+                        evolution?.metrics[`${metricName}Right`]
+                          .measure_evolution,
+                    },
+                  },
                 },
               ],
         };
@@ -113,15 +161,38 @@ export const BodySectionLegs = ({
       </Flex>
       <Stack>
         <Title order={4}>Circunferencias</Title>
-        {legMeasures.circumferences.map((value: Measure, index: number) => (
-          <CircumferenceCard
-            key={`${value.metricName}-${index}`}
-            measureTitle={value.metricName}
-            measureValue={value.measure_value}
-            measureUnit={value.measure_uom}
-            evolutionValue={value.evolution}
-          />
-        ))}
+        {legMeasures.circumferences.map((value: Measure, index: number) => {
+          if (value.metricName === "circumferenceGlutes") {
+            return (
+              <CircumferenceCard
+                key={`${value.metricName}-${index}`}
+                measureTitle={`${value.metricName}`}
+                measureValue={value.measure_value}
+                measureUnit={value.measure_uom}
+                evolutionValue={value.evolution}
+              />
+            );
+          } else {
+            return (
+              <Stack gap={16}>
+                <CircumferenceCard
+                  key={`${value.metricName}Left-${index}`}
+                  measureTitle={`${value.metricName}Left`}
+                  measureValue={value.metricValue.left.measure_value}
+                  measureUnit={value.metricValue.left.measure_uom}
+                  evolutionValue={value.metricValue.left.evolution}
+                />
+                <CircumferenceCard
+                  key={`${value.metricName}Right-${index}`}
+                  measureTitle={`${value.metricName}Right`}
+                  measureValue={value.metricValue.right.measure_value}
+                  measureUnit={value.metricValue.right.measure_uom}
+                  evolutionValue={value.metricValue.right.evolution}
+                />
+              </Stack>
+            );
+          }
+        })}
       </Stack>
     </Stack>
   );

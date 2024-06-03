@@ -12,6 +12,7 @@ interface MetricsResponse {
 
 export const useMetrics = (filters: URLSearchParams): MetricsResponse => {
   const params = new URLSearchParams(filters);
+  console.log(filters);
 
   const { data, error, isLoading, mutate } = useSWR(
     apiUrls.metrics.get(params.toString()),
