@@ -16,9 +16,17 @@ class MeasurementService {
   }
 
   async getMeasurementsByUser(userId: string): Promise<IMeasurement[]> {
-    const measurements = await MeasurementModel.find({
+    const measurements = await MeasurementModel.find(
+    {
       user_id: userId,
-    });
+    },
+    {},
+    {
+      sort: {
+        date: -1,
+      },
+    }
+    );
 
     return measurements;
   }
