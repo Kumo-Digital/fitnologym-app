@@ -20,7 +20,7 @@ export const useMetrics = (filters: URLSearchParams): MetricsResponse => {
   );
 
   return {
-    metrics: data ? data[0] : [],
+    metrics: data ? data[0] : {},
     isLoading,
     isError: error,
     refetch: mutate,

@@ -65,7 +65,7 @@ const AnalysisTab = () => {
 
   const filteredMetrics = prepareMeasurementForDisplay(metrics);
 
-  if (isLoading || isFirstMeasureLoading || isLastMeasureLoading) {
+  if (isLoading || isFirstMeasureLoading || isLastMeasureLoading || filteredMetrics.length === 0) {
     return <AnalysisTabSkeleton />;
   }
   return (
@@ -74,12 +74,13 @@ const AnalysisTab = () => {
         filters={filters}
         handleFiltersChange={handleFiltersChange}
         firstMeasure={firstMeasure}
+        lastMeasure={lastMeasure}
       />
       <AreaChart
         h={500}
         data={filteredMetrics}
         dataKey="date"
-        unit={metrics.uom}
+        unit={metrics?.uom}
         curveType="natural"
         tooltipAnimationDuration={200}
         withLegend
