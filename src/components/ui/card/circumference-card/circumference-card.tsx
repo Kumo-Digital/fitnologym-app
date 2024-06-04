@@ -23,6 +23,16 @@ interface CircumferenceCardProps {
   evolutionValue: number;
 }
 
+function openCheckModal(measure: string) {
+  modals.open({
+    children: <MeasureCardInfoModal measureTitle={measure} />,
+    title: getMeasureName(measure),
+    size: "md",
+    withCloseButton: true,
+    centered: true,
+  });
+}
+
 export const CircumferenceCard = ({
   measureTitle,
   measureValue,
@@ -31,24 +41,14 @@ export const CircumferenceCard = ({
 }: CircumferenceCardProps) => {
   const theme = useMantineTheme();
 
-  const measurementModals = {
-    checkModal: (measure: string) =>
-      modals.open({
-        children: <MeasureCardInfoModal measureTitle={measure} />,
-        title: getMeasureName(measure),
-        size: "md",
-        withCloseButton: true,
-        centered: true,
-      }),
-  };
-
   return (
     <Card
       radius="md"
       withBorder
       p={0}
       onClick={() => {
-        measurementModals.checkModal(measureTitle);
+        openCheckModal(measureTitle);
+        console.log("measureTitle", measureTitle);
       }}
     >
       <Group gap={16} p={16} align="stretch">

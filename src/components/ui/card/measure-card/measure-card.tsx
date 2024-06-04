@@ -26,6 +26,16 @@ interface MeasureCardProps {
   measureStatus: number;
 }
 
+function openCheckModal(measure: string) {
+  modals.open({
+    children: <MeasureCardInfoModal measureTitle={measure} />,
+    title: getMeasureName(measure),
+    size: "md",
+    withCloseButton: true,
+    centered: true,
+  });
+}
+
 export const MeasureCard: React.FC<MeasureCardProps> = ({
   measureTitle,
   measureValue,
@@ -35,28 +45,15 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
 }) => {
   const theme = useMantineTheme();
 
-  const measurementModals = {
-    checkModal: (measure: string) =>
-      modals.open({
-        children: <MeasureCardInfoModal measureTitle={measure} />,
-        title: getMeasureName(measure),
-        size: "md",
-        withCloseButton: true,
-        centered: true,
-      }),
-  };
-
   const isMuscleQuality = measureTitle === "muscle_quality";
 
-  //weight, bmi, body_fat, visc_fat,muscle_mass,muscle_quality,bone_mass
-  //bmr,metab_age,body_water,physique_rating
   return (
     <Card
       radius="md"
       withBorder
       p={0}
       onClick={() => {
-        measurementModals.checkModal(measureTitle);
+        openCheckModal(measureTitle);
       }}
       style={{ cursor: isMuscleQuality ? "pointer" : "default" }}
     >
