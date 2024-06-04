@@ -48,11 +48,10 @@ export const CircumferenceCard = ({
       p={0}
       onClick={() => {
         openCheckModal(measureTitle);
-        console.log("measureTitle", measureTitle);
       }}
     >
       <Group gap={16} p={16} align="stretch">
-        <Box miw={8} bg="lime.5" style={{ borderRadius: 9999 }}></Box>
+        <Box miw={8} bg="gray.5" style={{ borderRadius: 9999 }}></Box>
         <Stack flex={"1 0 0"} align="flex-start" justify="center">
           <Text size="xl" fw={600} c="gray.0">
             {getMeasureName(measureTitle)}

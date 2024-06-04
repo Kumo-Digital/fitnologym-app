@@ -45,8 +45,6 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
 }) => {
   const theme = useMantineTheme();
 
-  const isMuscleQuality = measureTitle === "muscle_quality";
-
   return (
     <Card
       radius="md"
@@ -55,7 +53,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
       onClick={() => {
         openCheckModal(measureTitle);
       }}
-      style={{ cursor: isMuscleQuality ? "pointer" : "default" }}
+      style={{ cursor: "pointer" }}
     >
       <Group gap={16} py={24} pl={16} pr={24} align="stretch" wrap="nowrap">
         <Box
