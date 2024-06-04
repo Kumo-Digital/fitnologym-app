@@ -68,7 +68,7 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   </Group>
 );
 
-const renderSelectiionOptionWeight: SelectProps["renderOption"] = ({
+const renderSelectionOptionWeight: SelectProps["renderOption"] = ({
   option,
 }) => (
   <Group flex="1" gap="xs">
