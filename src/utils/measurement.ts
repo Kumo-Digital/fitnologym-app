@@ -1,8 +1,8 @@
-import * as Yup from "yup";
 import { IMeasurement } from "@/db/interfaces/IMeasurement";
 import { MeasurementFormValues } from "@/types/admin";
-import { generateId } from "lucia";
 import { Metrics } from "@/types/measurements";
+import { generateId } from "lucia";
+import * as Yup from "yup";
 import { MEASUREMENT_UNITS } from "./constants";
 
 export const prepareMeasurementForInsert = (
@@ -54,12 +54,12 @@ export const prepareMeasurementForInsert = (
       bmr: {
         measure_uom: MEASUREMENT_UNITS.KCAL,
         measure_value: payload.bmr ?? null,
-        measure_status: payload.bmrStatus ?? 2,
+        measure_status: payload.bmrStatus ?? 0,
       },
       metab_age: {
         measure_uom: MEASUREMENT_UNITS.AGE,
         measure_value: payload.metabAge ?? null,
-        measure_status: payload.metabAgeStatus ?? 2,
+        measure_status: payload.metabAgeStatus ?? 0,
       },
       body_water: {
         measure_uom: MEASUREMENT_UNITS.LITERS,
@@ -255,7 +255,7 @@ export const prepareMeasurementForEditForm = (
     bmr: payload.metrics.bmr.measure_value || 0,
     bmrStatus: payload.metrics.bmr.measure_status || 2,
     metabAge: payload.metrics.metab_age.measure_value || 0,
-    metabAgeStatus: payload.metrics.metab_age.measure_status || 2,
+    metabAgeStatus: payload.metrics.metab_age.measure_status || 0,
     bodyWater: payload.metrics.body_water.measure_value || 0,
     bodyWaterStatus: payload.metrics.body_water.measure_status || 2,
     muscleQuality: payload.metrics.muscle_quality.measure_value || 0,
@@ -388,25 +388,6 @@ export const prepareMeasurementForDisplay = (
   });
 
   return preparedMeasurement;
-};
-
-export const getMeasureStatusColor = (status: number): string => {
-  switch (status) {
-    case 0:
-      // Bajo peso
-      return "blue.5";
-    case 1:
-      // Normal
-      return "lime.5";
-    case 2:
-      // Sobrepeso
-      return "orange.5";
-    case 3:
-      // Obesidad
-      return "violet.5";
-    default:
-      return "gray.5";
-  }
 };
 
 export const getMeasureName = (measure: string): string => {

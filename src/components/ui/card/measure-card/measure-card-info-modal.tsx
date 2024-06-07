@@ -2,15 +2,14 @@ import {
   BMI_STATUS_DESCRIPTION,
   BMR_STATUS_DESCRIPTION,
   BODY_FAT_DESCRIPTION,
+  BODY_FAT_STATUS_COLORS,
   BODY_WATER_STATUS_COLORS,
   BODY_WATER_STATUS_DESCRIPTION,
   BODY_WATER_STATUS_VALUES,
   BONE_MASS_STATUS_COLORS,
   BONE_MASS_STATUS_DESCRIPTION,
   BONE_MASS_STATUS_VALUES,
-  METABOLIC_AGE_STATUS_COLORS,
   METABOLIC_AGE_STATUS_DESCRIPTION,
-  METABOLIC_AGE_STATUS_VALUES,
   METABOLIC_BASAL_RATE_STATUS_COLORS,
   METABOLIC_BASAL_RATE_STATUS_VALUES,
   MUSCLE_MASS_STATUS_COLORS,
@@ -32,6 +31,7 @@ import {
   WEIGHT_STATUS_DESCRIPTION,
   WEIGHT_STATUS_VALUES,
 } from "@/utils/admin";
+import { circumferenceMeasures } from "@/utils/utils";
 import { Box, Text, useMantineTheme } from "@mantine/core";
 import Image from "next/image";
 import qualityMuscle from "../../../../../public/assets/images/quality-muscle.png";
@@ -45,44 +45,12 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
 }) => {
   const theme = useMantineTheme();
 
-  const circumferenceMeasures = [
-    "circumferenceNeck",
-    "circumferenceChest",
-    "circumferenceWaist",
-    "circumferenceHips",
-    "circumferenceShouldersLeft",
-    "circumferenceShouldersRight",
-    "circumferenceArmsLeft",
-    "circumferenceArmsRight",
-    "circumferenceFlexedArmsLeft",
-    "circumferenceFlexedArmsRight",
-    "circumferenceGlutes",
-    "circumferenceQuadsLeft",
-    "circumferenceQuadsRight",
-    "circumferenceCalfLeft",
-    "circumferenceCalfRight",
-  ];
-
   const isCircumferenceMeasure = circumferenceMeasures.includes(measureTitle);
 
   if (isCircumferenceMeasure) {
     return (
       <Box>
         <Text mb={10}>{SEGMENTED_STATUS_DESCRIPTION}</Text>
-        {SEGMENTED_STATUS_VALUES.map((item, index) => (
-          <Box key={index} display="flex" mb={5}>
-            <Box
-              bg={theme.colors[SEGMENTED_STATUS_COLORS[index]][6]}
-              w={20}
-              h={20}
-              mr={10}
-              style={{
-                borderRadius: "50%",
-              }}
-            />
-            <Text>{item.label}</Text>
-          </Box>
-        ))}
       </Box>
     );
   }
@@ -231,7 +199,7 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
           {STATUS_VALUES_WITHOUT_OBESITY.map((item, index) => (
             <Box key={index} display="flex" mb={5}>
               <Box
-                bg={theme.colors[STATUS_COLORS[index]][6]}
+                bg={theme.colors[BODY_FAT_STATUS_COLORS[index]][6]}
                 w={20}
                 h={20}
                 mr={10}

@@ -17,9 +17,9 @@ export const measurementFormInitialValues = {
   boneMass: 0,
   boneMassStatus: "2",
   bmr: 0,
-  bmrStatus: "2",
+  bmrStatus: "0",
   metabAge: 0,
-  metabAgeStatus: "2",
+  metabAgeStatus: "0",
   bodyWater: 0,
   bodyWaterStatus: "2",
   muscleQuality: 0,
@@ -128,6 +128,23 @@ export const WEIGHT_STATUS_COLORS = ["blue", "lime", "yellow"];
 
 export const WEIGHT_STATUS_DESCRIPTION = "El peso es un indicador de salud :";
 
+export const BODY_FAT_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Alto",
+  },
+];
+
+export const BODY_FAT_STATUS_COLORS = ["blue", "lime", "yellow"];
+
 export const VISC_FAT_STATUS_VALUES = [
   {
     value: "1",
@@ -185,37 +202,21 @@ export const BONE_MASS_STATUS_DESCRIPTION =
 
 export const METABOLIC_BASAL_RATE_STATUS_VALUES = [
   {
-    value: "1",
-    label: "Bajo",
-  },
-  {
-    value: "2",
+    value: "0",
     label: "Normal",
-  },
-  {
-    value: "3",
-    label: "Alto",
   },
 ];
 
-export const METABOLIC_BASAL_RATE_STATUS_COLORS = ["blue", "lime", "red"];
+export const METABOLIC_BASAL_RATE_STATUS_COLORS = ["lime"];
 
 export const METABOLIC_AGE_STATUS_VALUES = [
   {
-    value: "1",
-    label: "Bajo",
-  },
-  {
-    value: "2",
+    value: "0",
     label: "Normal",
-  },
-  {
-    value: "3",
-    label: "Alto",
   },
 ];
 
-export const METABOLIC_AGE_STATUS_COLORS = ["blue", "lime", "red"];
+export const METABOLIC_AGE_STATUS_COLORS = ["lime"];
 
 export const METABOLIC_AGE_STATUS_DESCRIPTION =
   "La edad metabólica es la edad de su metabolismo :";
@@ -255,7 +256,7 @@ export const BONE_MASS_BODY_WATER_STATUS_VALUES = [
   },
 ];
 
-export const BONE_MASS_BODY_WATER_STATUS_COLORS = ["red", "lime", "blue"];
+export const BONE_MASS_BODY_WATER_STATUS_COLORS = ["blue", "lime", "red"];
 
 export const MUSCLE_QUALITY_STATUS_VALUES = [
   {
@@ -272,7 +273,7 @@ export const MUSCLE_QUALITY_STATUS_VALUES = [
   },
 ];
 
-export const MUSCLE_QUALITY_STATUS_COLORS = ["yellow", "lime", "blue"];
+export const MUSCLE_QUALITY_STATUS_COLORS = ["blue", "lime", "red"];
 
 export const BMI_STATUS_DESCRIPTION =
   "El IMC es un indicador de sus niveles de grasa, músculo y hueso :";
@@ -321,7 +322,7 @@ export const PHISYQUE_RATING_STATUS_DESCRIPTION =
   "La calificación física se hace en base a la composición corporal :";
 
 export const SEGMENTED_STATUS_DESCRIPTION =
-  "La segmentación es la distribución de la masa muscular en su cuerpo :";
+  "La segmentación es la distribución de la masa muscular en su cuerpo";
 export const getSubscriptionColor = (user_type: string) => {
   switch (user_type) {
     case "basic":
