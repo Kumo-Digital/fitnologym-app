@@ -11,7 +11,7 @@ export const measurementFormInitialValues = {
   bodyFat: 0,
   bodyFatStatus: "2",
   viscFat: 0,
-  viscFatStatus: "2",
+  viscFatStatus: "1",
   muscleMass: 0,
   muscleMassStatus: "2",
   boneMass: 0,
