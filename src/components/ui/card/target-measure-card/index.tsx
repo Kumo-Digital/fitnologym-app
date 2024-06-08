@@ -25,7 +25,7 @@ export const TargetMeasureCard = ({
   const theme = useMantineTheme();
   const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(
-    `(min-width: ${em(426)}) and (max-width: ${em(560)})`
+    `(min-width: ${em(426)}) and (max-width: ${em(572)})`
   );
   const isMobileLG = useMediaQuery(
     `(min-width: ${em(769)}) and (max-width: ${em(1054)})`
