@@ -316,7 +316,7 @@ export const PHISYQUE_RATING_STATUS_VALUES = [
   },
 ];
 
-export const PHISYQUE_RATING_STATUS_COLORS = ["blue", "lime", "red"];
+export const PHISYQUE_RATING_STATUS_COLORS = ["red", "lime", "blue"];
 
 export const PHISYQUE_RATING_STATUS_DESCRIPTION =
   "La calificación física se hace en base a la composición corporal:";

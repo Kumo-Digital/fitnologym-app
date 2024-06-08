@@ -68,6 +68,20 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   </Group>
 );
 
+const renderSelectOptionPhysiqueRating: SelectProps["renderOption"] = ({ option }) => (
+  <Group flex="1" gap="xs">
+    <Box
+      w={8}
+      h={8}
+      bg={PHISYQUE_RATING_STATUS_COLORS[Number(option.value) - 1]}
+      style={{
+        borderRadius: "100%",
+      }}
+    ></Box>
+    <Text size="sm">{option.label}</Text>
+  </Group>
+);
+
 const renderSelectionOptionWeight: SelectProps["renderOption"] = ({
   option,
 }) => (
@@ -965,7 +979,7 @@ export default function MeasurementForm({
                                 }}
                               ></Box>
                             }
-                            renderOption={renderSelectOption}
+                            renderOption={renderSelectOptionPhysiqueRating}
                             data={PHISYQUE_RATING_STATUS_VALUES}
                             value={meta.value}
                             onChange={(e) =>
@@ -2040,43 +2054,6 @@ export default function MeasurementForm({
                           />
                         )}
                       </FastField>
-                      {/* ponemos el estado */}
-                      <FastField
-                        name="circumferenceNeckStatus"
-                        placeholder="Estado"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <Select
-                            {...field}
-                            label="Estado"
-                            withCheckIcon={false}
-                            maw={150}
-                            allowDeselect={false}
-                            leftSection={
-                              <Box
-                                w={8}
-                                h={8}
-                                bg={
-                                  SEGMENTED_STATUS_COLORS[
-                                    Number(meta.value) - 1
-                                  ]
-                                }
-                                style={{
-                                  borderRadius: "100%",
-                                }}
-                              ></Box>
-                            }
-                            renderOption={renderSelectOptionSegmented}
-                            data={SEGMENTED_STATUS_VALUES}
-                            value={meta.value}
-                            onChange={(e) =>
-                              form.setFieldValue("circumferenceNeckStatus", e)
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
                     </Group>
                     <Group grow id="value-circumferenceChest">
                       <FastField name="circumferenceChest" placeholder="Pecho">
@@ -2093,42 +2070,6 @@ export default function MeasurementForm({
                             }
                             onChange={(e) =>
                               form.setFieldValue("circumferenceChest", e)
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
-                      <FastField
-                        name="circumferenceChestStatus"
-                        placeholder="Estado"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <Select
-                            {...field}
-                            label="Estado"
-                            withCheckIcon={false}
-                            maw={150}
-                            allowDeselect={false}
-                            leftSection={
-                              <Box
-                                w={8}
-                                h={8}
-                                bg={
-                                  SEGMENTED_STATUS_COLORS[
-                                    Number(meta.value) - 1
-                                  ]
-                                }
-                                style={{
-                                  borderRadius: "100%",
-                                }}
-                              ></Box>
-                            }
-                            renderOption={renderSelectOptionSegmented}
-                            data={SEGMENTED_STATUS_VALUES}
-                            value={meta.value}
-                            onChange={(e) =>
-                              form.setFieldValue("circumferenceChestStatus", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
