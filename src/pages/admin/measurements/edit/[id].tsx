@@ -49,7 +49,6 @@ const Page: NextPageWithLayout = () => {
   const { user, isLoading: isLoadingUser } = useUniqueUser({
     id: measurement?.user_id,
   });
-  console.log(user);
 
   if (isLoadingMeasure || isLoadingUser) return <MeasurementFormSkeleton />;
   return (
