@@ -144,7 +144,6 @@ const UserOverview: NextPageWithLayout<{ sessionUser: LuciaUser }> = ({
                 </Badge>
               </Group>
             </Tabs.Tab>
-            <Tabs.Tab value="resources">Beneficios</Tabs.Tab>
           </Tabs.List>
 
           {/* USER HEADER */}
@@ -162,9 +161,6 @@ const UserOverview: NextPageWithLayout<{ sessionUser: LuciaUser }> = ({
           </Tabs.Panel>
           <Tabs.Panel value="report">
             <ReportTab user={user} />
-          </Tabs.Panel>
-          <Tabs.Panel value="resources">
-            <ResourcesTab />
           </Tabs.Panel>
         </Tabs>
       </Stack>
