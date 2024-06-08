@@ -55,7 +55,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           onChange={setSelectedBodySection}
         />
         {/* Height = 448px is the sum of all the fixed height elements */}
-        <ScrollArea.Autosize h={isMobile ? "auto" : `calc(100vh - 448px)`}>
+        <ScrollArea.Autosize h={isMobile ? "auto" : `calc(100vh - 20vh)`}>
           {selectedBodySection === "overview" && (
             <BodySectionOverview
               lastMeasure={lastMeasure}
