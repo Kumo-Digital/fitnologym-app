@@ -24,9 +24,16 @@ export const TargetMeasureCard = ({
 }: TargetMeasureCardProps) => {
   const theme = useMantineTheme();
   const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
+  const isMobileMD = useMediaQuery(
+    `(min-width: ${em(426)}) and (max-width: ${em(572)})`
+  );
+  const isMobileLG = useMediaQuery(
+    `(min-width: ${em(769)}) and (max-width: ${em(1054)})`
+  );
+
   const evolutionValue = getRemainingPercentage(currentValue, targetValue);
 
-  if (isMobile)
+  if (isMobile || isMobileMD || isMobileLG)
     return (
       <TargetMeasureCardMobile
         currentValue={currentValue}

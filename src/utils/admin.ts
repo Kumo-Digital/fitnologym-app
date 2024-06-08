@@ -11,15 +11,15 @@ export const measurementFormInitialValues = {
   bodyFat: 0,
   bodyFatStatus: "2",
   viscFat: 0,
-  viscFatStatus: "2",
+  viscFatStatus: "1",
   muscleMass: 0,
   muscleMassStatus: "2",
   boneMass: 0,
   boneMassStatus: "2",
   bmr: 0,
-  bmrStatus: "2",
+  bmrStatus: "0",
   metabAge: 0,
-  metabAgeStatus: "2",
+  metabAgeStatus: "0",
   bodyWater: 0,
   bodyWaterStatus: "2",
   muscleQuality: 0,
@@ -58,13 +58,19 @@ export const measurementFormInitialValues = {
   legRightBodyFatStatus: "2",
   circumferenceNeck: 0,
   circumferenceChest: 0,
-  circumferenceShoulders: 0,
-  circumferenceArms: 0,
   circumferenceWaist: 0,
   circumferenceHips: 0,
   circumferenceGlutes: 0,
-  circumferenceQuads: 0,
-  circumferenceCalf: 0,
+  circumferenceShouldersLeft: 0,
+  circumferenceShouldersRight: 0,
+  circumferenceArmsLeft: 0,
+  circumferenceArmsRight: 0,
+  circumferenceFlexedArmsLeft: 0,
+  circumferenceFlexedArmsRight: 0,
+  circumferenceQuadsLeft: 0,
+  circumferenceQuadsRight: 0,
+  circumferenceCalfLeft: 0,
+  circumferenceCalfRight: 0,
 };
 
 // Status Values & Colors
@@ -87,7 +93,57 @@ export const STATUS_VALUES = [
   },
 ];
 
+export const STATUS_VALUES_WITHOUT_OBESITY = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Alto",
+  },
+];
+export const STATUS_VALUES_WITHOUT_OBESITY_COLORS = ["blue", "lime", "red"];
 export const STATUS_COLORS = ["blue", "lime", "yellow", "red"];
+
+export const WEIGHT_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo Peso",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Sobrepeso",
+  },
+];
+export const WEIGHT_STATUS_COLORS = ["blue", "lime", "yellow"];
+
+export const WEIGHT_STATUS_DESCRIPTION = "El peso es un indicador de salud:";
+
+export const BODY_FAT_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Alto",
+  },
+];
+
+export const BODY_FAT_STATUS_COLORS = ["blue", "lime", "yellow"];
 
 export const VISC_FAT_STATUS_VALUES = [
   {
@@ -99,25 +155,91 @@ export const VISC_FAT_STATUS_VALUES = [
     label: "Alto",
   },
 ];
-
 export const VISC_FAT_STATUS_COLORS = ["lime", "red"];
+
+export const VISC_FAT_STATUS_DESCRIPTION =
+  "La grasa visceral es la grasa que rodea los órganos internos:";
 
 export const MUSCLE_MASS_STATUS_VALUES = [
   {
     value: "1",
-    label: "Principiante",
+    label: "Bajo",
   },
   {
     value: "2",
-    label: "Regular",
+    label: "Normal",
   },
   {
     value: "3",
-    label: "Avanzado",
-  }
+    label: "Muscular",
+  },
 ];
 
-export const MUSCLE_MASS_STATUS_COLORS = ["red", "lime", "blue"];
+export const MUSCLE_MASS_STATUS_DESCRIPTION =
+  "La masa muscular es el peso de los músculos:";
+
+export const MUSCLE_MASS_STATUS_COLORS = ["red", "lime", "violet"];
+
+export const BONE_MASS_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Alto",
+  },
+];
+
+export const BONE_MASS_STATUS_COLORS = ["blue", "lime", "red"];
+
+export const BONE_MASS_STATUS_DESCRIPTION =
+  "La masa ósea es parte de la composición corporal:";
+
+export const METABOLIC_BASAL_RATE_STATUS_VALUES = [
+  {
+    value: "0",
+    label: "Normal",
+  },
+];
+
+export const METABOLIC_BASAL_RATE_STATUS_COLORS = ["lime"];
+
+export const METABOLIC_AGE_STATUS_VALUES = [
+  {
+    value: "0",
+    label: "Normal",
+  },
+];
+
+export const METABOLIC_AGE_STATUS_COLORS = ["lime"];
+
+export const METABOLIC_AGE_STATUS_DESCRIPTION =
+  "La edad metabólica es la edad de su metabolismo:";
+
+export const BODY_WATER_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Alto",
+  },
+];
+
+export const BODY_WATER_STATUS_COLORS = ["red", "lime", "red"];
+
+export const BODY_WATER_STATUS_DESCRIPTION =
+  "El agua corporal es la hidratación que tiene su cuerpo:";
 
 export const BONE_MASS_BODY_WATER_STATUS_VALUES = [
   {
@@ -134,12 +256,12 @@ export const BONE_MASS_BODY_WATER_STATUS_VALUES = [
   },
 ];
 
-export const BONE_MASS_BODY_WATER_STATUS_COLORS = ["red", "lime", "blue"];
+export const BONE_MASS_BODY_WATER_STATUS_COLORS = ["blue", "lime", "red"];
 
 export const MUSCLE_QUALITY_STATUS_VALUES = [
   {
     value: "1",
-    label: "Baja",
+    label: "Bajo",
   },
   {
     value: "2",
@@ -147,12 +269,60 @@ export const MUSCLE_QUALITY_STATUS_VALUES = [
   },
   {
     value: "3",
-    label: "Elevada",
+    label: "Muscular",
   },
 ];
 
-export const MUSCLE_QUALITY_STATUS_COLORS = ["lime", "blue", "violet"];
+export const MUSCLE_QUALITY_STATUS_COLORS = ["blue", "lime", "red"];
 
+export const BMI_STATUS_DESCRIPTION =
+  "El IMC es un indicador de sus niveles de grasa, músculo y hueso:";
+
+export const BODY_FAT_DESCRIPTION =
+  "La grasa corporal es la cantidad de grasa en su cuerpo:";
+
+export const BMR_STATUS_DESCRIPTION =
+  "La Tasa Metabólica Basal es el indicador de su metabolismo en reposo:";
+
+export const SEGMENTED_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Medio",
+  },
+  {
+    value: "3",
+    label: "Alto",
+  },
+];
+
+export const SEGMENTED_STATUS_COLORS = ["blue", "lime", "orange"];
+
+export const PHISYQUE_RATING_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Muscular",
+  },
+];
+
+export const PHISYQUE_RATING_STATUS_COLORS = ["red", "lime", "blue"];
+
+export const PHISYQUE_RATING_STATUS_DESCRIPTION =
+  "La calificación física se hace en base a la composición corporal:";
+
+export const SEGMENTED_STATUS_DESCRIPTION =
+  "La segmentación es la distribución de la masa muscular en su cuerpo";
 export const getSubscriptionColor = (user_type: string) => {
   switch (user_type) {
     case "basic":

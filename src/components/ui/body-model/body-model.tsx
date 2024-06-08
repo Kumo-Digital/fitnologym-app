@@ -1,5 +1,4 @@
 import { Box } from "@mantine/core";
-import { useElementSize } from "@mantine/hooks";
 import Image from "next/image";
 import maleBodyImage from "../../../../public/assets/images/body/male-body.png";
 import femaleBodyImage from "../../../../public/assets/images/body/female-body.png";
@@ -12,11 +11,9 @@ interface BodySectionsProps {
 }
 
 export const BodyModel = ({ gender, onSectionSelect }: BodySectionsProps) => {
-  // const { ref, width, height } = useElementSize();
 
   return (
     <section style={{ width: "100%", height: "100%" }}>
-      {/* <Box ref={ref} style={{ position: "relative", aspectRatio: "1/1" }}> */}
       <Box
         style={{
           position: "relative",

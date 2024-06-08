@@ -61,8 +61,9 @@ const UserOverview = ({ sessionUser }: { sessionUser: User }) => {
   );
 
   if (query.userId === "undefined") return <UserOverviewEmpty />;
-  if (isLoading || isLoadingLastMeasure || isLoadingEvolution)
+  if (isLoading || isLoadingLastMeasure || isLoadingEvolution) {
     return <UserOverviewSkeleton />;
+  }
   return (
     <>
       <Head>
@@ -113,7 +114,6 @@ const UserOverview = ({ sessionUser }: { sessionUser: User }) => {
                 </Badge>
               </Group>
             </Tabs.Tab>
-            <Tabs.Tab value="resources">Beneficios</Tabs.Tab>
           </Tabs.List>
 
           {/* USER HEADER */}
@@ -131,9 +131,6 @@ const UserOverview = ({ sessionUser }: { sessionUser: User }) => {
           </Tabs.Panel>
           <Tabs.Panel value="report" h="90%">
             <ReportTab user={user} />
-          </Tabs.Panel>
-          <Tabs.Panel value="resources" h="90%">
-            <ResourcesTab />
           </Tabs.Panel>
         </Tabs>
       </Stack>

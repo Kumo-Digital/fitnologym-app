@@ -83,13 +83,29 @@ const measurementSchema = new Schema<IMeasurement>({
     },
     circumferenceNeck: CircumferenceObjSchema,
     circumferenceChest: CircumferenceObjSchema,
-    circumferenceShoulders: CircumferenceObjSchema,
-    circumferenceArms: CircumferenceObjSchema,
     circumferenceWaist: CircumferenceObjSchema,
     circumferenceHips: CircumferenceObjSchema,
     circumferenceGlutes: CircumferenceObjSchema,
-    circumferenceQuads: CircumferenceObjSchema,
-    circumferenceCalf: CircumferenceObjSchema,
+    circumferenceShoulders: {
+      left: CircumferenceObjSchema,
+      right: CircumferenceObjSchema,
+    },
+    circumferenceArms: {
+      left: CircumferenceObjSchema,
+      right: CircumferenceObjSchema,
+    },
+    circumferenceFlexedArms: {
+      left: CircumferenceObjSchema,
+      right: CircumferenceObjSchema,
+    },
+    circumferenceQuads: {
+      left: CircumferenceObjSchema,
+      right: CircumferenceObjSchema,
+    },
+    circumferenceCalf: {
+      left: CircumferenceObjSchema,
+      right: CircumferenceObjSchema,
+    }
   }
 } as const,
 {

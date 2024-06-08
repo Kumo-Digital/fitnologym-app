@@ -6,4 +6,5 @@ export interface AnalysisTableFiltersProps {
   filters: Filters;
   handleFiltersChange: (filterValues: any) => void;
   firstMeasure: IMeasurement;
+  lastMeasure: IMeasurement;
 }

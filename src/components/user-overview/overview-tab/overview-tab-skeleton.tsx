@@ -37,7 +37,7 @@ export const OverviewTabSkeleton = () => {
           <Skeleton height={26} w={250} />
           <Skeleton height={120} />
           <SimpleGrid
-            cols={{ base: 1, sm: 2, md: 3 }}
+            cols={{ base: 1, md: 2 }}
             spacing={16}
             verticalSpacing={16}
           >

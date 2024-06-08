@@ -20,6 +20,7 @@ import {
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { until } from "@open-draft/until";
+import { AxiosError } from "axios";
 import { Form, Formik } from "formik";
 
 interface NewUserModalProps {
@@ -67,10 +68,10 @@ const NewUserModal = ({ close, gyms, refetch }: NewUserModalProps) => {
       onSubmit={async (values) => {
         const { data, error } = await until(() => createUser(values));
 
-        if (error) {
+        if (error instanceof AxiosError) {
           notifications.show({
             title: "Error",
-            message: "Ocurrió un error al crear el usuario",
+            message: error.response?.data?.message ?? "Ocurrió un error al crear el usuario",
             color: "red",
           });
           close();
