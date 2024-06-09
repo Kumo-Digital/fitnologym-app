@@ -45,6 +45,9 @@ const UserOverviewHeader = ({
                   variant="filled"
                   aria-label="Nueva Medida"
                   size="lg"
+                  onClick={() =>
+                    push(`${appUrls.measurements.new}?userId=${user._id}`)
+                  }
                 >
                   <IconPlus
                     style={{ width: "70%", height: "70%" }}
