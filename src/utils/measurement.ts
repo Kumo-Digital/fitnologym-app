@@ -605,7 +605,7 @@ export enum FFMIStatus {
   FAT = "Fat",
   ATHLETE = "Athlete",
   INTERMEDIATE_GYM = "Intermediate Gym",
-  ADVANCED_GYM = "Advencer Gym",
+  ADVANCED_GYM = "Advanced Gym",
   BODYBUILDER = "Bodybuilder",
 }
 
