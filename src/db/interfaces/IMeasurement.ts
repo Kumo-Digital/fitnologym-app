@@ -26,6 +26,10 @@ export interface IMeasurement {
     metab_age: MeasurementObject;
     body_water: MeasurementObject;
     physique_rating: MeasurementObject;
+    ffmi: {
+      measure_value?: number;
+      measure_status?: string;
+    },
     left_arm: {
       muscle_mass: MeasurementObject;
       body_fat: MeasurementObject;
