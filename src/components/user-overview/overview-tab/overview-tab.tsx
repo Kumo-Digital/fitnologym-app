@@ -13,13 +13,15 @@ import { BodySectionLegs } from "./body-section-legs";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
 import OverviewTabEmpty from "./overview-tab-empty";
 import { User } from "@/types/user";
+import BodyBalance from "./body-balance";
 
 interface OverviewTabProps {
   user: User;
 }
 
 const OverviewTab = ({ user }: OverviewTabProps) => {
-  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
+  const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
+  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
   const { lastMeasure, isLoading } = useUniqueLastMeasure(user._id);
   const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(
     user._id
@@ -35,12 +37,20 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   return (
     <Flex
       gap={0}
-      direction={isMobile ? "column" : "row"}
-      align={isMobile ? "stretch" : "flex-start"}
+      direction={isMobileMD ? "column" : "row"}
+      align={isMobileMD ? "stretch" : "flex-start"}
       flex={"1 0 0"}
     >
       <Stack flex={"1 0 0"}>
         <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
+        {/* TODO: when the be is implemented, update this values */}
+        {!isMobileSM && (
+          <BodyBalance
+            ffmiValue={22}
+            bodyFat={{ armsValue: 6, legsValue: 3 }}
+            muscleMass={{ armsValue: 1, legsValue: -2 }}
+          />
+        )}
       </Stack>
       <Stack gap={32} py={32} flex={"1 0 0"}>
         <SegmentedControl
@@ -55,7 +65,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           onChange={setSelectedBodySection}
         />
         {/* Height = 448px is the sum of all the fixed height elements */}
-        <ScrollArea.Autosize h={isMobile ? "auto" : `calc(100vh - 20vh)`}>
+        <ScrollArea.Autosize>
           {selectedBodySection === "overview" && (
             <BodySectionOverview
               lastMeasure={lastMeasure}
@@ -71,6 +81,13 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           )}
           {selectedBodySection === "legs" && (
             <BodySectionLegs lastMeasure={lastMeasure} evolution={evolution} />
+          )}
+          {isMobileSM && (
+            <BodyBalance
+              ffmiValue={22}
+              bodyFat={{ armsValue: 6, legsValue: 3 }}
+              muscleMass={{ armsValue: 1, legsValue: -2 }}
+            />
           )}
         </ScrollArea.Autosize>
       </Stack>

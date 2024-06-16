@@ -1,5 +1,6 @@
 import SpeedMeter from "@/components/ui/speed-meter";
-import { Text, Card, Stack, Group } from "@mantine/core";
+import { Text, Card, Stack, Group, Flex, em } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
 
 interface BodySectionBalanceProps {
@@ -15,6 +16,8 @@ const BodySectionBalance = ({
   armsValue,
   legsValue,
 }: BodySectionBalanceProps) => {
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
+
   return (
     <Card radius="md" withBorder p={16}>
       <Stack align="center">
@@ -28,10 +31,10 @@ const BodySectionBalance = ({
             </Text>
           )}
         </Stack>
-        <Group wrap="nowrap" gap={32}>
+        <Flex direction={isMobile ? "column" : "row"} wrap="nowrap" gap={32}>
           <SpeedMeter name="Brazos" value={armsValue} />
           <SpeedMeter name="Piernas" value={legsValue} />
-        </Group>
+        </Flex>
       </Stack>
     </Card>
   );
