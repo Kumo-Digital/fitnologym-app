@@ -10,7 +10,6 @@ const SpeedMeter = ({ name, value }: SpeedMeterProps) => {
 
   useEffect(() => {
     if (needleRef.current !== null) {
-      console.log("move the needle with this value: ", mappedValue);
       needleRef.current.style.setProperty(
         "--rotate-value",
         `${mappedValue}deg`
