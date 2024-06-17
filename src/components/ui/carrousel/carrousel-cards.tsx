@@ -36,7 +36,7 @@ const CarouselCards = ({ user }: OverviewTabProps) => {
       measureStatus: metrics[metric].measure_status,
     }));
 
-  const autoplay = useRef(Autoplay({ delay: 2000 }));
+  const autoplay = useRef(Autoplay({ delay: 4000 }));
 
   return (
     <div className="container m-10 mx-auto max-w-4xl">
