@@ -1,18 +1,18 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
-import { Flex, ScrollArea, SegmentedControl, Stack, em } from "@mantine/core";
-import { useState } from "react";
-import { useMediaQuery } from "@mantine/hooks";
 import {
   useCalculateEvolution,
   useUniqueLastMeasure,
 } from "@/hooks/measurements";
-import { BodySectionOverview } from "./body-section-overview";
-import { BodySectionTorso } from "./body-section-torso";
+import { User } from "@/types/user";
+import { Flex, ScrollArea, SegmentedControl, Stack, em } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+import { useState } from "react";
 import { BodySectionArms } from "./body-section-arms";
 import { BodySectionLegs } from "./body-section-legs";
-import { OverviewTabSkeleton } from "./overview-tab-skeleton";
+import { BodySectionOverview } from "./body-section-overview";
+import { BodySectionTorso } from "./body-section-torso";
 import OverviewTabEmpty from "./overview-tab-empty";
-import { User } from "@/types/user";
+import { OverviewTabSkeleton } from "./overview-tab-skeleton";
 
 interface OverviewTabProps {
   user: User;
