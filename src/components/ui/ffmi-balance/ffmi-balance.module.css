@@ -8,6 +8,11 @@
   width: 100%;
 }
 
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -89,7 +94,7 @@
 
 @media (max-width: 425px) {
   .values > :nth-child(even) {
-    opacity: 0;
+    display: none;
   }
 }
 

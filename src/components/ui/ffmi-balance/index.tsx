@@ -25,27 +25,29 @@ const FFMIBalance = ({
 
   return (
     <div className={classes.root} style={styles} {...props}>
-      <div className={classes.header}>
-        {label && (
-          <label htmlFor="meter" className={classes.label}>
-            {label}
-          </label>
-        )}
-        {description && <p className={classes.description}>{description}</p>}
-      </div>
-      <div className={classes.graph}>
-        <meter
-          ref={valueRef}
-          id="meter"
-          min="0"
-          max="100"
-          value={mappedValue}
-          className={classes.meter}
-        ></meter>
-        <div className={classes.values}>
-          {Array.from({ length: 15 }).map((_, index) => (
-            <span key={`value-${index}`}>{16 + index}</span>
-          ))}
+      <div className={classes.container}>
+        <div className={classes.header}>
+          {label && (
+            <label htmlFor="meter" className={classes.label}>
+              {label}
+            </label>
+          )}
+          {description && <p className={classes.description}>{description}</p>}
+        </div>
+        <div className={classes.graph}>
+          <meter
+            ref={valueRef}
+            id="meter"
+            min="0"
+            max="100"
+            value={mappedValue}
+            className={classes.meter}
+          ></meter>
+          <div className={classes.values}>
+            {Array.from({ length: 15 }).map((_, index) => (
+              <span key={`value-${index}`}>{16 + index}</span>
+            ))}
+          </div>
         </div>
       </div>
     </div>

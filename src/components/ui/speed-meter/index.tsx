@@ -3,6 +3,7 @@ import Graph from "./graph";
 import Labels from "./labels";
 import { SpeedMeterProps } from "./speed-meter.types";
 import { mapRange } from "./speed-meter.utils";
+import classes from "./speed-meter.module.css";
 
 const SpeedMeter = ({ name, value }: SpeedMeterProps) => {
   const needleRef = useRef<SVGPathElement>(null);
@@ -18,7 +19,7 @@ const SpeedMeter = ({ name, value }: SpeedMeterProps) => {
   }, [value, needleRef]);
 
   return (
-    <div style={{ width: "100%", height: "auto" }}>
+    <div className={classes.root}>
       <Graph ref={needleRef} />
       <Labels name={name} />
     </div>

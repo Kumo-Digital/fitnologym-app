@@ -1,5 +1,12 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
-import { Flex, ScrollArea, SegmentedControl, Stack, em } from "@mantine/core";
+import {
+  Box,
+  Flex,
+  ScrollArea,
+  SegmentedControl,
+  Stack,
+  em,
+} from "@mantine/core";
 import { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import {
@@ -45,11 +52,13 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
         <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
         {/* TODO: when the be is implemented, update this values */}
         {!isMobileSM && (
-          <BodyBalance
-            ffmiValue={22}
-            bodyFat={{ armsValue: 6, legsValue: 3 }}
-            muscleMass={{ armsValue: 1, legsValue: -2 }}
-          />
+          <Box p={16}>
+            <BodyBalance
+              ffmiValue={16}
+              bodyFat={{ armsValue: 6, legsValue: 3 }}
+              muscleMass={{ armsValue: 1, legsValue: -2 }}
+            />
+          </Box>
         )}
       </Stack>
       <Stack gap={32} py={32} flex={"1 0 0"}>
@@ -83,11 +92,13 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
             <BodySectionLegs lastMeasure={lastMeasure} evolution={evolution} />
           )}
           {isMobileSM && (
-            <BodyBalance
-              ffmiValue={22}
-              bodyFat={{ armsValue: 6, legsValue: 3 }}
-              muscleMass={{ armsValue: 1, legsValue: -2 }}
-            />
+            <Box mt={16}>
+              <BodyBalance
+                ffmiValue={28}
+                bodyFat={{ armsValue: 6, legsValue: 3 }}
+                muscleMass={{ armsValue: 1, legsValue: -2 }}
+              />
+            </Box>
           )}
         </ScrollArea.Autosize>
       </Stack>
