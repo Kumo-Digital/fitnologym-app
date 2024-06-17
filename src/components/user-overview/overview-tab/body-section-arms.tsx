@@ -141,16 +141,14 @@ export const BodySectionArms = ({
       <Stack>
         <Title order={4}>Circunferencias</Title>
         {armMeasures.circumferences.map((value: Measure, index: number) => (
-          <Stack gap={16}>
+          <Stack gap={16} key={`${value.metricName}-Stack-${index}`}>
             <CircumferenceCard
-              key={`${value.metricName}Left-${index}`}
               measureTitle={`${value.metricName}Left`}
               measureValue={value.metricValue.left.measure_value}
               measureUnit={value.metricValue.left.measure_uom}
               evolutionValue={value.metricValue.left.evolution}
             />
             <CircumferenceCard
-              key={`${value.metricName}Right-${index}`}
               measureTitle={`${value.metricName}Right`}
               measureValue={value.metricValue.right.measure_value}
               measureUnit={value.metricValue.right.measure_uom}
