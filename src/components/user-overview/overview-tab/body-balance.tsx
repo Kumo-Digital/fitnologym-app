@@ -13,7 +13,11 @@ interface BodyBalanceProps {
   muscleMass: ValueProps;
 }
 
-const BodyBalance = ({ ffmiValue, bodyFat, muscleMass }: BodyBalanceProps) => {
+const BodyBalance = ({
+  ffmiValue = 16,
+  bodyFat = { armsValue: 0, legsValue: 0 },
+  muscleMass = { armsValue: 0, legsValue: 0 },
+}: BodyBalanceProps) => {
   return (
     <Stack gap={16}>
       <FFMIBalance

@@ -771,3 +771,18 @@ export const getRemainingPercentageFromMeasures = (
 
   return result;
 };
+
+export const getBalancePercentage = (
+  leftValue: number,
+  rightValue: number
+): number => {
+  if (
+    typeof leftValue !== "number" ||
+    typeof rightValue !== "number" ||
+    rightValue === 0
+  ) {
+    return 0;
+  }
+  let percentage = ((rightValue - leftValue) / leftValue) * 100;
+  return percentage;
+};

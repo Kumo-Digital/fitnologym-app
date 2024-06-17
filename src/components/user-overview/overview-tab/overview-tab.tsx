@@ -21,6 +21,7 @@ import { OverviewTabSkeleton } from "./overview-tab-skeleton";
 import OverviewTabEmpty from "./overview-tab-empty";
 import { User } from "@/types/user";
 import BodyBalance from "./body-balance";
+import { getBalancePercentage } from "@/utils/measurement";
 
 interface OverviewTabProps {
   user: User;
@@ -39,6 +40,26 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
 
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
 
+  const armsBodyFatBalance = getBalancePercentage(
+    lastMeasure?.metrics.left_arm?.body_fat?.measure_value || 0,
+    lastMeasure?.metrics.right_arm?.body_fat?.measure_value || 0
+  );
+
+  const armsMuscleMassBalance = getBalancePercentage(
+    lastMeasure?.metrics.left_arm?.muscle_mass?.measure_value || 0,
+    lastMeasure?.metrics.right_arm?.muscle_mass?.measure_value || 0
+  );
+
+  const legsBodyFatBalance = getBalancePercentage(
+    lastMeasure?.metrics.left_leg?.body_fat?.measure_value || 0,
+    lastMeasure?.metrics.right_leg?.body_fat?.measure_value || 0
+  );
+
+  const legsMuscleMassBalance = getBalancePercentage(
+    lastMeasure?.metrics.left_leg?.muscle_mass?.measure_value || 0,
+    lastMeasure?.metrics.right_leg?.muscle_mass?.measure_value || 0
+  );
+
   if (!lastMeasure) return <OverviewTabEmpty />;
   if (isLoading || isLoadingEvolution) return <OverviewTabSkeleton />;
   return (
@@ -55,8 +76,14 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           <Box p={16}>
             <BodyBalance
               ffmiValue={16}
-              bodyFat={{ armsValue: 6, legsValue: 3 }}
-              muscleMass={{ armsValue: 1, legsValue: -2 }}
+              bodyFat={{
+                armsValue: armsBodyFatBalance,
+                legsValue: legsBodyFatBalance,
+              }}
+              muscleMass={{
+                armsValue: armsMuscleMassBalance,
+                legsValue: legsMuscleMassBalance,
+              }}
             />
           </Box>
         )}
@@ -93,10 +120,17 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           )}
           {isMobileSM && (
             <Box mt={16}>
+              {/* TODO: when the be is implemented, update this values */}
               <BodyBalance
                 ffmiValue={28}
-                bodyFat={{ armsValue: 6, legsValue: 3 }}
-                muscleMass={{ armsValue: 1, legsValue: -2 }}
+                bodyFat={{
+                  armsValue: armsBodyFatBalance,
+                  legsValue: legsBodyFatBalance,
+                }}
+                muscleMass={{
+                  armsValue: armsMuscleMassBalance,
+                  legsValue: legsMuscleMassBalance,
+                }}
               />
             </Box>
           )}
