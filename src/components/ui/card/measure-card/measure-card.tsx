@@ -24,6 +24,7 @@ interface MeasureCardProps {
   measureUnit: string;
   evolutionValue: number;
   measureStatus: number;
+  isEvolutionFromFirstToLast: boolean;
 }
 // agregamos masa ossea
 const dontShowEvolution = ["body_water", "bmr", "physique_rating", "bone_mass"];
@@ -44,10 +45,15 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
   evolutionValue,
   measureUnit,
   measureStatus,
+  isEvolutionFromFirstToLast,
 }) => {
   const theme = useMantineTheme();
 
   const notShowEvolution = dontShowEvolution.includes(measureTitle);
+
+  const evolutionMessage: string = isEvolutionFromFirstToLast ? 
+    "Crecimiento entre la primera y la última medida" : 
+    "Crecimiento respecto a la última medida"; 
 
   return (
     <Card
@@ -143,7 +149,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 label={
                   !evolutionValue
                     ? "Aún no hay medidas suficientes para contrastar"
-                    : "Crecimiento respecto a la última medida"
+                    : evolutionMessage
                 }
                 position="bottom"
                 multiline

@@ -15,6 +15,7 @@ type legMeasures = {
 export const BodySectionLegs = ({
   lastMeasure,
   evolution,
+  isEvolutionFromFirstToLast,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
@@ -142,6 +143,7 @@ export const BodySectionLegs = ({
               measureUnit={value.measure_uom}
               measureStatus={value.measure_status}
               evolutionValue={value.evolution}
+              isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
           ))}
         </Stack>
@@ -155,6 +157,7 @@ export const BodySectionLegs = ({
               measureUnit={value.measure_uom}
               measureStatus={value.measure_status}
               evolutionValue={value.evolution}
+              isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
           ))}
         </Stack>
@@ -170,6 +173,7 @@ export const BodySectionLegs = ({
                 measureValue={value.measure_value}
                 measureUnit={value.measure_uom}
                 evolutionValue={value.evolution}
+                isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
               />
             );
           } else {
@@ -181,6 +185,7 @@ export const BodySectionLegs = ({
                   measureValue={value.metricValue.left.measure_value}
                   measureUnit={value.metricValue.left.measure_uom}
                   evolutionValue={value.metricValue.left.evolution}
+                  isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
                 />
                 <CircumferenceCard
                   key={`${value.metricName}Right-${index}`}
@@ -188,6 +193,7 @@ export const BodySectionLegs = ({
                   measureValue={value.metricValue.right.measure_value}
                   measureUnit={value.metricValue.right.measure_uom}
                   evolutionValue={value.metricValue.right.evolution}
+                  isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
                 />
               </Stack>
             );

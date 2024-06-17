@@ -13,6 +13,7 @@ type TorsoMeasures = {
 export const BodySectionTorso = ({
   lastMeasure,
   evolution,
+  isEvolutionFromFirstToLast,
 }: BodySectionProps) => {
   const torsoMeasures: TorsoMeasures = Object.entries(
     lastMeasure.metrics
@@ -64,6 +65,7 @@ export const BodySectionTorso = ({
             measureUnit={value.measure_uom}
             evolutionValue={value.evolution}
             measureStatus={value.measure_status}
+            isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
           />
         ))}
       </Stack>
@@ -76,6 +78,7 @@ export const BodySectionTorso = ({
             measureValue={value.measure_value}
             measureUnit={value.measure_uom}
             evolutionValue={value.evolution}
+            isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
           />
         ))}
       </Stack>

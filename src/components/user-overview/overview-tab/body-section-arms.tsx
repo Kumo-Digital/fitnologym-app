@@ -15,6 +15,7 @@ type ArmMeasures = {
 export const BodySectionArms = ({
   lastMeasure,
   evolution,
+  isEvolutionFromFirstToLast,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
@@ -121,6 +122,7 @@ export const BodySectionArms = ({
               measureUnit={value.measure_uom}
               measureStatus={value.measure_status}
               evolutionValue={value.evolution}
+              isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
           ))}
         </Stack>
@@ -134,6 +136,7 @@ export const BodySectionArms = ({
               measureUnit={value.measure_uom}
               measureStatus={value.measure_status}
               evolutionValue={value.evolution}
+              isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
           ))}
         </Stack>
@@ -148,6 +151,7 @@ export const BodySectionArms = ({
               measureValue={value.metricValue.left.measure_value}
               measureUnit={value.metricValue.left.measure_uom}
               evolutionValue={value.metricValue.left.evolution}
+              isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
             <CircumferenceCard
               key={`${value.metricName}Right-${index}`}
@@ -155,6 +159,7 @@ export const BodySectionArms = ({
               measureValue={value.metricValue.right.measure_value}
               measureUnit={value.metricValue.right.measure_uom}
               evolutionValue={value.metricValue.right.evolution}
+              isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
           </Stack>
         ))}

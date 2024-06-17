@@ -11,6 +11,7 @@ export const BodySectionOverview = ({
   lastMeasure,
   evolution,
   targetMeasure,
+  isEvolutionFromFirstToLast,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
@@ -54,6 +55,7 @@ export const BodySectionOverview = ({
             measureUnit={value.measure_uom}
             measureStatus={value.measure_status}
             key={`${value.metricName}-${index}`}
+            isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
           />
         ))}
       </SimpleGrid>
