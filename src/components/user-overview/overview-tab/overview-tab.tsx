@@ -1,9 +1,10 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
-import { Flex, ScrollArea, SegmentedControl, Stack, em } from "@mantine/core";
+import { Flex, ScrollArea, SegmentedControl, Stack, Switch, em } from "@mantine/core";
 import { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import {
   useCalculateEvolution,
+  useCalculateEvolutionFromFirstToLast,
   useUniqueLastMeasure,
 } from "@/hooks/measurements";
 import { BodySectionOverview } from "./body-section-overview";
@@ -13,6 +14,7 @@ import { BodySectionLegs } from "./body-section-legs";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
 import OverviewTabEmpty from "./overview-tab-empty";
 import { User } from "@/types/user";
+import { Evolution } from "@/types/measurements";
 
 interface OverviewTabProps {
   user: User;
@@ -24,14 +26,24 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(
     user._id
   );
+  const { evolutionFromFirstToLast, isLoading: isLoadingEvolutionFromFirstToLast } = useCalculateEvolutionFromFirstToLast(
+    user._id
+  );
 
   const [selectedBodySection, setSelectedBodySection] =
     useState<string>("overview");
 
+  const [selectedEvolution, setSelectedEvolution] =
+    useState<Evolution>(evolution);
+
+    const handleToggle = (checked: boolean) => {
+      setSelectedEvolution(checked ? evolutionFromFirstToLast : evolution);
+    };
+
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
 
   if (!lastMeasure) return <OverviewTabEmpty />;
-  if (isLoading || isLoadingEvolution) return <OverviewTabSkeleton />;
+  if (isLoading || isLoadingEvolution || isLoadingEvolutionFromFirstToLast) return <OverviewTabSkeleton />;
   return (
     <Flex
       gap={0}
@@ -43,6 +55,13 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
         <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
       </Stack>
       <Stack gap={32} py={32} flex={"1 0 0"}>
+        <Switch
+          size="md"
+          checked={selectedEvolution === evolutionFromFirstToLast} 
+          onChange={(event) => handleToggle(event.currentTarget.checked)} 
+          onLabel="FFTL" 
+          offLabel="STL" 
+        />
         <SegmentedControl
           data={[
             { label: "Generales", value: "overview" },
@@ -59,18 +78,31 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           {selectedBodySection === "overview" && (
             <BodySectionOverview
               lastMeasure={lastMeasure}
-              evolution={evolution}
+              evolution={selectedEvolution}
               targetMeasure={user.targets}
+              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast}
             />
           )}
           {selectedBodySection === "torso" && (
-            <BodySectionTorso lastMeasure={lastMeasure} evolution={evolution} />
+            <BodySectionTorso 
+              lastMeasure={lastMeasure} 
+              evolution={selectedEvolution}
+              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast} 
+            />
           )}
           {selectedBodySection === "arms" && (
-            <BodySectionArms lastMeasure={lastMeasure} evolution={evolution} />
+            <BodySectionArms
+              lastMeasure={lastMeasure} 
+              evolution={selectedEvolution}
+              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast} 
+            />
           )}
           {selectedBodySection === "legs" && (
-            <BodySectionLegs lastMeasure={lastMeasure} evolution={evolution} />
+            <BodySectionLegs
+              lastMeasure={lastMeasure}
+              evolution={selectedEvolution}
+              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast} 
+            />
           )}
         </ScrollArea.Autosize>
       </Stack>

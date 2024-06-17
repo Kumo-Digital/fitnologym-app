@@ -35,6 +35,7 @@ export const apiUrls = {
     create: "/measurements",
     update: "/measurements",
     getEvolution: (id: string) => `/measurements/get-evolution/${id}`,
+    getEvolutionFromFirstToLast: (id: string) => `/measurements/get-evolution-from-first-to-last/${id}`,
   },
   metrics: {
     get: (filters: string) => `/metrics?${filters}`,
