@@ -171,26 +171,23 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
 
     case "bmi":
       return (
-        console.log(theme.colors[STATUS_COLORS[0]][5]),
-        (
-          <Box>
-            <Text mb={10}>{BMI_STATUS_DESCRIPTION}</Text>
-            {STATUS_VALUES.map((item, index) => (
-              <Box key={index} display="flex" mb={5}>
-                <Box
-                  bg={theme.colors[STATUS_COLORS[index]][6]}
-                  w={20}
-                  h={20}
-                  mr={10}
-                  style={{
-                    borderRadius: "50%",
-                  }}
-                />
-                <Text>{item.label}</Text>
-              </Box>
-            ))}
-          </Box>
-        )
+        <Box>
+          <Text mb={10}>{BMI_STATUS_DESCRIPTION}</Text>
+          {STATUS_VALUES.map((item, index) => (
+            <Box key={index} display="flex" mb={5}>
+              <Box
+                bg={theme.colors[STATUS_COLORS[index]][6]}
+                w={20}
+                h={20}
+                mr={10}
+                style={{
+                  borderRadius: "50%",
+                }}
+              />
+              <Text>{item.label}</Text>
+            </Box>
+          ))}
+        </Box>
       );
 
     case "body_fat":
