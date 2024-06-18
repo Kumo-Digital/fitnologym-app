@@ -3,6 +3,7 @@ import {
   BMR_STATUS_DESCRIPTION,
   BODY_FAT_DESCRIPTION,
   BODY_FAT_STATUS_COLORS,
+  BODY_FAT_STATUS_VALUES,
   BODY_WATER_STATUS_COLORS,
   BODY_WATER_STATUS_DESCRIPTION,
   BODY_WATER_STATUS_VALUES,
@@ -18,12 +19,9 @@ import {
   PHISYQUE_RATING_STATUS_COLORS,
   PHISYQUE_RATING_STATUS_DESCRIPTION,
   PHISYQUE_RATING_STATUS_VALUES,
-  SEGMENTED_STATUS_COLORS,
   SEGMENTED_STATUS_DESCRIPTION,
-  SEGMENTED_STATUS_VALUES,
   STATUS_COLORS,
   STATUS_VALUES,
-  STATUS_VALUES_WITHOUT_OBESITY,
   VISC_FAT_STATUS_COLORS,
   VISC_FAT_STATUS_DESCRIPTION,
   VISC_FAT_STATUS_VALUES,
@@ -173,30 +171,33 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
 
     case "bmi":
       return (
-        <Box>
-          <Text mb={10}>{BMI_STATUS_DESCRIPTION}</Text>
-          {STATUS_VALUES.map((item, index) => (
-            <Box key={index} display="flex" mb={5}>
-              <Box
-                bg={theme.colors[STATUS_COLORS[index]][6]}
-                w={20}
-                h={20}
-                mr={10}
-                style={{
-                  borderRadius: "50%",
-                }}
-              />
-              <Text>{item.label}</Text>
-            </Box>
-          ))}
-        </Box>
+        console.log(theme.colors[STATUS_COLORS[0]][5]),
+        (
+          <Box>
+            <Text mb={10}>{BMI_STATUS_DESCRIPTION}</Text>
+            {STATUS_VALUES.map((item, index) => (
+              <Box key={index} display="flex" mb={5}>
+                <Box
+                  bg={theme.colors[STATUS_COLORS[index]][6]}
+                  w={20}
+                  h={20}
+                  mr={10}
+                  style={{
+                    borderRadius: "50%",
+                  }}
+                />
+                <Text>{item.label}</Text>
+              </Box>
+            ))}
+          </Box>
+        )
       );
 
     case "body_fat":
       return (
         <Box>
           <Text mb={10}>{BODY_FAT_DESCRIPTION}</Text>
-          {STATUS_VALUES_WITHOUT_OBESITY.map((item, index) => (
+          {BODY_FAT_STATUS_VALUES.map((item, index) => (
             <Box key={index} display="flex" mb={5}>
               <Box
                 bg={theme.colors[BODY_FAT_STATUS_COLORS[index]][6]}

@@ -1165,196 +1165,6 @@ export default function MeasurementForm({
                   </Stack>
                   <Stack gap={8} flex={"1 0 0"}>
                     <Text size="sm" c="gray.6" fw="600">
-                      Brazo Derecho
-                    </Text>
-                    <Group grow id="value-armRightBodyFat">
-                      <FastField
-                        name="armRightBodyFat"
-                        placeholder="Grasa Corporal"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <NumberInput
-                            {...field}
-                            label="Grasa Corporal"
-                            value={meta.value}
-                            maw="100%"
-                            rightSection={
-                              <Text c="gray.6" size="sm" fw={500} pr={12}>
-                                %
-                              </Text>
-                            }
-                            onChange={(e) =>
-                              form.setFieldValue("armRightBodyFat", e)
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
-                      <FastField
-                        name="armRightBodyFatStatus"
-                        placeholder="Estado"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <Select
-                            {...field}
-                            label="Estado"
-                            withCheckIcon={false}
-                            maw={150}
-                            allowDeselect={false}
-                            leftSection={
-                              <Box
-                                w={8}
-                                h={8}
-                                bg={
-                                  SEGMENTED_STATUS_COLORS[
-                                    Number(meta.value) - 1
-                                  ]
-                                }
-                                style={{
-                                  borderRadius: "100%",
-                                }}
-                              ></Box>
-                            }
-                            renderOption={renderSelectOptionSegmented}
-                            data={SEGMENTED_STATUS_VALUES}
-                            value={meta.value}
-                            onChange={(e) =>
-                              form.setFieldValue("armRightBodyFatStatus", e)
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
-                    </Group>
-                    <Group grow id="value-armRightMuscleMass">
-                      <FastField
-                        name="armRightMuscleMass"
-                        placeholder="Masa Muscular"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <NumberInput
-                            {...field}
-                            label="Masa Muscular"
-                            value={meta.value}
-                            maw="100%"
-                            rightSection={
-                              <Text c="gray.6" size="sm" fw={500} pr={12}>
-                                Kgs
-                              </Text>
-                            }
-                            onChange={(e) =>
-                              form.setFieldValue("armRightMuscleMass", e)
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
-                      <FastField
-                        name="armRightMuscleMassStatus"
-                        placeholder="Estado"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <Select
-                            {...field}
-                            label="Estado"
-                            withCheckIcon={false}
-                            maw={150}
-                            allowDeselect={false}
-                            leftSection={
-                              <Box
-                                w={8}
-                                h={8}
-                                bg={
-                                  SEGMENTED_STATUS_COLORS[
-                                    Number(meta.value) - 1
-                                  ]
-                                }
-                                style={{
-                                  borderRadius: "100%",
-                                }}
-                              ></Box>
-                            }
-                            renderOption={renderSelectOptionSegmented}
-                            data={SEGMENTED_STATUS_VALUES}
-                            value={meta.value}
-                            onChange={(e) =>
-                              form.setFieldValue("armRightMuscleMassStatus", e)
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
-                    </Group>
-                    <Group grow id="value-armRightMuscleQuality">
-                      <FastField
-                        name="armRightMuscleQuality"
-                        placeholder="Calidad del Músculo"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <NumberInput
-                            {...field}
-                            label="Calidad del Músculo"
-                            value={meta.value}
-                            maw="100%"
-                            rightSection={
-                              <Text c="gray.6" size="sm" fw={500} pr={12}>
-                                u
-                              </Text>
-                            }
-                            onChange={(e) =>
-                              form.setFieldValue("armRightMuscleQuality", e)
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
-                      <FastField
-                        name="armRightMuscleQualityStatus"
-                        placeholder="Estado"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <Select
-                            {...field}
-                            label="Estado"
-                            withCheckIcon={false}
-                            maw={150}
-                            allowDeselect={false}
-                            leftSection={
-                              <Box
-                                w={8}
-                                h={8}
-                                bg={
-                                  MUSCLE_QUALITY_STATUS_COLORS[
-                                    Number(meta.value) - 1
-                                  ]
-                                }
-                                style={{
-                                  borderRadius: "100%",
-                                }}
-                              ></Box>
-                            }
-                            renderOption={renderSelectOptionMuscleQuality}
-                            data={MUSCLE_QUALITY_STATUS_VALUES}
-                            value={meta.value}
-                            onChange={(e) =>
-                              form.setFieldValue(
-                                "armRightMuscleQualityStatus",
-                                e
-                              )
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
-                    </Group>
-
-                    <Text size="sm" mt={24} c="gray.6" fw="600">
                       Brazo Izquierdo
                     </Text>
                     <Group grow id="value-armLeftBodyFat">
@@ -1543,6 +1353,195 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                     </Group>
+                    <Text size="sm" mt={24} c="gray.6" fw="600">
+                      Brazo Derecho
+                    </Text>
+                    <Group grow id="value-armRightBodyFat">
+                      <FastField
+                        name="armRightBodyFat"
+                        placeholder="Grasa Corporal"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Grasa Corporal"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={12}>
+                                %
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("armRightBodyFat", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="armRightBodyFatStatus"
+                        placeholder="Estado"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <Select
+                            {...field}
+                            label="Estado"
+                            withCheckIcon={false}
+                            maw={150}
+                            allowDeselect={false}
+                            leftSection={
+                              <Box
+                                w={8}
+                                h={8}
+                                bg={
+                                  SEGMENTED_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
+                                style={{
+                                  borderRadius: "100%",
+                                }}
+                              ></Box>
+                            }
+                            renderOption={renderSelectOptionSegmented}
+                            data={SEGMENTED_STATUS_VALUES}
+                            value={meta.value}
+                            onChange={(e) =>
+                              form.setFieldValue("armRightBodyFatStatus", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
+                    <Group grow id="value-armRightMuscleMass">
+                      <FastField
+                        name="armRightMuscleMass"
+                        placeholder="Masa Muscular"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Masa Muscular"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={12}>
+                                Kgs
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("armRightMuscleMass", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="armRightMuscleMassStatus"
+                        placeholder="Estado"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <Select
+                            {...field}
+                            label="Estado"
+                            withCheckIcon={false}
+                            maw={150}
+                            allowDeselect={false}
+                            leftSection={
+                              <Box
+                                w={8}
+                                h={8}
+                                bg={
+                                  SEGMENTED_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
+                                style={{
+                                  borderRadius: "100%",
+                                }}
+                              ></Box>
+                            }
+                            renderOption={renderSelectOptionSegmented}
+                            data={SEGMENTED_STATUS_VALUES}
+                            value={meta.value}
+                            onChange={(e) =>
+                              form.setFieldValue("armRightMuscleMassStatus", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
+                    <Group grow id="value-armRightMuscleQuality">
+                      <FastField
+                        name="armRightMuscleQuality"
+                        placeholder="Calidad del Músculo"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Calidad del Músculo"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={12}>
+                                u
+                              </Text>
+                            }
+                            onChange={(e) =>
+                              form.setFieldValue("armRightMuscleQuality", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="armRightMuscleQualityStatus"
+                        placeholder="Estado"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <Select
+                            {...field}
+                            label="Estado"
+                            withCheckIcon={false}
+                            maw={150}
+                            allowDeselect={false}
+                            leftSection={
+                              <Box
+                                w={8}
+                                h={8}
+                                bg={
+                                  MUSCLE_QUALITY_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
+                                style={{
+                                  borderRadius: "100%",
+                                }}
+                              ></Box>
+                            }
+                            renderOption={renderSelectOptionMuscleQuality}
+                            data={MUSCLE_QUALITY_STATUS_VALUES}
+                            value={meta.value}
+                            onChange={(e) =>
+                              form.setFieldValue(
+                                "armRightMuscleQualityStatus",
+                                e
+                              )
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
                   </Stack>
                 </Flex>
               </Stack>
@@ -1569,7 +1568,7 @@ export default function MeasurementForm({
                     </Group>
                   </Stack>
                   <Stack gap={8} flex={"1 0 0"}>
-                    <Text size="sm" mt={24} c="gray.6" fw="600">
+                    <Text size="sm" c="gray.6" fw="600">
                       Pierna Izquierda
                     </Text>
                     <Group grow id="value-legLeftBodyFat">
@@ -1758,7 +1757,7 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                     </Group>
-                    <Text size="sm" c="gray.6" fw="600">
+                    <Text size="sm" mt={24} c="gray.6" fw="600">
                       Pierna Derecha
                     </Text>
                     <Group grow id="value-legRightBodyFat">
