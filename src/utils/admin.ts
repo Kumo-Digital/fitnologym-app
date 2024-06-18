@@ -104,10 +104,19 @@ export const STATUS_VALUES_WITHOUT_OBESITY = [
   },
   {
     value: "3",
-    label: "Alto",
+    label: "Sobrepeso",
+  },
+  {
+    value: "4",
+    label: "Obeso",
   },
 ];
-export const STATUS_VALUES_WITHOUT_OBESITY_COLORS = ["blue", "lime", "red"];
+export const STATUS_VALUES_WITHOUT_OBESITY_COLORS = [
+  "blue",
+  "lime",
+  "yellow",
+  "red",
+];
 export const STATUS_COLORS = ["blue", "lime", "yellow", "red"];
 
 export const WEIGHT_STATUS_VALUES = [
@@ -236,7 +245,7 @@ export const BODY_WATER_STATUS_VALUES = [
   },
 ];
 
-export const BODY_WATER_STATUS_COLORS = ["red", "lime", "red"];
+export const BODY_WATER_STATUS_COLORS = ["blue", "lime", "red"];
 
 export const BODY_WATER_STATUS_DESCRIPTION =
   "El agua corporal es la hidratación que tiene su cuerpo:";
@@ -304,7 +313,7 @@ export const SEGMENTED_STATUS_COLORS = ["blue", "lime", "orange"];
 export const PHISYQUE_RATING_STATUS_VALUES = [
   {
     value: "1",
-    label: "Bajo",
+    label: "Bajo rango ",
   },
   {
     value: "2",
@@ -312,7 +321,7 @@ export const PHISYQUE_RATING_STATUS_VALUES = [
   },
   {
     value: "3",
-    label: "Muscular",
+    label: "Atletico",
   },
 ];
 
