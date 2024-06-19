@@ -600,12 +600,11 @@ export const getCategoryColoBySection = (section: string): string => {
 };
 
 export enum FFMIStatus {
-  AVERAGE = "Average",
-  SKINNY = "Skinny",
-  FAT = "Fat",
-  ATHLETE = "Athlete",
-  INTERMEDIATE_GYM = "Intermediate Gym",
-  ADVANCED_GYM = "Advanced Gym",
+  AVERAGE = "Normal",
+  SKINNY = "Flaco",
+  FAT = "Sobrepeso",
+  ATHLETE = "Atlético",
+  ADVANCED = "Avanzado",
   BODYBUILDER = "Bodybuilder",
 }
 
