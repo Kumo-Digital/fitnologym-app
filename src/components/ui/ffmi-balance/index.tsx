@@ -44,8 +44,8 @@ const FFMIBalance = ({
             className={classes.meter}
           ></meter>
           <div className={classes.values}>
-            {Array.from({ length: 15 }).map((_, index) => (
-              <span key={`value-${index}`}>{16 + index}</span>
+            {Array.from({ length: 17 }).map((_, index) => (
+              <span key={`value-${index}`}>{14 + index}</span>
             ))}
           </div>
         </div>

@@ -41,23 +41,23 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
 
   const armsBodyFatBalance = getBalancePercentage(
-    lastMeasure?.metrics.left_arm?.body_fat?.measure_value || 0,
-    lastMeasure?.metrics.right_arm?.body_fat?.measure_value || 0
+    lastMeasure?.metrics.left_arm?.body_fat?.measure_value,
+    lastMeasure?.metrics.right_arm?.body_fat?.measure_value
   );
 
   const armsMuscleMassBalance = getBalancePercentage(
-    lastMeasure?.metrics.left_arm?.muscle_mass?.measure_value || 0,
-    lastMeasure?.metrics.right_arm?.muscle_mass?.measure_value || 0
+    lastMeasure?.metrics.left_arm?.muscle_mass?.measure_value,
+    lastMeasure?.metrics.right_arm?.muscle_mass?.measure_value
   );
 
   const legsBodyFatBalance = getBalancePercentage(
-    lastMeasure?.metrics.left_leg?.body_fat?.measure_value || 0,
-    lastMeasure?.metrics.right_leg?.body_fat?.measure_value || 0
+    lastMeasure?.metrics.left_leg?.body_fat?.measure_value,
+    lastMeasure?.metrics.right_leg?.body_fat?.measure_value
   );
 
   const legsMuscleMassBalance = getBalancePercentage(
-    lastMeasure?.metrics.left_leg?.muscle_mass?.measure_value || 0,
-    lastMeasure?.metrics.right_leg?.muscle_mass?.measure_value || 0
+    lastMeasure?.metrics.left_leg?.muscle_mass?.measure_value,
+    lastMeasure?.metrics.right_leg?.muscle_mass?.measure_value
   );
 
   if (!lastMeasure) return <OverviewTabEmpty />;
@@ -75,7 +75,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
         {!isMobileSM && (
           <Box p={16}>
             <BodyBalance
-              ffmiValue={16}
+              ffmiValue={14}
               bodyFat={{
                 armsValue: armsBodyFatBalance,
                 legsValue: legsBodyFatBalance,
@@ -122,7 +122,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
             <Box mt={16}>
               {/* TODO: when the be is implemented, update this values */}
               <BodyBalance
-                ffmiValue={28}
+                ffmiValue={14}
                 bodyFat={{
                   armsValue: armsBodyFatBalance,
                   legsValue: legsBodyFatBalance,

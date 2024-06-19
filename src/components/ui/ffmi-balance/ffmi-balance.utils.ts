@@ -1,6 +1,6 @@
 export const mapRange = (
   value: number,
-  inMin: number = 16,
+  inMin: number = 14,
   inMax: number = 30,
   outMin: number = 0,
   outMax: number = 100
