@@ -207,9 +207,8 @@ export const BodySectionLegs = ({
             );
           } else {
             return (
-              <Stack gap={16}>
+              <Stack gap={16} key={`${value.metricName}Stack-${index}`}>
                 <CircumferenceCard
-                  key={`${value.metricName}Left-${index}`}
                   measureTitle={`${value.metricName}Left`}
                   measureValue={value.metricValue.left.measure_value}
                   measureUnit={value.metricValue.left.measure_uom}
@@ -217,7 +216,6 @@ export const BodySectionLegs = ({
                   isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
                 />
                 <CircumferenceCard
-                  key={`${value.metricName}Right-${index}`}
                   measureTitle={`${value.metricName}Right`}
                   measureValue={value.metricValue.right.measure_value}
                   measureUnit={value.metricValue.right.measure_uom}

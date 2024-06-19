@@ -49,17 +49,16 @@ const Page: NextPageWithLayout = () => {
   const { user, isLoading: isLoadingUser } = useUniqueUser({
     id: measurement?.user_id,
   });
-  console.log(user);
 
   if (isLoadingMeasure || isLoadingUser) return <MeasurementFormSkeleton />;
   return (
-  <>
-    <Head>
-      <title>Fitnologym App | Editar Medida</title>
-    </Head>
-    <MeasurementForm user={user} measurement={measurement} />
-  </>
-);
+    <>
+      <Head>
+        <title>Fitnologym App | Editar Medida</title>
+      </Head>
+      <MeasurementForm user={user} measurement={measurement} />
+    </>
+  );
 };
 
 withRootLayout(Page);

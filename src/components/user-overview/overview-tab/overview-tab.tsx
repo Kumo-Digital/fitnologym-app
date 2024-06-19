@@ -4,10 +4,10 @@ import {
   useCalculateEvolutionFromFirstToLast,
   useUniqueLastMeasure,
 } from "@/hooks/measurements";
-import { User } from "@/types/user";
 import {
   Badge,
   Blockquote,
+  Box,
   em,
   Flex,
   Group,
@@ -23,20 +23,24 @@ import { BodySectionArms } from "./body-section-arms";
 import { BodySectionLegs } from "./body-section-legs";
 import { BodySectionOverview } from "./body-section-overview";
 import { BodySectionTorso } from "./body-section-torso";
-import OverviewTabEmpty from "./overview-tab-empty";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
+import OverviewTabEmpty from "./overview-tab-empty";
+import { User } from "@/types/user";
 import {
   PHISYQUE_RATING_STATUS_COLORS,
   PHISYQUE_RATING_STATUS_VALUES,
 } from "@/utils/admin";
 import { Evolution } from "@/types/measurements";
+import { getBalancePercentage } from "@/utils/measurement";
+import BodyBalance from "./body-balance";
 
 interface OverviewTabProps {
   user: User;
 }
 
 const OverviewTab = ({ user }: OverviewTabProps) => {
-  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
+  const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
+  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
   const { lastMeasure, isLoading } = useUniqueLastMeasure(user._id);
   const { evolution, isLoading: isLoadingEvolution } = useCalculateEvolution(
     user._id
@@ -81,28 +85,48 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
 
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
 
+  const armsBodyFatBalance = getBalancePercentage(
+    lastMeasure?.metrics.left_arm?.body_fat?.measure_value,
+    lastMeasure?.metrics.right_arm?.body_fat?.measure_value
+  );
+
+  const armsMuscleMassBalance = getBalancePercentage(
+    lastMeasure?.metrics.left_arm?.muscle_mass?.measure_value,
+    lastMeasure?.metrics.right_arm?.muscle_mass?.measure_value
+  );
+
+  const legsBodyFatBalance = getBalancePercentage(
+    lastMeasure?.metrics.left_leg?.body_fat?.measure_value,
+    lastMeasure?.metrics.right_leg?.body_fat?.measure_value
+  );
+
+  const legsMuscleMassBalance = getBalancePercentage(
+    lastMeasure?.metrics.left_leg?.muscle_mass?.measure_value,
+    lastMeasure?.metrics.right_leg?.muscle_mass?.measure_value
+  );
+
   if (!lastMeasure) return <OverviewTabEmpty />;
   if (isLoading || isLoadingEvolution || isLoadingEvolutionFromFirstToLast)
     return <OverviewTabSkeleton />;
   return (
     <Flex
       gap={0}
-      direction={isMobile ? "column" : "row"}
-      align={isMobile ? "stretch" : "flex-start"}
+      direction={isMobileMD ? "column" : "row"}
+      align={isMobileMD ? "stretch" : "flex-start"}
       flex={"1 0 0"}
     >
       <Stack flex={"1 0 0"}>
         {measurementPhysic.lastMeasure && (
           <Blockquote
-            w={isMobile ? "auto" : "50%"}
-            h={isMobile ? "auto" : "50%"}
+            w={isMobileSM ? "auto" : "50%"}
+            h={isMobileSM ? "auto" : "50%"}
             color={getRatingStatusColor()}
             icon={icon}
             mt="sm"
             radius="xl"
           >
             <Group align="center">
-              <Text size={isMobile ? "md" : "lg"}>Rating Físico</Text>
+              <Text size={isMobileSM ? "md" : "lg"}>Rating Físico</Text>
               <Badge autoContrast size="xl" color={getRatingStatusColor()}>
                 {getRatingStatusByColor(getRatingStatusColor())}
               </Badge>
@@ -110,6 +134,22 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           </Blockquote>
         )}
         <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
+        {/* TODO: when the be is implemented, update this values */}
+        {!isMobileSM && (
+          <Box p={16}>
+            <BodyBalance
+              ffmiValue={14}
+              bodyFat={{
+                armsValue: armsBodyFatBalance,
+                legsValue: legsBodyFatBalance,
+              }}
+              muscleMass={{
+                armsValue: armsMuscleMassBalance,
+                legsValue: legsMuscleMassBalance,
+              }}
+            />
+          </Box>
+        )}
       </Stack>
       <Stack gap={32} py={32} flex={"1 0 0"}>
         <SegmentedControl
@@ -124,7 +164,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           onChange={setSelectedBodySection}
         />
         {/* Height = 448px is the sum of all the fixed height elements */}
-        <ScrollArea.Autosize h={isMobile ? "auto" : `calc(100vh - 20vh)`}>
+        <ScrollArea.Autosize>
           {selectedBodySection === "overview" && (
             <BodySectionOverview
               lastMeasure={lastMeasure}
@@ -165,6 +205,38 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
               }
               handleToggle={handleToggle}
             />
+          )}
+          {isMobileSM && (
+            <Box mt={16}>
+              {/* TODO: when the be is implemented, update this values */}
+              <BodyBalance
+                ffmiValue={14}
+                bodyFat={{
+                  armsValue: armsBodyFatBalance,
+                  legsValue: legsBodyFatBalance,
+                }}
+                muscleMass={{
+                  armsValue: armsMuscleMassBalance,
+                  legsValue: legsMuscleMassBalance,
+                }}
+              />
+            </Box>
+          )}
+          {isMobileSM && (
+            <Box mt={16}>
+              {/* TODO: when the be is implemented, update this values */}
+              <BodyBalance
+                ffmiValue={14}
+                bodyFat={{
+                  armsValue: armsBodyFatBalance,
+                  legsValue: legsBodyFatBalance,
+                }}
+                muscleMass={{
+                  armsValue: armsMuscleMassBalance,
+                  legsValue: legsMuscleMassBalance,
+                }}
+              />
+            </Box>
           )}
         </ScrollArea.Autosize>
       </Stack>
