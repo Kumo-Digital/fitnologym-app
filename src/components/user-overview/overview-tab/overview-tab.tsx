@@ -1,5 +1,5 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
-import { Flex, ScrollArea, SegmentedControl, Stack, Switch, em } from "@mantine/core";
+import { Flex, ScrollArea, SegmentedControl, Stack, Switch, Text, em } from "@mantine/core";
 import { useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import {
@@ -36,8 +36,12 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   const [selectedEvolution, setSelectedEvolution] =
     useState<Evolution>(evolution);
 
-    const handleToggle = (checked: boolean) => {
-      setSelectedEvolution(checked ? evolutionFromFirstToLast : evolution);
+  const [isCheckedEvolution, setIsCheckedEvolution] =
+    useState<boolean>(false);
+
+    const handleToggle = () => {
+      setIsCheckedEvolution(!isCheckedEvolution);
+      setSelectedEvolution(isCheckedEvolution ? evolutionFromFirstToLast : evolution);
     };
 
   const onSectionSelect = (section: string) => setSelectedBodySection(section);
@@ -55,13 +59,6 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
         <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
       </Stack>
       <Stack gap={32} py={32} flex={"1 0 0"}>
-        <Switch
-          size="md"
-          checked={selectedEvolution === evolutionFromFirstToLast} 
-          onChange={(event) => handleToggle(event.currentTarget.checked)} 
-          onLabel="FFTL" 
-          offLabel="STL" 
-        />
         <SegmentedControl
           data={[
             { label: "Generales", value: "overview" },
@@ -81,27 +78,31 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
               evolution={selectedEvolution}
               targetMeasure={user.targets}
               isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast}
+              handleToggle={handleToggle}
             />
           )}
           {selectedBodySection === "torso" && (
             <BodySectionTorso 
               lastMeasure={lastMeasure} 
               evolution={selectedEvolution}
-              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast} 
+              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast}
+              handleToggle={handleToggle}
             />
           )}
           {selectedBodySection === "arms" && (
             <BodySectionArms
               lastMeasure={lastMeasure} 
               evolution={selectedEvolution}
-              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast} 
+              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast}
+              handleToggle={handleToggle}
             />
           )}
           {selectedBodySection === "legs" && (
             <BodySectionLegs
               lastMeasure={lastMeasure}
               evolution={selectedEvolution}
-              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast} 
+              isEvolutionFromFirstToLast={selectedEvolution === evolutionFromFirstToLast}
+              handleToggle={handleToggle}
             />
           )}
         </ScrollArea.Autosize>

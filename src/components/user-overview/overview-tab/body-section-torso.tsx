@@ -2,7 +2,7 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { torsoBodyMetrics } from "@/utils/measurement";
-import { Stack, Title } from "@mantine/core";
+import { Stack, Title, Group, Switch, Text } from "@mantine/core";
 
 type Measure = { [key: string]: any };
 type TorsoMeasures = {
@@ -14,6 +14,7 @@ export const BodySectionTorso = ({
   lastMeasure,
   evolution,
   isEvolutionFromFirstToLast,
+  handleToggle,
 }: BodySectionProps) => {
   const torsoMeasures: TorsoMeasures = Object.entries(
     lastMeasure.metrics
@@ -55,7 +56,16 @@ export const BodySectionTorso = ({
 
   return (
     <Stack>
-      <Title order={4}>Torso</Title>
+      <Group justify="space-between">
+        <Title order={4}>Torso</Title>
+        <Switch
+          size="xl"
+          checked={isEvolutionFromFirstToLast} 
+          onChange={() => handleToggle()} 
+          onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
+          offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+        />
+      </Group>
       <Stack gap={16}>
         {torsoMeasures.trunk.map((value: Measure, index: number) => (
           <MeasureCard

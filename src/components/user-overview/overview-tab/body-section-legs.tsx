@@ -2,7 +2,7 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { legsBodyMetrics } from "@/utils/measurement";
-import { Flex, Group, Stack, Title, em } from "@mantine/core";
+import { Flex, Group, Stack, Title, Switch, Text, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -16,10 +16,13 @@ export const BodySectionLegs = ({
   lastMeasure,
   evolution,
   isEvolutionFromFirstToLast,
+  handleToggle,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
-  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
-  const isMobileLG = useMediaQuery(`(max-width: ${em(1024)})`);
+  const isMobileMD = useMediaQuery(`(max-width: ${em(768)}) and (min-width: ${em(426)})`);
+  const isMobileLG = useMediaQuery(`(max-width: ${em(1024)}) and (min-width: ${em(769)})`);
+  const isMobileXL = useMediaQuery(`(min-width: ${em(1025)})`);
+
   const legMeasures: legMeasures = Object.entries(lastMeasure.metrics).reduce(
     (measures, [metricName, value]: any) => {
       if (!legsBodyMetrics.includes(metricName)) return measures;
@@ -134,7 +137,20 @@ export const BodySectionLegs = ({
         gap={16}
       >
         <Stack flex={"1 0 0"}>
-          <Title order={4}>Pierna Izquierda</Title>
+          <Group justify="space-between" align="center" h={36}>
+            <Title order={4}>Pierna Izquierda</Title>
+            {
+            (isMobileSM || isMobileLG) ? 
+            <Switch
+            size="xl"
+            checked={isEvolutionFromFirstToLast} 
+            onChange={() => handleToggle()} 
+            onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
+            offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+            /> : 
+            null
+            }
+          </Group>
           {legMeasures.left_leg.map((value: Measure, index: number) => (
             <MeasureCard
               key={`${value.metricName}-${index}`}
@@ -148,7 +164,20 @@ export const BodySectionLegs = ({
           ))}
         </Stack>
         <Stack flex={"1 0 0"}>
-          <Title order={4}>Pierna Derecha</Title>
+          <Group justify="space-between" align="center">
+            <Title order={4}>Pierna Derecha</Title>
+            {
+              (isMobileMD || isMobileXL) ? 
+              <Switch
+              size="xl"
+              checked={isEvolutionFromFirstToLast} 
+              onChange={() => handleToggle()} 
+              onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
+              offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+              /> : 
+              null
+              }
+          </Group>
           {legMeasures.right_leg.map((value: Measure, index: number) => (
             <MeasureCard
               key={`${value.metricName}-${index}`}
