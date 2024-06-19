@@ -92,19 +92,19 @@ export default async function handler(
             muscle_mass: {
               measure_evolution: getRemainingPercentageFromMeasures(
                 previousToLastMeasure.metrics.left_arm.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                lastMeasure.metrics.left_arm.muscle_mass.measure_value as number
               ),
             },
             body_fat: {
               measure_evolution: getRemainingPercentageFromMeasures(
                 previousToLastMeasure.metrics.left_arm.body_fat.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                lastMeasure.metrics.left_arm.body_fat.measure_value as number
               ),
             },
             muscle_quality: {
               measure_evolution: getRemainingPercentageFromMeasures(
                 previousToLastMeasure.metrics.left_arm.muscle_quality.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                lastMeasure.metrics.left_arm.muscle_quality.measure_value as number
               ),
             },
           },
@@ -112,19 +112,19 @@ export default async function handler(
             muscle_mass: {
               measure_evolution: getRemainingPercentageFromMeasures(
                 previousToLastMeasure.metrics.right_arm.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                lastMeasure.metrics.right_arm.muscle_mass.measure_value as number
               ),
             },
             body_fat: {
               measure_evolution: getRemainingPercentageFromMeasures(
-                previousToLastMeasure.metrics.right_arm.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                previousToLastMeasure.metrics.right_arm.body_fat.measure_value as number, 
+                lastMeasure.metrics.right_arm.body_fat.measure_value as number
               ),
             },
             muscle_quality: {
               measure_evolution: getRemainingPercentageFromMeasures(
-                previousToLastMeasure.metrics.right_arm.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                previousToLastMeasure.metrics.right_arm.muscle_quality.measure_value as number, 
+                lastMeasure.metrics.right_arm.muscle_quality.measure_value as number
               ),
             },
           },
@@ -132,19 +132,19 @@ export default async function handler(
             muscle_mass: {
               measure_evolution: getRemainingPercentageFromMeasures(
                 previousToLastMeasure.metrics.left_leg.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                lastMeasure.metrics.left_leg.muscle_mass.measure_value as number
               ),
             },
             body_fat: {
               measure_evolution: getRemainingPercentageFromMeasures(
-                previousToLastMeasure.metrics.left_leg.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                previousToLastMeasure.metrics.left_leg.body_fat.measure_value as number, 
+                lastMeasure.metrics.left_leg.body_fat.measure_value as number
               ),
             },
             muscle_quality: {
               measure_evolution: getRemainingPercentageFromMeasures(
-                previousToLastMeasure.metrics.left_leg.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                previousToLastMeasure.metrics.left_leg.muscle_quality.measure_value as number, 
+                lastMeasure.metrics.left_leg.muscle_quality.measure_value as number
               ),
             },
           },
@@ -152,19 +152,19 @@ export default async function handler(
             muscle_mass: {
               measure_evolution: getRemainingPercentageFromMeasures(
                 previousToLastMeasure.metrics.right_leg.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                lastMeasure.metrics.right_leg.muscle_mass.measure_value as number
               ),
             },
             body_fat: {
               measure_evolution: getRemainingPercentageFromMeasures(
-                previousToLastMeasure.metrics.right_leg.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                previousToLastMeasure.metrics.right_leg.body_fat.measure_value as number, 
+                lastMeasure.metrics.right_leg.body_fat.measure_value as number
               ),
             },
             muscle_quality: {
               measure_evolution: getRemainingPercentageFromMeasures(
-                previousToLastMeasure.metrics.right_leg.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                previousToLastMeasure.metrics.right_leg.muscle_quality.measure_value as number, 
+                lastMeasure.metrics.right_leg.muscle_quality.measure_value as number
               ),
             },
           },
@@ -172,19 +172,13 @@ export default async function handler(
             muscle_mass: {
               measure_evolution: getRemainingPercentageFromMeasures(
                 previousToLastMeasure.metrics.trunk.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                lastMeasure.metrics.trunk.muscle_mass.measure_value as number
               ),
             },
             body_fat: {
               measure_evolution: getRemainingPercentageFromMeasures(
-                previousToLastMeasure.metrics.trunk.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
-              ),
-            },
-            muscle_quality: {
-              measure_evolution: getRemainingPercentageFromMeasures(
-                previousToLastMeasure.metrics.trunk.muscle_mass.measure_value as number, 
-                lastMeasure.metrics.weight.measure_value as number
+                previousToLastMeasure.metrics.trunk.body_fat.measure_value as number, 
+                lastMeasure.metrics.trunk.body_fat.measure_value as number
               ),
             },
           },
