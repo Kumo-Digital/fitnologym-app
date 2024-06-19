@@ -21,6 +21,7 @@ interface CircumferenceCardProps {
   measureUnit: string;
   measureValue: number;
   evolutionValue: number;
+  isEvolutionFromFirstToLast: boolean;
 }
 
 function openCheckModal(measure: string) {
@@ -38,8 +39,13 @@ export const CircumferenceCard = ({
   measureValue,
   measureUnit,
   evolutionValue,
+  isEvolutionFromFirstToLast,
 }: CircumferenceCardProps) => {
   const theme = useMantineTheme();
+
+  const evolutionMessage: string = isEvolutionFromFirstToLast ? 
+    "Crecimiento entre la primera y la última medida" : 
+    "Crecimiento respecto a la última medida";
 
   return (
     <Card
@@ -122,7 +128,7 @@ export const CircumferenceCard = ({
                 />
               )}
               <Tooltip
-                label={"Crecimiento respecto a la última medida"}
+                label={evolutionMessage}
                 position="bottom"
                 multiline
                 withArrow

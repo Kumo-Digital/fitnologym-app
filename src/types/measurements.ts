@@ -162,4 +162,6 @@ export interface BodySectionProps {
   lastMeasure: any;
   evolution?: Record<string, any>;
   targetMeasure?: any;
+  isEvolutionFromFirstToLast: boolean;
+  handleToggle: () => void;
 }
