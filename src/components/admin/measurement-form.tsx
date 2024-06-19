@@ -1003,21 +1003,20 @@ export default function MeasurementForm({
                     </Group>
                     <Group grow id="value-ffmi">
                       <FastField
-                        name="ffmiStatus"
-                        placeholder="FFMI (Estado)"
+                        name="ffmi"
+                        placeholder="FFMI (Valor)"
                       >
                         {({ field, form, meta }: any) => (
-                          <Select
+                          <NumberInput
                             {...field}
-                            label="FFMI (Estado)"
-                            withCheckIcon={false}
-                            placeholder="Estado FFMI"
-                            value={meta.value}
+                            label="FFMI"
+                            placeholder="FFMI..."
                             maw="100%"
-                            min={0}
-                            data={ffmiStatusOptions}
+                            min={16}
+                            max={30}
+                            value={meta.value}
                             onChange={(e) =>
-                              form.setFieldValue("ffmiStatus", e)
+                              form.setFieldValue("ffmi", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -1025,21 +1024,21 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                       <FastField
-                        name="ffmi"
-                        placeholder="FFMI (Valor)"
+                        name="ffmiStatus"
+                        placeholder="Estado"
                       >
                         {({ field, form, meta }: any) => (
                           <Select
                             {...field}
-                            label="FFMI"
+                            label="Estado"
                             withCheckIcon={false}
-                            placeholder="FFMI..."
-                            maw={150}
-                            allowDeselect={false}
-                            data={['17', '18', '19', '20', '21', '22', '23', '24', '25']}
+                            placeholder="Estado FFMI"
                             value={meta.value}
+                            maw={150}
+                            min={0}
+                            data={ffmiStatusOptions}
                             onChange={(e) =>
-                              form.setFieldValue("ffmi", e)
+                              form.setFieldValue("ffmiStatus", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
