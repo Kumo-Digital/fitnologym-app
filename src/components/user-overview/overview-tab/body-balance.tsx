@@ -21,19 +21,17 @@ const BodyBalance = ({
   return (
     <Stack gap={16}>
       <FFMIBalance
-        label="Balance FFMI"
-        description="Lorem ipsum dolor sit amet consectetur. Eget maecenas volutpat fringilla id felis. Dignissim platea eu in tempus mattis gravida purus in enim."
+        label="Indice de Masa Libre de Grasa (FFMI)"
+        description="El Indice de Masa Libre de Grasa es una medida que indica la cantidad de masa corporal compuesta por músculos, huesos, agua y otros tejidos magros, excluyendo la grasa."
         value={ffmiValue}
       />
       <BodySectionBalance
         name="Grasa Corporal"
-        description="Lorem ipsum dolor sit amet consectetur. Eget maecenas volutpat fringilla id felis. Dignissim platea eu in tempus mattis gravida purus in enim."
         armsValue={bodyFat.armsValue}
         legsValue={bodyFat.legsValue}
       />
       <BodySectionBalance
         name="Masa Muscular"
-        description="Lorem ipsum dolor sit amet consectetur. Eget maecenas volutpat fringilla id felis. Dignissim platea eu in tempus mattis gravida purus in enim."
         armsValue={muscleMass.armsValue}
         legsValue={muscleMass.legsValue}
       />
