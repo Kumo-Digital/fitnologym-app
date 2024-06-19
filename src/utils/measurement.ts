@@ -637,7 +637,9 @@ export const measurementFormValidationSchema = Yup.object().shape({
   bodyWaterStatus: Yup.string(),
   physiqueRating: Yup.number().min(0, "El rating físico no puede ser negativo"),
   physiqueRatingStatus: Yup.string(),
-  ffmi: Yup.number().min(0, "El índice de masa libre de grasa no puede ser negativo"),
+  ffmi: Yup.number()
+    .min(14, "El índice de masa libre de grasa no puede ser menor a 14")
+    .max(30, "El índice de masa libre de grasa no puede ser mayor a 30"),
   ffmiStatus: Yup.string(),
   armLeftMuscleMass: Yup.number().min(
     0,

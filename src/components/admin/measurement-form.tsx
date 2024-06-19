@@ -69,7 +69,9 @@ const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   </Group>
 );
 
-const renderSelectOptionPhysiqueRating: SelectProps["renderOption"] = ({ option }) => (
+const renderSelectOptionPhysiqueRating: SelectProps["renderOption"] = ({
+  option,
+}) => (
   <Group flex="1" gap="xs">
     <Box
       w={8}
@@ -224,7 +226,7 @@ const renderSelectOptionSegmented: SelectProps["renderOption"] = ({
 );
 
 const getFFMIEnumOptions = (enumObj: any) => {
-  return Object.keys(enumObj).map(key => ({
+  return Object.keys(enumObj).map((key) => ({
     value: key,
     label: enumObj[key],
   }));
@@ -1002,31 +1004,23 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                     <Group grow id="value-ffmi">
-                      <FastField
-                        name="ffmi"
-                        placeholder="FFMI (Valor)"
-                      >
+                      <FastField name="ffmi" placeholder="FFMI (Valor)">
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
                             label="FFMI"
                             placeholder="FFMI..."
                             maw="100%"
-                            min={16}
+                            min={14}
                             max={30}
                             value={meta.value}
-                            onChange={(e) =>
-                              form.setFieldValue("ffmi", e)
-                            }
+                            onChange={(e) => form.setFieldValue("ffmi", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
                           />
                         )}
                       </FastField>
-                      <FastField
-                        name="ffmiStatus"
-                        placeholder="Estado"
-                      >
+                      <FastField name="ffmiStatus" placeholder="Estado">
                         {({ field, form, meta }: any) => (
                           <Select
                             {...field}
@@ -1035,8 +1029,8 @@ export default function MeasurementForm({
                             placeholder="Estado FFMI"
                             value={meta.value}
                             maw={150}
-                            min={0}
                             data={ffmiStatusOptions}
+                            allowDeselect={false}
                             onChange={(e) =>
                               form.setFieldValue("ffmiStatus", e)
                             }
