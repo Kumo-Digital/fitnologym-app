@@ -55,6 +55,9 @@ export interface Evolution {
     physique_rating: {
       measure_evolution: number;
     };
+    ffmi: {
+      measure_evolution: number;
+    };
     left_arm: {
       muscle_mass: {
         measure_evolution: number;

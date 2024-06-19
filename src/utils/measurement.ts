@@ -71,6 +71,10 @@ export const prepareMeasurementForInsert = (
         measure_value: payload.physiqueRating ?? null,
         measure_status: payload.physiqueRatingStatus ?? 2,
       },
+      ffmi: {
+        measure_value: payload.ffmi ?? null,
+        measure_status: payload.ffmiStatus ?? FFMIStatus.AVERAGE,
+      },
       left_arm: {
         muscle_mass: {
           measure_uom: MEASUREMENT_UNITS.KG,
@@ -257,6 +261,8 @@ export const prepareMeasurementForEditForm = (
     muscleQualityStatus: payload.metrics.muscle_quality.measure_status || 2,
     physiqueRating: payload.metrics.physique_rating.measure_value || 0,
     physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
+    ffmi: payload.metrics.ffmi.measure_value || 0,
+    ffmiStatus: payload.metrics.ffmi.measure_status || FFMIStatus.AVERAGE,
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
     trunkMuscleMassStatus:
       payload.metrics.trunk.muscle_mass.measure_status || 2,
@@ -584,6 +590,15 @@ export const getCategoryColoBySection = (section: string): string => {
   }
 };
 
+export enum FFMIStatus {
+  AVERAGE = "Normal",
+  SKINNY = "Flaco",
+  FAT = "Sobrepeso",
+  ATHLETE = "Atlético",
+  ADVANCED = "Avanzado",
+  BODYBUILDER = "Bodybuilder",
+}
+
 export const measurementFormValidationSchema = Yup.object().shape({
   user_id: Yup.string().required("El nombre del cliente es obligatorio"),
   report_url: Yup.string(),
@@ -613,6 +628,10 @@ export const measurementFormValidationSchema = Yup.object().shape({
   bodyWaterStatus: Yup.string(),
   physiqueRating: Yup.number().min(0, "El rating físico no puede ser negativo"),
   physiqueRatingStatus: Yup.string(),
+  ffmi: Yup.number()
+    .min(14, "El índice de masa libre de grasa no puede ser menor a 14")
+    .max(30, "El índice de masa libre de grasa no puede ser mayor a 30"),
+  ffmiStatus: Yup.string(),
   armLeftMuscleMass: Yup.number().min(
     0,
     "La masa muscular no puede ser negativa"

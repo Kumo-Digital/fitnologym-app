@@ -88,6 +88,12 @@ export default async function handler(
               lastMeasure.metrics.physique_rating.measure_value as number
             ),
           },
+          ffmi: {
+            measure_evolution: getRemainingPercentageFromMeasures(
+              previousToLastMeasure.metrics.ffmi.measure_value as number, 
+              lastMeasure.metrics.ffmi.measure_value as number
+            ),
+          },
           left_arm: {
             muscle_mass: {
               measure_evolution: getRemainingPercentageFromMeasures(

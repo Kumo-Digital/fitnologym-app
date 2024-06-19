@@ -29,6 +29,7 @@ import {
   measurementFormInitialValues,
 } from "@/utils/admin";
 import {
+  FFMIStatus,
   measurementFormValidationSchema,
   prepareMeasurementForEditForm,
 } from "@/utils/measurement";
@@ -223,6 +224,15 @@ const renderSelectOptionSegmented: SelectProps["renderOption"] = ({
     <Text size="sm">{option.label}</Text>
   </Group>
 );
+
+const getFFMIEnumOptions = (enumObj: any) => {
+  return Object.keys(enumObj).map((key) => ({
+    value: key,
+    label: enumObj[key],
+  }));
+};
+
+const ffmiStatusOptions = getFFMIEnumOptions(FFMIStatus);
 
 export default function MeasurementForm({
   user,
@@ -986,6 +996,43 @@ export default function MeasurementForm({
                             value={meta.value}
                             onChange={(e) =>
                               form.setFieldValue("bodyWaterStatus", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
+                    <Group grow id="value-ffmi">
+                      <FastField name="ffmi" placeholder="FFMI (Valor)">
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="FFMI"
+                            placeholder="FFMI..."
+                            maw="100%"
+                            min={14}
+                            max={30}
+                            value={meta.value}
+                            onChange={(e) => form.setFieldValue("ffmi", e)}
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField name="ffmiStatus" placeholder="Estado">
+                        {({ field, form, meta }: any) => (
+                          <Select
+                            {...field}
+                            label="Estado"
+                            withCheckIcon={false}
+                            placeholder="Estado FFMI"
+                            value={meta.value}
+                            maw={150}
+                            data={ffmiStatusOptions}
+                            allowDeselect={false}
+                            onChange={(e) =>
+                              form.setFieldValue("ffmiStatus", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}

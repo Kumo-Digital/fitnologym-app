@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { FFMIStatus } from "./measurement";
 
 export const measurementFormInitialValues = {
   user_id: "",
@@ -26,6 +27,8 @@ export const measurementFormInitialValues = {
   muscleQualityStatus: "2",
   physiqueRating: 0,
   physiqueRatingStatus: "2",
+  ffmi: 17,
+  ffmiStatus: FFMIStatus.AVERAGE,
   trunkMuscleMass: 0,
   trunkMuscleMassStatus: "2",
   trunkMuscleQuality: 0,
