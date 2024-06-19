@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/charts/styles.css";
+import "@mantine/carousel/styles.css";
 import "@mantine/notifications/styles.css";
 import { createTheme, MantineProvider } from "@mantine/core";
 import "dayjs/locale/es";

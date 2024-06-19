@@ -1,8 +1,16 @@
-import { SimpleGrid, Stack, Title, em } from "@mantine/core";
+import {
+  SimpleGrid,
+  Stack,
+  Title,
+  Group,
+  Switch,
+  Text,
+  em,
+} from "@mantine/core";
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
-import { overviewBodyMetrics } from "@/utils/measurement";
-import { BodySectionProps } from "@/types/measurements";
 import { TargetMeasureCard } from "@/components/ui/card/target-measure-card";
+import { BodySectionProps } from "@/types/measurements";
+import { overviewBodyMetrics } from "@/utils/measurement";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -11,6 +19,8 @@ export const BodySectionOverview = ({
   lastMeasure,
   evolution,
   targetMeasure,
+  isEvolutionFromFirstToLast,
+  handleToggle,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
@@ -36,7 +46,24 @@ export const BodySectionOverview = ({
 
   return (
     <Stack>
-      <Title order={4}>Generales</Title>
+      <Group justify="space-between">
+        <Title order={4}>Generales</Title>
+        <Switch
+          size="xl"
+          checked={isEvolutionFromFirstToLast}
+          onChange={() => handleToggle()}
+          onLabel={
+            <Text size="xs" c="dark.7" fw={600} px={4}>
+              Completa
+            </Text>
+          }
+          offLabel={
+            <Text size="xs" fw={600} px={4}>
+              Actual
+            </Text>
+          }
+        />
+      </Group>
       <TargetMeasureCard
         currentValue={currentValue}
         targetValue={targetValue}
@@ -54,6 +81,7 @@ export const BodySectionOverview = ({
             measureUnit={value.measure_uom}
             measureStatus={value.measure_status}
             key={`${value.metricName}-${index}`}
+            isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
           />
         ))}
       </SimpleGrid>

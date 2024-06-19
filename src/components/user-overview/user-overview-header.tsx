@@ -3,19 +3,20 @@ import { appUrls } from "@/lib/appUrls";
 import { User } from "@/types/user";
 import { parseDate } from "@/utils/utils";
 import {
-  Group,
-  Stack,
-  Title,
-  Text,
+  ActionIcon,
+  Box,
   Button,
   Divider,
   em,
-  ActionIcon,
-  Box,
+  Group,
+  Stack,
+  Text,
+  Title,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconPlus } from "@tabler/icons-react";
 import { useRouter } from "next/router";
+import CarouselCards from "../ui/carrousel/carrousel-cards";
 
 const UserOverviewHeader = ({
   user,
@@ -40,31 +41,23 @@ const UserOverviewHeader = ({
               <Title order={1} size={32} c="gray.0">
                 {user.fullname}
               </Title>
-              {isMobileSM ? (
-                <ActionIcon
-                  variant="filled"
-                  aria-label="Nueva Medida"
-                  size="lg"
-                  onClick={() =>
-                    push(`${appUrls.measurements.new}?userId=${user._id}`)
-                  }
-                >
-                  <IconPlus
-                    style={{ width: "70%", height: "70%" }}
-                    stroke={1.5}
-                  />
-                </ActionIcon>
-              ) : (
-                <Button
-                  c="black"
-                  leftSection={<IconPlus />}
-                  onClick={() =>
-                    push(`${appUrls.measurements.new}?userId=${user._id}`)
-                  }
-                >
-                  Nueva Medición
-                </Button>
-              )}
+              {isMobileSM
+                ? sessionUser.role === "administrator" && (
+                    <ActionIcon
+                      variant="filled"
+                      aria-label="Nueva Medida"
+                      size="lg"
+                      onClick={() =>
+                        push(`${appUrls.measurements.new}?userId=${user._id}`)
+                      }
+                    >
+                      <IconPlus
+                        style={{ width: "70%", height: "70%" }}
+                        stroke={1.5}
+                      />
+                    </ActionIcon>
+                  )
+                : null}
             </Group>
             <MeasureLegend lastMeasure={lastMeasure} />
           </Stack>
@@ -91,6 +84,12 @@ const UserOverviewHeader = ({
         )}
       </Box>
       <Divider size="sm" />
+      {isMobileSM && (
+        <>
+          <CarouselCards user={user} />
+          <Divider size="sm" />
+        </>
+      )}
     </Stack>
   );
 };

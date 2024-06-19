@@ -55,6 +55,9 @@ export interface Evolution {
     physique_rating: {
       measure_evolution: number;
     };
+    ffmi: {
+      measure_evolution: number;
+    };
     left_arm: {
       muscle_mass: {
         measure_evolution: number;
@@ -104,9 +107,6 @@ export interface Evolution {
         measure_evolution: number;
       };
       body_fat: {
-        measure_evolution: number;
-      };
-      muscle_quality: {
         measure_evolution: number;
       };
     };
@@ -162,4 +162,6 @@ export interface BodySectionProps {
   lastMeasure: any;
   evolution?: Record<string, any>;
   targetMeasure?: any;
+  isEvolutionFromFirstToLast: boolean;
+  handleToggle: () => void;
 }
