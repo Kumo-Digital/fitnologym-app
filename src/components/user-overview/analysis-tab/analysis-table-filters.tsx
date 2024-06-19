@@ -1,12 +1,12 @@
-import { Form, Formik } from "formik";
-import { Box, Button, Group, Select, SelectProps, Text } from "@mantine/core";
-import { MonthPickerInput } from "@mantine/dates";
+import { AnalysisTableFiltersProps } from "@/types/analysis";
+import { analysisFilterFormValidationSchema } from "@/utils/analysis";
 import {
   getCategoryColoBySection,
   metricsSelectOptions,
 } from "@/utils/measurement";
-import { AnalysisTableFiltersProps } from "@/types/analysis";
-import { analysisFilterFormValidationSchema } from "@/utils/analysis";
+import { Box, Button, Group, Select, SelectProps, Text } from "@mantine/core";
+import { MonthPickerInput } from "@mantine/dates";
+import { Form, Formik } from "formik";
 
 const renderSelectOption: SelectProps["renderOption"] = ({
   option,

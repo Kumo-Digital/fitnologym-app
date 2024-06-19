@@ -95,7 +95,8 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
             </Text>
           </Group>
         </Stack>
-        {notShowEvolution ? null : (
+
+        {notShowEvolution || !evolutionValue ? null : (
           <Stack gap={4} align="flex-start" justify="space-between">
             <Text size="md" c="gray.0" fw={700} h={36} w={75}>
               Evolución

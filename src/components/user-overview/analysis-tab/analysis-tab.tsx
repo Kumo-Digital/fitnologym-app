@@ -1,21 +1,21 @@
-import { Stack, em } from "@mantine/core";
-import { AreaChart } from "@mantine/charts";
-import { useEffect, useState } from "react";
+import {
+  useUniqueFirstMeasure,
+  useUniqueLastMeasure,
+} from "@/hooks/measurements";
+import { useMetrics } from "@/hooks/metrics";
+import { Filters } from "@/types/analysis";
 import {
   getLabelColoBySection,
   metricsSelectOptions,
   prepareMeasurementForDisplay,
 } from "@/utils/measurement";
-import AnalysisTableFilters from "./analysis-table-filters";
-import AnalysisTabSkeleton from "./analysis-tab-skeleton";
-import { useMetrics } from "@/hooks/metrics";
-import { useRouter } from "next/router";
-import { Filters } from "@/types/analysis";
-import {
-  useUniqueFirstMeasure,
-  useUniqueLastMeasure,
-} from "@/hooks/measurements";
+import { AreaChart } from "@mantine/charts";
+import { Stack, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import AnalysisTabSkeleton from "./analysis-tab-skeleton";
+import AnalysisTableFilters from "./analysis-table-filters";
 
 const twoMonthsAgo = new Date();
 twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
@@ -65,7 +65,12 @@ const AnalysisTab = () => {
 
   const filteredMetrics = prepareMeasurementForDisplay(metrics);
 
-  if (isLoading || isFirstMeasureLoading || isLastMeasureLoading || filteredMetrics.length === 0) {
+  if (
+    isLoading ||
+    isFirstMeasureLoading ||
+    isLastMeasureLoading ||
+    filteredMetrics.length === 0
+  ) {
     return <AnalysisTabSkeleton />;
   }
   return (
@@ -84,6 +89,7 @@ const AnalysisTab = () => {
         curveType="natural"
         tooltipAnimationDuration={200}
         withLegend
+        withGradient={false}
         legendProps={{ height: isMobile ? 100 : 50 }}
         series={
           filteredMetrics

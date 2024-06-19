@@ -1,8 +1,16 @@
-import { SimpleGrid, Stack, Title, Group, Switch, Text, em } from "@mantine/core";
+import {
+  SimpleGrid,
+  Stack,
+  Title,
+  Group,
+  Switch,
+  Text,
+  em,
+} from "@mantine/core";
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
-import { overviewBodyMetrics } from "@/utils/measurement";
-import { BodySectionProps } from "@/types/measurements";
 import { TargetMeasureCard } from "@/components/ui/card/target-measure-card";
+import { BodySectionProps } from "@/types/measurements";
+import { overviewBodyMetrics } from "@/utils/measurement";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -42,10 +50,18 @@ export const BodySectionOverview = ({
         <Title order={4}>Generales</Title>
         <Switch
           size="xl"
-          checked={isEvolutionFromFirstToLast} 
-          onChange={() => handleToggle()} 
-          onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
-          offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+          checked={isEvolutionFromFirstToLast}
+          onChange={() => handleToggle()}
+          onLabel={
+            <Text size="xs" c="dark.7" fw={600} px={4}>
+              Completa
+            </Text>
+          }
+          offLabel={
+            <Text size="xs" fw={600} px={4}>
+              Actual
+            </Text>
+          }
         />
       </Group>
       <TargetMeasureCard
