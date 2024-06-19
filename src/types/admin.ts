@@ -29,8 +29,6 @@ export interface MeasurementFormValues {
   ffmiStatus: string;
   trunkMuscleMass: number;
   trunkMuscleMassStatus: number;
-  trunkMuscleQuality: number;
-  trunkMuscleQualityStatus: number;
   trunkBodyFat: number;
   trunkBodyFatStatus: number;
   armLeftMuscleMass: number;

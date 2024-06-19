@@ -1,8 +1,8 @@
-import { SimpleGrid, Stack, Title, em } from "@mantine/core";
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
-import { overviewBodyMetrics } from "@/utils/measurement";
-import { BodySectionProps } from "@/types/measurements";
 import { TargetMeasureCard } from "@/components/ui/card/target-measure-card";
+import { BodySectionProps } from "@/types/measurements";
+import { overviewBodyMetrics } from "@/utils/measurement";
+import { SimpleGrid, Stack, Title, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
