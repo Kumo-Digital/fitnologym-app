@@ -24,7 +24,7 @@ interface MeasureCardProps {
   measureUnit: string;
   evolutionValue: number;
   measureStatus: number;
-  isEvolutionFromFirstToLast: boolean;
+  isEvolutionFromFirstToLast?: boolean;
 }
 // agregamos masa ossea
 const dontShowEvolution = ["body_water", "bmr", "physique_rating", "bone_mass"];
@@ -51,9 +51,9 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
 
   const notShowEvolution = dontShowEvolution.includes(measureTitle);
 
-  const evolutionMessage: string = isEvolutionFromFirstToLast ? 
-    "Crecimiento entre la primera y la última medida" : 
-    "Crecimiento respecto a la última medida"; 
+  const evolutionMessage: string = isEvolutionFromFirstToLast
+    ? "Crecimiento entre la primera y la última medida"
+    : "Crecimiento respecto a la última medida";
 
   return (
     <Card
