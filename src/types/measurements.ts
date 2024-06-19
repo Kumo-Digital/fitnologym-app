@@ -106,9 +106,6 @@ export interface Evolution {
       body_fat: {
         measure_evolution: number;
       };
-      muscle_quality: {
-        measure_evolution: number;
-      };
     };
     circumferenceNeck: {
       measure_evolution: number;

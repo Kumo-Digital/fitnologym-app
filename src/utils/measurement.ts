@@ -150,11 +150,6 @@ export const prepareMeasurementForInsert = (
           measure_value: payload.trunkBodyFat ?? null,
           measure_status: payload.trunkBodyFatStatus ?? 2,
         },
-        muscle_quality: {
-          measure_uom: MEASUREMENT_UNITS.UNIT,
-          measure_value: payload.trunkMuscleQuality ?? null,
-          measure_status: payload.trunkMuscleQualityStatus ?? 2,
-        },
       },
       circumferenceNeck: {
         measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
@@ -265,9 +260,6 @@ export const prepareMeasurementForEditForm = (
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
     trunkMuscleMassStatus:
       payload.metrics.trunk.muscle_mass.measure_status || 2,
-    trunkMuscleQuality: payload.metrics.trunk.muscle_quality.measure_value || 0,
-    trunkMuscleQualityStatus:
-      payload.metrics.trunk.muscle_quality.measure_status || 2,
     trunkBodyFat: payload.metrics.trunk.body_fat.measure_value || 0,
     trunkBodyFatStatus: payload.metrics.trunk.body_fat.measure_status || 2,
     armLeftMuscleMass: payload.metrics.left_arm.muscle_mass.measure_value || 0,
@@ -531,7 +523,6 @@ export const metricsSelectOptions = [
     label: "Calidad Muscular",
     sections: [
       "overview",
-      "trunk",
       "left_leg",
       "right_leg",
       "left_arm",
@@ -766,7 +757,13 @@ export const getRemainingPercentageFromMeasures = (
   previousToLastValue: number,
   lastValue: number
 ): number => {
-  const result =
+  let result = 0;
+
+  if (previousToLastValue === lastValue) {
+    return result;
+  }
+
+  result =
     ((previousToLastValue - lastValue) / previousToLastValue) * 100;
 
   return result;

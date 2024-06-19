@@ -49,7 +49,6 @@ export interface IMeasurement {
     trunk: {
       muscle_mass: MeasurementObject;
       body_fat: MeasurementObject;
-      muscle_quality: MeasurementObject;
     };
     circumferenceNeck?: CircumferenceObject;
     circumferenceChest?: CircumferenceObject;
