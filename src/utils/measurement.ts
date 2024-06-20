@@ -527,13 +527,7 @@ export const metricsSelectOptions = [
   {
     value: "muscle_quality",
     label: "Calidad Muscular",
-    sections: [
-      "overview",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["overview", "left_leg", "right_leg", "left_arm", "right_arm"],
   },
   { value: "visc_fat", label: "Grasa Visceral", sections: ["overview"] },
   { value: "bone_mass", label: "Masa Ósea", sections: ["overview"] },
@@ -782,8 +776,22 @@ export const getRemainingPercentageFromMeasures = (
     return result;
   }
 
-  result =
-    ((previousToLastValue - lastValue) / previousToLastValue) * 100;
+  result = ((previousToLastValue - lastValue) / previousToLastValue) * 100;
+
+  return result;
+};
+
+export const getRemainingSpecificFromMeasures = (
+  previousToLastValue: number,
+  lastValue: number
+): number => {
+  let result = 0;
+
+  if (previousToLastValue === lastValue) {
+    return result;
+  }
+
+  result = previousToLastValue - lastValue;
 
   return result;
 };
