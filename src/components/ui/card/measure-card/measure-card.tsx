@@ -1,11 +1,13 @@
 import { getMeasureName } from "@/utils/measurement";
 import {
+  Box,
   Card,
   Group,
   Stack,
   Text,
   Title,
   Tooltip,
+  Transition,
   useMantineTheme,
 } from "@mantine/core";
 import { modals } from "@mantine/modals";
@@ -17,6 +19,7 @@ import {
 } from "@tabler/icons-react";
 import { BoxColorCard } from "./box-color-card";
 import { MeasureCardInfoModal } from "./measure-card-info-modal";
+import { useEffect, useState } from "react";
 
 interface MeasureCardProps {
   measureTitle: string;
@@ -48,6 +51,17 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
   isEvolutionFromFirstToLast,
 }) => {
   const theme = useMantineTheme();
+  const [isUnitToggled, setIsUnitToggled] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (measureUnit !== "kg") return;
+
+    const timer = setInterval(() => {
+      setIsUnitToggled((prev) => !prev);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const notShowEvolution = dontShowEvolution.includes(measureTitle);
 
@@ -98,10 +112,10 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
 
         {notShowEvolution || !evolutionValue ? null : (
           <Stack gap={4} align="flex-start" justify="space-between">
-            <Text size="md" c="gray.0" fw={700} h={36} w={75}>
+            <Text size="md" c="gray.0" fw={700} w={75}>
               Evolución
             </Text>
-            <Group align="baseline" gap={8}>
+            <Group align="baseline" pb={4} gap={8} wrap="nowrap">
               {(evolutionValue === 0 || !evolutionValue) && (
                 <IconLineDashed
                   color={theme.colors.gray[5]}
@@ -166,14 +180,60 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                     </Text>
                   </Group>
                 ) : (
-                  <Group align="baseline" gap={8}>
-                    <Text size="xl" c="gray.0" fw={600}>
-                      {Math.abs(evolutionValue).toFixed(1)}
-                    </Text>
-                    <Text size="sm" c="gray.5">
-                      %
-                    </Text>
-                  </Group>
+                  <Box pos="relative">
+                    <Transition
+                      mounted={isUnitToggled}
+                      duration={200}
+                      transition="slide-down"
+                      timingFunction="ease-in-out"
+                      keepMounted
+                    >
+                      {(styles) => (
+                        <Group
+                          align="baseline"
+                          gap={8}
+                          style={styles}
+                          wrap="nowrap"
+                          pos="absolute"
+                          bottom={-10}
+                          left={0}
+                        >
+                          <Text size="xl" c="gray.0" fw={600}>
+                            {Math.abs(evolutionValue).toFixed(1)}
+                          </Text>
+                          <Text size="sm" c="gray.5">
+                            %
+                          </Text>
+                        </Group>
+                      )}
+                    </Transition>
+                    <Transition
+                      mounted={!isUnitToggled}
+                      duration={200}
+                      transition="slide-down"
+                      timingFunction="ease-in-out"
+                      keepMounted
+                    >
+                      {(styles) => (
+                        <Group
+                          align="baseline"
+                          gap={8}
+                          style={styles}
+                          wrap="nowrap"
+                          pos="absolute"
+                          bottom={-10}
+                          left={0}
+                        >
+                          <Text size="xl" c="gray.0" fw={600}>
+                            4
+                          </Text>
+                          <Text size="sm" c="gray.5">
+                            kg
+                          </Text>
+                        </Group>
+                      )}
+                    </Transition>
+                  </Box>
                 )}
               </Tooltip>
             </Group>
