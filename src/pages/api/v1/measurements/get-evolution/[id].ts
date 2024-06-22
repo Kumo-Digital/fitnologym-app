@@ -1,5 +1,4 @@
 import connectDB from "@/lib/db";
-import UserService from "@/db/services/user";
 import { NextApiRequest, NextApiResponse } from "next";
 import MeasurementService from "@/db/services/measurement";
 import { Evolution } from "@/types/measurements";
