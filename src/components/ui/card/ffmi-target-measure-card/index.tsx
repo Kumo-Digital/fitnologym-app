@@ -88,13 +88,7 @@ export const FfmiTargetMeasureCard = ({
       />
     );
   return (
-    <Card
-      radius="md"
-      withBorder
-      p={0}
-      h={120}
-      bg={getColor(ffmiTargetValue.toString())}
-    >
+    <Card radius="md" withBorder p={0} h={120}>
       <Group gap={16} p={16} align="center" justify="center">
         <Stack
           justify="center"
@@ -102,28 +96,28 @@ export const FfmiTargetMeasureCard = ({
           w={64}
           h={64}
           style={{ borderRadius: 8 }}
-          bg="white"
+          bg={getColor(ffmiTargetValue.toString())}
         >
-          <IconMan size={32} color="black" fill="black" />
+          <IconMan size={32} color="white" fill="white" />
         </Stack>
         <Group justify="space-between" flex="1 0 0">
           <Stack gap={4}>
-            <Text size="md" fw={600} c="black">
+            <Text size="md" fw={600} c="white">
               Score FFMI
             </Text>
             <Group gap={4} align="baseline">
-              <Title order={2} c="black">
+              <Title order={2} c="white">
                 {ffmiCurrentValue}
               </Title>
             </Group>
           </Stack>
 
           <Stack gap={4} h={100} justify="center">
-            <Text size="md" fw={600} c="black">
+            <Text size="md" fw={600} c="white">
               Tipo de Cuerpo
             </Text>
             <Group gap={4}>
-              <Title order={2} c="black">
+              <Title order={2} c={getColor(ffmiTargetValue.toString())}>
                 {getNameStatus(ffmiTargetValue.toString())}
               </Title>
             </Group>
@@ -140,12 +134,7 @@ const FfmiTargetMeasureCardMobile = ({
   ffmiTargetValue,
 }: FfmiTargetMeasureCardProps) => {
   return (
-    <Card
-      radius="md"
-      withBorder
-      p={16}
-      bg={getColor(ffmiTargetValue.toString())}
-    >
+    <Card radius="md" withBorder p={16}>
       <Stack gap={16} h={200}>
         <Group gap={8} flex={"1 0 0"} justify="space-between">
           <Stack
@@ -154,28 +143,28 @@ const FfmiTargetMeasureCardMobile = ({
             w={64}
             h={64}
             style={{ borderRadius: 8 }}
-            bg="white"
+            bg={getColor(ffmiTargetValue.toString())}
           >
-            <IconMan size={32} color="black" fill="black" />
+            <IconMan size={32} color="white" fill="white" />
           </Stack>
           <Group gap={6} flex={"1 0 0"} justify="space-between">
             <Stack gap={4}>
-              <Text size="md" fw={600} c="black">
+              <Text size="md" fw={600} c="white">
                 Score FFMI
               </Text>
               <Group align="baseline">
-                <Title order={3} c="black">
+                <Title order={3} c="white">
                   {ffmiCurrentValue}
                 </Title>
               </Group>
             </Stack>
             <Divider orientation="vertical" />
             <Stack gap={4}>
-              <Text size="md" fw={600} c="black">
+              <Text size="md" fw={600} c="white">
                 Tipo de Cuerpo
               </Text>
               <Group>
-                <Title order={3} c="black">
+                <Title order={3} c={getColor(ffmiTargetValue.toString())}>
                   {getNameStatus(ffmiTargetValue.toString())}
                 </Title>
               </Group>
@@ -185,11 +174,11 @@ const FfmiTargetMeasureCardMobile = ({
 
         <Group gap={16} flex={"1 0 0"} justify="space-between">
           <Stack gap={4}>
-            <Text size="md" fw={600} c="black">
+            <Text size="md" fw={600} c="white">
               FFMI
             </Text>
             <Group gap={4} align="baseline">
-              <Text size="md" c="black">
+              <Text size="md" c="white">
                 Es el índice de masa libre de grasa que indica la cantidad de
                 masa corporal magra compuesta por músculos, huesos y otros
                 tejidos magros, excluyendo la grasa.
