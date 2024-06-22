@@ -20,12 +20,13 @@ import {
 import { BoxColorCard } from "./box-color-card";
 import { MeasureCardInfoModal } from "./measure-card-info-modal";
 import { useEffect, useState } from "react";
+import { EvolutionValue } from "@/types/measurements";
 
 interface MeasureCardProps {
   measureTitle: string;
   measureValue: number;
   measureUnit: string;
-  evolutionValue: number;
+  evolutionValue: EvolutionValue;
   measureStatus: number;
   isEvolutionFromFirstToLast?: boolean;
 }
@@ -116,7 +117,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
               Evolución
             </Text>
             <Group align="baseline" pb={4} gap={8} wrap="nowrap">
-              {(evolutionValue === 0 || !evolutionValue) && (
+              {(evolutionValue.percentage === 0 || !evolutionValue) && (
                 <IconLineDashed
                   color={theme.colors.gray[5]}
                   aria-label="Options"
@@ -138,7 +139,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                   }}
                 />
               )}
-              {evolutionValue < 0 && (
+              {evolutionValue.percentage < 0 && (
                 <IconChevronsUp
                   color={theme.colors.lime[5]}
                   aria-label="Options"
@@ -149,7 +150,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                   }}
                 />
               )}
-              {evolutionValue > 0 && (
+              {evolutionValue.percentage > 0 && (
                 <IconChevronsDown
                   color={theme.colors.lime[5]}
                   aria-label="Options"
@@ -171,7 +172,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 withArrow
                 w={160}
               >
-                {evolutionValue === 0 ||
+                {evolutionValue.percentage === 0 ||
                 evolutionValue === null ||
                 !evolutionValue ? (
                   <Group align="baseline" gap={8}>
@@ -191,7 +192,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                       {(styles) => (
                         <Group
                           align="baseline"
-                          gap={8}
+                          gap={2}
                           style={styles}
                           wrap="nowrap"
                           pos="absolute"
@@ -199,7 +200,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                           left={0}
                         >
                           <Text size="xl" c="gray.0" fw={600}>
-                            {Math.abs(evolutionValue).toFixed(1)}
+                            {Math.abs(evolutionValue.percentage).toFixed(1)}
                           </Text>
                           <Text size="sm" c="gray.5">
                             %
@@ -217,7 +218,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                       {(styles) => (
                         <Group
                           align="baseline"
-                          gap={8}
+                          gap={2}
                           style={styles}
                           wrap="nowrap"
                           pos="absolute"
@@ -225,7 +226,9 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                           left={0}
                         >
                           <Text size="xl" c="gray.0" fw={600}>
-                            4
+                            {(evolutionValue.specific &&
+                              Math.abs(evolutionValue.specific).toFixed(2)) ??
+                              0}
                           </Text>
                           <Text size="sm" c="gray.5">
                             kg
