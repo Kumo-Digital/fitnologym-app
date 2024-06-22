@@ -6,6 +6,7 @@ import { Flex, Group, Stack, Title, Switch, Text, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
+
 type ArmMeasures = {
   left_arm: { [key: string]: any }[];
   right_arm: { [key: string]: any }[];
@@ -19,8 +20,12 @@ export const BodySectionArms = ({
   handleToggle,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
-  const isMobileMD = useMediaQuery(`(max-width: ${em(768)}) and (min-width: ${em(426)})`);
-  const isMobileLG = useMediaQuery(`(max-width: ${em(1024)}) and (min-width: ${em(769)})`);
+  const isMobileMD = useMediaQuery(
+    `(max-width: ${em(768)}) and (min-width: ${em(426)})`
+  );
+  const isMobileLG = useMediaQuery(
+    `(max-width: ${em(1024)}) and (min-width: ${em(769)})`
+  );
   const isMobileXL = useMediaQuery(`(min-width: ${em(1025)})`);
 
   const armMeasures: ArmMeasures = Object.entries(lastMeasure.metrics).reduce(
@@ -32,8 +37,9 @@ export const BodySectionArms = ({
           (metric: [string, any]) => ({
             metricName: metric[0],
             ...metric[1],
-            evolution:
-              evolution?.metrics[metricName][metric[0]].measure_evolution,
+            evolution: {
+              ...evolution?.metrics[metricName][metric[0]].measure_evolution,
+            },
           })
         );
         return {
@@ -44,8 +50,9 @@ export const BodySectionArms = ({
         const rightArmMetrics = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
-          evolution:
-            evolution?.metrics[metricName][metric[0]].measure_evolution,
+          evolution: {
+            ...evolution?.metrics[metricName][metric[0]].measure_evolution,
+          },
         }));
         return {
           ...measures,
@@ -62,15 +69,17 @@ export const BodySectionArms = ({
                   metricValue: {
                     left: {
                       ...value.left,
-                      measure_evolution:
-                        evolution?.metrics[`${metricName}Left`]
+                      measure_evolution: {
+                        ...evolution?.metrics[`${metricName}Left`]
                           .measure_evolution,
+                      },
                     },
                     right: {
                       ...value.right,
-                      measure_evolution:
-                        evolution?.metrics[`${metricName}Right`]
+                      measure_evolution: {
+                        ...evolution?.metrics[`${metricName}Right`]
                           .measure_evolution,
+                      },
                     },
                   },
                 },
@@ -81,15 +90,17 @@ export const BodySectionArms = ({
                   metricValue: {
                     left: {
                       ...value.left,
-                      measure_evolution:
-                        evolution?.metrics[`${metricName}Left`]
+                      measure_evolution: {
+                        ...evolution?.metrics[`${metricName}Left`]
                           .measure_evolution,
+                      },
                     },
                     right: {
                       ...value.right,
-                      measure_evolution:
-                        evolution?.metrics[`${metricName}Right`]
+                      measure_evolution: {
+                        ...evolution?.metrics[`${metricName}Right`]
                           .measure_evolution,
+                      },
                     },
                   },
                 },
@@ -117,17 +128,23 @@ export const BodySectionArms = ({
         <Stack flex={"1 0 0"}>
           <Group justify="space-between" align="center" h={36}>
             <Title order={4}>Brazo Izquierdo</Title>
-            {
-            (isMobileSM || isMobileLG) ? 
-            <Switch
-            size="xl"
-            checked={isEvolutionFromFirstToLast} 
-            onChange={() => handleToggle()} 
-            onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
-            offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
-            /> : 
-            null
-            }
+            {isMobileSM || isMobileLG ? (
+              <Switch
+                size="xl"
+                checked={isEvolutionFromFirstToLast}
+                onChange={() => handleToggle()}
+                onLabel={
+                  <Text size="xs" c="dark.7" fw={600} px={4}>
+                    Completa
+                  </Text>
+                }
+                offLabel={
+                  <Text size="xs" fw={600} px={4}>
+                    Actual
+                  </Text>
+                }
+              />
+            ) : null}
           </Group>
           {armMeasures.left_arm.map((value: Measure, index: number) => (
             <MeasureCard
@@ -142,20 +159,26 @@ export const BodySectionArms = ({
           ))}
         </Stack>
         <Stack flex={"1 0 0"}>
-        <Group justify="space-between" align="center">
-          <Title order={4}>Brazo Derecho</Title>
-          {
-            (isMobileMD || isMobileXL) ? 
-            <Switch
-            size="xl"
-            checked={isEvolutionFromFirstToLast} 
-            onChange={() => handleToggle()} 
-            onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
-            offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
-            /> : 
-            null
-            }
-        </Group>
+          <Group justify="space-between" align="center">
+            <Title order={4}>Brazo Derecho</Title>
+            {isMobileMD || isMobileXL ? (
+              <Switch
+                size="xl"
+                checked={isEvolutionFromFirstToLast}
+                onChange={() => handleToggle()}
+                onLabel={
+                  <Text size="xs" c="dark.7" fw={600} px={4}>
+                    Completa
+                  </Text>
+                }
+                offLabel={
+                  <Text size="xs" fw={600} px={4}>
+                    Actual
+                  </Text>
+                }
+              />
+            ) : null}
+          </Group>
           {armMeasures.right_arm.map((value: Measure, index: number) => (
             <MeasureCard
               key={`${value.metricName}-${index}`}
@@ -177,14 +200,14 @@ export const BodySectionArms = ({
               measureTitle={`${value.metricName}Left`}
               measureValue={value.metricValue.left.measure_value}
               measureUnit={value.metricValue.left.measure_uom}
-              evolutionValue={value.metricValue.left.evolution}
+              evolutionValue={value.metricValue.left.measure_evolution}
               isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
             <CircumferenceCard
               measureTitle={`${value.metricName}Right`}
               measureValue={value.metricValue.right.measure_value}
               measureUnit={value.metricValue.right.measure_uom}
-              evolutionValue={value.metricValue.right.evolution}
+              evolutionValue={value.metricValue.right.measure_evolution}
               isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
           </Stack>
