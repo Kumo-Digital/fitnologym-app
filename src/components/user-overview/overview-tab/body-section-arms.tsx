@@ -116,7 +116,7 @@ export const BodySectionArms = ({
         gap={16}
       >
         <Stack flex={"1 0 0"}>
-          <Group justify="space-between" align="center" h={((isMobileSM || isMobileLG) && showSwitch) ? 36 : undefined}>
+          <Group justify="space-between" align="center" h={36}>
             <Title order={4}>Brazo Izquierdo</Title>
             {
             ((isMobileSM || isMobileLG) && showSwitch) ? 

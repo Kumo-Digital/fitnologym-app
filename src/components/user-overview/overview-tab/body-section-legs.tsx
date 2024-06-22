@@ -138,7 +138,7 @@ export const BodySectionLegs = ({
         gap={16}
       >
         <Stack flex={"1 0 0"}>
-          <Group justify="space-between" align="center" h={((isMobileSM || isMobileLG) && showSwitch) ? 36 : undefined}>
+          <Group justify="space-between" align="center" h={36}>
             <Title order={4}>Pierna Izquierda</Title>
             {
             ((isMobileSM || isMobileLG) && showSwitch) ? 
@@ -165,7 +165,7 @@ export const BodySectionLegs = ({
           ))}
         </Stack>
         <Stack flex={"1 0 0"}>
-          <Group justify="space-between" align="center">
+          <Group justify="space-between" align="center" h={36}>
             <Title order={4}>Pierna Derecha</Title>
             {
               ((isMobileMD || isMobileXL) && showSwitch) ? 

@@ -79,11 +79,11 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
           style={{ flexGrow: 1 }}
         >
           <Group>
-            <Group gap={4}>
+            <Group gap={4} wrap="nowrap">
               <Text size="md" c="gray.0" fw={600} maw={150}>
                 {getMeasureName(measureTitle)}
               </Text>
-              <IconExclamationCircle size={25} stroke={2} />
+              <IconExclamationCircle size={16} stroke={2} />
             </Group>
           </Group>
           <Group align="baseline" gap={4}>
