@@ -176,14 +176,8 @@ export const prepareMeasurementForInsert = (
         measure_value: payload.circumferenceGlutes ?? null,
       },
       circumferenceShoulders: {
-        left: {
-          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.circumferenceShouldersLeft ?? null,
-        },
-        right: {
-          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.circumferenceShouldersRight ?? null,
-        },
+        measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+        measure_value: payload.circumferenceGlutes ?? null,
       },
       circumferenceArms: {
         left: {
@@ -314,10 +308,8 @@ export const prepareMeasurementForEditForm = (
     circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
     circumferenceGlutes:
       payload.metrics.circumferenceGlutes?.measure_value || 0,
-    circumferenceShouldersLeft:
-      payload.metrics.circumferenceShoulders?.left.measure_value || 0,
-    circumferenceShouldersRight:
-      payload.metrics.circumferenceShoulders?.right.measure_value || 0,
+    circumferenceShoulders:
+      payload.metrics.circumferenceShoulders?.measure_value || 0,
     circumferenceArmsLeft:
       payload.metrics.circumferenceArms?.left.measure_value || 0,
     circumferenceArmsRight:
@@ -351,8 +343,7 @@ const metricLabels = [
   { key: "Cintura", value: "circumferenceWaist" },
   { key: "Cadera", value: "circumferenceHips" },
   { key: "Glúteos", value: "circumferenceGlutes" },
-  { key: "Hombro Izquierdo", value: "circumferenceShouldersLeft" },
-  { key: "Hombro Derecho", value: "circumferenceShouldersRight" },
+  { key: "Hombros", value: "circumferenceShoulders" },
   { key: "Brazo Izquierdo", value: "circumferenceArmsLeft" },
   { key: "Brazo Derecho", value: "circumferenceArmsRight" },
   { key: "Brazo Flexionado Izquierdo", value: "circumferenceFlexedArmsLeft" },
@@ -434,10 +425,8 @@ export const getMeasureName = (measure: string): string => {
       return "Cadera";
     case "circumferenceGlutes":
       return "Glúteos";
-    case "circumferenceShouldersLeft":
-      return "Hombro Izquierdo";
-    case "circumferenceShouldersRight":
-      return "Hombro Derecho";
+    case "circumferenceShoulders":
+      return "Hombros";
     case "circumferenceArmsLeft":
       return "Brazo Izquierdo";
     case "circumferenceArmsRight":
@@ -479,12 +468,12 @@ export const torsoBodyMetrics = [
   "circumferenceChest",
   "circumferenceWaist",
   "circumferenceHips",
+  "circumferenceShoulders",
 ];
 
 export const armsBodyMetrics = [
   "left_arm",
   "right_arm",
-  "circumferenceShoulders",
   "circumferenceArms",
   "circumferenceFlexedArms",
 ];
@@ -719,11 +708,7 @@ export const measurementFormValidationSchema = Yup.object().shape({
     0,
     "La circunferencia no puede ser negativa"
   ),
-  circumferenceShouldersLeft: Yup.number().min(
-    0,
-    "La circunferencia no puede ser negativa"
-  ),
-  circumferenceShouldersRight: Yup.number().min(
+  circumferenceShoulders: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),

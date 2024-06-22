@@ -125,10 +125,7 @@ export interface Evolution {
     circumferenceGlutes: {
       measure_evolution: number;
     };
-    circumferenceShouldersLeft: {
-      measure_evolution: number;
-    };
-    circumferenceShouldersRight: {
+    circumferenceShoulders: {
       measure_evolution: number;
     };
     circumferenceArmsLeft: {

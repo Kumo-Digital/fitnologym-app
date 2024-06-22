@@ -219,16 +219,10 @@ export default async function handler(
                     lastMeasure?.metrics?.circumferenceGlutes?.measure_value as number
                   ),
                 },
-                circumferenceShouldersLeft: {
+                circumferenceShoulders: {
                   measure_evolution: getRemainingPercentageFromMeasures(
-                    firstMeasure?.metrics?.circumferenceShoulders?.left.measure_value as number, 
-                    lastMeasure?.metrics?.circumferenceShoulders?.left.measure_value as number
-                  ),
-                },
-                circumferenceShouldersRight: {
-                  measure_evolution: getRemainingPercentageFromMeasures(
-                    firstMeasure?.metrics?.circumferenceShoulders?.right.measure_value as number, 
-                    lastMeasure?.metrics?.circumferenceShoulders?.right.measure_value as number
+                    firstMeasure?.metrics?.circumferenceShoulders?.measure_value as number, 
+                    lastMeasure?.metrics?.circumferenceShoulders?.measure_value as number
                   ),
                 },
                 circumferenceArmsLeft: {
