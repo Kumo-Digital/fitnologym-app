@@ -67,7 +67,7 @@ export const TargetMeasureCard = ({
               </Text>
             </Group>
           </Stack>
-          <Stack gap={4}>
+          <Stack gap={4} h={100}>
             <Text size="md" fw={600} c="gray.0">
               Peso Objetivo
             </Text>

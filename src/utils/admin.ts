@@ -333,6 +333,33 @@ export const PHISYQUE_RATING_STATUS_COLORS = ["red", "lime", "blue"];
 export const PHISYQUE_RATING_STATUS_DESCRIPTION =
   "La calificación física se hace en base a la composición corporal:";
 
+export const FFMI_STATUS_VALUES_COLORS = [
+  {
+    label: FFMIStatus.SKINNY,
+    color: "blue",
+  },
+  {
+    label: FFMIStatus.AVERAGE,
+    color: "lime",
+  },
+  {
+    label: FFMIStatus.FAT,
+    color: "yellow",
+  },
+  {
+    label: FFMIStatus.ADVANCED,
+    color: "red",
+  },
+  {
+    label: FFMIStatus.ATHLETE,
+    color: "purple",
+  },
+  {
+    label: FFMIStatus.BODYBUILDER,
+    color: "orange",
+  },
+];
+
 export const SEGMENTED_STATUS_DESCRIPTION =
   "La segmentación es la distribución de la masa muscular en su cuerpo";
 export const getSubscriptionColor = (user_type: string) => {
