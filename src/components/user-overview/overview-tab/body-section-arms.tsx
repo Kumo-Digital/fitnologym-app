@@ -17,6 +17,7 @@ export const BodySectionArms = ({
   evolution,
   isEvolutionFromFirstToLast,
   handleToggle,
+  showSwitch,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)}) and (min-width: ${em(426)})`);
@@ -115,10 +116,10 @@ export const BodySectionArms = ({
         gap={16}
       >
         <Stack flex={"1 0 0"}>
-          <Group justify="space-between" align="center" h={36}>
+          <Group justify="space-between" align="center" h={((isMobileSM || isMobileLG) && showSwitch) ? 36 : undefined}>
             <Title order={4}>Brazo Izquierdo</Title>
             {
-            (isMobileSM || isMobileLG) ? 
+            ((isMobileSM || isMobileLG) && showSwitch) ? 
             <Switch
             size="xl"
             checked={isEvolutionFromFirstToLast} 
@@ -142,10 +143,10 @@ export const BodySectionArms = ({
           ))}
         </Stack>
         <Stack flex={"1 0 0"}>
-        <Group justify="space-between" align="center">
+        <Group justify="space-between" align="center" h={36}>
           <Title order={4}>Brazo Derecho</Title>
           {
-            (isMobileMD || isMobileXL) ? 
+            ((isMobileMD || isMobileXL) && showSwitch) ? 
             <Switch
             size="xl"
             checked={isEvolutionFromFirstToLast} 

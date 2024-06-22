@@ -33,6 +33,7 @@ import {
 import { Evolution } from "@/types/measurements";
 import { getBalancePercentage } from "@/utils/measurement";
 import BodyBalance from "./body-balance";
+import { useUniqueReports } from "@/hooks/reports";
 
 interface OverviewTabProps {
   user: User;
@@ -52,6 +53,10 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   const icon = <IconMan />;
 
   const measurementPhysic = useUniqueLastMeasure(user._id);
+
+  const { reports, isLoading: isLoadingReports } = useUniqueReports(user._id, user.fullname);
+
+  const showSwitch = reports?.length > 2 ? true : false;
 
   const getRatingStatusByColor = (color: string) => {
     const index = PHISYQUE_RATING_STATUS_COLORS.indexOf(color);
@@ -106,7 +111,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   );
 
   if (!lastMeasure) return <OverviewTabEmpty />;
-  if (isLoading || isLoadingEvolution || isLoadingEvolutionFromFirstToLast)
+  if (isLoading || isLoadingEvolution || isLoadingEvolutionFromFirstToLast || isLoadingReports)
     return <OverviewTabSkeleton />;
   return (
     <Flex
@@ -174,6 +179,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "torso" && (
@@ -184,6 +190,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "arms" && (
@@ -194,6 +201,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "legs" && (
@@ -204,6 +212,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {isMobileSM && (

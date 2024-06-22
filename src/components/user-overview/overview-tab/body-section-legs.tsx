@@ -17,6 +17,7 @@ export const BodySectionLegs = ({
   evolution,
   isEvolutionFromFirstToLast,
   handleToggle,
+  showSwitch,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)}) and (min-width: ${em(426)})`);
@@ -137,10 +138,10 @@ export const BodySectionLegs = ({
         gap={16}
       >
         <Stack flex={"1 0 0"}>
-          <Group justify="space-between" align="center" h={36}>
+          <Group justify="space-between" align="center" h={((isMobileSM || isMobileLG) && showSwitch) ? 36 : undefined}>
             <Title order={4}>Pierna Izquierda</Title>
             {
-            (isMobileSM || isMobileLG) ? 
+            ((isMobileSM || isMobileLG) && showSwitch) ? 
             <Switch
             size="xl"
             checked={isEvolutionFromFirstToLast} 
@@ -167,7 +168,7 @@ export const BodySectionLegs = ({
           <Group justify="space-between" align="center">
             <Title order={4}>Pierna Derecha</Title>
             {
-              (isMobileMD || isMobileXL) ? 
+              ((isMobileMD || isMobileXL) && showSwitch) ? 
               <Switch
               size="xl"
               checked={isEvolutionFromFirstToLast} 
