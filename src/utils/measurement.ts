@@ -501,39 +501,34 @@ export const metricsSelectOptions = [
   { value: "weight", label: "Peso", sections: ["overview"] },
   { value: "bmi", label: "IMC", sections: ["overview"] },
   {
+    value: "body_fat_overview",
+    label: "Grasa Corporal Generales",
+    sections: ["overview"],
+  },
+  {
     value: "body_fat",
     label: "Grasa Corporal",
-    sections: [
-      "overview",
-      "trunk",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["trunk", "left_leg", "right_leg", "left_arm", "right_arm"],
+  },
+  {
+    value: "muscle_mass_overview",
+    label: "Masa Muscular Generales",
+    sections: ["overview"],
   },
   {
     value: "muscle_mass",
     label: "Masa Muscular",
-    sections: [
-      "overview",
-      "trunk",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["trunk", "left_leg", "right_leg", "left_arm", "right_arm"],
+  },
+  {
+    value: "muscle_quality_overview",
+    label: "Calidad Muscular generales",
+    sections: ["overview"],
   },
   {
     value: "muscle_quality",
     label: "Calidad Muscular",
-    sections: [
-      "overview",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["left_leg", "right_leg", "left_arm", "right_arm"],
   },
   { value: "visc_fat", label: "Grasa Visceral", sections: ["overview"] },
   { value: "bone_mass", label: "Masa Ósea", sections: ["overview"] },
@@ -782,8 +777,7 @@ export const getRemainingPercentageFromMeasures = (
     return result;
   }
 
-  result =
-    ((previousToLastValue - lastValue) / previousToLastValue) * 100;
+  result = ((previousToLastValue - lastValue) / previousToLastValue) * 100;
 
   return result;
 };
