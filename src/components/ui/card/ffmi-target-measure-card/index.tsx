@@ -1,6 +1,15 @@
 import { FFMI_STATUS_VALUES_COLORS } from "@/utils/admin";
 import { FFMIStatus } from "@/utils/measurement";
-import { Card, Divider, Group, Stack, Text, Title, em } from "@mantine/core";
+import {
+  Card,
+  Divider,
+  Flex,
+  Group,
+  Stack,
+  Text,
+  Title,
+  em,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconMan } from "@tabler/icons-react";
 
@@ -59,10 +68,6 @@ export const getNameStatus = (ffmiTargetValue: string): string => {
   }
 };
 
-export const capitalize = (s: string) => {
-  if (typeof s !== "string") return "";
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};
 export const FfmiTargetMeasureCard = ({
   ffmiCurrentValue,
   ffmiTargetValue,
@@ -74,11 +79,6 @@ export const FfmiTargetMeasureCard = ({
   const isMobileLG = useMediaQuery(
     `(min-width: ${em(769)}) and (max-width: ${em(1054)})`
   );
-
-  const capitalize = (s: string) => {
-    if (typeof s !== "string") return "";
-    return s.charAt(0).toUpperCase() + s.slice(1);
-  };
 
   if (isMobile || isMobileMD || isMobileLG)
     return (
@@ -133,10 +133,12 @@ const FfmiTargetMeasureCardMobile = ({
   ffmiCurrentValue,
   ffmiTargetValue,
 }: FfmiTargetMeasureCardProps) => {
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
+
   return (
     <Card radius="md" withBorder p={16}>
-      <Stack gap={16} h={200}>
-        <Group gap={8} flex={"1 0 0"} justify="space-between">
+      <Stack gap={16}>
+        <Group gap={16} align={isMobile ? "flex-start" : "center"}>
           <Stack
             justify="center"
             align="center"
@@ -147,7 +149,7 @@ const FfmiTargetMeasureCardMobile = ({
           >
             <IconMan size={32} color="white" fill="white" />
           </Stack>
-          <Group gap={6} flex={"1 0 0"} justify="space-between">
+          <Flex direction={isMobile ? "column" : "row"} gap={6}>
             <Stack gap={4}>
               <Text size="md" fw={600} c="white">
                 Score FFMI
@@ -158,34 +160,29 @@ const FfmiTargetMeasureCardMobile = ({
                 </Title>
               </Group>
             </Stack>
-            <Divider orientation="vertical" />
+            <Divider orientation={isMobile ? "horizontal" : "vertical"} />
             <Stack gap={4}>
               <Text size="md" fw={600} c="white">
                 Tipo de Cuerpo
               </Text>
-              <Group>
-                <Title order={3} c={getColor(ffmiTargetValue.toString())}>
-                  {getNameStatus(ffmiTargetValue.toString())}
-                </Title>
-              </Group>
+              <Title order={3} c={getColor(ffmiTargetValue.toString())}>
+                {getNameStatus(ffmiTargetValue.toString())}
+              </Title>
             </Stack>
-          </Group>
+          </Flex>
         </Group>
 
-        <Group gap={16} flex={"1 0 0"} justify="space-between">
+        <Group>
           <Stack gap={4}>
             <Text size="md" fw={600} c="white">
               FFMI
             </Text>
-            <Group gap={4} align="baseline">
-              <Text size="md" c="white">
-                Es el índice de masa libre de grasa que indica la cantidad de
-                masa corporal magra compuesta por músculos, huesos y otros
-                tejidos magros, excluyendo la grasa.
-              </Text>
-            </Group>
+            <Text size="md" c="white">
+              Es el índice de masa libre de grasa que indica la cantidad de masa
+              corporal magra compuesta por músculos, huesos y otros tejidos
+              magros, excluyendo la grasa.
+            </Text>
           </Stack>
-          <Stack gap={4}></Stack>
         </Group>
       </Stack>
     </Card>
