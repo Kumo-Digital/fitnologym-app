@@ -30,6 +30,7 @@ import { BodySectionOverview } from "./body-section-overview";
 import { BodySectionTorso } from "./body-section-torso";
 import OverviewTabEmpty from "./overview-tab-empty";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
+import { useUniqueReports } from "@/hooks/reports";
 
 interface OverviewTabProps {
   user: User;
@@ -49,6 +50,13 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   const icon = <IconMan />;
 
   const measurementPhysic = useUniqueLastMeasure(user._id);
+
+  const { reports, isLoading: isLoadingReports } = useUniqueReports(
+    user._id,
+    user.fullname
+  );
+
+  const showSwitch = reports?.length > 2 ? true : false;
 
   const getRatingStatusByColor = (color: string) => {
     const index = FFMI_STATUS_VALUES_COLORS.findIndex(
@@ -121,7 +129,12 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   );
 
   if (!lastMeasure) return <OverviewTabEmpty />;
-  if (isLoading || isLoadingEvolution || isLoadingEvolutionFromFirstToLast)
+  if (
+    isLoading ||
+    isLoadingEvolution ||
+    isLoadingEvolutionFromFirstToLast ||
+    isLoadingReports
+  )
     return <OverviewTabSkeleton />;
   return (
     <Flex
@@ -189,6 +202,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "torso" && (
@@ -199,6 +213,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "arms" && (
@@ -209,6 +224,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "legs" && (
@@ -219,6 +235,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {isMobileSM && (
