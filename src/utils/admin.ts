@@ -344,7 +344,7 @@ export const FFMI_STATUS_VALUES_COLORS = [
   },
   {
     label: FFMIStatus.FAT,
-    color: "yellow",
+    color: "orange",
   },
   {
     label: FFMIStatus.ADVANCED,
@@ -352,11 +352,11 @@ export const FFMI_STATUS_VALUES_COLORS = [
   },
   {
     label: FFMIStatus.ATHLETE,
-    color: "purple",
+    color: "violet",
   },
   {
     label: FFMIStatus.BODYBUILDER,
-    color: "orange",
+    color: "teal",
   },
 ];
 

@@ -53,7 +53,7 @@ export const TargetMeasureCard = ({
         >
           <IconWeight size={32} color={theme.colors.lime[5]} />
         </Stack>
-        <Group justify="space-between" flex="1 0 0">
+        <Group justify="space-between" align="center" flex="1 0 0">
           <Stack gap={4}>
             <Text size="md" fw={600} c="gray.0">
               Peso Actual
@@ -67,7 +67,7 @@ export const TargetMeasureCard = ({
               </Text>
             </Group>
           </Stack>
-          <Stack gap={4} h={100}>
+          <Stack gap={4} h={100} justify="center">
             <Text size="md" fw={600} c="gray.0">
               Peso Objetivo
             </Text>
@@ -100,11 +100,12 @@ const TargetMeasureCardMobile = ({
   targetValue,
 }: TargetMeasureCardProps) => {
   const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const evolutionValue = getRemainingPercentage(currentValue, targetValue);
 
   return (
-    <Card radius="md" withBorder p={16}>
-      <Stack gap={16}>
+    <Card radius="md" withBorder p={16} h={isMobile ? 310 : "auto"}>
+      <Stack gap={16} h="100%" align="space-between" justify="space-between">
         <Group gap={16} flex={"1 0 0"} justify="space-between">
           <Stack
             justify="center"

@@ -8,7 +8,9 @@ import {
   Stack,
   Text,
   Title,
+  alpha,
   em,
+  useMantineTheme,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconMan } from "@tabler/icons-react";
@@ -19,7 +21,6 @@ interface FfmiTargetMeasureCardProps {
 }
 
 export const getColor = (ffmiTargetValue: string): string => {
-  // Convierte ffmiTargetValue a un valor del enumerado FFMIStatus si es necesario
   const statusEnum = FFMIStatus[ffmiTargetValue as keyof typeof FFMIStatus];
 
   if (statusEnum) {
@@ -30,41 +31,26 @@ export const getColor = (ffmiTargetValue: string): string => {
     if (index !== -1) {
       return FFMI_STATUS_VALUES_COLORS[index].color;
     } else {
-      console.log(
-        `No se encontró ninguna coincidencia para "${ffmiTargetValue}". Devolviendo color predeterminado.`
-      );
-      return "gray"; // Color predeterminado si no se encuentra ninguna coincidencia
+      return "gray";
     }
   } else {
-    console.log(
-      `Valor no válido para FFMIStatus: "${ffmiTargetValue}". Devolviendo color predeterminado.`
-    );
-    return "gray"; // Color predeterminado si ffmiTargetValue no es un valor válido de FFMIStatus
+    return "gray";
   }
 };
 
 export const getNameStatus = (ffmiTargetValue: string): string => {
-  // Convierte ffmiTargetValue a un valor del enumerado FFMIStatus si es necesario
   const statusEnum = FFMIStatus[ffmiTargetValue as keyof typeof FFMIStatus];
 
-  if (statusEnum) {
-    const index = FFMI_STATUS_VALUES_COLORS.findIndex(
-      (item) => item.label === statusEnum
-    );
+  if (!statusEnum) return "Desconocido";
 
-    if (index !== -1) {
-      return FFMI_STATUS_VALUES_COLORS[index].label;
-    } else {
-      console.log(
-        `No se encontró ninguna coincidencia para "${ffmiTargetValue}". Devolviendo color predeterminado.`
-      );
-      return "Desconocido"; // Valor predeterminado si no se encuentra ninguna coincidencia
-    }
+  const index = FFMI_STATUS_VALUES_COLORS.findIndex(
+    (item) => item.label === statusEnum
+  );
+
+  if (index !== -1) {
+    return FFMI_STATUS_VALUES_COLORS[index].label;
   } else {
-    console.log(
-      `Valor no válido para FFMIStatus: "${ffmiTargetValue}". Devolviendo color predeterminado.`
-    );
-    return "Desconocido"; // Valor predeterminado si ffmiTargetValue no es un valor válido de FFMIStatus
+    return "Desconocido";
   }
 };
 
@@ -72,6 +58,7 @@ export const FfmiTargetMeasureCard = ({
   ffmiCurrentValue,
   ffmiTargetValue,
 }: FfmiTargetMeasureCardProps) => {
+  const theme = useMantineTheme();
   const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(
     `(min-width: ${em(426)}) and (max-width: ${em(572)})`
@@ -95,10 +82,18 @@ export const FfmiTargetMeasureCard = ({
           align="center"
           w={64}
           h={64}
-          style={{ borderRadius: 8 }}
-          bg={getColor(ffmiTargetValue.toString())}
+          style={{
+            borderRadius: 8,
+          }}
+          bg={alpha(
+            `var(--mantine-color-${getColor(ffmiTargetValue.toString())}-5)`,
+            0.2
+          )}
         >
-          <IconMan size={32} color="white" fill="white" />
+          <IconMan
+            size={32}
+            color={theme.colors[getColor(ffmiTargetValue.toString())][5]}
+          />
         </Stack>
         <Group justify="space-between" flex="1 0 0">
           <Stack gap={4}>
@@ -133,10 +128,11 @@ const FfmiTargetMeasureCardMobile = ({
   ffmiCurrentValue,
   ffmiTargetValue,
 }: FfmiTargetMeasureCardProps) => {
+  const theme = useMantineTheme();
   const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
 
   return (
-    <Card radius="md" withBorder p={16}>
+    <Card radius="md" withBorder p={16} h={isMobile ? 310 : "auto"}>
       <Stack gap={16}>
         <Group gap={16} align={isMobile ? "flex-start" : "center"}>
           <Stack
@@ -145,9 +141,15 @@ const FfmiTargetMeasureCardMobile = ({
             w={64}
             h={64}
             style={{ borderRadius: 8 }}
-            bg={getColor(ffmiTargetValue.toString())}
+            bg={alpha(
+              `var(--mantine-color-${getColor(ffmiTargetValue.toString())}-5)`,
+              0.2
+            )}
           >
-            <IconMan size={32} color="white" fill="white" />
+            <IconMan
+              size={32}
+              color={theme.colors[getColor(ffmiTargetValue.toString())][5]}
+            />
           </Stack>
           <Flex direction={isMobile ? "column" : "row"} gap={6}>
             <Stack gap={4}>
@@ -177,7 +179,7 @@ const FfmiTargetMeasureCardMobile = ({
             <Text size="md" fw={600} c="white">
               FFMI
             </Text>
-            <Text size="md" c="white">
+            <Text size="sm" c="white">
               Es el índice de masa libre de grasa que indica la cantidad de masa
               corporal magra compuesta por músculos, huesos y otros tejidos
               magros, excluyendo la grasa.
