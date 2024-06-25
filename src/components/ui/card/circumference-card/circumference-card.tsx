@@ -9,13 +9,11 @@ import {
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
-import { modals } from "@mantine/modals";
 import {
   IconChevronsDown,
   IconChevronsUp,
   IconLineDashed,
 } from "@tabler/icons-react";
-import { MeasureCardInfoModal } from "../measure-card/measure-card-info-modal";
 
 interface CircumferenceCardProps {
   measureTitle: string;
@@ -23,16 +21,6 @@ interface CircumferenceCardProps {
   measureValue: number;
   evolutionValue: EvolutionValue;
   isEvolutionFromFirstToLast: boolean;
-}
-
-function openCheckModal(measure: string) {
-  modals.open({
-    children: <MeasureCardInfoModal measureTitle={measure} />,
-    title: getMeasureName(measure),
-    size: "md",
-    withCloseButton: true,
-    centered: true,
-  });
 }
 
 export const CircumferenceCard = ({
