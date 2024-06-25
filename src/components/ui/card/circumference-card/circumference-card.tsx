@@ -1,3 +1,4 @@
+import { EvolutionValue } from "@/types/measurements";
 import { getMeasureName } from "@/utils/measurement";
 import {
   Box,
@@ -15,7 +16,6 @@ import {
   IconLineDashed,
 } from "@tabler/icons-react";
 import { MeasureCardInfoModal } from "../measure-card/measure-card-info-modal";
-import { EvolutionValue } from "@/types/measurements";
 
 interface CircumferenceCardProps {
   measureTitle: string;
@@ -49,14 +49,7 @@ export const CircumferenceCard = ({
     : "Crecimiento respecto a la última medida";
 
   return (
-    <Card
-      radius="md"
-      withBorder
-      p={0}
-      onClick={() => {
-        openCheckModal(measureTitle);
-      }}
-    >
+    <Card radius="md" withBorder p={0}>
       <Group gap={16} p={16} align="stretch">
         <Box miw={8} bg="gray.5" style={{ borderRadius: 9999 }}></Box>
         <Stack flex={"1 0 0"} align="flex-start" justify="center">
