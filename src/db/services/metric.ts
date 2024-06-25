@@ -81,10 +81,7 @@ class MetricService {
               circumferenceWaist: "$metrics.circumferenceWaist.measure_value",
               circumferenceHips: "$metrics.circumferenceHips.measure_value",
               circumferenceGlutes: "$metrics.circumferenceGlutes.measure_value",
-              circumferenceShouldersLeft:
-                "$metrics.circumferenceShoulders.left.measure_value",
-              circumferenceShouldersRight:
-                "$metrics.circumferenceShoulders.right.measure_value",
+              circumferenceShoulders: "$metrics.circumferenceGlutes.measure_value",
               circumferenceArmsLeft: "$metrics.circumferenceArms.left.measure_value",
               circumferenceArmsRight: "$metrics.circumferenceArms.right.measure_value",
               circumferenceQuadsLeft: "$metrics.circumferenceQuads.left.measure_value",

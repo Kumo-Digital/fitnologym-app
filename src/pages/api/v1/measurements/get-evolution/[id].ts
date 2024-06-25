@@ -402,24 +402,13 @@ export default async function handler(
                     specific: null,
                   },
                 },
-                circumferenceShouldersLeft: {
+                circumferenceShoulders: {
                   measure_evolution: {
                     percentage: getRemainingPercentageFromMeasures(
                       previousToLastMeasure?.metrics?.circumferenceShoulders
-                        ?.left.measure_value as number,
-                      lastMeasure?.metrics?.circumferenceShoulders?.left
-                        .measure_value as number
-                    ),
-                    specific: null,
-                  },
-                },
-                circumferenceShouldersRight: {
-                  measure_evolution: {
-                    percentage: getRemainingPercentageFromMeasures(
-                      previousToLastMeasure?.metrics?.circumferenceShoulders
-                        ?.right.measure_value as number,
-                      lastMeasure?.metrics?.circumferenceShoulders?.right
-                        .measure_value as number
+                        ?.measure_value as number,
+                      lastMeasure?.metrics?.circumferenceShoulders
+                        ?.measure_value as number
                     ),
                     specific: null,
                   },

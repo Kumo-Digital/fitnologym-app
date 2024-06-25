@@ -418,12 +418,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceNeck
                         ?.measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceNeck
-                        ?.measure_value as number,
-                      lastMeasure?.metrics?.circumferenceNeck
-                        ?.measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceChest: {
@@ -434,12 +429,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceChest
                         ?.measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceChest
-                        ?.measure_value as number,
-                      lastMeasure?.metrics?.circumferenceChest
-                        ?.measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceWaist: {
@@ -450,12 +440,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceWaist
                         ?.measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceWaist
-                        ?.measure_value as number,
-                      lastMeasure?.metrics?.circumferenceWaist
-                        ?.measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceHips: {
@@ -466,12 +451,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceHips
                         ?.measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceHips
-                        ?.measure_value as number,
-                      lastMeasure?.metrics?.circumferenceHips
-                        ?.measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceGlutes: {
@@ -482,44 +462,18 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceGlutes
                         ?.measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceGlutes
+                    specific: null,
+                  },
+                },
+                circumferenceShoulders: {
+                  measure_evolution: {
+                    percentage: getRemainingPercentageFromMeasures(
+                      firstMeasure?.metrics?.circumferenceShoulders
                         ?.measure_value as number,
-                      lastMeasure?.metrics?.circumferenceGlutes
+                      lastMeasure?.metrics?.circumferenceShoulders
                         ?.measure_value as number
                     ),
-                  },
-                },
-                circumferenceShouldersLeft: {
-                  measure_evolution: {
-                    percentage: getRemainingPercentageFromMeasures(
-                      firstMeasure?.metrics?.circumferenceShoulders?.left
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceShoulders?.left
-                        .measure_value as number
-                    ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceShoulders?.left
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceShoulders?.left
-                        .measure_value as number
-                    ),
-                  },
-                },
-                circumferenceShouldersRight: {
-                  measure_evolution: {
-                    percentage: getRemainingPercentageFromMeasures(
-                      firstMeasure?.metrics?.circumferenceShoulders?.right
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceShoulders?.right
-                        .measure_value as number
-                    ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceShoulders?.right
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceShoulders?.right
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceArmsLeft: {
@@ -530,12 +484,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceArms?.left
                         .measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceArms?.left
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceArms?.left
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceArmsRight: {
@@ -546,12 +495,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceArms?.right
                         .measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceArms?.right
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceArms?.right
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceFlexedArmsLeft: {
@@ -562,12 +506,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceArms?.left
                         .measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceArms?.left
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceArms?.left
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceFlexedArmsRight: {
@@ -578,12 +517,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceArms?.right
                         .measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceArms?.right
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceArms?.right
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceQuadsLeft: {
@@ -594,12 +528,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceQuads?.left
                         .measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceQuads?.left
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceQuads?.left
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceQuadsRight: {
@@ -610,12 +539,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceQuads?.right
                         .measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceQuads?.right
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceQuads?.right
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceCalfLeft: {
@@ -626,12 +550,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceCalf?.left
                         .measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceCalf?.left
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceCalf?.left
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
                 circumferenceCalfRight: {
@@ -642,12 +561,7 @@ export default async function handler(
                       lastMeasure?.metrics?.circumferenceCalf?.right
                         .measure_value as number
                     ),
-                    specific: getRemainingSpecificFromMeasures(
-                      firstMeasure?.metrics?.circumferenceCalf?.right
-                        .measure_value as number,
-                      lastMeasure?.metrics?.circumferenceCalf?.right
-                        .measure_value as number
-                    ),
+                    specific: null,
                   },
                 },
               },

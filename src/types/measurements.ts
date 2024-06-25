@@ -130,10 +130,7 @@ export interface Evolution {
     circumferenceGlutes: {
       measure_evolution: EvolutionValue;
     };
-    circumferenceShouldersLeft: {
-      measure_evolution: EvolutionValue;
-    };
-    circumferenceShouldersRight: {
+    circumferenceShoulders: {
       measure_evolution: EvolutionValue;
     };
     circumferenceArmsLeft: {
