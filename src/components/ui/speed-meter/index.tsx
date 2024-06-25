@@ -20,7 +20,7 @@ const SpeedMeter = ({ name, value }: SpeedMeterProps) => {
 
   return (
     <div className={classes.root}>
-      <Graph ref={needleRef} />
+      <Graph ref={needleRef} highlight={name} />
       <Labels name={name} />
     </div>
   );
