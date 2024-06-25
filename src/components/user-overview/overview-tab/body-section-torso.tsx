@@ -26,7 +26,9 @@ export const BodySectionTorso = ({
       const torsoMetrics = Object.entries(value).map((metric: any) => ({
         ...metric[1],
         metricName: metric[0],
-        evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
+        evolution: {
+          ...evolution?.metrics[metricName][metric[0]].measure_evolution,
+        },
       }));
       return {
         ...measures,
@@ -40,7 +42,9 @@ export const BodySectionTorso = ({
               ...measures?.circumferences,
               {
                 metricName,
-                evolution: evolution?.metrics[metricName].measure_evolution,
+                evolution: {
+                  ...evolution?.metrics[metricName].measure_evolution,
+                },
                 ...value,
               },
             ]
@@ -48,7 +52,9 @@ export const BodySectionTorso = ({
               {
                 metricName,
                 ...value,
-                evolution: evolution?.metrics[metricName].measure_evolution,
+                evolution: {
+                  ...evolution?.metrics[metricName].measure_evolution,
+                },
               },
             ],
       };
