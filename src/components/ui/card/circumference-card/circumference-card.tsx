@@ -15,12 +15,13 @@ import {
   IconLineDashed,
 } from "@tabler/icons-react";
 import { MeasureCardInfoModal } from "../measure-card/measure-card-info-modal";
+import { EvolutionValue } from "@/types/measurements";
 
 interface CircumferenceCardProps {
   measureTitle: string;
   measureUnit: string;
   measureValue: number;
-  evolutionValue: number;
+  evolutionValue: EvolutionValue;
   isEvolutionFromFirstToLast: boolean;
 }
 
@@ -43,9 +44,9 @@ export const CircumferenceCard = ({
 }: CircumferenceCardProps) => {
   const theme = useMantineTheme();
 
-  const evolutionMessage: string = isEvolutionFromFirstToLast ? 
-    "Crecimiento entre la primera y la última medida" : 
-    "Crecimiento respecto a la última medida";
+  const evolutionMessage: string = isEvolutionFromFirstToLast
+    ? "Crecimiento entre la primera y la última medida"
+    : "Crecimiento respecto a la última medida";
 
   return (
     <Card
@@ -82,7 +83,7 @@ export const CircumferenceCard = ({
               Evolución
             </Text>
             <Group align="baseline" gap={8}>
-              {evolutionValue === 0 ||
+              {evolutionValue.percentage === 0 ||
                 (!evolutionValue && (
                   <IconLineDashed
                     color={theme.colors.gray[5]}
@@ -105,7 +106,7 @@ export const CircumferenceCard = ({
                   }}
                 />
               )}
-              {evolutionValue < 0 && (
+              {evolutionValue.percentage < 0 && (
                 <IconChevronsUp
                   color={theme.colors.lime[5]}
                   aria-label="Options"
@@ -116,7 +117,7 @@ export const CircumferenceCard = ({
                   }}
                 />
               )}
-              {evolutionValue > 0 && (
+              {evolutionValue.percentage > 0 && (
                 <IconChevronsDown
                   color={theme.colors.lime[5]}
                   aria-label="Options"
@@ -134,7 +135,7 @@ export const CircumferenceCard = ({
                 withArrow
                 w={160}
               >
-                {evolutionValue === 0 ||
+                {evolutionValue.percentage === 0 ||
                 evolutionValue === null ||
                 !evolutionValue ? (
                   <Group align="baseline" gap={8}>
@@ -145,7 +146,7 @@ export const CircumferenceCard = ({
                 ) : (
                   <Group align="baseline" gap={8}>
                     <Text size="xl" c="gray.0" fw={600}>
-                      {Math.abs(evolutionValue).toFixed(1)}
+                      {Math.abs(evolutionValue.percentage).toFixed(1)}
                     </Text>
                     <Text size="sm" c="gray.5">
                       %

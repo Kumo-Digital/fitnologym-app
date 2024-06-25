@@ -4,6 +4,10 @@ import {
   useCalculateEvolutionFromFirstToLast,
   useUniqueLastMeasure,
 } from "@/hooks/measurements";
+import { Evolution } from "@/types/measurements";
+import { User } from "@/types/user";
+import { FFMI_STATUS_VALUES_COLORS } from "@/utils/admin";
+import { FFMIStatus, getBalancePercentage } from "@/utils/measurement";
 import {
   Badge,
   Blockquote,
@@ -19,20 +23,14 @@ import {
 import { useMediaQuery } from "@mantine/hooks";
 import { IconMan } from "@tabler/icons-react";
 import { useState } from "react";
+import BodyBalance from "./body-balance";
 import { BodySectionArms } from "./body-section-arms";
 import { BodySectionLegs } from "./body-section-legs";
 import { BodySectionOverview } from "./body-section-overview";
 import { BodySectionTorso } from "./body-section-torso";
-import { OverviewTabSkeleton } from "./overview-tab-skeleton";
 import OverviewTabEmpty from "./overview-tab-empty";
-import { User } from "@/types/user";
-import {
-  PHISYQUE_RATING_STATUS_COLORS,
-  PHISYQUE_RATING_STATUS_VALUES,
-} from "@/utils/admin";
-import { Evolution } from "@/types/measurements";
-import { getBalancePercentage } from "@/utils/measurement";
-import BodyBalance from "./body-balance";
+import { OverviewTabSkeleton } from "./overview-tab-skeleton";
+import { useUniqueReports } from "@/hooks/reports";
 
 interface OverviewTabProps {
   user: User;
@@ -53,18 +51,43 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
 
   const measurementPhysic = useUniqueLastMeasure(user._id);
 
+  const { reports, isLoading: isLoadingReports } = useUniqueReports(
+    user._id,
+    user.fullname
+  );
+
+  const showSwitch = reports?.length > 2 ? true : false;
+
   const getRatingStatusByColor = (color: string) => {
-    const index = PHISYQUE_RATING_STATUS_COLORS.indexOf(color);
+    const index = FFMI_STATUS_VALUES_COLORS.findIndex(
+      (item) => item.color === color
+    );
     if (index !== -1) {
-      return PHISYQUE_RATING_STATUS_VALUES[index]?.label || "Desconocido";
+      return FFMI_STATUS_VALUES_COLORS[index]?.label || "Desconocido";
     }
     return "Desconocido";
   };
 
-  const getRatingStatusColor = () => {
+  const getScoreStatusColor = (): string => {
     const rating_status =
-      measurementPhysic.lastMeasure?.metrics.physique_rating.measure_status;
-    const measureRatingColor = PHISYQUE_RATING_STATUS_COLORS[rating_status - 1];
+      measurementPhysic.lastMeasure?.metrics.ffmi?.measure_status;
+
+    if (rating_status === undefined) {
+      return "Desconocido";
+    }
+
+    // Se convierte rating_status a un valor del enumerado FFMIStatus si es necesario
+    const statusEnum = FFMIStatus[rating_status as keyof typeof FFMIStatus];
+
+    // Buscar el color con el valor del enumerado
+    const measureRatingColor = FFMI_STATUS_VALUES_COLORS.find(
+      (item) => item.label === statusEnum
+    )?.color;
+
+    if (!measureRatingColor) {
+      return "Desconocido";
+    }
+
     return measureRatingColor;
   };
 
@@ -106,7 +129,12 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
   );
 
   if (!lastMeasure) return <OverviewTabEmpty />;
-  if (isLoading || isLoadingEvolution || isLoadingEvolutionFromFirstToLast)
+  if (
+    isLoading ||
+    isLoadingEvolution ||
+    isLoadingEvolutionFromFirstToLast ||
+    isLoadingReports
+  )
     return <OverviewTabSkeleton />;
   return (
     <Flex
@@ -118,17 +146,17 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
       <Stack flex={"1 0 0"}>
         {measurementPhysic.lastMeasure && (
           <Blockquote
-            w={isMobileSM ? "auto" : "50%"}
+            w={isMobileSM ? "auto" : "60%"}
             h={isMobileSM ? "auto" : "50%"}
-            color={getRatingStatusColor()}
+            color={getScoreStatusColor()}
             icon={icon}
             mt="sm"
             radius="xl"
           >
             <Group align="center">
-              <Text size={isMobileSM ? "md" : "lg"}>Rating Físico</Text>
-              <Badge autoContrast size="xl" color={getRatingStatusColor()}>
-                {getRatingStatusByColor(getRatingStatusColor())}
+              <Text size={isMobileSM ? "md" : "lg"}>Score Físico</Text>
+              <Badge autoContrast size="xl" color={getScoreStatusColor()}>
+                {getRatingStatusByColor(getScoreStatusColor())}
               </Badge>
             </Group>
           </Blockquote>
@@ -174,6 +202,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "torso" && (
@@ -184,6 +213,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "arms" && (
@@ -194,6 +224,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {selectedBodySection === "legs" && (
@@ -204,6 +235,7 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
                 selectedEvolution === evolutionFromFirstToLast
               }
               handleToggle={handleToggle}
+              showSwitch={showSwitch}
             />
           )}
           {isMobileSM && (

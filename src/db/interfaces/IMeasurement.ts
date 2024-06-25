@@ -59,10 +59,7 @@ export interface IMeasurement {
     circumferenceWaist?: CircumferenceObject;
     circumferenceHips?: CircumferenceObject;
     circumferenceGlutes?: CircumferenceObject;
-    circumferenceShoulders?: {
-      left: CircumferenceObject;
-      right: CircumferenceObject;
-    };
+    circumferenceShoulders?: CircumferenceObject;
     circumferenceArms?: {
       left: CircumferenceObject;
       right: CircumferenceObject;

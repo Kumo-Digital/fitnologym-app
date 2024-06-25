@@ -15,6 +15,7 @@ export const BodySectionTorso = ({
   evolution,
   isEvolutionFromFirstToLast,
   handleToggle,
+  showSwitch,
 }: BodySectionProps) => {
   const torsoMeasures: TorsoMeasures = Object.entries(
     lastMeasure.metrics
@@ -25,7 +26,9 @@ export const BodySectionTorso = ({
       const torsoMetrics = Object.entries(value).map((metric: any) => ({
         ...metric[1],
         metricName: metric[0],
-        evolution: evolution?.metrics[metricName][metric[0]].measure_evolution,
+        evolution: {
+          ...evolution?.metrics[metricName][metric[0]].measure_evolution,
+        },
       }));
       return {
         ...measures,
@@ -39,7 +42,9 @@ export const BodySectionTorso = ({
               ...measures?.circumferences,
               {
                 metricName,
-                evolution: evolution?.metrics[metricName].measure_evolution,
+                evolution: {
+                  ...evolution?.metrics[metricName].measure_evolution,
+                },
                 ...value,
               },
             ]
@@ -47,7 +52,9 @@ export const BodySectionTorso = ({
               {
                 metricName,
                 ...value,
-                evolution: evolution?.metrics[metricName].measure_evolution,
+                evolution: {
+                  ...evolution?.metrics[metricName].measure_evolution,
+                },
               },
             ],
       };
@@ -58,13 +65,16 @@ export const BodySectionTorso = ({
     <Stack>
       <Group justify="space-between">
         <Title order={4}>Torso</Title>
+        {(showSwitch) ? 
         <Switch
           size="xl"
           checked={isEvolutionFromFirstToLast} 
           onChange={() => handleToggle()} 
           onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
           offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
-        />
+        /> :
+        null
+        }
       </Group>
       <Stack gap={16}>
         {torsoMeasures.trunk.map((value: Measure, index: number) => (

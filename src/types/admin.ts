@@ -60,8 +60,7 @@ export interface MeasurementFormValues {
   circumferenceWaist: number;
   circumferenceHips: number;
   circumferenceGlutes: number;
-  circumferenceShouldersLeft: number;
-  circumferenceShouldersRight: number;
+  circumferenceShoulders: number;
   circumferenceArmsLeft: number;
   circumferenceArmsRight: number;
   circumferenceFlexedArmsLeft: number;

@@ -2064,14 +2064,11 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                     <Group grow id="value-circumferenceShoulders">
-                      <FastField
-                        name="circumferenceShouldersLeft"
-                        placeholder="Hombro Izquierdo"
-                      >
+                      <FastField name="circumferenceShoulders" placeholder="Hombros">
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Hombro Izquierdo"
+                            label="Hombros"
                             value={meta.value}
                             maw="100%"
                             rightSection={
@@ -2080,36 +2077,7 @@ export default function MeasurementForm({
                               </Text>
                             }
                             onChange={(e) =>
-                              form.setFieldValue(
-                                "circumferenceShouldersLeft",
-                                e
-                              )
-                            }
-                            onBlur={form.handleBlur}
-                            error={meta.touched && meta.error}
-                          />
-                        )}
-                      </FastField>
-                      <FastField
-                        name="circumferenceShouldersRight"
-                        placeholder="Hombro Derecho"
-                      >
-                        {({ field, form, meta }: any) => (
-                          <NumberInput
-                            {...field}
-                            label="Hombro Derecho"
-                            value={meta.value}
-                            maw="100%"
-                            rightSection={
-                              <Text c="gray.6" size="sm" fw={500} pr={18}>
-                                Cms
-                              </Text>
-                            }
-                            onChange={(e) =>
-                              form.setFieldValue(
-                                "circumferenceShouldersRight",
-                                e
-                              )
+                              form.setFieldValue("circumferenceShoulders", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}

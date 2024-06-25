@@ -73,7 +73,7 @@ export const prepareMeasurementForInsert = (
       },
       ffmi: {
         measure_value: payload.ffmi ?? null,
-        measure_status: payload.ffmiStatus ?? FFMIStatus.AVERAGE,
+        measure_status: payload.ffmiStatus ?? Object.keys(FFMIStatus)[Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)],
       },
       left_arm: {
         muscle_mass: {
@@ -176,14 +176,8 @@ export const prepareMeasurementForInsert = (
         measure_value: payload.circumferenceGlutes ?? null,
       },
       circumferenceShoulders: {
-        left: {
-          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.circumferenceShouldersLeft ?? null,
-        },
-        right: {
-          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.circumferenceShouldersRight ?? null,
-        },
+        measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+        measure_value: payload.circumferenceGlutes ?? null,
       },
       circumferenceArms: {
         left: {
@@ -262,7 +256,7 @@ export const prepareMeasurementForEditForm = (
     physiqueRating: payload.metrics.physique_rating.measure_value || 0,
     physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
     ffmi: payload.metrics.ffmi.measure_value || 0,
-    ffmiStatus: payload.metrics.ffmi.measure_status || FFMIStatus.AVERAGE,
+    ffmiStatus: payload.metrics.ffmi.measure_status || Object.keys(FFMIStatus)[Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)],
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
     trunkMuscleMassStatus:
       payload.metrics.trunk.muscle_mass.measure_status || 2,
@@ -314,10 +308,8 @@ export const prepareMeasurementForEditForm = (
     circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
     circumferenceGlutes:
       payload.metrics.circumferenceGlutes?.measure_value || 0,
-    circumferenceShouldersLeft:
-      payload.metrics.circumferenceShoulders?.left.measure_value || 0,
-    circumferenceShouldersRight:
-      payload.metrics.circumferenceShoulders?.right.measure_value || 0,
+    circumferenceShoulders:
+      payload.metrics.circumferenceShoulders?.measure_value || 0,
     circumferenceArmsLeft:
       payload.metrics.circumferenceArms?.left.measure_value || 0,
     circumferenceArmsRight:
@@ -351,8 +343,7 @@ const metricLabels = [
   { key: "Cintura", value: "circumferenceWaist" },
   { key: "Cadera", value: "circumferenceHips" },
   { key: "Glúteos", value: "circumferenceGlutes" },
-  { key: "Hombro Izquierdo", value: "circumferenceShouldersLeft" },
-  { key: "Hombro Derecho", value: "circumferenceShouldersRight" },
+  { key: "Hombros", value: "circumferenceShoulders" },
   { key: "Brazo Izquierdo", value: "circumferenceArmsLeft" },
   { key: "Brazo Derecho", value: "circumferenceArmsRight" },
   { key: "Brazo Flexionado Izquierdo", value: "circumferenceFlexedArmsLeft" },
@@ -434,10 +425,8 @@ export const getMeasureName = (measure: string): string => {
       return "Cadera";
     case "circumferenceGlutes":
       return "Glúteos";
-    case "circumferenceShouldersLeft":
-      return "Hombro Izquierdo";
-    case "circumferenceShouldersRight":
-      return "Hombro Derecho";
+    case "circumferenceShoulders":
+      return "Hombros";
     case "circumferenceArmsLeft":
       return "Brazo Izquierdo";
     case "circumferenceArmsRight":
@@ -479,12 +468,12 @@ export const torsoBodyMetrics = [
   "circumferenceChest",
   "circumferenceWaist",
   "circumferenceHips",
+  "circumferenceShoulders",
 ];
 
 export const armsBodyMetrics = [
   "left_arm",
   "right_arm",
-  "circumferenceShoulders",
   "circumferenceArms",
   "circumferenceFlexedArms",
 ];
@@ -502,7 +491,7 @@ export const metricsSelectOptions = [
   { value: "bmi", label: "IMC", sections: ["overview"] },
   {
     value: "body_fat_overview",
-    label: "Grasa Corporal Generales",
+    label: "Grasa Corporal (General)",
     sections: ["overview"],
   },
   {
@@ -512,7 +501,7 @@ export const metricsSelectOptions = [
   },
   {
     value: "muscle_mass_overview",
-    label: "Masa Muscular Generales",
+    label: "Masa Muscular (General)",
     sections: ["overview"],
   },
   {
@@ -522,7 +511,7 @@ export const metricsSelectOptions = [
   },
   {
     value: "muscle_quality_overview",
-    label: "Calidad Muscular generales",
+    label: "Calidad Muscular (General)",
     sections: ["overview"],
   },
   {
@@ -593,6 +582,11 @@ export enum FFMIStatus {
   ADVANCED = "Avanzado",
   BODYBUILDER = "Bodybuilder",
 }
+
+export type FFMIStatusColor = {
+  label: FFMIStatus;
+  color: string;
+};
 
 export const measurementFormValidationSchema = Yup.object().shape({
   user_id: Yup.string().required("El nombre del cliente es obligatorio"),
@@ -714,11 +708,7 @@ export const measurementFormValidationSchema = Yup.object().shape({
     0,
     "La circunferencia no puede ser negativa"
   ),
-  circumferenceShouldersLeft: Yup.number().min(
-    0,
-    "La circunferencia no puede ser negativa"
-  ),
-  circumferenceShouldersRight: Yup.number().min(
+  circumferenceShoulders: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
@@ -778,6 +768,21 @@ export const getRemainingPercentageFromMeasures = (
   }
 
   result = ((previousToLastValue - lastValue) / previousToLastValue) * 100;
+
+  return result;
+};
+
+export const getRemainingSpecificFromMeasures = (
+  previousToLastValue: number,
+  lastValue: number
+): number => {
+  let result = 0;
+
+  if (previousToLastValue === lastValue) {
+    return result;
+  }
+
+  result = previousToLastValue - lastValue;
 
   return result;
 };

@@ -64,8 +64,7 @@ export const measurementFormInitialValues = {
   circumferenceWaist: 0,
   circumferenceHips: 0,
   circumferenceGlutes: 0,
-  circumferenceShouldersLeft: 0,
-  circumferenceShouldersRight: 0,
+  circumferenceShoulders: 0,
   circumferenceArmsLeft: 0,
   circumferenceArmsRight: 0,
   circumferenceFlexedArmsLeft: 0,
@@ -316,7 +315,7 @@ export const SEGMENTED_STATUS_COLORS = ["blue", "lime", "orange"];
 export const PHISYQUE_RATING_STATUS_VALUES = [
   {
     value: "1",
-    label: "Bajo rango ",
+    label: "Bajo rango",
   },
   {
     value: "2",
@@ -332,6 +331,33 @@ export const PHISYQUE_RATING_STATUS_COLORS = ["red", "lime", "blue"];
 
 export const PHISYQUE_RATING_STATUS_DESCRIPTION =
   "La calificación física se hace en base a la composición corporal:";
+
+export const FFMI_STATUS_VALUES_COLORS = [
+  {
+    label: FFMIStatus.SKINNY,
+    color: "blue",
+  },
+  {
+    label: FFMIStatus.AVERAGE,
+    color: "lime",
+  },
+  {
+    label: FFMIStatus.FAT,
+    color: "orange",
+  },
+  {
+    label: FFMIStatus.ADVANCED,
+    color: "red",
+  },
+  {
+    label: FFMIStatus.ATHLETE,
+    color: "violet",
+  },
+  {
+    label: FFMIStatus.BODYBUILDER,
+    color: "teal",
+  },
+];
 
 export const SEGMENTED_STATUS_DESCRIPTION =
   "La segmentación es la distribución de la masa muscular en su cuerpo";
