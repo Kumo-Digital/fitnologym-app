@@ -17,6 +17,7 @@ export const BodySectionLegs = ({
   evolution,
   isEvolutionFromFirstToLast,
   handleToggle,
+  showSwitch,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(
@@ -151,23 +152,17 @@ export const BodySectionLegs = ({
         <Stack flex={"1 0 0"}>
           <Group justify="space-between" align="center" h={36}>
             <Title order={4}>Pierna Izquierda</Title>
-            {isMobileSM || isMobileLG ? (
-              <Switch
-                size="xl"
-                checked={isEvolutionFromFirstToLast}
-                onChange={() => handleToggle()}
-                onLabel={
-                  <Text size="xs" c="dark.7" fw={600} px={4}>
-                    Completa
-                  </Text>
-                }
-                offLabel={
-                  <Text size="xs" fw={600} px={4}>
-                    Actual
-                  </Text>
-                }
-              />
-            ) : null}
+            {
+            ((isMobileSM || isMobileLG) && showSwitch) ? 
+            <Switch
+            size="xl"
+            checked={isEvolutionFromFirstToLast} 
+            onChange={() => handleToggle()} 
+            onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
+            offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+            /> : 
+            null
+            }
           </Group>
           {legMeasures.left_leg.map((value: Measure, index: number) => (
             <MeasureCard
@@ -182,9 +177,10 @@ export const BodySectionLegs = ({
           ))}
         </Stack>
         <Stack flex={"1 0 0"}>
-          <Group justify="space-between" align="center">
+          <Group justify="space-between" align="center" h={36}>
             <Title order={4}>Pierna Derecha</Title>
-            {isMobileMD || isMobileXL ? (
+            {
+              ((isMobileMD || isMobileXL) && showSwitch) ? 
               <Switch
                 size="xl"
                 checked={isEvolutionFromFirstToLast}
@@ -200,7 +196,7 @@ export const BodySectionLegs = ({
                   </Text>
                 }
               />
-            ) : null}
+            : null}
           </Group>
           {legMeasures.right_leg.map((value: Measure, index: number) => (
             <MeasureCard

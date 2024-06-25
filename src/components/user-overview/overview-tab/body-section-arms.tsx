@@ -18,6 +18,7 @@ export const BodySectionArms = ({
   evolution,
   isEvolutionFromFirstToLast,
   handleToggle,
+  showSwitch,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(
@@ -128,23 +129,17 @@ export const BodySectionArms = ({
         <Stack flex={"1 0 0"}>
           <Group justify="space-between" align="center" h={36}>
             <Title order={4}>Brazo Izquierdo</Title>
-            {isMobileSM || isMobileLG ? (
-              <Switch
-                size="xl"
-                checked={isEvolutionFromFirstToLast}
-                onChange={() => handleToggle()}
-                onLabel={
-                  <Text size="xs" c="dark.7" fw={600} px={4}>
-                    Completa
-                  </Text>
-                }
-                offLabel={
-                  <Text size="xs" fw={600} px={4}>
-                    Actual
-                  </Text>
-                }
-              />
-            ) : null}
+            {
+            ((isMobileSM || isMobileLG) && showSwitch) ? 
+            <Switch
+            size="xl"
+            checked={isEvolutionFromFirstToLast} 
+            onChange={() => handleToggle()} 
+            onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
+            offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+            /> : 
+            null
+            }
           </Group>
           {armMeasures.left_arm.map((value: Measure, index: number) => (
             <MeasureCard
@@ -159,26 +154,20 @@ export const BodySectionArms = ({
           ))}
         </Stack>
         <Stack flex={"1 0 0"}>
-          <Group justify="space-between" align="center">
-            <Title order={4}>Brazo Derecho</Title>
-            {isMobileMD || isMobileXL ? (
-              <Switch
-                size="xl"
-                checked={isEvolutionFromFirstToLast}
-                onChange={() => handleToggle()}
-                onLabel={
-                  <Text size="xs" c="dark.7" fw={600} px={4}>
-                    Completa
-                  </Text>
-                }
-                offLabel={
-                  <Text size="xs" fw={600} px={4}>
-                    Actual
-                  </Text>
-                }
-              />
-            ) : null}
-          </Group>
+        <Group justify="space-between" align="center" h={36}>
+          <Title order={4}>Brazo Derecho</Title>
+          {
+            ((isMobileMD || isMobileXL) && showSwitch) ? 
+            <Switch
+            size="xl"
+            checked={isEvolutionFromFirstToLast} 
+            onChange={() => handleToggle()} 
+            onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
+            offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+            /> : 
+            null
+            }
+        </Group>
           {armMeasures.right_arm.map((value: Measure, index: number) => (
             <MeasureCard
               key={`${value.metricName}-${index}`}

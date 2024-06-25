@@ -15,6 +15,7 @@ export const BodySectionTorso = ({
   evolution,
   isEvolutionFromFirstToLast,
   handleToggle,
+  showSwitch,
 }: BodySectionProps) => {
   const torsoMeasures: TorsoMeasures = Object.entries(
     lastMeasure.metrics
@@ -64,21 +65,16 @@ export const BodySectionTorso = ({
     <Stack>
       <Group justify="space-between">
         <Title order={4}>Torso</Title>
+        {(showSwitch) ? 
         <Switch
           size="xl"
-          checked={isEvolutionFromFirstToLast}
-          onChange={() => handleToggle()}
-          onLabel={
-            <Text size="xs" c="dark.7" fw={600} px={4}>
-              Completa
-            </Text>
-          }
-          offLabel={
-            <Text size="xs" fw={600} px={4}>
-              Actual
-            </Text>
-          }
-        />
+          checked={isEvolutionFromFirstToLast} 
+          onChange={() => handleToggle()} 
+          onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
+          offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+        /> :
+        null
+        }
       </Group>
       <Stack gap={16}>
         {torsoMeasures.trunk.map((value: Measure, index: number) => (

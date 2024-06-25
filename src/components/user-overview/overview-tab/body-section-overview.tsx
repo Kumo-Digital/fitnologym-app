@@ -1,16 +1,17 @@
-import {
-  SimpleGrid,
-  Stack,
-  Title,
-  Group,
-  Switch,
-  Text,
-  em,
-} from "@mantine/core";
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
-import { TargetMeasureCard } from "@/components/ui/card/target-measure-card";
+import TransitionCard from "@/components/ui/card/transition-card";
 import { BodySectionProps } from "@/types/measurements";
 import { overviewBodyMetrics } from "@/utils/measurement";
+import {
+  Box,
+  Group,
+  SimpleGrid,
+  Stack,
+  Switch,
+  Text,
+  Title,
+  em,
+} from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -21,6 +22,7 @@ export const BodySectionOverview = ({
   targetMeasure,
   isEvolutionFromFirstToLast,
   handleToggle,
+  showSwitch,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
@@ -43,31 +45,41 @@ export const BodySectionOverview = ({
 
   const currentValue = lastMeasure?.metrics.weight.measure_value;
   const targetValue = targetMeasure[0]?.target_value;
+  const ffmiCurrentValue = lastMeasure?.metrics.ffmi.measure_value;
+  const ffmiTargetValue = lastMeasure?.metrics.ffmi.measure_status;
 
   return (
     <Stack>
       <Group justify="space-between">
         <Title order={4}>Generales</Title>
+        {(showSwitch) ?
         <Switch
-          size="xl"
-          checked={isEvolutionFromFirstToLast}
-          onChange={() => handleToggle()}
-          onLabel={
-            <Text size="xs" c="dark.7" fw={600} px={4}>
-              Completa
-            </Text>
-          }
-          offLabel={
-            <Text size="xs" fw={600} px={4}>
-              Actual
-            </Text>
-          }
-        />
+        size="xl"
+        checked={isEvolutionFromFirstToLast}
+        onChange={() => handleToggle()}
+        onLabel={
+          <Text size="xs" c="dark.7" fw={600} px={4}>
+            Completa
+          </Text>
+        }
+        offLabel={
+          <Text size="xs" fw={600} px={4}>
+            Actual
+          </Text>
+        }
+      /> :
+      null
+      }
       </Group>
-      <TargetMeasureCard
-        currentValue={currentValue}
-        targetValue={targetValue}
-      />
+      <Box>
+        <TransitionCard
+          currentValue={currentValue}
+          targetValue={targetValue}
+          ffmiCurrentValue={ffmiCurrentValue}
+          ffmiTargetValue={ffmiTargetValue}
+        />
+      </Box>
+
       <SimpleGrid
         cols={isMobileSM ? 1 : isMobileMD ? 2 : isMobileLG ? 1 : 2}
         spacing={16}

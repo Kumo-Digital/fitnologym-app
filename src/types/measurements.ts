@@ -169,4 +169,5 @@ export interface BodySectionProps {
   targetMeasure?: any;
   isEvolutionFromFirstToLast: boolean;
   handleToggle: () => void;
+  showSwitch: boolean;
 }

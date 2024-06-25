@@ -593,6 +593,11 @@ export enum FFMIStatus {
   BODYBUILDER = "Bodybuilder",
 }
 
+export type FFMIStatusColor = {
+  label: FFMIStatus;
+  color: string;
+};
+
 export const measurementFormValidationSchema = Yup.object().shape({
   user_id: Yup.string().required("El nombre del cliente es obligatorio"),
   report_url: Yup.string(),

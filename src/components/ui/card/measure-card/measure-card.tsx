@@ -94,11 +94,11 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
           style={{ flexGrow: 1 }}
         >
           <Group>
-            <Group gap={4}>
+            <Group gap={4} wrap="nowrap">
               <Text size="md" c="gray.0" fw={600} maw={150}>
                 {getMeasureName(measureTitle)}
               </Text>
-              <IconExclamationCircle size={25} stroke={2} />
+              <IconExclamationCircle size={16} stroke={2} />
             </Group>
           </Group>
           <Group align="baseline" gap={4}>
@@ -113,7 +113,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
 
         {notShowEvolution || !evolutionValue ? null : (
           <Stack gap={4} align="flex-start" justify="space-between">
-            <Text size="md" c="gray.0" fw={700} w={75}>
+            <Text size="md" c="gray.0" fw={700} h={'auto'} w={75}>
               Evolución
             </Text>
             <Group align="baseline" pb={4} gap={8} wrap="nowrap">
