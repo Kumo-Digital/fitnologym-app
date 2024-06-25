@@ -315,7 +315,7 @@ export const SEGMENTED_STATUS_COLORS = ["blue", "lime", "orange"];
 export const PHISYQUE_RATING_STATUS_VALUES = [
   {
     value: "1",
-    label: "Bajo rango ",
+    label: "Bajo rango",
   },
   {
     value: "2",

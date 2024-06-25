@@ -73,7 +73,7 @@ export const prepareMeasurementForInsert = (
       },
       ffmi: {
         measure_value: payload.ffmi ?? null,
-        measure_status: payload.ffmiStatus ?? FFMIStatus.AVERAGE,
+        measure_status: payload.ffmiStatus ?? Object.keys(FFMIStatus)[Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)],
       },
       left_arm: {
         muscle_mass: {
@@ -256,7 +256,7 @@ export const prepareMeasurementForEditForm = (
     physiqueRating: payload.metrics.physique_rating.measure_value || 0,
     physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
     ffmi: payload.metrics.ffmi.measure_value || 0,
-    ffmiStatus: payload.metrics.ffmi.measure_status || FFMIStatus.AVERAGE,
+    ffmiStatus: payload.metrics.ffmi.measure_status || Object.keys(FFMIStatus)[Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)],
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
     trunkMuscleMassStatus:
       payload.metrics.trunk.muscle_mass.measure_status || 2,
@@ -490,33 +490,34 @@ export const metricsSelectOptions = [
   { value: "weight", label: "Peso", sections: ["overview"] },
   { value: "bmi", label: "IMC", sections: ["overview"] },
   {
+    value: "body_fat_overview",
+    label: "Grasa Corporal (General)",
+    sections: ["overview"],
+  },
+  {
     value: "body_fat",
     label: "Grasa Corporal",
-    sections: [
-      "overview",
-      "trunk",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["trunk", "left_leg", "right_leg", "left_arm", "right_arm"],
+  },
+  {
+    value: "muscle_mass_overview",
+    label: "Masa Muscular (General)",
+    sections: ["overview"],
   },
   {
     value: "muscle_mass",
     label: "Masa Muscular",
-    sections: [
-      "overview",
-      "trunk",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["trunk", "left_leg", "right_leg", "left_arm", "right_arm"],
+  },
+  {
+    value: "muscle_quality_overview",
+    label: "Calidad Muscular (General)",
+    sections: ["overview"],
   },
   {
     value: "muscle_quality",
     label: "Calidad Muscular",
-    sections: ["overview", "left_leg", "right_leg", "left_arm", "right_arm"],
+    sections: ["left_leg", "right_leg", "left_arm", "right_arm"],
   },
   { value: "visc_fat", label: "Grasa Visceral", sections: ["overview"] },
   { value: "bone_mass", label: "Masa Ósea", sections: ["overview"] },
