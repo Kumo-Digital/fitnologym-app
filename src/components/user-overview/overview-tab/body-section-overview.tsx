@@ -35,7 +35,7 @@ export const BodySectionOverview = ({
         ...metricList,
         {
           metricName: metric,
-          evolution: evolution?.metrics[metric].measure_evolution,
+          evolution: { ...evolution?.metrics[metric].measure_evolution },
           ...values,
         },
       ];

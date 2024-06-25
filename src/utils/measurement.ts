@@ -786,6 +786,21 @@ export const getRemainingPercentageFromMeasures = (
   return result;
 };
 
+export const getRemainingSpecificFromMeasures = (
+  previousToLastValue: number,
+  lastValue: number
+): number => {
+  let result = 0;
+
+  if (previousToLastValue === lastValue) {
+    return result;
+  }
+
+  result = previousToLastValue - lastValue;
+
+  return result;
+};
+
 export const getBalancePercentage = (
   leftValue: number,
   rightValue: number
