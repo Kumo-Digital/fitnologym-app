@@ -132,7 +132,7 @@ const FfmiTargetMeasureCardMobile = ({
   const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
 
   return (
-    <Card radius="md" withBorder p={16} h={isMobile ? 310 : "auto"}>
+    <Card radius="md" withBorder p={16} h={isMobile ? 310 : 233.89}>
       <Stack gap={16}>
         <Group gap={16} align={isMobile ? "flex-start" : "center"}>
           <Stack

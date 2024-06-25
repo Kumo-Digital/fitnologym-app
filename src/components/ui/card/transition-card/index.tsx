@@ -1,10 +1,10 @@
 import { Carousel } from "@mantine/carousel";
+import { em } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
 import React, { useRef } from "react";
 import { FfmiTargetMeasureCard } from "../ffmi-target-measure-card";
 import { TargetMeasureCard } from "../target-measure-card";
-import { useMediaQuery } from "@mantine/hooks";
-import { em } from "@mantine/core";
 
 interface TransitionCardProps {
   currentValue: any;
@@ -20,7 +20,7 @@ const TransitionCard: React.FC<TransitionCardProps> = ({
   ffmiTargetValue,
 }) => {
   const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
-  const autoplay = useRef(Autoplay({ delay: 3000 }));
+  const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
   return (
     <Carousel
