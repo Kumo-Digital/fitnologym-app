@@ -20,7 +20,7 @@ const TransitionCard: React.FC<TransitionCardProps> = ({
   ffmiTargetValue,
 }) => {
   const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
-  const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
 
   return (
     <Carousel
