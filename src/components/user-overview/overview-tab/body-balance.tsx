@@ -20,11 +20,6 @@ const BodyBalance = ({
 }: BodyBalanceProps) => {
   return (
     <Stack gap={16}>
-      <FFMIBalance
-        label="Indice de Masa Libre de Grasa (FFMI)"
-        description="El Indice de Masa Libre de Grasa es una medida que indica la cantidad de masa corporal compuesta por músculos, huesos, agua y otros tejidos magros, excluyendo la grasa."
-        value={ffmiValue}
-      />
       <BodySectionBalance
         name="Grasa Corporal"
         armsValue={bodyFat.armsValue}

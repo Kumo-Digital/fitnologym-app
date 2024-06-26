@@ -19,6 +19,7 @@ import {
   SegmentedControl,
   Stack,
   Text,
+  Title,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconMan } from "@tabler/icons-react";
@@ -31,6 +32,7 @@ import { BodySectionTorso } from "./body-section-torso";
 import OverviewTabEmpty from "./overview-tab-empty";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
 import { useUniqueReports } from "@/hooks/reports";
+import FFMIBalance from "@/components/ui/ffmi-balance";
 
 interface OverviewTabProps {
   user: User;
@@ -162,21 +164,17 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
           </Blockquote>
         )}
         <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
-        {/* TODO: when the be is implemented, update this values */}
         {!isMobileSM && (
-          <Box p={16}>
-            <BodyBalance
-              ffmiValue={14}
-              bodyFat={{
-                armsValue: armsBodyFatBalance,
-                legsValue: legsBodyFatBalance,
-              }}
-              muscleMass={{
-                armsValue: armsMuscleMassBalance,
-                legsValue: legsMuscleMassBalance,
-              }}
+          <Stack p={16}>
+            <FFMIBalance
+              label="Indice de Masa Libre de Grasa (FFMI)"
+              description="El Indice de Masa Libre de Grasa es una medida que indica la cantidad de masa corporal compuesta por músculos, huesos, agua y otros tejidos magros, excluyendo la grasa."
+              value={
+                measurementPhysic?.lastMeasure?.metrics?.ffmi?.measure_value ??
+                14
+              }
             />
-          </Box>
+          </Stack>
         )}
       </Stack>
       <Stack gap={32} py={32} flex={"1 0 0"}>
@@ -238,38 +236,34 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
               showSwitch={showSwitch}
             />
           )}
-          {isMobileSM && (
-            <Box mt={16}>
-              {/* TODO: when the be is implemented, update this values */}
-              <BodyBalance
-                ffmiValue={14}
-                bodyFat={{
-                  armsValue: armsBodyFatBalance,
-                  legsValue: legsBodyFatBalance,
-                }}
-                muscleMass={{
-                  armsValue: armsMuscleMassBalance,
-                  legsValue: legsMuscleMassBalance,
-                }}
+          <Stack gap={16} mt={16}>
+            <Title order={4}>Balance Corporal</Title>
+            {isMobileSM && (
+              <FFMIBalance
+                label="Indice de Masa Libre de Grasa (FFMI)"
+                description="El Indice de Masa Libre de Grasa es una medida que indica la cantidad de masa corporal compuesta por músculos, huesos, agua y otros tejidos magros, excluyendo la grasa."
+                value={
+                  measurementPhysic?.lastMeasure?.metrics?.ffmi
+                    ?.measure_value ?? 14
+                }
               />
-            </Box>
-          )}
-          {isMobileSM && (
-            <Box mt={16}>
-              {/* TODO: when the be is implemented, update this values */}
-              <BodyBalance
-                ffmiValue={14}
-                bodyFat={{
-                  armsValue: armsBodyFatBalance,
-                  legsValue: legsBodyFatBalance,
-                }}
-                muscleMass={{
-                  armsValue: armsMuscleMassBalance,
-                  legsValue: legsMuscleMassBalance,
-                }}
-              />
-            </Box>
-          )}
+            )}
+
+            <BodyBalance
+              ffmiValue={
+                measurementPhysic?.lastMeasure?.metrics?.ffmi?.measure_value ??
+                14
+              }
+              bodyFat={{
+                armsValue: armsBodyFatBalance,
+                legsValue: legsBodyFatBalance,
+              }}
+              muscleMass={{
+                armsValue: armsMuscleMassBalance,
+                legsValue: legsMuscleMassBalance,
+              }}
+            />
+          </Stack>
         </ScrollArea.Autosize>
       </Stack>
     </Flex>
