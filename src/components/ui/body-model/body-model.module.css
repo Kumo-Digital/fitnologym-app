@@ -10,3 +10,8 @@
   stroke-opacity: 1 !important;
   cursor: pointer;
 }
+
+.body_shadow {
+  background: rgb(36, 36, 36);
+  background: radial-gradient(circle, rgba(36, 36, 36, 1), rgba(36, 36, 36, 0));
+}
