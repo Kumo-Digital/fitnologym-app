@@ -43,7 +43,7 @@ const GymModal = ({ close, refetch }: { close: () => void; refetch: any }) => {
         }
 
         notifications.show({
-          title: "Usuario Creado",
+          title: "Gimnasio Creado",
           message: `El gimnasio ${data.name} ha sido creado exitosamente`,
           color: "lime",
         });

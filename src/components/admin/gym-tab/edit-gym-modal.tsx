@@ -55,7 +55,7 @@ const EditGymModal = ({
         }
 
         notifications.show({
-          title: "Usuario Creado",
+          title: "Gimnasio Editado",
           message: `El gimnasio ${data.name} ha sido editado exitosamente`,
           color: "lime",
         });
