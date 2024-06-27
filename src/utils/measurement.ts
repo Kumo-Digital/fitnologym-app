@@ -71,6 +71,10 @@ export const prepareMeasurementForInsert = (
         measure_value: payload.physiqueRating ?? null,
         measure_status: payload.physiqueRatingStatus ?? 2,
       },
+      ffmi: {
+        measure_value: payload.ffmi ?? null,
+        measure_status: payload.ffmiStatus ?? Object.keys(FFMIStatus)[Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)],
+      },
       left_arm: {
         muscle_mass: {
           measure_uom: MEASUREMENT_UNITS.KG,
@@ -150,11 +154,6 @@ export const prepareMeasurementForInsert = (
           measure_value: payload.trunkBodyFat ?? null,
           measure_status: payload.trunkBodyFatStatus ?? 2,
         },
-        muscle_quality: {
-          measure_uom: MEASUREMENT_UNITS.UNIT,
-          measure_value: payload.trunkMuscleQuality ?? null,
-          measure_status: payload.trunkMuscleQualityStatus ?? 2,
-        },
       },
       circumferenceNeck: {
         measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
@@ -177,14 +176,8 @@ export const prepareMeasurementForInsert = (
         measure_value: payload.circumferenceGlutes ?? null,
       },
       circumferenceShoulders: {
-        left: {
-          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.circumferenceShouldersLeft ?? null,
-        },
-        right: {
-          measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
-          measure_value: payload.circumferenceShouldersRight ?? null,
-        },
+        measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+        measure_value: payload.circumferenceGlutes ?? null,
       },
       circumferenceArms: {
         left: {
@@ -262,12 +255,11 @@ export const prepareMeasurementForEditForm = (
     muscleQualityStatus: payload.metrics.muscle_quality.measure_status || 2,
     physiqueRating: payload.metrics.physique_rating.measure_value || 0,
     physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
+    ffmi: payload.metrics.ffmi.measure_value || 0,
+    ffmiStatus: payload.metrics.ffmi.measure_status || Object.keys(FFMIStatus)[Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)],
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
     trunkMuscleMassStatus:
       payload.metrics.trunk.muscle_mass.measure_status || 2,
-    trunkMuscleQuality: payload.metrics.trunk.muscle_quality.measure_value || 0,
-    trunkMuscleQualityStatus:
-      payload.metrics.trunk.muscle_quality.measure_status || 2,
     trunkBodyFat: payload.metrics.trunk.body_fat.measure_value || 0,
     trunkBodyFatStatus: payload.metrics.trunk.body_fat.measure_status || 2,
     armLeftMuscleMass: payload.metrics.left_arm.muscle_mass.measure_value || 0,
@@ -316,10 +308,8 @@ export const prepareMeasurementForEditForm = (
     circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
     circumferenceGlutes:
       payload.metrics.circumferenceGlutes?.measure_value || 0,
-    circumferenceShouldersLeft:
-      payload.metrics.circumferenceShoulders?.left.measure_value || 0,
-    circumferenceShouldersRight:
-      payload.metrics.circumferenceShoulders?.right.measure_value || 0,
+    circumferenceShoulders:
+      payload.metrics.circumferenceShoulders?.measure_value || 0,
     circumferenceArmsLeft:
       payload.metrics.circumferenceArms?.left.measure_value || 0,
     circumferenceArmsRight:
@@ -353,8 +343,7 @@ const metricLabels = [
   { key: "Cintura", value: "circumferenceWaist" },
   { key: "Cadera", value: "circumferenceHips" },
   { key: "Glúteos", value: "circumferenceGlutes" },
-  { key: "Hombro Izquierdo", value: "circumferenceShouldersLeft" },
-  { key: "Hombro Derecho", value: "circumferenceShouldersRight" },
+  { key: "Hombros", value: "circumferenceShoulders" },
   { key: "Brazo Izquierdo", value: "circumferenceArmsLeft" },
   { key: "Brazo Derecho", value: "circumferenceArmsRight" },
   { key: "Brazo Flexionado Izquierdo", value: "circumferenceFlexedArmsLeft" },
@@ -436,10 +425,8 @@ export const getMeasureName = (measure: string): string => {
       return "Cadera";
     case "circumferenceGlutes":
       return "Glúteos";
-    case "circumferenceShouldersLeft":
-      return "Hombro Izquierdo";
-    case "circumferenceShouldersRight":
-      return "Hombro Derecho";
+    case "circumferenceShoulders":
+      return "Hombros";
     case "circumferenceArmsLeft":
       return "Brazo Izquierdo";
     case "circumferenceArmsRight":
@@ -481,12 +468,12 @@ export const torsoBodyMetrics = [
   "circumferenceChest",
   "circumferenceWaist",
   "circumferenceHips",
+  "circumferenceShoulders",
 ];
 
 export const armsBodyMetrics = [
   "left_arm",
   "right_arm",
-  "circumferenceShoulders",
   "circumferenceArms",
   "circumferenceFlexedArms",
 ];
@@ -503,40 +490,34 @@ export const metricsSelectOptions = [
   { value: "weight", label: "Peso", sections: ["overview"] },
   { value: "bmi", label: "IMC", sections: ["overview"] },
   {
+    value: "body_fat_overview",
+    label: "Grasa Corporal (General)",
+    sections: ["overview"],
+  },
+  {
     value: "body_fat",
     label: "Grasa Corporal",
-    sections: [
-      "overview",
-      "trunk",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["trunk", "left_leg", "right_leg", "left_arm", "right_arm"],
+  },
+  {
+    value: "muscle_mass_overview",
+    label: "Masa Muscular (General)",
+    sections: ["overview"],
   },
   {
     value: "muscle_mass",
     label: "Masa Muscular",
-    sections: [
-      "overview",
-      "trunk",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["trunk", "left_leg", "right_leg", "left_arm", "right_arm"],
+  },
+  {
+    value: "muscle_quality_overview",
+    label: "Calidad Muscular (General)",
+    sections: ["overview"],
   },
   {
     value: "muscle_quality",
     label: "Calidad Muscular",
-    sections: [
-      "overview",
-      "trunk",
-      "left_leg",
-      "right_leg",
-      "left_arm",
-      "right_arm",
-    ],
+    sections: ["left_leg", "right_leg", "left_arm", "right_arm"],
   },
   { value: "visc_fat", label: "Grasa Visceral", sections: ["overview"] },
   { value: "bone_mass", label: "Masa Ósea", sections: ["overview"] },
@@ -593,6 +574,20 @@ export const getCategoryColoBySection = (section: string): string => {
   }
 };
 
+export enum FFMIStatus {
+  AVERAGE = "Normal",
+  SKINNY = "Flaco",
+  FAT = "Sobrepeso",
+  ATHLETE = "Atlético",
+  ADVANCED = "Avanzado",
+  BODYBUILDER = "Bodybuilder",
+}
+
+export type FFMIStatusColor = {
+  label: FFMIStatus;
+  color: string;
+};
+
 export const measurementFormValidationSchema = Yup.object().shape({
   user_id: Yup.string().required("El nombre del cliente es obligatorio"),
   report_url: Yup.string(),
@@ -622,6 +617,10 @@ export const measurementFormValidationSchema = Yup.object().shape({
   bodyWaterStatus: Yup.string(),
   physiqueRating: Yup.number().min(0, "El rating físico no puede ser negativo"),
   physiqueRatingStatus: Yup.string(),
+  ffmi: Yup.number()
+    .min(14, "El índice de masa libre de grasa no puede ser menor a 14")
+    .max(30, "El índice de masa libre de grasa no puede ser mayor a 30"),
+  ffmiStatus: Yup.string(),
   armLeftMuscleMass: Yup.number().min(
     0,
     "La masa muscular no puede ser negativa"
@@ -709,11 +708,7 @@ export const measurementFormValidationSchema = Yup.object().shape({
     0,
     "La circunferencia no puede ser negativa"
   ),
-  circumferenceShouldersLeft: Yup.number().min(
-    0,
-    "La circunferencia no puede ser negativa"
-  ),
-  circumferenceShouldersRight: Yup.number().min(
+  circumferenceShoulders: Yup.number().min(
     0,
     "La circunferencia no puede ser negativa"
   ),
@@ -766,8 +761,43 @@ export const getRemainingPercentageFromMeasures = (
   previousToLastValue: number,
   lastValue: number
 ): number => {
-  const result =
-    ((previousToLastValue - lastValue) / previousToLastValue) * 100;
+  let result = 0;
+
+  if (previousToLastValue === lastValue) {
+    return result;
+  }
+
+  result = ((previousToLastValue - lastValue) / previousToLastValue) * 100;
 
   return result;
+};
+
+export const getRemainingSpecificFromMeasures = (
+  previousToLastValue: number,
+  lastValue: number
+): number => {
+  let result = 0;
+
+  if (previousToLastValue === lastValue) {
+    return result;
+  }
+
+  result = previousToLastValue - lastValue;
+
+  return result;
+};
+
+export const getBalancePercentage = (
+  leftValue: number,
+  rightValue: number
+): number => {
+  if (
+    typeof leftValue !== "number" ||
+    typeof rightValue !== "number" ||
+    rightValue === 0
+  ) {
+    return 0;
+  }
+  let percentage = ((rightValue - leftValue) / leftValue) * 100;
+  return percentage;
 };

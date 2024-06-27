@@ -1,7 +1,6 @@
 import connectDB from "@/lib/db";
 import type { NextApiRequest, NextApiResponse } from "next";
 import MeasurementService from "@/db/services/measurement";
-import { IMeasurement } from "@/db/interfaces/IMeasurement";
 import { prepareMeasurementForInsert } from "@/utils/measurement";
 
 export default async function handler(

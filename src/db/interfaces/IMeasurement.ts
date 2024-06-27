@@ -26,6 +26,10 @@ export interface IMeasurement {
     metab_age: MeasurementObject;
     body_water: MeasurementObject;
     physique_rating: MeasurementObject;
+    ffmi: {
+      measure_value?: number;
+      measure_status?: string;
+    },
     left_arm: {
       muscle_mass: MeasurementObject;
       body_fat: MeasurementObject;
@@ -49,17 +53,13 @@ export interface IMeasurement {
     trunk: {
       muscle_mass: MeasurementObject;
       body_fat: MeasurementObject;
-      muscle_quality: MeasurementObject;
     };
     circumferenceNeck?: CircumferenceObject;
     circumferenceChest?: CircumferenceObject;
     circumferenceWaist?: CircumferenceObject;
     circumferenceHips?: CircumferenceObject;
     circumferenceGlutes?: CircumferenceObject;
-    circumferenceShoulders?: {
-      left: CircumferenceObject;
-      right: CircumferenceObject;
-    };
+    circumferenceShoulders?: CircumferenceObject;
     circumferenceArms?: {
       left: CircumferenceObject;
       right: CircumferenceObject;

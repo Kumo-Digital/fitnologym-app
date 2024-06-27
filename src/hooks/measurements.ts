@@ -59,6 +59,20 @@ export const useCalculateEvolution = (userId: string): any => {
   };
 };
 
+export const useCalculateEvolutionFromFirstToLast = (userId: string): any => {
+  const { data, error, isLoading, mutate } = useSWR(
+    apiUrls.measurements.getEvolutionFromFirstToLast(userId),
+    apiFetcher
+  );
+
+  return {
+    evolutionFromFirstToLast: data,
+    error,
+    isLoading,
+    refetch: mutate,
+  };
+};
+
 interface UseMeasurementsReturn {
   measurements: Measurement[];
   error: any;

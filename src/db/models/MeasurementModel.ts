@@ -56,6 +56,16 @@ const measurementSchema = new Schema<IMeasurement>({
     metab_age: MeasurementObjSchema,
     body_water: MeasurementObjSchema,
     physique_rating: MeasurementObjSchema,
+    ffmi: {
+      measure_value: {
+        type: Number,
+        required: false,
+      },
+      measure_status: {
+        type: String,
+        required: false,
+      },
+    },
     left_arm: {
       muscle_mass: MeasurementObjSchema,
       body_fat: MeasurementObjSchema,

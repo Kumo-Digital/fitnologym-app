@@ -1,6 +1,11 @@
 import MeasurementModel from "../models/MeasurementModel";
 
 const multipleValues = ["body_fat", "muscle_mass", "muscle_quality"];
+const overview = [
+  "body_fat_overview",
+  "muscle_mass_overview",
+  "muscle_quality_overview",
+];
 const circumferenceValues = ["circumference"];
 
 class MetricService {
@@ -29,7 +34,7 @@ class MetricService {
             uom: `$metrics.${metric}.measure_uom`,
             filtered_metrics: {
               date: "$date",
-              overview: `$metrics.${metric}.measure_value`,
+              /* overview: `$metrics.${metric}.measure_value`, */
               left_arm: `$metrics.left_arm.${metric}.measure_value`,
               right_arm: `$metrics.right_arm.${metric}.measure_value`,
               trunk: `$metrics.trunk.${metric}.measure_value`,
@@ -81,10 +86,7 @@ class MetricService {
               circumferenceWaist: "$metrics.circumferenceWaist.measure_value",
               circumferenceHips: "$metrics.circumferenceHips.measure_value",
               circumferenceGlutes: "$metrics.circumferenceGlutes.measure_value",
-              circumferenceShouldersLeft:
-                "$metrics.circumferenceShoulders.left.measure_value",
-              circumferenceShouldersRight:
-                "$metrics.circumferenceShoulders.right.measure_value",
+              circumferenceShoulders: "$metrics.circumferenceGlutes.measure_value",
               circumferenceArmsLeft: "$metrics.circumferenceArms.left.measure_value",
               circumferenceArmsRight: "$metrics.circumferenceArms.right.measure_value",
               circumferenceQuadsLeft: "$metrics.circumferenceQuads.left.measure_value",
@@ -133,6 +135,134 @@ class MetricService {
             filtered_metrics: {
               date: "$date",
               overview: `$metrics.${metric}.measure_value`,
+            },
+          },
+        },
+        {
+          $unwind: "$filtered_metrics",
+        },
+        {
+          $sort: { "filtered_metrics.date": 1 },
+        },
+        {
+          $group: {
+            _id: "$user_id",
+            uom: { $first: "$uom" },
+            filtered_metrics: { $push: "$filtered_metrics" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            uom: 1,
+            filtered_metrics: 1,
+          },
+        },
+      ]);
+    }
+
+    if (metric === "body_fat_overview") {
+      metrics = await MeasurementModel.aggregate([
+        {
+          $match: {
+            user_id: userId,
+            date: {
+              $gte: new Date(startDate),
+              $lte: new Date(endDate),
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            uom: `$metrics.body_fat.measure_uom`,
+            filtered_metrics: {
+              date: "$date",
+              overview: "$metrics.body_fat.measure_value",
+            },
+          },
+        },
+        {
+          $unwind: "$filtered_metrics",
+        },
+        {
+          $sort: { "filtered_metrics.date": 1 },
+        },
+        {
+          $group: {
+            _id: "$user_id",
+            uom: { $first: "$uom" },
+            filtered_metrics: { $push: "$filtered_metrics" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            uom: 1,
+            filtered_metrics: 1,
+          },
+        },
+      ]);
+    } else if (metric === "muscle_mass_overview") {
+      metrics = await MeasurementModel.aggregate([
+        {
+          $match: {
+            user_id: userId,
+            date: {
+              $gte: new Date(startDate),
+              $lte: new Date(endDate),
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            uom: `$metrics.muscle_mass.measure_uom`,
+            filtered_metrics: {
+              date: "$date",
+              overview: "$metrics.muscle_mass.measure_value",
+            },
+          },
+        },
+        {
+          $unwind: "$filtered_metrics",
+        },
+        {
+          $sort: { "filtered_metrics.date": 1 },
+        },
+        {
+          $group: {
+            _id: "$user_id",
+            uom: { $first: "$uom" },
+            filtered_metrics: { $push: "$filtered_metrics" },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            uom: 1,
+            filtered_metrics: 1,
+          },
+        },
+      ]);
+    } else if (metric === "muscle_quality_overview") {
+      metrics = await MeasurementModel.aggregate([
+        {
+          $match: {
+            user_id: userId,
+            date: {
+              $gte: new Date(startDate),
+              $lte: new Date(endDate),
+            },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            uom: `$metrics.muscle_quality.measure_uom`,
+            filtered_metrics: {
+              date: "$date",
+              overview: "$metrics.muscle_quality.measure_value",
             },
           },
         },
