@@ -24,6 +24,7 @@ const CarouselCards = ({ user }: OverviewTabProps) => {
     "circumferenceFlexedArms",
     "circumferenceQuads",
     "circumferenceCalf",
+    "ffmi",
   ];
 
   const slides = Object.keys(metrics)
