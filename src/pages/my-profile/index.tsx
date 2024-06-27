@@ -157,7 +157,7 @@ const UserOverview: NextPageWithLayout<{ sessionUser: LuciaUser }> = ({
             <OverviewTab user={user} />
           </Tabs.Panel>
           <Tabs.Panel value="analysis">
-            <AnalysisTab />
+            <AnalysisTab sessionUserId={sessionUser.id} />
           </Tabs.Panel>
           <Tabs.Panel value="report">
             <ReportTab user={user} />
