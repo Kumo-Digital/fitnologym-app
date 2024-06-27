@@ -20,15 +20,24 @@ import AnalysisTableFilters from "./analysis-table-filters";
 const twoMonthsAgo = new Date();
 twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
 
-const AnalysisTab = () => {
+const AnalysisTab = (
+  {
+    sessionUserId
+  }: 
+  { 
+    sessionUserId?: string
+  }
+) => {
   const { query } = useRouter();
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
+  
+  const userId: string = sessionUserId ?? query.userId as string;
 
   const { firstMeasure, isLoading: isFirstMeasureLoading } =
-    useUniqueFirstMeasure(query.userId as string);
+    useUniqueFirstMeasure(userId);
 
   const { lastMeasure, isLoading: isLastMeasureLoading } = useUniqueLastMeasure(
-    query.userId as string
+    userId
   );
 
   const [filters, setFilters] = useState({
@@ -52,7 +61,7 @@ const AnalysisTab = () => {
   }, [firstMeasure, lastMeasure]);
 
   const searchParams: Record<string, string> = {
-    userId: query.userId as string,
+    userId: userId,
     metric: filters.metric,
     startMonth: filters.dateRange[0]?.toISOString(),
     endMonth: filters.dateRange[1]?.toISOString(),
