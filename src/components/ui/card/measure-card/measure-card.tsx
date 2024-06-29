@@ -30,7 +30,7 @@ interface MeasureCardProps {
   measureStatus: number;
   isEvolutionFromFirstToLast?: boolean;
 }
-// agregamos masa ossea
+
 const dontShowEvolution = ["body_water", "bmr", "physique_rating", "bone_mass"];
 
 function openCheckModal(measure: string) {
@@ -113,7 +113,7 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
 
         {notShowEvolution || !evolutionValue ? null : (
           <Stack gap={4} align="flex-start" justify="space-between">
-            <Text size="md" c="gray.0" fw={700} h={'auto'} w={75}>
+            <Text size="md" c="gray.0" fw={700} h={"auto"} w={75}>
               Evolución
             </Text>
             <Group align="baseline" pb={4} gap={8} wrap="nowrap">
@@ -128,17 +128,18 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                   }}
                 />
               )}
-              {evolutionValue === null && (
-                <IconLineDashed
-                  color={theme.colors.gray[5]}
-                  aria-label="Options"
-                  size={20}
-                  style={{
-                    position: "relative",
-                    bottom: "-4px",
-                  }}
-                />
-              )}
+              {evolutionValue === null ||
+                (Object.keys(evolutionValue).length === 0 && (
+                  <IconLineDashed
+                    color={theme.colors.gray[5]}
+                    aria-label="Options"
+                    size={20}
+                    style={{
+                      position: "relative",
+                      bottom: "-4px",
+                    }}
+                  />
+                ))}
               {evolutionValue.percentage < 0 && (
                 <IconChevronsUp
                   color={theme.colors.lime[5]}
@@ -172,7 +173,8 @@ export const MeasureCard: React.FC<MeasureCardProps> = ({
                 withArrow
                 w={160}
               >
-                {evolutionValue.percentage === 0 ||
+                {Object.keys(evolutionValue).length === 0 ||
+                evolutionValue.percentage === 0 ||
                 evolutionValue === null ||
                 !evolutionValue ? (
                   <Group align="baseline" gap={8}>

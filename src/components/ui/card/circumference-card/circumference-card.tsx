@@ -64,7 +64,8 @@ export const CircumferenceCard = ({
               Evolución
             </Text>
             <Group align="baseline" gap={8}>
-              {evolutionValue.percentage === 0 ||
+              {Object.keys(evolutionValue).length === 0 ||
+                evolutionValue.percentage === 0 ||
                 (!evolutionValue && (
                   <IconLineDashed
                     color={theme.colors.gray[5]}
@@ -76,17 +77,18 @@ export const CircumferenceCard = ({
                     }}
                   />
                 ))}
-              {evolutionValue === null && (
-                <IconLineDashed
-                  color={theme.colors.gray[5]}
-                  aria-label="Options"
-                  size={20}
-                  style={{
-                    position: "relative",
-                    bottom: "-4px",
-                  }}
-                />
-              )}
+              {Object.keys(evolutionValue).length === 0 ||
+                (evolutionValue === null && (
+                  <IconLineDashed
+                    color={theme.colors.gray[5]}
+                    aria-label="Options"
+                    size={20}
+                    style={{
+                      position: "relative",
+                      bottom: "-4px",
+                    }}
+                  />
+                ))}
               {evolutionValue.percentage < 0 && (
                 <IconChevronsUp
                   color={theme.colors.lime[5]}
@@ -116,7 +118,8 @@ export const CircumferenceCard = ({
                 withArrow
                 w={160}
               >
-                {evolutionValue.percentage === 0 ||
+                {Object.keys(evolutionValue).length === 0 ||
+                evolutionValue.percentage === 0 ||
                 evolutionValue === null ||
                 !evolutionValue ? (
                   <Group align="baseline" gap={8}>
