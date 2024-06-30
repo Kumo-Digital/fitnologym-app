@@ -73,7 +73,11 @@ export const prepareMeasurementForInsert = (
       },
       ffmi: {
         measure_value: payload.ffmi ?? null,
-        measure_status: payload.ffmiStatus ?? Object.keys(FFMIStatus)[Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)],
+        measure_status:
+          payload.ffmiStatus ??
+          Object.keys(FFMIStatus)[
+            Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)
+          ],
       },
       left_arm: {
         muscle_mass: {
@@ -256,7 +260,11 @@ export const prepareMeasurementForEditForm = (
     physiqueRating: payload.metrics.physique_rating.measure_value || 0,
     physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
     ffmi: payload.metrics.ffmi.measure_value || 0,
-    ffmiStatus: payload.metrics.ffmi.measure_status || Object.keys(FFMIStatus)[Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)],
+    ffmiStatus:
+      payload.metrics.ffmi.measure_status ||
+      Object.keys(FFMIStatus)[
+        Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)
+      ],
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
     trunkMuscleMassStatus:
       payload.metrics.trunk.muscle_mass.measure_status || 2,
@@ -465,10 +473,10 @@ export const overviewBodyMetrics = [
 export const torsoBodyMetrics = [
   "trunk",
   "circumferenceNeck",
+  "circumferenceShoulders",
   "circumferenceChest",
   "circumferenceWaist",
   "circumferenceHips",
-  "circumferenceShoulders",
 ];
 
 export const armsBodyMetrics = [
