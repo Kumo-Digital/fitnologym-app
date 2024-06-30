@@ -247,6 +247,10 @@ export default function MeasurementForm({
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   const initialValuesForEdit = prepareMeasurementForEditForm(measurement);
 
+  const autoSelectFieldValue = (field: any) => {
+    field.select();
+  };
+
   // Set measurementFormInitialValues to new variable
   let formInitialValues = measurementFormInitialValues;
 
@@ -427,6 +431,7 @@ export default function MeasurementForm({
                                 Kgs
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) => form.setFieldValue("weight", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -477,6 +482,7 @@ export default function MeasurementForm({
                                 u
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) => form.setFieldValue("bmi", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -525,6 +531,7 @@ export default function MeasurementForm({
                                 %
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) => form.setFieldValue("bodyFat", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -579,6 +586,7 @@ export default function MeasurementForm({
                                 Kgs
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("muscleMass", e)
                             }
@@ -638,6 +646,7 @@ export default function MeasurementForm({
                                 u
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("muscleQuality", e)
                             }
@@ -700,6 +709,7 @@ export default function MeasurementForm({
                                 u
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("physiqueRating", e)
                             }
@@ -759,6 +769,7 @@ export default function MeasurementForm({
                                 Kgs
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) => form.setFieldValue("boneMass", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -813,6 +824,7 @@ export default function MeasurementForm({
                                 u
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) => form.setFieldValue("viscFat", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -865,6 +877,7 @@ export default function MeasurementForm({
                                 Kcals
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) => form.setFieldValue("bmr", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -914,6 +927,7 @@ export default function MeasurementForm({
                                 Años
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
                           />
@@ -963,6 +977,7 @@ export default function MeasurementForm({
                                 Lts
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) => form.setFieldValue("bodyWater", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -1014,6 +1029,7 @@ export default function MeasurementForm({
                             min={14}
                             max={30}
                             value={meta.value}
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) => form.setFieldValue("ffmi", e)}
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}
@@ -1082,6 +1098,7 @@ export default function MeasurementForm({
                                 %
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("trunkBodyFat", e)
                             }
@@ -1140,6 +1157,7 @@ export default function MeasurementForm({
                                 Kgs
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("trunkMuscleMass", e)
                             }
@@ -1230,6 +1248,7 @@ export default function MeasurementForm({
                                 %
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("armLeftBodyFat", e)
                             }
@@ -1291,6 +1310,7 @@ export default function MeasurementForm({
                                 Kgs
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("armLeftMuscleMass", e)
                             }
@@ -1352,6 +1372,7 @@ export default function MeasurementForm({
                                 u
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("armLeftMuscleQuality", e)
                             }
@@ -1419,6 +1440,7 @@ export default function MeasurementForm({
                                 %
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("armRightBodyFat", e)
                             }
@@ -1480,6 +1502,7 @@ export default function MeasurementForm({
                                 Kgs
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("armRightMuscleMass", e)
                             }
@@ -1541,6 +1564,7 @@ export default function MeasurementForm({
                                 u
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("armRightMuscleQuality", e)
                             }
@@ -1634,6 +1658,7 @@ export default function MeasurementForm({
                                 %
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("legLeftBodyFat", e)
                             }
@@ -1695,6 +1720,7 @@ export default function MeasurementForm({
                                 Kgs
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("legLeftMuscleMass", e)
                             }
@@ -1756,6 +1782,7 @@ export default function MeasurementForm({
                                 u
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("legLeftMuscleQuality", e)
                             }
@@ -1823,6 +1850,7 @@ export default function MeasurementForm({
                                 %
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("legRightBodyFat", e)
                             }
@@ -1884,6 +1912,7 @@ export default function MeasurementForm({
                                 Kgs
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("legRightMuscleMass", e)
                             }
@@ -1945,6 +1974,7 @@ export default function MeasurementForm({
                                 u
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("legRightMuscleQuality", e)
                             }
@@ -2032,6 +2062,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceNeck", e)
                             }
@@ -2054,6 +2085,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceChest", e)
                             }
@@ -2064,7 +2096,10 @@ export default function MeasurementForm({
                       </FastField>
                     </Group>
                     <Group grow id="value-circumferenceShoulders">
-                      <FastField name="circumferenceShoulders" placeholder="Hombros">
+                      <FastField
+                        name="circumferenceShoulders"
+                        placeholder="Hombros"
+                      >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
@@ -2076,6 +2111,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceShoulders", e)
                             }
@@ -2101,6 +2137,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceArmsLeft", e)
                             }
@@ -2124,6 +2161,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceArmsRight", e)
                             }
@@ -2149,6 +2187,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue(
                                 "circumferenceFlexedArmsLeft",
@@ -2175,6 +2214,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue(
                                 "circumferenceFlexedArmsRight",
@@ -2203,6 +2243,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceWaist", e)
                             }
@@ -2225,6 +2266,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceHips", e)
                             }
@@ -2250,6 +2292,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceGlutes", e)
                             }
@@ -2275,6 +2318,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceQuadsLeft", e)
                             }
@@ -2298,6 +2342,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceQuadsRight", e)
                             }
@@ -2323,6 +2368,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceCalfLeft", e)
                             }
@@ -2346,6 +2392,7 @@ export default function MeasurementForm({
                                 Cms
                               </Text>
                             }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceCalfRight", e)
                             }
