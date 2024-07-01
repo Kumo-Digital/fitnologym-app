@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { FFMIStatus } from "./measurement";
 
 export const measurementFormInitialValues = {
   user_id: "",
@@ -26,6 +27,8 @@ export const measurementFormInitialValues = {
   muscleQualityStatus: "2",
   physiqueRating: 0,
   physiqueRatingStatus: "2",
+  ffmi: 17,
+  ffmiStatus: FFMIStatus.AVERAGE,
   trunkMuscleMass: 0,
   trunkMuscleMassStatus: "2",
   trunkMuscleQuality: 0,
@@ -61,8 +64,7 @@ export const measurementFormInitialValues = {
   circumferenceWaist: 0,
   circumferenceHips: 0,
   circumferenceGlutes: 0,
-  circumferenceShouldersLeft: 0,
-  circumferenceShouldersRight: 0,
+  circumferenceShoulders: 0,
   circumferenceArmsLeft: 0,
   circumferenceArmsRight: 0,
   circumferenceFlexedArmsLeft: 0,
@@ -104,10 +106,19 @@ export const STATUS_VALUES_WITHOUT_OBESITY = [
   },
   {
     value: "3",
-    label: "Alto",
+    label: "Sobrepeso",
+  },
+  {
+    value: "4",
+    label: "Obeso",
   },
 ];
-export const STATUS_VALUES_WITHOUT_OBESITY_COLORS = ["blue", "lime", "red"];
+export const STATUS_VALUES_WITHOUT_OBESITY_COLORS = [
+  "blue",
+  "lime",
+  "yellow",
+  "red",
+];
 export const STATUS_COLORS = ["blue", "lime", "yellow", "red"];
 
 export const WEIGHT_STATUS_VALUES = [
@@ -236,7 +247,7 @@ export const BODY_WATER_STATUS_VALUES = [
   },
 ];
 
-export const BODY_WATER_STATUS_COLORS = ["red", "lime", "red"];
+export const BODY_WATER_STATUS_COLORS = ["blue", "lime", "red"];
 
 export const BODY_WATER_STATUS_DESCRIPTION =
   "El agua corporal es la hidratación que tiene su cuerpo:";
@@ -304,7 +315,7 @@ export const SEGMENTED_STATUS_COLORS = ["blue", "lime", "orange"];
 export const PHISYQUE_RATING_STATUS_VALUES = [
   {
     value: "1",
-    label: "Bajo",
+    label: "Bajo rango",
   },
   {
     value: "2",
@@ -312,7 +323,7 @@ export const PHISYQUE_RATING_STATUS_VALUES = [
   },
   {
     value: "3",
-    label: "Muscular",
+    label: "Atletico",
   },
 ];
 
@@ -320,6 +331,33 @@ export const PHISYQUE_RATING_STATUS_COLORS = ["red", "lime", "blue"];
 
 export const PHISYQUE_RATING_STATUS_DESCRIPTION =
   "La calificación física se hace en base a la composición corporal:";
+
+export const FFMI_STATUS_VALUES_COLORS = [
+  {
+    label: FFMIStatus.SKINNY,
+    color: "blue",
+  },
+  {
+    label: FFMIStatus.AVERAGE,
+    color: "lime",
+  },
+  {
+    label: FFMIStatus.FAT,
+    color: "orange",
+  },
+  {
+    label: FFMIStatus.ADVANCED,
+    color: "red",
+  },
+  {
+    label: FFMIStatus.ATHLETE,
+    color: "violet",
+  },
+  {
+    label: FFMIStatus.BODYBUILDER,
+    color: "teal",
+  },
+];
 
 export const SEGMENTED_STATUS_DESCRIPTION =
   "La segmentación es la distribución de la masa muscular en su cuerpo";

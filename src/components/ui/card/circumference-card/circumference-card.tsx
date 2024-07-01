@@ -1,3 +1,4 @@
+import { EvolutionValue } from "@/types/measurements";
 import { getMeasureName } from "@/utils/measurement";
 import {
   Box,
@@ -8,29 +9,18 @@ import {
   Tooltip,
   useMantineTheme,
 } from "@mantine/core";
-import { modals } from "@mantine/modals";
 import {
   IconChevronsDown,
   IconChevronsUp,
   IconLineDashed,
 } from "@tabler/icons-react";
-import { MeasureCardInfoModal } from "../measure-card/measure-card-info-modal";
 
 interface CircumferenceCardProps {
   measureTitle: string;
   measureUnit: string;
   measureValue: number;
-  evolutionValue: number;
-}
-
-function openCheckModal(measure: string) {
-  modals.open({
-    children: <MeasureCardInfoModal measureTitle={measure} />,
-    title: getMeasureName(measure),
-    size: "md",
-    withCloseButton: true,
-    centered: true,
-  });
+  evolutionValue: EvolutionValue;
+  isEvolutionFromFirstToLast: boolean;
 }
 
 export const CircumferenceCard = ({
@@ -38,18 +28,16 @@ export const CircumferenceCard = ({
   measureValue,
   measureUnit,
   evolutionValue,
+  isEvolutionFromFirstToLast,
 }: CircumferenceCardProps) => {
   const theme = useMantineTheme();
 
+  const evolutionMessage: string = isEvolutionFromFirstToLast
+    ? "Crecimiento entre la primera y la última medida"
+    : "Crecimiento respecto a la última medida";
+
   return (
-    <Card
-      radius="md"
-      withBorder
-      p={0}
-      onClick={() => {
-        openCheckModal(measureTitle);
-      }}
-    >
+    <Card radius="md" withBorder p={0}>
       <Group gap={16} p={16} align="stretch">
         <Box miw={8} bg="gray.5" style={{ borderRadius: 9999 }}></Box>
         <Stack flex={"1 0 0"} align="flex-start" justify="center">
@@ -76,7 +64,8 @@ export const CircumferenceCard = ({
               Evolución
             </Text>
             <Group align="baseline" gap={8}>
-              {evolutionValue === 0 ||
+              {Object.keys(evolutionValue).length === 0 ||
+                evolutionValue.percentage === 0 ||
                 (!evolutionValue && (
                   <IconLineDashed
                     color={theme.colors.gray[5]}
@@ -88,18 +77,19 @@ export const CircumferenceCard = ({
                     }}
                   />
                 ))}
-              {evolutionValue === null && (
-                <IconLineDashed
-                  color={theme.colors.gray[5]}
-                  aria-label="Options"
-                  size={20}
-                  style={{
-                    position: "relative",
-                    bottom: "-4px",
-                  }}
-                />
-              )}
-              {evolutionValue < 0 && (
+              {Object.keys(evolutionValue).length === 0 ||
+                (evolutionValue === null && (
+                  <IconLineDashed
+                    color={theme.colors.gray[5]}
+                    aria-label="Options"
+                    size={20}
+                    style={{
+                      position: "relative",
+                      bottom: "-4px",
+                    }}
+                  />
+                ))}
+              {evolutionValue.percentage < 0 && (
                 <IconChevronsUp
                   color={theme.colors.lime[5]}
                   aria-label="Options"
@@ -110,7 +100,7 @@ export const CircumferenceCard = ({
                   }}
                 />
               )}
-              {evolutionValue > 0 && (
+              {evolutionValue.percentage > 0 && (
                 <IconChevronsDown
                   color={theme.colors.lime[5]}
                   aria-label="Options"
@@ -122,13 +112,14 @@ export const CircumferenceCard = ({
                 />
               )}
               <Tooltip
-                label={"Crecimiento respecto a la última medida"}
+                label={evolutionMessage}
                 position="bottom"
                 multiline
                 withArrow
                 w={160}
               >
-                {evolutionValue === 0 ||
+                {Object.keys(evolutionValue).length === 0 ||
+                evolutionValue.percentage === 0 ||
                 evolutionValue === null ||
                 !evolutionValue ? (
                   <Group align="baseline" gap={8}>
@@ -139,7 +130,7 @@ export const CircumferenceCard = ({
                 ) : (
                   <Group align="baseline" gap={8}>
                     <Text size="xl" c="gray.0" fw={600}>
-                      {Math.abs(evolutionValue).toFixed(1)}
+                      {Math.abs(evolutionValue.percentage).toFixed(1)}
                     </Text>
                     <Text size="sm" c="gray.5">
                       %

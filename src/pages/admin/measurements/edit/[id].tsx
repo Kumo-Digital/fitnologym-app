@@ -52,13 +52,13 @@ const Page: NextPageWithLayout = () => {
 
   if (isLoadingMeasure || isLoadingUser) return <MeasurementFormSkeleton />;
   return (
-  <>
-    <Head>
-      <title>Fitnologym App | Editar Medida</title>
-    </Head>
-    <MeasurementForm user={user} measurement={measurement} />
-  </>
-);
+    <>
+      <Head>
+        <title>Fitnologym App | Editar Medida</title>
+      </Head>
+      <MeasurementForm user={user} measurement={measurement} />
+    </>
+  );
 };
 
 withRootLayout(Page);

@@ -1,0 +1,123 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.label {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--mantine-clor-white);
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.description {
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--mantine-color-gray-6);
+  margin: 0;
+  text-align: center;
+}
+
+.graph {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.meter {
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(
+    to right,
+    var(--mantine-color-violet-5) 0%,
+    var(--mantine-color-red-5) 20%,
+    var(--mantine-color-orange-4) 40%,
+    var(--mantine-color-lime-5) 60%,
+    var(--mantine-color-cyan-5) 80%,
+    var(--mantine-color-violet-5) 100%
+  );
+  border-radius: 4px;
+}
+
+.meter::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 4px;
+  left: var(--indicator-position, 0%);
+  transform: translate(-50%, -50%);
+  height: 12px;
+  width: 12px;
+  background: var(--mantine-color-white);
+  border-radius: 50%;
+}
+
+.meter::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 4px;
+  left: var(--indicator-position, 0%);
+  transform: translate(-50%, -50%);
+  height: 18px;
+  width: 18px;
+  background: var(--mantine-color-dark-7);
+  border-radius: 50%;
+}
+
+@media (max-width: 425px) {
+  .values > :nth-child(even) {
+    display: none;
+  }
+}
+
+.values > *:first-child {
+  margin-left: -6px;
+}
+.values > *:last-child {
+  margin-right: -6px;
+}
+
+.values {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  width: 100%;
+}
+
+.values span {
+  opacity: 1;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--mantine-color-gray-6);
+  margin: 0;
+  line-height: 1;
+}

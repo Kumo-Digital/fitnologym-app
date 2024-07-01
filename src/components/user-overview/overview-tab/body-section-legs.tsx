@@ -2,7 +2,7 @@ import { CircumferenceCard } from "@/components/ui/card/circumference-card/circu
 import { MeasureCard } from "@/components/ui/card/measure-card/measure-card";
 import { BodySectionProps } from "@/types/measurements";
 import { legsBodyMetrics } from "@/utils/measurement";
-import { Flex, Group, Stack, Title, em } from "@mantine/core";
+import { Flex, Group, Stack, Title, Switch, Text, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
@@ -15,10 +15,19 @@ type legMeasures = {
 export const BodySectionLegs = ({
   lastMeasure,
   evolution,
+  isEvolutionFromFirstToLast,
+  handleToggle,
+  showSwitch,
 }: BodySectionProps) => {
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
-  const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
-  const isMobileLG = useMediaQuery(`(max-width: ${em(1024)})`);
+  const isMobileMD = useMediaQuery(
+    `(max-width: ${em(768)}) and (min-width: ${em(426)})`
+  );
+  const isMobileLG = useMediaQuery(
+    `(max-width: ${em(1024)}) and (min-width: ${em(769)})`
+  );
+  const isMobileXL = useMediaQuery(`(min-width: ${em(1025)})`);
+
   const legMeasures: legMeasures = Object.entries(lastMeasure.metrics).reduce(
     (measures, [metricName, value]: any) => {
       if (!legsBodyMetrics.includes(metricName)) return measures;
@@ -27,8 +36,9 @@ export const BodySectionLegs = ({
         const leftLegMetric = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
-          evolution:
-            evolution?.metrics[metricName][metric[0]].measure_evolution,
+          evolution: {
+            ...evolution?.metrics[metricName][metric[0]].measure_evolution,
+          },
         }));
         return {
           ...measures,
@@ -38,8 +48,9 @@ export const BodySectionLegs = ({
         const rightLegMetric = Object.entries(value).map((metric: any) => ({
           metricName: metric[0],
           ...metric[1],
-          evolution:
-            evolution?.metrics[metricName][metric[0]].measure_evolution,
+          evolution: {
+            ...evolution?.metrics[metricName][metric[0]].measure_evolution,
+          },
         }));
         return {
           ...measures,
@@ -55,8 +66,9 @@ export const BodySectionLegs = ({
                   metricName,
 
                   ...value,
-                  measure_evolution:
-                    evolution?.metrics[metricName].measure_evolution,
+                  measure_evolution: {
+                    ...evolution?.metrics[metricName].measure_evolution,
+                  },
                 },
               ]
             : [
@@ -64,8 +76,9 @@ export const BodySectionLegs = ({
                   metricName,
 
                   ...value,
-                  measure_evolution:
-                    evolution?.metrics[metricName].measure_evolution,
+                  measure_evolution: {
+                    ...evolution?.metrics[metricName].measure_evolution,
+                  },
                 },
               ],
         };
@@ -80,15 +93,17 @@ export const BodySectionLegs = ({
                   metricValue: {
                     left: {
                       ...value.left,
-                      measure_evolution:
-                        evolution?.metrics[`${metricName}Left`]
+                      measure_evolution: {
+                        ...evolution?.metrics[`${metricName}Left`]
                           .measure_evolution,
+                      },
                     },
                     right: {
                       ...value.right,
-                      measure_evolution:
-                        evolution?.metrics[`${metricName}Right`]
+                      measure_evolution: {
+                        ...evolution?.metrics[`${metricName}Right`]
                           .measure_evolution,
+                      },
                     },
                   },
                 },
@@ -99,15 +114,17 @@ export const BodySectionLegs = ({
                   metricValue: {
                     left: {
                       ...value.left,
-                      measure_evolution:
-                        evolution?.metrics[`${metricName}Left`]
+                      measure_evolution: {
+                        ...evolution?.metrics[`${metricName}Left`]
                           .measure_evolution,
+                      },
                     },
                     right: {
                       ...value.right,
-                      measure_evolution:
-                        evolution?.metrics[`${metricName}Right`]
+                      measure_evolution: {
+                        ...evolution?.metrics[`${metricName}Right`]
                           .measure_evolution,
+                      },
                     },
                   },
                 },
@@ -133,7 +150,20 @@ export const BodySectionLegs = ({
         gap={16}
       >
         <Stack flex={"1 0 0"}>
-          <Title order={4}>Pierna Izquierda</Title>
+          <Group justify="space-between" align="center" h={36}>
+            <Title order={4}>Pierna Izquierda</Title>
+            {
+            ((isMobileSM || isMobileLG) && showSwitch) ? 
+            <Switch
+            size="xl"
+            checked={isEvolutionFromFirstToLast} 
+            onChange={() => handleToggle()} 
+            onLabel={<Text size="xs" c="dark.7" fw={600} px={4}>Completa</Text>} 
+            offLabel={<Text size="xs" fw={600} px={4}>Actual</Text>} 
+            /> : 
+            null
+            }
+          </Group>
           {legMeasures.left_leg.map((value: Measure, index: number) => (
             <MeasureCard
               key={`${value.metricName}-${index}`}
@@ -142,11 +172,32 @@ export const BodySectionLegs = ({
               measureUnit={value.measure_uom}
               measureStatus={value.measure_status}
               evolutionValue={value.evolution}
+              isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
           ))}
         </Stack>
         <Stack flex={"1 0 0"}>
-          <Title order={4}>Pierna Derecha</Title>
+          <Group justify="space-between" align="center" h={36}>
+            <Title order={4}>Pierna Derecha</Title>
+            {
+              ((isMobileMD || isMobileXL) && showSwitch) ? 
+              <Switch
+                size="xl"
+                checked={isEvolutionFromFirstToLast}
+                onChange={() => handleToggle()}
+                onLabel={
+                  <Text size="xs" c="dark.7" fw={600} px={4}>
+                    Completa
+                  </Text>
+                }
+                offLabel={
+                  <Text size="xs" fw={600} px={4}>
+                    Actual
+                  </Text>
+                }
+              />
+            : null}
+          </Group>
           {legMeasures.right_leg.map((value: Measure, index: number) => (
             <MeasureCard
               key={`${value.metricName}-${index}`}
@@ -155,6 +206,7 @@ export const BodySectionLegs = ({
               measureUnit={value.measure_uom}
               measureStatus={value.measure_status}
               evolutionValue={value.evolution}
+              isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
             />
           ))}
         </Stack>
@@ -169,25 +221,26 @@ export const BodySectionLegs = ({
                 measureTitle={`${value.metricName}`}
                 measureValue={value.measure_value}
                 measureUnit={value.measure_uom}
-                evolutionValue={value.evolution}
+                evolutionValue={value.measure_evolution}
+                isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
               />
             );
           } else {
             return (
-              <Stack gap={16}>
+              <Stack gap={16} key={`${value.metricName}Stack-${index}`}>
                 <CircumferenceCard
-                  key={`${value.metricName}Left-${index}`}
                   measureTitle={`${value.metricName}Left`}
                   measureValue={value.metricValue.left.measure_value}
                   measureUnit={value.metricValue.left.measure_uom}
-                  evolutionValue={value.metricValue.left.evolution}
+                  evolutionValue={value.metricValue.left.measure_evolution}
+                  isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
                 />
                 <CircumferenceCard
-                  key={`${value.metricName}Right-${index}`}
                   measureTitle={`${value.metricName}Right`}
                   measureValue={value.metricValue.right.measure_value}
                   measureUnit={value.metricValue.right.measure_uom}
-                  evolutionValue={value.metricValue.right.evolution}
+                  evolutionValue={value.metricValue.right.measure_evolution}
+                  isEvolutionFromFirstToLast={isEvolutionFromFirstToLast}
                 />
               </Stack>
             );
