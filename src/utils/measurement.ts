@@ -584,7 +584,7 @@ export const getCategoryColoBySection = (section: string): string => {
 
 export enum FFMIStatus {
   AVERAGE = "Normal",
-  SKINNY = "Flaco",
+  SKINNY = "Delgado",
   FAT = "Sobrepeso",
   ATHLETE = "Atlético",
   ADVANCED = "Avanzado",

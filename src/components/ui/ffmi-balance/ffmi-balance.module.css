@@ -19,6 +19,7 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
+  margin-bottom: 4px;
 }
 
 .label {
@@ -64,6 +65,25 @@
     var(--mantine-color-violet-5) 100%
   );
   border-radius: 4px;
+  border: 0;
+}
+
+.meter::-webkit-meter-bar {
+  background: linear-gradient(
+    to right,
+    var(--mantine-color-violet-5) 0%,
+    var(--mantine-color-red-5) 20%,
+    var(--mantine-color-orange-4) 40%,
+    var(--mantine-color-lime-5) 60%,
+    var(--mantine-color-cyan-5) 80%,
+    var(--mantine-color-violet-5) 100%
+  );
+  border: none;
+  border-radius: 4px;
+}
+
+.meter::-webkit-meter-optimum-value {
+  background: transparent;
 }
 
 .meter::after {
