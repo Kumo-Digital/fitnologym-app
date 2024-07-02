@@ -1,11 +1,11 @@
-import { Box, em } from "@mantine/core";
-import Image from "next/image";
-import maleBodyImage from "../../../../public/assets/images/body/male-body.png";
-import femaleBodyImage from "../../../../public/assets/images/body/female-body.png";
-import { MaleBodyOutlines } from "@/components/ui/body-model/male-body-outlines";
 import { FemaleBodyOutlines } from "@/components/ui/body-model/female-body-outlines";
-import { brandFloorImages } from "./body-model.data";
+import { MaleBodyOutlines } from "@/components/ui/body-model/male-body-outlines";
+import { Box, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import Image from "next/image";
+import femaleBodyImage from "../../../../public/assets/images/body/female-body.png";
+import maleBodyImage from "../../../../public/assets/images/body/male-body.png";
+import { brandFloorImages } from "./body-model.data";
 
 interface BodySectionsProps {
   gender: "female" | "male";
@@ -35,9 +35,9 @@ export const BodyModel = ({
         <Box
           id="brand-floor"
           pos="absolute"
-          w={`calc(100% - ${isMobile ? 32 : 128}px)`}
-          h={`calc(100% - ${isMobile ? 32 : 128}px)`}
-          bottom={`${isMobileLG ? -26 : -32}%`}
+          w={`calc(100% - ${isMobile ? 38 : 128}px)`}
+          h={`calc(100% - ${isMobile ? 38 : 128}px)`}
+          bottom={`${isMobile ? -37 : -30}%`}
           left={isMobile ? 16 : 64}
           style={{
             perspective: "50cm",
