@@ -758,6 +758,10 @@ export const getRemainingPercentage = (
   currentValue: number,
   targetValue: number
 ) => {
+  if (currentValue === 0 || targetValue === 0) {
+    return 0;
+  }
+
   if (currentValue < targetValue) {
     return (currentValue / targetValue) * 100;
   } else {

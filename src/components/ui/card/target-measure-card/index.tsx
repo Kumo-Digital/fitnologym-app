@@ -81,9 +81,19 @@ export const TargetMeasureCard = ({
             </Group>
           </Stack>
           <RingProgress
-            sections={[{ value: Math.round(evolutionValue), color: "lime" }]}
+            sections={[
+              {
+                value: Math.round(evolutionValue),
+                color: evolutionValue === 0 ? "gray" : "lime",
+              },
+            ]}
             label={
-              <Text c="lime.5" fw={700} ta="center" size="xl">
+              <Text
+                c={evolutionValue === 0 ? "gray.5" : "lime.5"}
+                fw={700}
+                ta="center"
+                size="xl"
+              >
                 {evolutionValue ? Math.round(evolutionValue) : "-"}
               </Text>
             }
