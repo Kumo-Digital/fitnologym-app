@@ -1,6 +1,5 @@
 import { Stack } from "@mantine/core";
 import BodySectionBalance from "./body-section-balance";
-import FFMIBalance from "@/components/ui/ffmi-balance";
 
 type ValueProps = {
   armsValue: number;
@@ -14,7 +13,6 @@ interface BodyBalanceProps {
 }
 
 const BodyBalance = ({
-  ffmiValue = 16,
   bodyFat = { armsValue: 0, legsValue: 0 },
   muscleMass = { armsValue: 0, legsValue: 0 },
 }: BodyBalanceProps) => {

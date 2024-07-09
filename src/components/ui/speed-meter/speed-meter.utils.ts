@@ -1,7 +1,7 @@
 export const mapRange = (
   value: number,
-  min: number = -30,
-  max: number = 30,
+  min: number = -150,
+  max: number = 150,
   outMin: number = -115, // Min needle movement
   outMax: number = 115 // Max needle movement
 ): number => {
