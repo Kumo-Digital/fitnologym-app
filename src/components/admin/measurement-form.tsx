@@ -974,7 +974,7 @@ export default function MeasurementForm({
                             min={0}
                             rightSection={
                               <Text c="gray.6" size="sm" fw={500} pr={12}>
-                                Lts
+                                %
                               </Text>
                             }
                             onClick={(e) => autoSelectFieldValue(e.target)}
