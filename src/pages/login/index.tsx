@@ -1,28 +1,28 @@
-import * as Yup from "yup";
-import {
-  TextInput,
-  PasswordInput,
-  Button,
-  Title,
-  Text,
-  em,
-  Stack,
-} from "@mantine/core";
-import classes from "./index.module.css";
-import { withAuthLayout } from "@/utils/layouts";
-import { Formik } from "formik";
-import { until } from "@open-draft/until";
-import { loginUser } from "@/services/auth";
-import { useRouter } from "next/router";
-import { notifications } from "@mantine/notifications";
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { validateRequest } from "@/lib/auth";
-import { User } from "@/types/user";
-import Head from "next/head";
 import { appUrls } from "@/lib/appUrls";
-import Image from "next/image";
-import { useMediaQuery } from "@mantine/hooks";
+import { validateRequest } from "@/lib/auth";
+import { loginUser } from "@/services/auth";
+import { User } from "@/types/user";
 import { APP_VERSION } from "@/utils/constants";
+import { withAuthLayout } from "@/utils/layouts";
+import {
+  Button,
+  em,
+  PasswordInput,
+  Stack,
+  Text,
+  TextInput,
+  Title,
+} from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
+import { until } from "@open-draft/until";
+import { Formik } from "formik";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import * as Yup from "yup";
+import classes from "./index.module.css";
 
 interface InitialValues {
   email: string;
@@ -75,7 +75,12 @@ const Login = () => {
             // remember: Yup.boolean(),
           })}
           onSubmit={async (values, actions) => {
-            const { data, error } = await until(() => loginUser(values));
+            const { data, error } = await until(() =>
+              loginUser({
+                ...values,
+                email: values.email.toLowerCase(),
+              })
+            );
 
             if (data) {
               actions.setSubmitting(false);
@@ -168,9 +173,16 @@ const Login = () => {
                     </Button>
                   </form>
                 </Stack>
-                <Stack align="center" style={{flexGrow: 1}} justify="flex-end">
+                <Stack
+                  align="center"
+                  style={{ flexGrow: 1 }}
+                  justify="flex-end"
+                >
                   <Text size="xs">
-                    versión <Text style={{ fontWeight: 700 }} component="span">{APP_VERSION}</Text>
+                    versión{" "}
+                    <Text style={{ fontWeight: 700 }} component="span">
+                      {APP_VERSION}
+                    </Text>
                   </Text>
                 </Stack>
                 {/* <Text ta="center" mt="md">
