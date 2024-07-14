@@ -272,7 +272,7 @@ export const BONE_MASS_BODY_WATER_STATUS_COLORS = ["blue", "lime", "red"];
 export const MUSCLE_QUALITY_STATUS_VALUES = [
   {
     value: "1",
-    label: "Bajo",
+    label: "Bajo Rango",
   },
   {
     value: "2",
@@ -280,11 +280,11 @@ export const MUSCLE_QUALITY_STATUS_VALUES = [
   },
   {
     value: "3",
-    label: "Muscular",
+    label: "Atletico",
   },
 ];
 
-export const MUSCLE_QUALITY_STATUS_COLORS = ["blue", "lime", "red"];
+export const MUSCLE_QUALITY_STATUS_COLORS = ["red", "lime", "blue"];
 
 export const BMI_STATUS_DESCRIPTION =
   "El IMC es un indicador de sus niveles de grasa, músculo y hueso:";
