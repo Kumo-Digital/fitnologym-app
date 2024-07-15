@@ -62,7 +62,7 @@ export const prepareMeasurementForInsert = (
         measure_status: payload.metabAgeStatus ?? 0,
       },
       body_water: {
-        measure_uom: MEASUREMENT_UNITS.LITERS,
+        measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
         measure_value: payload.bodyWater ?? null,
         measure_status: payload.bodyWaterStatus ?? 2,
       },
