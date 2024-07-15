@@ -1,6 +1,9 @@
 import * as Yup from "yup";
 import { FFMIStatus } from "./measurement";
 
+const getKeyByValue = (object: { [key: string]: string }, value: string): string | undefined => 
+  Object.keys(object).find(key => object[key] === value);
+
 export const measurementFormInitialValues = {
   user_id: "",
   report_url: "",
@@ -28,7 +31,7 @@ export const measurementFormInitialValues = {
   physiqueRating: 0,
   physiqueRatingStatus: "2",
   ffmi: 17,
-  ffmiStatus: FFMIStatus.AVERAGE,
+  ffmiStatus: getKeyByValue(FFMIStatus, FFMIStatus.AVERAGE),
   trunkMuscleMass: 0,
   trunkMuscleMassStatus: "2",
   trunkMuscleQuality: 0,
