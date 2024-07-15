@@ -30,6 +30,7 @@ import {
 } from "@/utils/admin";
 import {
   FFMIStatus,
+  FFMIStatusValue,
   measurementFormValidationSchema,
   prepareMeasurementForEditForm,
 } from "@/utils/measurement";
@@ -228,7 +229,7 @@ const renderSelectOptionSegmented: SelectProps["renderOption"] = ({
 const getFFMIEnumOptions = (enumObj: any) => {
   return Object.keys(enumObj).map((key) => ({
     value: key,
-    label: enumObj[key],
+    label: FFMIStatusValue[key],
   }));
 };
 
