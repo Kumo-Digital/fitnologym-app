@@ -1,18 +1,16 @@
-import { useState } from "react";
 import classes from "./body-model.module.css";
 
 interface FemaleBodyOutlinesProps {
   onSectionSelect: (section: string) => void;
   props?: any;
+  selectedSection: string;
 }
 
 export const FemaleBodyOutlines = ({
   onSectionSelect,
+  selectedSection,
 }: FemaleBodyOutlinesProps) => {
-  const [selectedSection, setSelectedSection] = useState<string | null>(null);
-
   const handleSectionSelect = (section: string) => {
-    setSelectedSection(section);
     onSectionSelect(section);
   };
 

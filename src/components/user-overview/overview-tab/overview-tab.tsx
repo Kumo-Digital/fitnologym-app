@@ -1,9 +1,11 @@
 import { BodyModel } from "@/components/ui/body-model/body-model";
+import FFMIBalance from "@/components/ui/ffmi-balance";
 import {
   useCalculateEvolution,
   useCalculateEvolutionFromFirstToLast,
   useUniqueLastMeasure,
 } from "@/hooks/measurements";
+import { useUniqueReports } from "@/hooks/reports";
 import { Evolution } from "@/types/measurements";
 import { User } from "@/types/user";
 import { FFMI_STATUS_VALUES_COLORS } from "@/utils/admin";
@@ -11,7 +13,6 @@ import { FFMIStatus, getBalancePercentage } from "@/utils/measurement";
 import {
   Badge,
   Blockquote,
-  Box,
   em,
   Flex,
   Group,
@@ -31,8 +32,6 @@ import { BodySectionOverview } from "./body-section-overview";
 import { BodySectionTorso } from "./body-section-torso";
 import OverviewTabEmpty from "./overview-tab-empty";
 import { OverviewTabSkeleton } from "./overview-tab-skeleton";
-import { useUniqueReports } from "@/hooks/reports";
-import FFMIBalance from "@/components/ui/ffmi-balance";
 
 interface OverviewTabProps {
   user: User;
@@ -163,7 +162,11 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
             </Group>
           </Blockquote>
         )}
-        <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
+        <BodyModel
+          gender={user.gender}
+          onSectionSelect={onSectionSelect}
+          selectedSection={selectedBodySection}
+        />
         {!isMobileSM && (
           <Stack p={16}>
             <FFMIBalance
