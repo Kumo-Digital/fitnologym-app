@@ -13,3 +13,9 @@ export const updateMeasurement = async (payload: MeasurementFormValues) => {
 
   return data;
 };
+
+export const deleteMeasurement = async (id: string) => {
+  const { data } = await apiClient.delete(apiUrls.measurements.delete(id));
+
+  return data;
+};

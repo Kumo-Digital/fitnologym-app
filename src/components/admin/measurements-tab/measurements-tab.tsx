@@ -5,25 +5,45 @@ import { useUsers } from "@/hooks/users";
 import { Measurement } from "@/types/measurements";
 import { parseDate } from "@/utils/utils";
 import {
+  ActionIcon,
   Button,
   Container,
   Group,
+  Menu,
   Stack,
   Table,
   Text,
   em,
+  rem,
+  useMantineTheme,
 } from "@mantine/core";
-import { IconClipboardList, IconPlus } from "@tabler/icons-react";
-import Link from "next/link";
+import {
+  IconClipboardList,
+  IconDotsVertical,
+  IconEdit,
+  IconPlus,
+  IconTrash,
+} from "@tabler/icons-react";
 import { useState } from "react";
 import MeasurementTabSkeleton from "./measurement-tab-skeleton";
 import { useRouter } from "next/router";
 import { appUrls } from "@/lib/appUrls";
 import { useMediaQuery } from "@mantine/hooks";
 import Empty from "@/components/ui/empty/empty";
+import { modals } from "@mantine/modals";
+import { until } from "@open-draft/until";
+import { notifications } from "@mantine/notifications";
+import { deleteMeasurement } from "@/services/measurements";
 
-const getRows = (measurements: Measurement[], users: any, gyms: any) =>
-  measurements.map((measure, index) => {
+const getRows = (
+  measurements: Measurement[],
+  users: any,
+  gyms: any,
+  refetch?: any
+) => {
+  const theme = useMantineTheme();
+
+  return measurements.map((measure, index) => {
     const user = users?.find((user: any) => user._id === measure.user_id);
     const gym = gyms?.find((gym: any) => gym.id === user.gym_id);
 
@@ -48,15 +68,84 @@ const getRows = (measurements: Measurement[], users: any, gyms: any) =>
           </Text>
         </Table.Td>
         <Table.Td>
-          <Link href={`/admin/measurements/edit/${measure._id}`}>
-            <Text c="lime.5" fw={600} size="sm">
-              Editar
-            </Text>
-          </Link>
+          <Menu shadow="md" width={200}>
+            <Menu.Target>
+              <ActionIcon title="Opciones de Medida" variant="subtle">
+                <IconDotsVertical
+                  color={theme.colors.gray[6]}
+                  aria-label="Options"
+                  size={16}
+                />
+              </ActionIcon>
+            </Menu.Target>
+            <MeasurementMenuDropdown
+              measureId={measure._id}
+              refetch={refetch}
+            />
+          </Menu>
         </Table.Td>
       </Table.Tr>
     );
   });
+};
+
+const MeasurementMenuDropdown = ({
+  measureId,
+  refetch,
+}: {
+  measureId: string;
+  refetch: () => void;
+}) => {
+  const { push } = useRouter();
+
+  const measurementDeleteModal = () =>
+    modals.openConfirmModal({
+      title: "Eliminar Medida",
+      labels: { confirm: "Eliminar", cancel: "Cancel" },
+      confirmProps: { color: "red" },
+      centered: true,
+      children: (
+        <Text size="sm">
+          Estás seguro que quieres borrar esta medida? Esta acción no tiene
+          recuperación.
+        </Text>
+      ),
+      onConfirm: async () => {
+        const { error } = await until(() => deleteMeasurement(measureId));
+
+        if (error)
+          notifications.show({
+            title: "Eliminar Medida",
+            message:
+              "Hubo un error borrando la medida, por favor intente de nuevo.",
+            color: "red",
+          });
+
+        refetch();
+      },
+      onCancel: () => modals.closeAll(),
+    });
+
+  return (
+    <Menu.Dropdown>
+      <Menu.Item
+        leftSection={<IconEdit style={{ width: rem(14), height: rem(14) }} />}
+        onClick={() => push(appUrls.measurements.edit(measureId))}
+      >
+        Editar Medición
+      </Menu.Item>
+
+      <Menu.Divider />
+      <Menu.Item
+        color="red"
+        leftSection={<IconTrash style={{ width: rem(14), height: rem(14) }} />}
+        onClick={() => measurementDeleteModal()}
+      >
+        Borrar Medida
+      </Menu.Item>
+    </Menu.Dropdown>
+  );
+};
 
 const sortOptions = [
   { value: "name", label: "Nombre de Usuario" },
@@ -69,7 +158,11 @@ const MeasurementsTab = () => {
   const { push } = useRouter();
   const { users, isLoading } = useUsers({ but: "admins" });
   const { gyms, isLoading: isLoadingGyms } = useGyms();
-  const { measurements, isLoading: isLoadingMeasurements } = useMeasurements();
+  const {
+    measurements,
+    isLoading: isLoadingMeasurements,
+    refetch,
+  } = useMeasurements();
 
   const [searchInput, setSearchInput] = useState<string>("");
   const [sortInput, setSortInput] = useState<string>("date");
@@ -159,7 +252,7 @@ const MeasurementsTab = () => {
                 </Table.Tr>
               </Table.Thead>
               <Table.Tbody>
-                {getRows(filteredMeasurements, users, gyms)}
+                {getRows(filteredMeasurements, users, gyms, refetch)}
               </Table.Tbody>
             </Table>
           </Table.ScrollContainer>
