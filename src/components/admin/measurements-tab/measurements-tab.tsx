@@ -113,14 +113,21 @@ const MeasurementMenuDropdown = ({
       onConfirm: async () => {
         const { error } = await until(() => deleteMeasurement(measureId));
 
-        if (error)
+        if (error) {
           notifications.show({
             title: "Eliminar Medida",
             message:
               "Hubo un error borrando la medida, por favor intente de nuevo.",
             color: "red",
           });
+          return;
+        }
 
+        notifications.show({
+          title: "Eliminar Medida",
+          message: "La medida ha sido borrada exitosamente.",
+          color: "green",
+        });
         refetch();
       },
       onCancel: () => modals.closeAll(),
