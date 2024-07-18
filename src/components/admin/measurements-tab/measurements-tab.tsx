@@ -39,9 +39,9 @@ const getRows = (
   measurements: Measurement[],
   users: any,
   gyms: any,
-  refetch?: any
+  refetch?: any,
+  iconColor?: any,
 ) => {
-  const theme = useMantineTheme();
 
   return measurements.map((measure, index) => {
     const user = users?.find((user: any) => user._id === measure.user_id);
@@ -72,7 +72,7 @@ const getRows = (
             <Menu.Target>
               <ActionIcon title="Opciones de Medida" variant="subtle">
                 <IconDotsVertical
-                  color={theme.colors.gray[6]}
+                  color={iconColor}
                   aria-label="Options"
                   size={16}
                 />
@@ -171,6 +171,8 @@ const MeasurementsTab = () => {
     refetch,
   } = useMeasurements();
 
+  const theme = useMantineTheme();
+
   const [searchInput, setSearchInput] = useState<string>("");
   const [sortInput, setSortInput] = useState<string>("date");
 
@@ -259,7 +261,7 @@ const MeasurementsTab = () => {
                 </Table.Tr>
               </Table.Thead>
               <Table.Tbody>
-                {getRows(filteredMeasurements, users, gyms, refetch)}
+                {getRows(filteredMeasurements, users, gyms, refetch, theme.colors.gray[6])}
               </Table.Tbody>
             </Table>
           </Table.ScrollContainer>
