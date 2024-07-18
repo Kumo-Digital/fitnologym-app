@@ -22,6 +22,8 @@ import {
   SEGMENTED_STATUS_DESCRIPTION,
   STATUS_COLORS,
   STATUS_VALUES,
+  STATUS_VALUES_WITHOUT_OBESITY,
+  STATUS_VALUES_WITHOUT_OBESITY_COLORS,
   VISC_FAT_STATUS_COLORS,
   VISC_FAT_STATUS_DESCRIPTION,
   VISC_FAT_STATUS_VALUES,
@@ -30,7 +32,7 @@ import {
   WEIGHT_STATUS_VALUES,
 } from "@/utils/admin";
 import { circumferenceMeasures } from "@/utils/utils";
-import { Box, Text, useMantineTheme } from "@mantine/core";
+import { Box, SimpleGrid, Text, Title, useMantineTheme } from "@mantine/core";
 import Image from "next/image";
 import qualityMuscle from "../../../../../public/assets/images/quality-muscle.png";
 
@@ -194,20 +196,49 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
       return (
         <Box>
           <Text mb={10}>{BODY_FAT_DESCRIPTION}</Text>
-          {BODY_FAT_STATUS_VALUES.map((item, index) => (
-            <Box key={index} display="flex" mb={5}>
-              <Box
-                bg={theme.colors[BODY_FAT_STATUS_COLORS[index]][6]}
-                w={20}
-                h={20}
-                mr={10}
-                style={{
-                  borderRadius: "50%",
-                }}
-              />
-              <Text>{item.label}</Text>
-            </Box>
-          ))}
+          <SimpleGrid cols={2}>
+            <div>
+              <Title order={6} mb={25}>
+                Generales
+              </Title>
+              {STATUS_VALUES_WITHOUT_OBESITY.map((item, index) => (
+                <Box key={index} display="flex" mb={5}>
+                  <Box
+                    bg={
+                      theme.colors[
+                        STATUS_VALUES_WITHOUT_OBESITY_COLORS[index]
+                      ][6]
+                    }
+                    w={20}
+                    h={20}
+                    mr={10}
+                    style={{
+                      borderRadius: "50%",
+                    }}
+                  />
+                  <Text>{item.label}</Text>
+                </Box>
+              ))}
+            </div>
+            <div>
+              <Title order={6}>Segmentados</Title>{" "}
+              <Title order={6} mb={5}>
+                ( Torso,Brazos,Piernas)
+              </Title>{" "}
+              {BODY_FAT_STATUS_VALUES.map((item, index) => (
+                <Box key={index} display="flex" mb={5}>
+                  <Box
+                    bg={theme.colors[BODY_FAT_STATUS_COLORS[index]][6]}
+                    w={20}
+                    h={20}
+                    mr={10}
+                    style={{ borderRadius: "50%" }}
+                  />
+                  <Text>{item.label}</Text>
+                </Box>
+              ))}
+            </div>
+          </SimpleGrid>
         </Box>
       );
 
