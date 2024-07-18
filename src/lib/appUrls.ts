@@ -6,6 +6,7 @@ export const appUrls = {
   userDetails: (gymId: string, userId: string) => `/${gymId}/${userId}`,
   measurements: {
     new: "/admin/measurements/new",
+    edit: (id: string) => `/admin/measurements/edit/${id}`,
   },
   user: {
     my_profile: "/my-profile",

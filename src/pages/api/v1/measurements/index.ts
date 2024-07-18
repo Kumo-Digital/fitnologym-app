@@ -13,7 +13,8 @@ export default async function handler(
       const measurementService = new MeasurementService();
       const measurements = await measurementService.getAll();
 
-      if (!measurements) res.status(404).json({ message: "Measurements not found" });
+      if (!measurements)
+        res.status(404).json({ message: "Measurements not found" });
       res.status(200).json(measurements);
     } catch (e) {
       console.error(e);
@@ -24,9 +25,11 @@ export default async function handler(
     try {
       await connectDB();
       const measurementService = new MeasurementService();
-      
+
       const preparedMeasurement = prepareMeasurementForInsert(req.body);
-      const newMeasurement = await measurementService.createMeasurement(preparedMeasurement);
+      const newMeasurement = await measurementService.createMeasurement(
+        preparedMeasurement
+      );
 
       if (!newMeasurement)
         return res.status(400).json({ message: "Measurement was not created" });
@@ -41,14 +44,38 @@ export default async function handler(
     try {
       await connectDB();
       const measurementService = new MeasurementService();
-      
+
       const preparedMeasurement = prepareMeasurementForInsert(req.body);
-      const updatedMeasurement = await measurementService.updateMeasurement(preparedMeasurement, req.body._id);
+      const updatedMeasurement = await measurementService.updateMeasurement(
+        preparedMeasurement,
+        req.body._id
+      );
 
       if (!updatedMeasurement)
         return res.status(400).json({ message: "Measurement was not updated" });
 
       return res.status(200).json(updatedMeasurement);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  if (req.method === "DELETE") {
+    if (!req.body.id) {
+      return res.status(400).json({ message: "Measurement ID is required" });
+    }
+
+    try {
+      await connectDB();
+      const measurementService = new MeasurementService();
+      const deletedMeasurement = await measurementService.deleteMeasurement(
+        req.body.id
+      );
+
+      if (!deletedMeasurement)
+        return res.status(400).json({ message: "Measurement was not deleted" });
+
+      return res.status(200).json(deletedMeasurement);
     } catch (e) {
       console.error(e);
     }

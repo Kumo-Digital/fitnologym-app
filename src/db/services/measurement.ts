@@ -17,15 +17,15 @@ class MeasurementService {
 
   async getMeasurementsByUser(userId: string): Promise<IMeasurement[]> {
     const measurements = await MeasurementModel.find(
-    {
-      user_id: userId,
-    },
-    {},
-    {
-      sort: {
-        date: -1,
+      {
+        user_id: userId,
       },
-    }
+      {},
+      {
+        sort: {
+          date: -1,
+        },
+      }
     );
 
     return measurements;
@@ -101,6 +101,17 @@ class MeasurementService {
         MeasurementData
       );
       return updatedMeasurement;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async deleteMeasurement(measurementId: string): Promise<any> {
+    try {
+      const deletedMeasurement = await MeasurementModel.findOneAndDelete({
+        _id: measurementId,
+      });
+      return deletedMeasurement;
     } catch (error) {
       return error;
     }
