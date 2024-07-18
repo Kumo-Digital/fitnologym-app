@@ -11,12 +11,14 @@ interface BodySectionsProps {
   gender: "female" | "male";
   gymName?: string;
   onSectionSelect: (section: string) => void;
+  selectedSection: string;
 }
 
 export const BodyModel = ({
   gender,
   onSectionSelect,
   gymName = "default",
+  selectedSection,
 }: BodySectionsProps) => {
   const isMobile = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
@@ -99,10 +101,16 @@ export const BodyModel = ({
         >
           <>
             {gender === "male" && (
-              <MaleBodyOutlines onSectionSelect={onSectionSelect} />
+              <MaleBodyOutlines
+                onSectionSelect={onSectionSelect}
+                selectedSection={selectedSection}
+              />
             )}
             {gender === "female" && (
-              <FemaleBodyOutlines onSectionSelect={onSectionSelect} />
+              <FemaleBodyOutlines
+                onSectionSelect={onSectionSelect}
+                selectedSection={selectedSection}
+              />
             )}
           </>
         </Box>

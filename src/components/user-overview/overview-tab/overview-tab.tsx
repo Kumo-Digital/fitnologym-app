@@ -163,7 +163,11 @@ const OverviewTab = ({ user }: OverviewTabProps) => {
             </Group>
           </Blockquote>
         )}
-        <BodyModel gender={user.gender} onSectionSelect={onSectionSelect} />
+        <BodyModel
+          gender={user.gender}
+          onSectionSelect={onSectionSelect}
+          selectedSection={selectedBodySection}
+        />
         {!isMobileSM && (
           <Stack p={16}>
             <FFMIBalance
