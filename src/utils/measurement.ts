@@ -5,6 +5,10 @@ import { generateId } from "lucia";
 import * as Yup from "yup";
 import { MEASUREMENT_UNITS } from "./constants";
 
+const getEnumKeyByValue = (enumObj: any, value: string): string => {
+  return Object.keys(enumObj).find(key => enumObj[key] === value) as string;
+};
+
 export const prepareMeasurementForInsert = (
   payload: MeasurementFormValues
 ): IMeasurement => {
@@ -62,7 +66,7 @@ export const prepareMeasurementForInsert = (
         measure_status: payload.metabAgeStatus ?? 0,
       },
       body_water: {
-        measure_uom: MEASUREMENT_UNITS.LITERS,
+        measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
         measure_value: payload.bodyWater ?? null,
         measure_status: payload.bodyWaterStatus ?? 2,
       },
@@ -261,10 +265,8 @@ export const prepareMeasurementForEditForm = (
     physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
     ffmi: payload.metrics.ffmi.measure_value || 0,
     ffmiStatus:
-      payload.metrics.ffmi.measure_status ||
-      Object.keys(FFMIStatus)[
-        Object.values(FFMIStatus).indexOf(FFMIStatus.AVERAGE)
-      ],
+      payload.metrics.ffmi.measure_status || 
+      getEnumKeyByValue(FFMIStatus, FFMIStatus.AVERAGE),
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
     trunkMuscleMassStatus:
       payload.metrics.trunk.muscle_mass.measure_status || 2,
@@ -591,6 +593,15 @@ export enum FFMIStatus {
   BODYBUILDER = "Bodybuilder",
 }
 
+export const FFMIStatusValue: {[key: string]: string} = {
+  'AVERAGE': 'Normal',
+  'SKINNY': 'Delgado',
+  'FAT': 'Sobrepeso',
+  'ATHLETE': 'Atlético',
+  'ADVANCED': 'Avanzado',
+  'BODYBUILDER': 'Bodybuilder',
+}
+
 export type FFMIStatusColor = {
   label: FFMIStatus;
   color: string;
@@ -758,6 +769,10 @@ export const getRemainingPercentage = (
   currentValue: number,
   targetValue: number
 ) => {
+  if (currentValue === 0 || targetValue === 0) {
+    return 0;
+  }
+
   if (currentValue < targetValue) {
     return (currentValue / targetValue) * 100;
   } else {

@@ -11,7 +11,7 @@ interface OverviewTabProps {
 
 const CarouselCards = ({ user }: OverviewTabProps) => {
   const { lastMeasure } = useUniqueLastMeasure(user._id);
-  const metrics = lastMeasure.metrics;
+  const metrics = lastMeasure?.metrics || [];
 
   const filteredMetrics = [
     "left_leg",
@@ -39,37 +39,36 @@ const CarouselCards = ({ user }: OverviewTabProps) => {
 
   const autoplay = useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
 
+  if (metrics.length === 0) return <></>;
   return (
-    <div className="container m-10 mx-auto max-w-4xl">
-      <Carousel
-        loop
-        withControls
-        plugins={[autoplay.current]}
-        onMouseEnter={autoplay.current.stop}
-        onMouseLeave={autoplay.current.reset}
-      >
-        {slides.map((slide, index) => (
-          <Carousel.Slide
-            key={index}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            p={0}
-            my={10}
-          >
-            <MeasureCard
-              measureTitle={slide.metricName}
-              measureValue={slide.measureValue}
-              measureUnit={slide.measureUnit}
-              evolutionValue={slide.evolutionValue}
-              measureStatus={slide.measureStatus}
-            />
-          </Carousel.Slide>
-        ))}
-      </Carousel>
-    </div>
+    <Carousel
+      loop
+      withControls
+      plugins={[autoplay.current]}
+      onMouseEnter={autoplay.current.stop}
+      onMouseLeave={autoplay.current.reset}
+    >
+      {slides.map((slide, index) => (
+        <Carousel.Slide
+          key={index}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          p={0}
+          my={10}
+        >
+          <MeasureCard
+            measureTitle={slide.metricName}
+            measureValue={slide.measureValue}
+            measureUnit={slide.measureUnit}
+            evolutionValue={slide.evolutionValue}
+            measureStatus={slide.measureStatus}
+          />
+        </Carousel.Slide>
+      ))}
+    </Carousel>
   );
 };
 

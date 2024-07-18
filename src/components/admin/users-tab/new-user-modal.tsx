@@ -66,12 +66,19 @@ const NewUserModal = ({ close, gyms, refetch }: NewUserModalProps) => {
       initialValues={newUserInitialValues}
       validationSchema={newUserFormValidationSchema}
       onSubmit={async (values) => {
-        const { data, error } = await until(() => createUser(values));
+        const { data, error } = await until(() =>
+          createUser({
+            ...values,
+            email: values.email.toLowerCase(),
+          })
+        );
 
         if (error instanceof AxiosError) {
           notifications.show({
             title: "Error",
-            message: error.response?.data?.message ?? "Ocurrió un error al crear el usuario",
+            message:
+              error.response?.data?.message ??
+              "Ocurrió un error al crear el usuario",
             color: "red",
           });
           close();

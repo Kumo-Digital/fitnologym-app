@@ -30,6 +30,7 @@ import {
 } from "@/utils/admin";
 import {
   FFMIStatus,
+  FFMIStatusValue,
   measurementFormValidationSchema,
   prepareMeasurementForEditForm,
 } from "@/utils/measurement";
@@ -228,7 +229,7 @@ const renderSelectOptionSegmented: SelectProps["renderOption"] = ({
 const getFFMIEnumOptions = (enumObj: any) => {
   return Object.keys(enumObj).map((key) => ({
     value: key,
-    label: enumObj[key],
+    label: FFMIStatusValue[key],
   }));
 };
 
@@ -974,7 +975,7 @@ export default function MeasurementForm({
                             min={0}
                             rightSection={
                               <Text c="gray.6" size="sm" fw={500} pr={12}>
-                                Lts
+                                %
                               </Text>
                             }
                             onClick={(e) => autoSelectFieldValue(e.target)}

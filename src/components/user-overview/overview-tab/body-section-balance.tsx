@@ -1,5 +1,5 @@
 import SpeedMeter from "@/components/ui/speed-meter";
-import { Text, Card, Stack, Group, Flex, em } from "@mantine/core";
+import { Text, Card, Stack, Flex, em } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import React from "react";
 
