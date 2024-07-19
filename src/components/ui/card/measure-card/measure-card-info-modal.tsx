@@ -32,7 +32,15 @@ import {
   WEIGHT_STATUS_VALUES,
 } from "@/utils/admin";
 import { circumferenceMeasures } from "@/utils/utils";
-import { Box, SimpleGrid, Text, Title, useMantineTheme } from "@mantine/core";
+import {
+  Box,
+  em,
+  SimpleGrid,
+  Text,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import Image from "next/image";
 import qualityMuscle from "../../../../../public/assets/images/quality-muscle.png";
 
@@ -46,7 +54,7 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
   const theme = useMantineTheme();
 
   const isCircumferenceMeasure = circumferenceMeasures.includes(measureTitle);
-
+  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
   if (isCircumferenceMeasure) {
     return (
       <Box>
@@ -196,7 +204,7 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
       return (
         <Box>
           <Text mb={10}>{BODY_FAT_DESCRIPTION}</Text>
-          <SimpleGrid cols={2}>
+          <SimpleGrid cols={isMobile ? 1 : 2} spacing={isMobile ? "lg" : "xl"}>
             <div>
               <Title order={6} mb={25}>
                 Generales
@@ -221,10 +229,10 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
               ))}
             </div>
             <div>
-              <Title order={6}>Segmentados</Title>{" "}
+              <Title order={6}>Segmentados</Title>
               <Title order={6} mb={5}>
-                ( Torso,Brazos,Piernas)
-              </Title>{" "}
+                (Torso, Brazos, Piernas)
+              </Title>
               {BODY_FAT_STATUS_VALUES.map((item, index) => (
                 <Box key={index} display="flex" mb={5}>
                   <Box
