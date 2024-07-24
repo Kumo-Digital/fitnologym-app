@@ -29,6 +29,14 @@ export const changePassword = async (userId: string, payload: ChangePasswordForm
   return data;
 };
 
+export const recoverPassword = async (dni: string) => {
+  const { data } = await apiClient.post(apiUrls.users.recoverPassword, {
+    dni: dni,
+  });
+
+  return data;
+}
+
 export const saveLastLoggedInDate = async (userId: string) => {
   const { data } = await apiClient.post(apiUrls.users.saveLastLoggedInDate(userId));
 
