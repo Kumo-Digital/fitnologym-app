@@ -20,6 +20,7 @@ import { Formik } from "formik";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import classes from "./index.module.css";
@@ -173,6 +174,9 @@ const Login = () => {
                     </Button>
                   </form>
                 </Stack>
+                <Link href={appUrls.recoverPassword} passHref>
+                  ¿ Olvidaste tu contraseña ?
+                </Link>
                 <Stack
                   align="center"
                   style={{ flexGrow: 1 }}
