@@ -23,7 +23,7 @@ export default async function handler(
         );
 
         if (!validPassword) {
-          res.status(400).json({
+          return res.status(400).json({
             error: "Incorrect username or password",
           });
         }
