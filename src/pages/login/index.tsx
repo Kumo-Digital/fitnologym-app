@@ -20,6 +20,7 @@ import { Formik } from "formik";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import classes from "./index.module.css";
@@ -27,7 +28,6 @@ import classes from "./index.module.css";
 interface InitialValues {
   email: string;
   password: string;
-  // remember: boolean;
 }
 
 export async function getServerSideProps(
@@ -72,7 +72,6 @@ const Login = () => {
               .email("Dirección de correo electrónico inválida")
               .required("Correo electrónico es requerido"),
             password: Yup.string().required("Contraseña es requerida"),
-            // remember: Yup.boolean(),
           })}
           onSubmit={async (values, actions) => {
             const { data, error } = await until(() =>
@@ -107,7 +106,6 @@ const Login = () => {
             handleBlur,
             errors,
             touched,
-            setFieldValue,
             handleSubmit,
             isSubmitting,
           }) => {
@@ -152,14 +150,17 @@ const Login = () => {
                       onBlur={handleBlur}
                       error={touched.password && errors.password}
                     />
-                    {/* <Checkbox
-                      name="remember"
-                      label="Mantener el inicio de sesión"
-                      mt="xl"
-                      size="md"
-                      checked={values.remember}
-                      onChange={(e) => setFieldValue("remember", e.target.checked)}
-                    /> */}
+                    <Link href={appUrls.recoverPassword} passHref>
+                      <Text
+                        c="white"
+                        fw={600}
+                        size="sm"
+                        mt={4}
+                        style={{ textDecoration: "none" }}
+                      >
+                        ¿Olvidaste tu contraseña?
+                      </Text>
+                    </Link>
                     <Button
                       fullWidth
                       mt="xl"
@@ -185,16 +186,6 @@ const Login = () => {
                     </Text>
                   </Text>
                 </Stack>
-                {/* <Text ta="center" mt="md">
-                  No estás registrado?{" "}
-                  <Anchor<"a">
-                    href="#"
-                    fw={700}
-                    onClick={(event) => event.preventDefault()}
-                  >
-                    Registrarse
-                  </Anchor>
-                </Text> */}
               </Stack>
             );
           }}
