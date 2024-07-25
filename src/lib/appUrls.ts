@@ -15,4 +15,5 @@ export const appUrls = {
   termsAndConditions: "/terminos-y-condiciones",
   contact: "/contacto",
   changePassword: "/change-password",
+  recoverPassword: "/recover-password",
 };
