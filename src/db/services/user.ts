@@ -51,6 +51,16 @@ class UserService {
     return user;
   }
 
+  async getUserByDNI(dni: string): Promise<DatabaseUser | null> {
+    const user = await UserModel.findOne(
+      {
+        dni: dni,
+      },
+    );
+
+    return user;
+  }
+
   async createUser(userData: UserForm, role: string): Promise<any> {
     const {
       email,
@@ -171,6 +181,36 @@ class UserService {
 
     } catch (error) {
       console.error("Error changing password", error);
+    }
+  }
+
+  async recoverPassword(userId: string, dni: string): Promise<any> {
+    try {
+      const existingUser = await UserModel.findOne({
+        _id: userId,
+      });
+  
+      if (!existingUser) {
+        console.error('There is no existing user!');
+        return;
+      }
+  
+      // Hash DNI as new password
+      const hashedDNI = await new Argon2id().hash(dni);
+      
+      await UserModel.findOneAndUpdate(
+        {
+          _id: userId
+        },
+        {
+          password: hashedDNI,
+          last_logged_in: null,
+        },
+      );
+
+      return 'Password recovered succesfully';
+    } catch (error) {
+      console.error("Error recovering password", error);
     }
   }
 

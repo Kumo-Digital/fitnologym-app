@@ -16,6 +16,7 @@ export const apiUrls = {
     changePassword: (id: string) => `/users/change-password/${id}`,
     saveLastLoggedInDate: (id: string) =>
       `/users/save-last-logged-in-date/${id}`,
+    recoverPassword: "/users/recover-password",
   },
   gyms: {
     get: "/gyms",
