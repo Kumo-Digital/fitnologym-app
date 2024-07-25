@@ -17,7 +17,7 @@ import * as Yup from "yup";
 import classes from "./index.module.css";
 
 interface InitialValues {
-  dni: string; // Cambiado a string para coincidir con Yup.string()
+  dni: string;
 }
 
 export async function getServerSideProps(
@@ -157,9 +157,9 @@ const RecoverPassword = () => {
                     Contraseña restablecida
                   </Text>
                   <Text mb="lg">
-                    Si el documento de identidad corresponde a una cuenta
-                    activa, una vez realizado este proceso va a poder ingresar a
-                    su cuenta con correo electrónico y D.N.I. como contraseña.
+                    Si el documento de identidad corresponde a una cuenta activa
+                    va a poder ingresar a su cuenta con correo electrónico y
+                    D.N.I. como contraseña.
                   </Text>
                   <Button
                     fullWidth
