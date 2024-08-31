@@ -1,11 +1,11 @@
-import connectDB from "@/lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
 import MeasurementService from "@/db/services/measurement";
+import connectDB from "@/lib/db";
 import { Evolution } from "@/types/measurements";
 import {
   getRemainingPercentageFromMeasures,
   getRemainingSpecificFromMeasures,
 } from "@/utils/measurement";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
@@ -161,6 +161,18 @@ export default async function handler(
                         .measure_value as number,
                       lastMeasure.metrics.physique_rating
                         .measure_value as number
+                    ),
+                  },
+                },
+                dryProtein: {
+                  measure_evolution: {
+                    percentage: getRemainingPercentageFromMeasures(
+                      firstMeasure.metrics.dryProtein.measure_value as number,
+                      lastMeasure.metrics.dryProtein.measure_value as number
+                    ),
+                    specific: getRemainingSpecificFromMeasures(
+                      firstMeasure.metrics.dryProtein.measure_value as number,
+                      lastMeasure.metrics.dryProtein.measure_value as number
                     ),
                   },
                 },
