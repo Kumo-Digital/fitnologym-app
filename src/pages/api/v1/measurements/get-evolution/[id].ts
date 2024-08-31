@@ -1,11 +1,11 @@
-import connectDB from "@/lib/db";
-import { NextApiRequest, NextApiResponse } from "next";
 import MeasurementService from "@/db/services/measurement";
+import connectDB from "@/lib/db";
 import { Evolution } from "@/types/measurements";
 import {
   getRemainingPercentageFromMeasures,
   getRemainingSpecificFromMeasures,
 } from "@/utils/measurement";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
@@ -57,7 +57,11 @@ export default async function handler(
                         .measure_value as number,
                       lastMeasure.metrics.body_fat.measure_value as number
                     ),
-                    specific: null,
+                    specific: getRemainingSpecificFromMeasures(
+                      previousToLastMeasure.metrics.body_fat
+                        .measure_value as number,
+                      lastMeasure.metrics.body_fat.measure_value as number
+                    ),
                   },
                 },
                 visc_fat: {
@@ -144,6 +148,46 @@ export default async function handler(
                         .measure_value as number,
                       lastMeasure.metrics.physique_rating
                         .measure_value as number
+                    ),
+                    specific: null,
+                  },
+                },
+                /*  force_rating: {
+                  measure_evolution: {
+                    percentage: getRemainingPercentageFromMeasures(
+                      previousToLastMeasure.metrics.force_rating
+                        .measure_value as number,
+                      lastMeasure.metrics.force_rating.measure_value as number
+                    ),
+                    specific: null,
+                  },
+                },
+                fat_free_mass: {
+                  measure_evolution: {
+                    percentage: getRemainingPercentageFromMeasures(
+                      previousToLastMeasure.metrics.fatFreeMass
+                        .measure_value as number,
+                      lastMeasure.metrics.fatFreeMass.measure_value as number
+                    ),
+                    specific: null,
+                  },
+                },
+                sub_fat: {
+                  measure_evolution: {
+                    percentage: getRemainingPercentageFromMeasures(
+                      previousToLastMeasure.metrics.subFat
+                        .measure_value as number,
+                      lastMeasure.metrics.subFat.measure_value as number
+                    ),
+                    specific: null,
+                  },
+                }, */
+                dryProtein: {
+                  measure_evolution: {
+                    percentage: getRemainingPercentageFromMeasures(
+                      previousToLastMeasure.metrics.dryProtein
+                        .measure_value as number,
+                      lastMeasure.metrics.dryProtein.measure_value as number
                     ),
                     specific: null,
                   },

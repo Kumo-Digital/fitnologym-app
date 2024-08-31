@@ -6,6 +6,8 @@ import {
   BODY_WATER_STATUS_VALUES,
   BONE_MASS_STATUS_COLORS,
   BONE_MASS_STATUS_VALUES,
+  FAT_FREE_MASS_STATUS_COLORS,
+  FAT_FREE_MASS_STATUS_VALUES,
   METABOLIC_AGE_STATUS_COLORS,
   METABOLIC_AGE_STATUS_VALUES,
   METABOLIC_BASAL_RATE_STATUS_COLORS,
@@ -16,6 +18,8 @@ import {
   MUSCLE_QUALITY_STATUS_VALUES,
   PHISYQUE_RATING_STATUS_COLORS,
   PHISYQUE_RATING_STATUS_VALUES,
+  RATING_FORCE_STATUS_COLORS,
+  RATING_FORCE_STATUS_VALUES,
   SEGMENTED_STATUS_COLORS,
   SEGMENTED_STATUS_VALUES,
   STATUS_COLORS,
@@ -55,6 +59,7 @@ import { notifications } from "@mantine/notifications";
 import { until } from "@open-draft/until";
 import { FastField, Form, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const renderSelectOption: SelectProps["renderOption"] = ({ option }) => (
   <Group flex="1" gap="xs">
@@ -210,6 +215,37 @@ const renderSelectOptionMuscleQuality: SelectProps["renderOption"] = ({
   </Group>
 );
 
+const renderSelectOptionRatingForce: SelectProps["renderOption"] = ({
+  option,
+}) => (
+  <Group flex="1" gap="xs">
+    <Box
+      w={8}
+      h={8}
+      bg={RATING_FORCE_STATUS_COLORS[Number(option.value) - 1]}
+      style={{
+        borderRadius: "100%",
+      }}
+    ></Box>
+    <Text size="sm">{option.label}</Text>
+  </Group>
+);
+
+const renderSelectionOptionFatFreeMass: SelectProps["renderOption"] = ({
+  option,
+}) => (
+  <Group flex="1" gap="xs">
+    <Box
+      w={8}
+      h={8}
+      bg={FAT_FREE_MASS_STATUS_COLORS[Number(option.value) - 1]}
+      style={{
+        borderRadius: "100%",
+      }}
+    ></Box>
+    <Text size="sm">{option.label}</Text>
+  </Group>
+);
 const renderSelectOptionSegmented: SelectProps["renderOption"] = ({
   option,
 }) => (
@@ -298,7 +334,8 @@ export default function MeasurementForm({
         });
       }}
     >
-      {({ handleSubmit, isSubmitting }) => {
+      {({ handleSubmit, values, setFieldValue, isSubmitting }) => {
+        useEffect(() => {}, [values.viscFat, setFieldValue]);
         return (
           <Form onSubmit={handleSubmit}>
             <Stack>
@@ -696,12 +733,12 @@ export default function MeasurementForm({
                     <Group grow id="value-physiqueRating">
                       <FastField
                         name="physiqueRating"
-                        placeholder="Rating Físico"
+                        placeholder="Score Físico"
                       >
                         {({ field, form, meta }: any) => (
                           <NumberInput
                             {...field}
-                            label="Rating Físico"
+                            label="Score Físico"
                             value={meta.value}
                             maw="100%"
                             min={0}
@@ -1057,6 +1094,134 @@ export default function MeasurementForm({
                         )}
                       </FastField>
                     </Group>
+                    <Group grow id="value-forceRating">
+                      <FastField name="forceRating" placeholder="Rating Fuerza">
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Score Fuerza"
+                            value={meta.value}
+                            maw="100%"
+                            min={0}
+                            onChange={(e) =>
+                              form.setFieldValue("forceRating", e)
+                            }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField name="forceRatingStatus" placeholder="Estado">
+                        {({ field, form, meta }: any) => (
+                          <Select
+                            {...field}
+                            label="Estado"
+                            withCheckIcon={false}
+                            maw={150}
+                            allowDeselect={false}
+                            leftSection={
+                              <Box
+                                w={8}
+                                h={8}
+                                bg={
+                                  RATING_FORCE_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
+                                style={{
+                                  borderRadius: "100%",
+                                }}
+                              ></Box>
+                            }
+                            renderOption={renderSelectOptionRatingForce}
+                            data={RATING_FORCE_STATUS_VALUES}
+                            value={meta.value}
+                            onChange={(e) =>
+                              form.setFieldValue("forceRatingStatus", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
+
+                    <Group grow id="value-fatFreeMass">
+                      <FastField
+                        name="fatFreeMass"
+                        placeholder="Masa Libre de Grasa"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Masa Libre de Grasa"
+                            value={meta.value}
+                            maw="100%"
+                            min={0}
+                            onChange={(e) =>
+                              form.setFieldValue("fatFreeMass", e)
+                            }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField name="fatFreeMassStatus" placeholder="Estado">
+                        {({ field, form, meta }: any) => (
+                          <Select
+                            {...field}
+                            label="Estado"
+                            withCheckIcon={false}
+                            maw={150}
+                            allowDeselect={false}
+                            leftSection={
+                              <Box
+                                w={8}
+                                h={8}
+                                bg={
+                                  FAT_FREE_MASS_STATUS_COLORS[
+                                    Number(meta.value) - 1
+                                  ]
+                                }
+                                style={{
+                                  borderRadius: "100%",
+                                }}
+                              ></Box>
+                            }
+                            renderOption={renderSelectionOptionFatFreeMass}
+                            data={FAT_FREE_MASS_STATUS_VALUES}
+                            value={meta.value}
+                            onChange={(e) =>
+                              form.setFieldValue("fatFreeMassStatus", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
+
+                    <Group grow id="value-dryProtein">
+                      <FastField name="dryProtein">
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Proteína Seca"
+                            value={form.values.dryProtein}
+                            maw="100%"
+                            min={0}
+                            onChange={(e) =>
+                              form.setFieldValue("dryProtein", e)
+                            }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                    </Group>
                   </Stack>
                 </Flex>
               </Stack>
@@ -1183,7 +1348,7 @@ export default function MeasurementForm({
                                 w={8}
                                 h={8}
                                 bg={
-                                  SEGMENTED_STATUS_COLORS[
+                                  MUSCLE_MASS_STATUS_COLORS[
                                     Number(meta.value) - 1
                                   ]
                                 }
@@ -1336,7 +1501,7 @@ export default function MeasurementForm({
                                 w={8}
                                 h={8}
                                 bg={
-                                  SEGMENTED_STATUS_COLORS[
+                                  MUSCLE_MASS_STATUS_COLORS[
                                     Number(meta.value) - 1
                                   ]
                                 }
@@ -1528,7 +1693,7 @@ export default function MeasurementForm({
                                 w={8}
                                 h={8}
                                 bg={
-                                  SEGMENTED_STATUS_COLORS[
+                                  MUSCLE_MASS_STATUS_COLORS[
                                     Number(meta.value) - 1
                                   ]
                                 }
@@ -1746,7 +1911,7 @@ export default function MeasurementForm({
                                 w={8}
                                 h={8}
                                 bg={
-                                  SEGMENTED_STATUS_COLORS[
+                                  MUSCLE_MASS_STATUS_COLORS[
                                     Number(meta.value) - 1
                                   ]
                                 }
@@ -1938,7 +2103,7 @@ export default function MeasurementForm({
                                 w={8}
                                 h={8}
                                 bg={
-                                  SEGMENTED_STATUS_COLORS[
+                                  MUSCLE_MASS_STATUS_COLORS[
                                     Number(meta.value) - 1
                                   ]
                                 }
@@ -2247,6 +2412,30 @@ export default function MeasurementForm({
                             onClick={(e) => autoSelectFieldValue(e.target)}
                             onChange={(e) =>
                               form.setFieldValue("circumferenceWaist", e)
+                            }
+                            onBlur={form.handleBlur}
+                            error={meta.touched && meta.error}
+                          />
+                        )}
+                      </FastField>
+                      <FastField
+                        name="circumferenceAbdomen"
+                        placeholder="Abdomen"
+                      >
+                        {({ field, form, meta }: any) => (
+                          <NumberInput
+                            {...field}
+                            label="Abdomen"
+                            value={meta.value}
+                            maw="100%"
+                            rightSection={
+                              <Text c="gray.6" size="sm" fw={500} pr={18}>
+                                Cms
+                              </Text>
+                            }
+                            onClick={(e) => autoSelectFieldValue(e.target)}
+                            onChange={(e) =>
+                              form.setFieldValue("circumferenceAbdomen", e)
                             }
                             onBlur={form.handleBlur}
                             error={meta.touched && meta.error}

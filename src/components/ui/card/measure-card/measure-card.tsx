@@ -1,3 +1,4 @@
+import { EvolutionValue } from "@/types/measurements";
 import { getMeasureName } from "@/utils/measurement";
 import {
   Box,
@@ -17,10 +18,9 @@ import {
   IconExclamationCircle,
   IconLineDashed,
 } from "@tabler/icons-react";
+import { useEffect, useState } from "react";
 import { BoxColorCard } from "./box-color-card";
 import { MeasureCardInfoModal } from "./measure-card-info-modal";
-import { useEffect, useState } from "react";
-import { EvolutionValue } from "@/types/measurements";
 
 interface MeasureCardProps {
   measureTitle: string;

@@ -16,6 +16,10 @@ import { useMediaQuery } from "@mantine/hooks";
 
 type Measure = { [key: string]: any };
 
+export function calculateBtaValue(bodyWater: number, weight: number) {
+  return (weight * bodyWater) / 100;
+}
+
 export const BodySectionOverview = ({
   lastMeasure,
   evolution,
@@ -27,49 +31,65 @@ export const BodySectionOverview = ({
   const isMobileSM = useMediaQuery(`(max-width: ${em(425)})`);
   const isMobileMD = useMediaQuery(`(max-width: ${em(768)})`);
   const isMobileLG = useMediaQuery(`(max-width: ${em(1024)})`);
-  const overviewMeasures: Measure[] = Object.entries(
-    lastMeasure.metrics
-  ).reduce((metricList: Measure[], [metric, values]: any) => {
-    if (overviewBodyMetrics.includes(metric)) {
-      metricList = [
-        ...metricList,
-        {
+
+  const weight = lastMeasure.metrics.weight.measure_value;
+  const bodyWater = lastMeasure.metrics.body_water.measure_value;
+  const btaValue = calculateBtaValue(bodyWater, weight);
+
+  const overviewMeasures: Measure[] = overviewBodyMetrics
+    .map((metric) => {
+      const values = lastMeasure.metrics[metric];
+      if (values) {
+        return {
           metricName: metric,
-          evolution: { ...evolution?.metrics[metric].measure_evolution },
+          evolution: { ...evolution?.metrics[metric]?.measure_evolution },
           ...values,
-        },
-      ];
-    }
-    return metricList;
-  }, []);
+        };
+      }
+      return null;
+    })
+    .filter(Boolean)
+    .map((measure) => {
+      // Sobrescribe el valor de 'BTA' si es necesario
+      if (measure.metricName === "BTA") {
+        return {
+          ...measure,
+          measure_value: btaValue,
+        };
+      }
+      return measure;
+    });
 
   const currentValue = lastMeasure?.metrics.weight.measure_value;
   const targetValue = targetMeasure[0]?.target_value;
   const ffmiCurrentValue = lastMeasure?.metrics.ffmi.measure_value;
   const ffmiTargetValue = lastMeasure?.metrics.ffmi.measure_status;
+  const forceRatingCurrentValue =
+    lastMeasure?.metrics.force_rating?.measure_value;
+  const forceRatingValue = lastMeasure?.metrics.force_rating?.measure_status;
+  const fatFreeMass = lastMeasure.metrics.fatFreeMass.measure_value;
 
   return (
     <Stack>
       <Group justify="space-between">
         <Title order={4}>Generales</Title>
-        {(showSwitch) ?
-        <Switch
-        size="xl"
-        checked={isEvolutionFromFirstToLast}
-        onChange={() => handleToggle()}
-        onLabel={
-          <Text size="xs" c="dark.7" fw={600} px={4}>
-            Completa
-          </Text>
-        }
-        offLabel={
-          <Text size="xs" fw={600} px={4}>
-            Actual
-          </Text>
-        }
-      /> :
-      null
-      }
+        {showSwitch ? (
+          <Switch
+            size="xl"
+            checked={isEvolutionFromFirstToLast}
+            onChange={() => handleToggle()}
+            onLabel={
+              <Text size="xs" c="dark.7" fw={600} px={4}>
+                Completa
+              </Text>
+            }
+            offLabel={
+              <Text size="xs" fw={600} px={4}>
+                Actual
+              </Text>
+            }
+          />
+        ) : null}
       </Group>
       <Box>
         <TransitionCard
@@ -77,6 +97,11 @@ export const BodySectionOverview = ({
           targetValue={targetValue}
           ffmiCurrentValue={ffmiCurrentValue}
           ffmiTargetValue={ffmiTargetValue}
+          forceRatingCurrentValue={forceRatingCurrentValue}
+          forceRatingValue={forceRatingValue}
+          bodyFatvalue={lastMeasure?.metrics.body_fat?.measure_value}
+          weightValue={lastMeasure?.metrics.weight?.measure_value}
+          fatFreeMass={fatFreeMass}
         />
       </Box>
 

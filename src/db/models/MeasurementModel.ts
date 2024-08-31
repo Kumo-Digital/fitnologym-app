@@ -1,5 +1,5 @@
-import { Schema, model, models } from "mongoose";
 import { IMeasurement } from "@/db/interfaces/IMeasurement";
+import { Schema, model, models } from "mongoose";
 
 const MeasurementObjSchema = {
   measure_uom: {
@@ -57,6 +57,10 @@ const measurementSchema = new Schema<IMeasurement>(
       metab_age: MeasurementObjSchema,
       body_water: MeasurementObjSchema,
       physique_rating: MeasurementObjSchema,
+      force_rating: MeasurementObjSchema,
+      fatFreeMass: MeasurementObjSchema,
+      BTA: MeasurementObjSchema,
+      dryProtein: MeasurementObjSchema,
       ffmi: {
         measure_value: {
           type: Number,
@@ -95,6 +99,7 @@ const measurementSchema = new Schema<IMeasurement>(
       circumferenceNeck: CircumferenceObjSchema,
       circumferenceChest: CircumferenceObjSchema,
       circumferenceWaist: CircumferenceObjSchema,
+      circumferenceAbdomen: CircumferenceObjSchema,
       circumferenceHips: CircumferenceObjSchema,
       circumferenceGlutes: CircumferenceObjSchema,
       circumferenceShoulders: CircumferenceObjSchema,

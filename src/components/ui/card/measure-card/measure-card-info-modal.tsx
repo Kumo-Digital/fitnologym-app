@@ -10,6 +10,11 @@ import {
   BONE_MASS_STATUS_COLORS,
   BONE_MASS_STATUS_DESCRIPTION,
   BONE_MASS_STATUS_VALUES,
+  BTA_STATUS_DESCRIPTION,
+  DRY_PROTEIN_STATUS_DESCRIPTION,
+  FAT_FREE_MASS_STATUS_COLORS,
+  FAT_FREE_MASS_STATUS_DESCRIPTION,
+  FAT_FREE_MASS_STATUS_VALUES,
   METABOLIC_AGE_STATUS_DESCRIPTION,
   METABOLIC_BASAL_RATE_STATUS_COLORS,
   METABOLIC_BASAL_RATE_STATUS_VALUES,
@@ -19,6 +24,9 @@ import {
   PHISYQUE_RATING_STATUS_COLORS,
   PHISYQUE_RATING_STATUS_DESCRIPTION,
   PHISYQUE_RATING_STATUS_VALUES,
+  RATING_FORCE_STATUS_COLORS,
+  RATING_FORCE_STATUS_DESCRIPTION,
+  RATING_FORCE_STATUS_VALUES,
   SEGMENTED_STATUS_DESCRIPTION,
   STATUS_COLORS,
   STATUS_VALUES,
@@ -310,6 +318,62 @@ export const MeasureCardInfoModal: React.FC<MeasureCardInfoProps> = ({
               <Text>{item.label}</Text>
             </Box>
           ))}
+        </Box>
+      );
+
+    case "force_rating":
+      return (
+        <Box>
+          <Text mb={10}>{RATING_FORCE_STATUS_DESCRIPTION}</Text>
+          {RATING_FORCE_STATUS_VALUES.map((item, index) => (
+            <Box key={index} display="flex" mb={5}>
+              <Box
+                bg={theme.colors[RATING_FORCE_STATUS_COLORS[index]][6]}
+                w={20}
+                h={20}
+                mr={10}
+                style={{
+                  borderRadius: "50%",
+                }}
+              />
+              <Text>{item.label}</Text>
+            </Box>
+          ))}
+        </Box>
+      );
+
+    case "fatFreeMass":
+      return (
+        <Box>
+          <Text mb={10}>{FAT_FREE_MASS_STATUS_DESCRIPTION}</Text>
+          {FAT_FREE_MASS_STATUS_VALUES.map((item, index) => (
+            <Box key={index} display="flex" mb={5}>
+              <Box
+                bg={theme.colors[FAT_FREE_MASS_STATUS_COLORS[index]][6]}
+                w={20}
+                h={20}
+                mr={10}
+                style={{
+                  borderRadius: "50%",
+                }}
+              />
+              <Text>{item.label}</Text>
+            </Box>
+          ))}
+        </Box>
+      );
+
+    case "BTA":
+      return (
+        <Box>
+          <Text mb={10}>{BTA_STATUS_DESCRIPTION}</Text>
+        </Box>
+      );
+
+    case "dryProtein":
+      return (
+        <Box>
+          <Text mb={10}>{DRY_PROTEIN_STATUS_DESCRIPTION}</Text>
         </Box>
       );
 

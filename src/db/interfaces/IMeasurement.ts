@@ -19,17 +19,21 @@ export interface IMeasurement {
     bmi: MeasurementObject;
     body_fat: MeasurementObject;
     visc_fat: MeasurementObject;
+    fatFreeMass: MeasurementObject;
     muscle_mass: MeasurementObject;
     muscle_quality: MeasurementObject;
-    bone_mass: MeasurementObject;
     bmr: MeasurementObject;
     metab_age: MeasurementObject;
-    body_water: MeasurementObject;
     physique_rating: MeasurementObject;
+    force_rating: MeasurementObject;
+    dryProtein: MeasurementObject;
+    body_water: MeasurementObject;
+    BTA: MeasurementObject;
+    bone_mass: MeasurementObject;
     ffmi: {
       measure_value?: number;
       measure_status?: string;
-    },
+    };
     left_arm: {
       muscle_mass: MeasurementObject;
       body_fat: MeasurementObject;
@@ -57,6 +61,7 @@ export interface IMeasurement {
     circumferenceNeck?: CircumferenceObject;
     circumferenceChest?: CircumferenceObject;
     circumferenceWaist?: CircumferenceObject;
+    circumferenceAbdomen?: CircumferenceObject;
     circumferenceHips?: CircumferenceObject;
     circumferenceGlutes?: CircumferenceObject;
     circumferenceShoulders?: CircumferenceObject;
@@ -76,5 +81,5 @@ export interface IMeasurement {
       left: CircumferenceObject;
       right: CircumferenceObject;
     };
-  }
+  };
 }

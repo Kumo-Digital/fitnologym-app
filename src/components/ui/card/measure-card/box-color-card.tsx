@@ -1,5 +1,6 @@
 import {
   BONE_MASS_STATUS_COLORS,
+  FORCE_RATING_STATUS_COLORS,
   METABOLIC_AGE_STATUS_COLORS,
   MUSCLE_MASS_STATUS_COLORS,
   MUSCLE_QUALITY_STATUS_COLORS,
@@ -46,6 +47,7 @@ export const getMeasureStatusColor = (
     muscle_mass: MUSCLE_MASS_STATUS_COLORS,
     muscle_quality: MUSCLE_QUALITY_STATUS_COLORS,
     segmented: SEGMENTED_STATUS_COLORS,
+    force_rating: FORCE_RATING_STATUS_COLORS,
   };
   const key = measureTitle.toLowerCase();
   const isCircumferenceMeasure = circumferenceMeasures.includes(measureTitle);

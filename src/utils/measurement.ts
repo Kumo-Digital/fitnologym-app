@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { MEASUREMENT_UNITS } from "./constants";
 
 const getEnumKeyByValue = (enumObj: any, value: string): string => {
-  return Object.keys(enumObj).find(key => enumObj[key] === value) as string;
+  return Object.keys(enumObj).find((key) => enumObj[key] === value) as string;
 };
 
 export const prepareMeasurementForInsert = (
@@ -40,6 +40,11 @@ export const prepareMeasurementForInsert = (
         measure_value: payload.viscFat ?? null,
         measure_status: payload.viscFatStatus ?? 2,
       },
+      fatFreeMass: {
+        measure_uom: MEASUREMENT_UNITS.KG,
+        measure_value: payload.fatFreeMass ?? null,
+        measure_status: payload.fatFreeMassStatus ?? 2,
+      },
       muscle_mass: {
         measure_uom: MEASUREMENT_UNITS.KG,
         measure_value: payload.muscleMass ?? null,
@@ -50,11 +55,7 @@ export const prepareMeasurementForInsert = (
         measure_value: payload.muscleQuality ?? null,
         measure_status: payload.muscleQualityStatus ?? 2,
       },
-      bone_mass: {
-        measure_uom: MEASUREMENT_UNITS.KG,
-        measure_value: payload.boneMass ?? null,
-        measure_status: payload.boneMassStatus ?? 2,
-      },
+
       bmr: {
         measure_uom: MEASUREMENT_UNITS.KCAL,
         measure_value: payload.bmr ?? null,
@@ -65,15 +66,33 @@ export const prepareMeasurementForInsert = (
         measure_value: payload.metabAge ?? null,
         measure_status: payload.metabAgeStatus ?? 0,
       },
+      physique_rating: {
+        measure_uom: MEASUREMENT_UNITS.UNIT,
+        measure_value: payload.physiqueRating ?? null,
+        measure_status: payload.physiqueRatingStatus ?? 2,
+      },
+      force_rating: {
+        measure_uom: MEASUREMENT_UNITS.UNIT,
+        measure_value: payload.forceRating ?? null,
+        measure_status: payload.forceRatingStatus ?? 2,
+      },
+      BTA: {
+        measure_uom: MEASUREMENT_UNITS.KG,
+        measure_value: payload.BTA ?? null,
+      },
+      dryProtein: {
+        measure_uom: MEASUREMENT_UNITS.KG,
+        measure_value: payload.dryProtein ?? null,
+      },
       body_water: {
         measure_uom: MEASUREMENT_UNITS.PERCENTAGE,
         measure_value: payload.bodyWater ?? null,
         measure_status: payload.bodyWaterStatus ?? 2,
       },
-      physique_rating: {
-        measure_uom: MEASUREMENT_UNITS.UNIT,
-        measure_value: payload.physiqueRating ?? null,
-        measure_status: payload.physiqueRatingStatus ?? 2,
+      bone_mass: {
+        measure_uom: MEASUREMENT_UNITS.KG,
+        measure_value: payload.boneMass ?? null,
+        measure_status: payload.boneMassStatus ?? 2,
       },
       ffmi: {
         measure_value: payload.ffmi ?? null,
@@ -175,10 +194,15 @@ export const prepareMeasurementForInsert = (
         measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
         measure_value: payload.circumferenceWaist ?? null,
       },
+      circumferenceAbdomen: {
+        measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
+        measure_value: payload.circumferenceAbdomen ?? null,
+      },
       circumferenceHips: {
         measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
         measure_value: payload.circumferenceHips ?? null,
       },
+
       circumferenceGlutes: {
         measure_uom: MEASUREMENT_UNITS.CENTIMETERS,
         measure_value: payload.circumferenceGlutes ?? null,
@@ -263,9 +287,17 @@ export const prepareMeasurementForEditForm = (
     muscleQualityStatus: payload.metrics.muscle_quality.measure_status || 2,
     physiqueRating: payload.metrics.physique_rating.measure_value || 0,
     physiqueRatingStatus: payload.metrics.physique_rating.measure_status || 2,
+    forceRating: payload.metrics.force_rating?.measure_value || 0,
+    forceRatingStatus: payload.metrics.force_rating?.measure_status || 2,
+    fatFreeMass: payload.metrics.fatFreeMass?.measure_value || 0,
+    fatFreeMassStatus: payload.metrics.fatFreeMass?.measure_status || 2,
+    BTA: payload.metrics.BTA?.measure_value
+      ? payload.metrics.BTA.measure_value
+      : 0,
+    dryProtein: payload.metrics.dryProtein?.measure_value || 0,
     ffmi: payload.metrics.ffmi.measure_value || 0,
     ffmiStatus:
-      payload.metrics.ffmi.measure_status || 
+      payload.metrics.ffmi.measure_status ||
       getEnumKeyByValue(FFMIStatus, FFMIStatus.AVERAGE),
     trunkMuscleMass: payload.metrics.trunk.muscle_mass.measure_value || 0,
     trunkMuscleMassStatus:
@@ -315,6 +347,8 @@ export const prepareMeasurementForEditForm = (
     circumferenceNeck: payload.metrics.circumferenceNeck?.measure_value || 0,
     circumferenceChest: payload.metrics.circumferenceChest?.measure_value || 0,
     circumferenceWaist: payload.metrics.circumferenceWaist?.measure_value || 0,
+    circumferenceAbdomen:
+      payload.metrics.circumferenceAbdomen?.measure_value || 0,
     circumferenceHips: payload.metrics.circumferenceHips?.measure_value || 0,
     circumferenceGlutes:
       payload.metrics.circumferenceGlutes?.measure_value || 0,
@@ -351,6 +385,7 @@ const metricLabels = [
   { key: "Cuello", value: "circumferenceNeck" },
   { key: "Pecho", value: "circumferenceChest" },
   { key: "Cintura", value: "circumferenceWaist" },
+  { key: "Abdomen", value: "circumferenceAbdomen" },
   { key: "Cadera", value: "circumferenceHips" },
   { key: "Glúteos", value: "circumferenceGlutes" },
   { key: "Hombros", value: "circumferenceShoulders" },
@@ -399,20 +434,28 @@ export const getMeasureName = (measure: string): string => {
       return "Grasa Corporal";
     case "visc_fat":
       return "Grasa Visceral";
+    case "fatFreeMass":
+      return "Masa Libre de Grasa";
     case "muscle_mass":
       return "Masa Muscular";
     case "muscle_quality":
       return "Calidad Muscular";
-    case "bone_mass":
-      return "Masa Ósea";
     case "bmr":
       return "TMB";
     case "metab_age":
       return "Edad Metabólica";
+    case "physique_rating":
+      return "Score Físico";
+    case "force_rating":
+      return "Score de Fuerza";
+    case "dryProtein":
+      return "Proteína Seca";
+    case "BTA":
+      return "BTA";
     case "body_water":
       return "Agua Corporal";
-    case "physique_rating":
-      return "Rating Físico";
+    case "bone_mass":
+      return "Masa Ósea";
     case "overview":
       return "General";
     case "left_arm":
@@ -433,6 +476,8 @@ export const getMeasureName = (measure: string): string => {
       return "Cintura";
     case "circumferenceHips":
       return "Cadera";
+    case "circumferenceAbdomen":
+      return "Abdomen";
     case "circumferenceGlutes":
       return "Glúteos";
     case "circumferenceShoulders":
@@ -463,13 +508,17 @@ export const overviewBodyMetrics = [
   "bmi",
   "body_fat",
   "visc_fat",
+  "fatFreeMass",
   "muscle_mass",
   "muscle_quality",
-  "bone_mass",
   "bmr",
   "metab_age",
-  "body_water",
   "physique_rating",
+  "force_rating",
+  "dryProtein",
+  "body_water",
+  "BTA",
+  "bone_mass",
 ];
 
 export const torsoBodyMetrics = [
@@ -479,6 +528,7 @@ export const torsoBodyMetrics = [
   "circumferenceChest",
   "circumferenceWaist",
   "circumferenceHips",
+  "circumferenceAbdomen",
 ];
 
 export const armsBodyMetrics = [
@@ -534,7 +584,15 @@ export const metricsSelectOptions = [
   { value: "bmr", label: "TMB", sections: ["overview"] },
   { value: "metab_age", label: "Edad Metabólica", sections: ["overview"] },
   { value: "body_water", label: "Agua Corporal", sections: ["overview"] },
-  { value: "physique_rating", label: "Rating Físico", sections: ["overview"] },
+  { value: "physique_rating", label: "Score Físico", sections: ["overview"] },
+  { value: "force_rating", label: "Score Fuerza", sections: ["overview"] },
+  {
+    value: "fatFreeMass",
+    label: "Masa Libre de Grasa",
+    sections: ["overview"],
+  },
+  { value: "BTA", label: "BTA", sections: ["overview"] },
+  { value: "dryProtein", label: "Proteína Seca", sections: ["overview"] },
   {
     value: "circumference",
     label: "Circunferencias",
@@ -584,6 +642,18 @@ export const getCategoryColoBySection = (section: string): string => {
   }
 };
 
+export enum ForceRatingStatus {
+  WEAK = "Débil",
+  NORMAL = "Normal",
+  STRONG = "Fuerte",
+}
+
+export const ForceRatingStatusValue: { [key: string]: string } = {
+  WEAK: "Débil",
+  NORMAL: "Normal",
+  STRONG: "Fuerte",
+};
+
 export enum FFMIStatus {
   AVERAGE = "Normal",
   SKINNY = "Delgado",
@@ -593,13 +663,19 @@ export enum FFMIStatus {
   BODYBUILDER = "Bodybuilder",
 }
 
-export const FFMIStatusValue: {[key: string]: string} = {
-  'AVERAGE': 'Normal',
-  'SKINNY': 'Delgado',
-  'FAT': 'Sobrepeso',
-  'ATHLETE': 'Atlético',
-  'ADVANCED': 'Avanzado',
-  'BODYBUILDER': 'Bodybuilder',
+export const FFMIStatusValue: { [key: string]: string } = {
+  AVERAGE: "Normal",
+  SKINNY: "Delgado",
+  FAT: "Sobrepeso",
+  ATHLETE: "Atlético",
+  ADVANCED: "Avanzado",
+  BODYBUILDER: "Bodybuilder",
+};
+
+export enum ForceStatus {
+  WEAK = "Débil",
+  NORMAL = "Normal",
+  STRONG = "Fuerte",
 }
 
 export type FFMIStatusColor = {
@@ -636,10 +712,18 @@ export const measurementFormValidationSchema = Yup.object().shape({
   bodyWaterStatus: Yup.string(),
   physiqueRating: Yup.number().min(0, "El rating físico no puede ser negativo"),
   physiqueRatingStatus: Yup.string(),
+  forceRating: Yup.number().min(0, "El score de fuerza no puede ser negativo"),
+  forceRatingStatus: Yup.string(),
+  fatFreeMass: Yup.number().min(
+    0,
+    "La masa libre de grasa no puede ser negativa"
+  ),
+  fatFreeMassStatus: Yup.string(),
   ffmi: Yup.number()
     .min(14, "El índice de masa libre de grasa no puede ser menor a 14")
     .max(30, "El índice de masa libre de grasa no puede ser mayor a 30"),
   ffmiStatus: Yup.string(),
+  dryProtein: Yup.number().min(0, "La proteína seca no puede ser negativa"),
   armLeftMuscleMass: Yup.number().min(
     0,
     "La masa muscular no puede ser negativa"

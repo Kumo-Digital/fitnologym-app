@@ -54,13 +54,17 @@ export interface Evolution {
     metab_age: {
       measure_evolution: EvolutionValue;
     };
-    body_water: {
-      measure_evolution: EvolutionValue;
-    };
+
     physique_rating: {
       measure_evolution: EvolutionValue;
     };
     ffmi: {
+      measure_evolution: EvolutionValue;
+    };
+    dryProtein: {
+      measure_evolution: EvolutionValue;
+    };
+    body_water: {
       measure_evolution: EvolutionValue;
     };
     left_arm: {

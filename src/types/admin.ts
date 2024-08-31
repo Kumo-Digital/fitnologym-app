@@ -25,6 +25,12 @@ export interface MeasurementFormValues {
   muscleQualityStatus: number;
   physiqueRating: number;
   physiqueRatingStatus: number;
+  forceRating: number;
+  forceRatingStatus: number;
+  fatFreeMass: number;
+  fatFreeMassStatus: number;
+  BTA: number;
+  dryProtein: number;
   ffmi: number;
   ffmiStatus: string;
   trunkMuscleMass: number;
@@ -59,6 +65,7 @@ export interface MeasurementFormValues {
   circumferenceChest: number;
   circumferenceWaist: number;
   circumferenceHips: number;
+  circumferenceAbdomen: number;
   circumferenceGlutes: number;
   circumferenceShoulders: number;
   circumferenceArmsLeft: number;

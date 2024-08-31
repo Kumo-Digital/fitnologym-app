@@ -1,8 +1,11 @@
 import * as Yup from "yup";
-import { FFMIStatus } from "./measurement";
+import { FFMIStatus, ForceRatingStatus } from "./measurement";
 
-const getKeyByValue = (object: { [key: string]: string }, value: string): string | undefined => 
-  Object.keys(object).find(key => object[key] === value);
+const getKeyByValue = (
+  object: { [key: string]: string },
+  value: string
+): string | undefined =>
+  Object.keys(object).find((key) => object[key] === value);
 
 export const measurementFormInitialValues = {
   user_id: "",
@@ -31,40 +34,47 @@ export const measurementFormInitialValues = {
   physiqueRating: 0,
   physiqueRatingStatus: "2",
   ffmi: 17,
+  forceRating: 0,
+  forceRatingStatus: "2",
+  fatFreeMass: 0,
+  fatFreeMassStatus: "2",
+  BTA: 0,
+  dryProtein: 0,
   ffmiStatus: getKeyByValue(FFMIStatus, FFMIStatus.AVERAGE),
   trunkMuscleMass: 0,
   trunkMuscleMassStatus: "2",
   trunkMuscleQuality: 0,
-  trunkMuscleQualityStatus: "2",
+  trunkMuscleQualityStatus: "1",
   trunkBodyFat: 0,
-  trunkBodyFatStatus: "2",
+  trunkBodyFatStatus: "1",
   armLeftMuscleMass: 0,
-  armLeftMuscleMassStatus: "2",
+  armLeftMuscleMassStatus: "1",
   armLeftMuscleQuality: 0,
   armLeftMuscleQualityStatus: "2",
   armLeftBodyFat: 0,
-  armLeftBodyFatStatus: "2",
+  armLeftBodyFatStatus: "1",
   armRightMuscleMass: 0,
-  armRightMuscleMassStatus: "2",
+  armRightMuscleMassStatus: "1",
   armRightMuscleQuality: 0,
   armRightMuscleQualityStatus: "2",
   armRightBodyFat: 0,
-  armRightBodyFatStatus: "2",
+  armRightBodyFatStatus: "1",
   legLeftMuscleMass: 0,
-  legLeftMuscleMassStatus: "2",
+  legLeftMuscleMassStatus: "1",
   legLeftMuscleQuality: 0,
   legLeftMuscleQualityStatus: "2",
   legLeftBodyFat: 0,
-  legLeftBodyFatStatus: "2",
+  legLeftBodyFatStatus: "1",
   legRightMuscleMass: 0,
-  legRightMuscleMassStatus: "2",
+  legRightMuscleMassStatus: "1",
   legRightMuscleQuality: 0,
   legRightMuscleQualityStatus: "2",
   legRightBodyFat: 0,
-  legRightBodyFatStatus: "2",
+  legRightBodyFatStatus: "1",
   circumferenceNeck: 0,
   circumferenceChest: 0,
   circumferenceWaist: 0,
+  circumferenceAbdomen: 0,
   circumferenceHips: 0,
   circumferenceGlutes: 0,
   circumferenceShoulders: 0,
@@ -235,6 +245,52 @@ export const METABOLIC_AGE_STATUS_COLORS = ["lime"];
 export const METABOLIC_AGE_STATUS_DESCRIPTION =
   "La edad metabólica es la edad de su metabolismo:";
 
+export const RATING_FORCE_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Débil",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Fuerte",
+  },
+];
+
+export const RATING_FORCE_STATUS_COLORS = ["blue", "lime", "red"];
+
+export const RATING_FORCE_STATUS_DESCRIPTION =
+  "La calificación de fuerza es la capacidad de su cuerpo:";
+
+export const FAT_FREE_MASS_STATUS_VALUES = [
+  {
+    value: "1",
+    label: "Bajo",
+  },
+  {
+    value: "2",
+    label: "Normal",
+  },
+  {
+    value: "3",
+    label: "Alto",
+  },
+];
+
+export const FAT_FREE_MASS_STATUS_COLORS = ["blue", "lime", "red"];
+
+export const FAT_FREE_MASS_STATUS_DESCRIPTION =
+  "La masa libre de grasa es el peso de su cuerpo sin grasa:";
+
+export const BTA_STATUS_DESCRIPTION =
+  "BTA significa Balance Total de Agua, es la cantidad de agua en su cuerpo medida en kilogramos";
+
+export const DRY_PROTEIN_STATUS_DESCRIPTION =
+  "Determina si realmente hay un aumento de masa muscular por hipertrofia";
+
 export const BODY_WATER_STATUS_VALUES = [
   {
     value: "1",
@@ -362,6 +418,20 @@ export const FFMI_STATUS_VALUES_COLORS = [
   },
 ];
 
+export const FORCE_RATING_STATUS_VALUES_COLORS = [
+  { label: "Débil", color: "blue" },
+  { label: "Normal", color: "lime" },
+  { label: "Fuerte", color: "red" },
+];
+
+export const ForceRatingMap: { [key: number]: keyof typeof ForceRatingStatus } =
+  {
+    1: "WEAK",
+    2: "NORMAL",
+    3: "STRONG",
+  };
+
+export const FORCE_RATING_STATUS_COLORS = ["blue", "lime", "red"];
 export const SEGMENTED_STATUS_DESCRIPTION =
   "La segmentación es la distribución de la masa muscular en su cuerpo";
 export const getSubscriptionColor = (user_type: string) => {
